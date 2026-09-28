@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Game/Scenes/Hub.unity
+    guid: a70b250df0da5b8419976c05a98bdcff
+  - enabled: 1
+    path: Assets/_Game/Scenes/ArrowOut.unity
+    guid: 8665a02100e0cfe4a867779249fee9fb
+  - enabled: 1
+    path: Assets/_Game/Scenes/EyeBlast.unity
+    guid: 808c6b3fa1ab12d4a88031a4b3403eef
+  - enabled: 1
+    path: Assets/_Game/Scenes/EyeMerge.unity
+    guid: 4f4fff50ffc8b554dbdd1a64719ecd82
+  m_configObjects:
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 2bcd2660ca9b64942af0de543d8d7100, type: 3}
+  m_UseUCBPForAssetBundles: 0

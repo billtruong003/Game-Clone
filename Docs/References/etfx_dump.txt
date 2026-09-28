@@ -1,0 +1,673 @@
+# ToonTallFireRed  (Assets/References/Epic Toon FX/Prefabs/Environment/Fire/Cartoon/Tall/ToonTallFireRed.prefab)
+## ToonTallFireRed  pos(-1.65, 0.44, -0.41) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 0.5 loop True delay 0 life 0.6 speed 1 size 0.7..0.5 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 8 bursts [t0 n0 x1]
+  shape: Cone r 0.01 thick 1 angle 0 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFF2A2 0.267:#FFB500 1:#FF5000} a{0:1 0.513:1 0.997:0}
+  sizeOverLife: x x1 [0:0.346 1:1] y x1 [0:0.378 1:1]
+  textureSheet: Grid 3x6 anim WholeSheet frame x0.667 [0:0 1:1] start 0 cycles 1
+  renderer: Stretch mat fire_3x6_ADD tex fire2_6x3 blend Additive tint #FFFFFFFF order 0 fudge 0 lengthScale -3 velScale 0.2
+## ToonTallFireRed/Smoke  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 1.2 speed 3.5 size 1..1.4 rot 0..6.283 grav -0.15 space World max 1000 color #FFFFFF8A
+  emission: rate 8 bursts []
+  shape: Cone r 0.01 thick 1 angle 5 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 1 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FF8300 0.705:#3E4556} a{0:0 0.171:1 1:0}
+  sizeOverLife: x1 [0:0.505 1:1]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_soft_AB tex cloud_2x2_soft blend Alpha tint #FFFFFFFF order 0 fudge 2
+## ToonTallFireRed/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.7..0.9 speed 0 size 1.8 rot 0 grav 0 space Local max 25 color #FF8400FF
+  emission: rate 2 bursts []
+  shape: Cone r 0.01 thick 1 angle 0 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 2 dampen 0.13 drag 0
+  colorOverLife: rgb{0.009:#FFFFFF 0.994:#FFFFFF} a{0:0 0.481:1 1:0}
+  sizeOverLife: x1 [0:0.723 0.501:1 0.994:0.723]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+## ToonTallFireRed/Sparkles  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.4..0.8 speed 3 size 0.02..0.04 rot 0 grav -0.1 space World max 25 color #FFFFFFFF
+  emission: rate 14 bursts []
+  shape: Cone r 0.2 thick 1 angle 5 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 2 dampen 0.15 drag 0
+  colorOverLife: rgb{0.009:#FFFFFF 0.515:#FFD54B 0.982:#FF3400} a{0:0 0.186:1 0.744:1 1:0}
+  sizeOverLife: x1 [0:0.33 0.24:1 1:0.472]
+  rotationOverLife: x12.566 [0:-0.022 0.009:-0.011 1:0.626]..[0:1]
+  noise: strength 0.4 freq 1 scroll 0 damping True octaves 1
+  renderer: Stretch mat circle_sharp_AB tex circle_sharp blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 2.5 velScale 0.02
+
+# ToonRadialFireRed  (Assets/References/Epic Toon FX/Prefabs/Environment/Fire/Cartoon/Radial/ToonRadialFireRed.prefab)
+## ToonRadialFireRed  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 0.5 loop True delay 0 life 0.25..0.4 speed 1 size 0.4..0.6 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 65 bursts [t0 n0 x1]
+  shape: Sphere r 0.01 thick 1 angle 0 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.1 drag 0
+  colorOverLife: rgb{0:#FFE18A 0.467:#FF9300 1:#FF4300} a{0:1 0.835:1}
+  sizeOverLife: x1 [0:0.495 1:1]
+  textureSheet: Grid 3x6 anim WholeSheet frame x0.667 [0:0 1:1] start 0 cycles 1
+  renderer: Stretch mat fire_3x6_ADD tex fire2_6x3 blend Additive tint #FFFFFFFF order 0 fudge 0 lengthScale -2 velScale 0
+## ToonRadialFireRed/Sparkles  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.4..0.8 speed 4..8 size 0.03..0.05 rot 0 grav -0.1 space World max 25 color #FFFFFFFF
+  emission: rate 35 bursts []
+  shape: Sphere r 0.13 thick 1 angle 5 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 1 dampen 0.2 drag 0
+  colorOverLife: rgb{0.009:#FFFFFF 0.515:#FFD54B 0.982:#FF3400} a{0:0 0.186:1 0.744:1 1:0}
+  sizeOverLife: x1 [0:0.33 0.24:1 1:0.472]
+  rotationOverLife: x12.566 [0:-0.022 0.009:-0.011 1:0.626]..[0:1]
+  noise: strength 0.4 freq 1 scroll 0 damping True octaves 1
+  renderer: Stretch mat circle_sharp_AB tex circle_sharp blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 2.5 velScale 0.02
+## ToonRadialFireRed/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 0.5 loop True delay 0 life 0.5 speed 0 size 3 rot 0 grav 0 space Local max 25 color #FF8400FF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 2 dampen 0.13 drag 0
+  colorOverLife: rgb{0.009:#FFFFFF 0.994:#FFFFFF} a{0:0.49 0.511:1 1:0.49}
+  sizeOverLife: x1 [0:0.845 0.501:1 0.994:0.845]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge -1
+
+# FireFieldRed  (Assets/References/Epic Toon FX/Prefabs/Environment/Fire/Cartoon/Field/FireFieldRed.prefab)
+## FireFieldRed  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.45 speed 0 size 7 rot 0 grav 0 space Local max 1000 color #FF8000FF
+  emission: rate 3.5 bursts []
+  shape: Cone r 0.01 thick 1 angle 0 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.457:1 1:0}
+  sizeOverLife: x1 [0:0.47 1:1]
+  renderer: HorizontalBillboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge -1
+## FireFieldRed/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.45..0.6 speed 1.5 size 0.04 rot 0 grav -0.05 space Local max 1000 color #FFFFFFFF
+  emission: rate 25 bursts []
+  shape: Cone r 0.7 thick 0 angle 0 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0:#FFEDA7 0.998:#FFB300} a{0:1 1:1}
+  sizeOverLife: x1 [0:0.271 0.296:1 1:0]
+  noise: strength 0.5 freq 1 scroll 0 damping True octaves 1
+  renderer: Stretch mat circle_sharp_AB tex circle_sharp blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 2 velScale 0
+## FireFieldRed/GroundFire  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.7 speed 0.5 size 1.5..2 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 8 bursts []
+  shape: Circle r 0.7 thick 1 angle 12 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 1.5 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFC300} a{0:1 0.863:1 1:0}
+  sizeOverLife: x x1 [0:0 0.547:1 1:0] y x1 [0:0.228 0.314:1 1:0.006]
+  textureSheet: Grid 3x3 anim WholeSheet frame x1 [0:0 1:1] start 0 cycles 3
+  renderer: VerticalBillboard mat fire_ground_3x3_AB tex fire_ground_soft3x3 blend Alpha tint #FFFFFFFF order 0 fudge 0
+
+# ToonFireTorchRed  (Assets/References/Epic Toon FX/Prefabs/Environment/Fire/Cartoon/Torch/ToonFireTorchRed.prefab)
+## ToonFireTorchRed  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.45 speed 1.65..2 size 0.65..0.8 rot 0..6.283 grav -0.3 space World max 1000 color #FFFFFFFF
+  emission: rate 12 bursts []
+  shape: Cone r 0.01 thick 1 angle 2 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 1.5 dampen 0.2 drag 0
+  colorOverLife: rgb{0.17:#FFFFFF 0.55:#FFC500 1:#FF4100} a{0.876:1 1:0}
+  sizeOverLife: x1 [0:0.482 0.378:0.944 1:0.406]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 3x3 anim WholeSheet frame x1 [0:0 1:1] start 0 cycles 1
+  renderer: Billboard mat explosion_spritesheet_3x3_AB tex explosion_round_3x3 blend Alpha tint #FFFFFFFF order 0 fudge 0
+## ToonFireTorchRed/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.5..1 speed 1..4 size 0.05 rot 0 grav -0.2 space World max 1000 color #FFFFFFFF
+  emission: rate 15 bursts []
+  shape: Cone r 0.13 thick 0 angle 5 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.6 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 0.507:#FFC733 0.992:#FF812F} a{0:0 0.224:1 0.835:1 1:0}
+  sizeOverLife: x1 [0.476:1 1:0]
+  rotationOverLife: 7.854..18.85
+  renderer: Billboard mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0
+## ToonFireTorchRed/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.275 speed 0 size 1.3..1.6 rot 0..6.283 grav -1 space World max 1000 color #FFFFFF87
+  emission: rate 9 bursts []
+  shape: Cone r 0.01 thick 1 angle 0 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0.009:#FFBE00 0.994:#FF0000} a{0:0 0.248:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.492]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge -1
+
+# CandleLight2  (Assets/References/Epic Toon FX/Prefabs/Environment/Fire/Candle/CandleLight2/CandleLight2.prefab)
+## CandleLight2  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop True delay 0 life 2 speed 0 size 0.6 rot 0 grav 0 space Local max 25 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  sizeOverLife: x x0.8 [0:1 0.284:0.824 0.513:0.982 0.77:0.789 1:1]..[0:1 0.192:0.992 0.399:0.928 0.611:0.791 0.848:0.932 1:1] y x1 [0:0.875 0.251:1 0.368:0.845 0.589:0.86 0.793:0.679 1:0.875]..[0:0.875 0.16:1 0.379:0.741 0.61:0.96 0.772:0.99 1:0.875]
+  rotationOverLife: x0.436 [0:0.5 0.5:-0.51 1:0.5]
+  renderer: Mesh mat candle_simple_colored_AB tex candle_simple_colored blend Alpha tint #FFFFFFFF order 0 fudge 0 mesh Quad
+## CandleLight2/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.8..1 speed 0..0 size 0.8..0.9 rot 0 grav 0 space Local max 25 color #FF83408F
+  emission: rate 1 bursts []
+  shape: Cone r 0.01 thick 0 angle 0 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 2 dampen 0.13 drag 0
+  colorOverLife: rgb{0:#FFFFFF 0.994:#FFFFFF} a{0:0 0.512:1 1:0}
+  sizeOverLife: x1 [0:0.654 0.501:1 0.994:0.654]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+
+# SmallExplosionFire  (Assets/References/Epic Toon FX/Prefabs/Combat/Explosions/SmallExplosion/SmallExplosionFire.prefab)
+## SmallExplosionFire  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.55..0.7 speed 3 size 0.8..1 rot 0..6.283 grav 0.1 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n5 x1]
+  shape: Sphere r 0.15 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFE278 0.247:#FFA200 0.593:#3E4556} a{0:1 0.9:1 1:0}
+  sizeOverLife: x1.4 [0:1 1:0]
+  rotationOverLife: x3.142 [0:-0.925 1:0.011]..[0:1 1:0.011]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_default_AB tex cloud_2x2_hardshadow blend Alpha tint #FFFFFFFF order 0 fudge 0
+## SmallExplosionFire/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.2..0.4 speed 6..16 size 0.08..0.11 rot 0 grav 0.7 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n8 x1]
+  shape: Sphere r 0.25 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 0.554:#FFFF4B 1:#FF7900} a{0:1 1:1}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Stretch mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 0.1 velScale 0.03
+## SmallExplosionFire/ExplosionRays  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.1..0.2 speed 0.01 size 0.18 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n6 x1]
+  shape: Sphere r 0.01 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0:#FFB74B 1:#FF6A00} a{0.487:1 0.993:0}
+  sizeOverLife: x1.4 [0:1 1:0]
+  renderer: Stretch mat lightray2_ADD tex lightray2 blend Additive tint #FFFFFFFF order 0 fudge 5 lengthScale 11 velScale 0.01
+## SmallExplosionFire/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.3 speed 0 size 5 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFCE00 1:#FF3A00} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.692]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge -1
+## SmallExplosionFire/FireBall  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.3 speed 0 size 1.3 rot -6.283..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0 dampen 0.15 drag 0
+  colorOverLife: rgb{0.264:#FFF6F3 0.583:#FFDB5C 1:#FF8400} a{0:1 0.722:1 0.894:0}
+  sizeOverLife: x1 [0:0.472 1:1]
+  rotationOverLife: x12.566 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 3x3 anim WholeSheet frame x1 [0:0 1:1] start 0 cycles 1
+  renderer: Billboard mat explosion_spritesheet_3x3_AB tex explosion_round_3x3 blend Alpha tint #FFFFFFFF order 1 fudge 0
+
+# SharpExplosionFire  (Assets/References/Epic Toon FX/Prefabs/Combat/Explosions/SharpExplosion/SharpExplosionFire.prefab)
+## SharpExplosionFire  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 0.7 loop False delay 0 life 0.15..0.2 speed 0.02 size 0.15..0.3 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n17 x1]
+  shape: Sphere r 0.01 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.01 dampen 0.1 drag 0
+  colorOverLife: rgb{0:#FFE18A 0.467:#FF9300 1:#FF4300} a{0:1 0.835:1}
+  sizeOverLife: x1 [0:0.655 0.351:0.961 1:0]
+  renderer: Stretch mat lightray2_ADD tex lightray2 blend Additive tint #FFFFFFFF order 0 fudge 0 lengthScale 9 velScale 0.01
+## SharpExplosionFire/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.3 speed 0 size 5 rot 0..6.283 grav 0 space Local max 1000 color #FF6F00FF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.315]
+  renderer: Billboard mat glow2_ADD tex glow2 blend Additive tint #FFFFFFFF order 0 fudge 15
+## SharpExplosionFire/Ring  pos(0.00, 0.00, 0.00) rot(90.00, 0.00, 0.00) scale(1.30, 1.30, 1.30)
+  main: dur 2 loop False delay 0 life 0.25 speed 0 size 2.2 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.5 dampen 0.05 drag 0
+  colorOverLife: rgb{0:#FFEFA0 1:#FF8000} a{0:1 1:0}
+  sizeOverLife: x1 [0:0 1:1]
+  renderer: Billboard mat ring_shockwave_ADD tex ring_shockwave blend Additive tint #FFFFFFFF order 0 fudge 0
+## SharpExplosionFire/Threads  pos(0.00, 0.00, 0.00) rot(0.00, 270.00, 180.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.07..0.12 speed 30..37 size 0.2 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n16 x1]
+  shape: Sphere r 0.01 thick 1 angle 24.42 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.25 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.9:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  rotationOverLife: x6.283 [0:-1 1:-0.495]..[0:1 1:0.407]
+  subEmitters: 1
+## SharpExplosionFire/Threads/Trail  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 0.15 loop False delay 0 life 0.2..0.7 speed 0 size x0.3 [0:0.535 1:0.186]..[0:1 1:0.201] rot 0..6.283 grav 0 space World max 1000 color #FFFFFFFF
+  emission: rate 0 bursts []
+  shape: Sphere r 0.01 thick 1 angle 24.42 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.1 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFEFA0 1:#FF8000} a{0:1 1:0}
+  sizeOverLife: x x1 [0:0 0.153:0.936 1:0.083] y x1 [0:0.154 0.191:0.943 1:0]
+  renderer: Stretch mat magic_line_ADD tex magic_line blend Additive tint #FFFFFFFF order 0 fudge 0 lengthScale 6 velScale 0.02
+
+# ExplosionFireballFire  (Assets/References/Epic Toon FX/Prefabs/Combat/Explosions/FireballRoundExplosion/ExplosionFireballFire.prefab)
+## ExplosionFireballFire  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.15..0.5 speed 3..6 size 0.5..1.23 rot -6.283..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n9 x1]
+  shape: Sphere r 0.01 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.15 drag 0
+  colorOverLife: rgb{0.411:#FFFFFF 0.708:#FFFF00 0.998:#FF5700} a{0:1 1:1}
+  sizeOverLife: x1 [0:0.708 1:1]
+  rotationOverLife: x12.566 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 3x3 anim WholeSheet frame x1 [0:0 0.258:0 0.291:0 1:0.991] start 0 cycles 1
+  renderer: Billboard mat explosion_spritesheet_3x3_AB tex explosion_round_3x3 blend Alpha tint #FFFFFFFF order 1 fudge 0
+## ExplosionFireballFire/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.3..0.9 speed 12..24 size 0.05 rot 0 grav 1 space Local max 1000 color #FFBB00FF
+  emission: rate 0 bursts [t0 n16 x1]
+  shape: Sphere r 0.25 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 1 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.224:1 0.835:1 1:0}
+  renderer: Stretch mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 1 velScale 0.02
+## ExplosionFireballFire/Smoke  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.4..0.8 speed 4..11 size 1..1.3 rot 0..6.283 grav -0.8 space Local max 1000 color #EAEAEAFF..#FFFFFFFF
+  emission: rate 0 bursts [t0 n12 x1]
+  shape: Sphere r 0.01 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FF9200 0.326:#A74417 0.721:#3E4556} a{0:1 0.9:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_default_AB tex cloud_2x2_hardshadow blend Alpha tint #FFFFFFFF order 0 fudge 0
+## ExplosionFireballFire/FireCurve  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.2..0.3 speed 8..16 size 0.4..0.55 rot 0 grav 0 space Local max 1000 color #FFE300FF
+  emission: rate 0 bursts [t0 n9 x1]
+  shape: Sphere r 0.5 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.25 drag 0
+  colorOverLife: rgb{0.23:#FFF6F3 1:#FF6400} a{0:1 0.774:1 1:0}
+  sizeOverLife: x1 [0:1 0.669:1 1:0.221]
+  renderer: Stretch mat wave3_ADD tex wave3 blend Additive tint #FFFFFFFF order 1 fudge 0 lengthScale 0.25 velScale 0
+## ExplosionFireballFire/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.4 speed 0 size 5.5 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFCE00 1:#FF3A00} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.692]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+
+# BalloonPopExplosion  (Assets/References/Epic Toon FX/Prefabs/Combat/Explosions (Misc)/BalloonPopExplosion.prefab)
+## BalloonPopExplosion  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 0.35 loop False delay 0 life 0.1..0.2 speed 1..3 size 0.07..0.1 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n12 x1]
+  shape: Sphere r 0.8 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFF6F3 1:#FFF6F3} a{0:1 0.321:1 1:0}
+  sizeOverLife: x1 [0:1 0.669:1 0.981:0.027]
+  renderer: Stretch mat triangle_curve_AB tex triangle_curve blend Alpha tint #FFFFFFFF order 1 fudge 0 lengthScale 2 velScale 0.2
+## BalloonPopExplosion/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.15..0.35 speed 7..19 size 0.04 rot 0 grav 0.7 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n15 x1]
+  shape: Sphere r 0.4 thick 0.5 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.3 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.128:1 0.415:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Stretch mat circlestretchy_AB tex circlestretchy blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 0.5 velScale 0.02
+## BalloonPopExplosion/Ring  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.2 speed 0 size 1.2 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 1:0}
+  sizeOverLife: x1 [0:0.521 1:1]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  renderer: Billboard mat ring_ADD tex ring blend Additive tint #FFFFFFFF order 0 fudge 0
+
+# FlashExplosion  (Assets/References/Epic Toon FX/Prefabs/Combat/Explosions (Misc)/FlashExplosion.prefab)
+## FlashExplosion  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.8..1.4 speed 5..7 size 0.5..1 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n13 x1]
+  shape: Circle r 0.203 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.5 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 0.746:#535353} a{0:1 0.753:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  rotationOverLife: x4.712 [0:-1 1:-0.571]..[0:1 1:0.56]
+  renderer: Billboard mat cloud_magic_AB tex clouds_magic2_soft blend Alpha tint #FFFFFFFF order 0 fudge 1
+## FlashExplosion/Sparkles  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.3..0.8 speed 9..20 size 0.09 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n15 x1]
+  shape: Cone r 0.36 thick 1 angle 37.19 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0.522:#FFFFFF 0.994:#585858} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.419]
+  renderer: Billboard mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0
+## FlashExplosion/MysticExplosionWhite  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.25..0.35 speed 0.1 size 0.625 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n5 x1]
+  shape: Cone r 0.01 thick 0.2 angle 31.05 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.02 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 1:0}
+  sizeOverLife: x x1 [0:1 1:0.322] y x1 [0:1 1:1]
+  renderer: Stretch mat lightray2_ADD tex lightray2 blend Additive tint #FFFFFFFF order 0 fudge 0 lengthScale -6 velScale 0
+## FlashExplosion/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.4 speed 0 size 4.5 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0.401:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.316]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+
+# HitDustExplosion  (Assets/References/Epic Toon FX/Prefabs/Combat/Explosions (Misc)/HitDustExplosion.prefab)
+## HitDustExplosion  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.2 speed 0 size 2.5 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Billboard mat glow2_ADD tex glow2 blend Additive tint #FFFFFFFF order 0 fudge 0
+## HitDustExplosion/Clouds  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.375..0.55 speed 0 size 1.4 rot 0..6.283 grav 0.2 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0.01 n1 x1]
+  shape: Sphere r 0 thick 0 angle 61.353 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.3 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.224:1 0.3:1 1:0}
+  sizeOverLife: x1 [0:0.485 1:1]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_soft_AB tex cloud_2x2_soft blend Alpha tint #FFFFFFFF order 0 fudge 0
+## HitDustExplosion/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.25..0.4 speed 3..15 size 0.04..0.06 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n12 x1]
+  shape: Sphere r 0.01 thick 0.5 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 1 dampen 0.3 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.128:1 0.415:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Stretch mat circlestretchy_AB tex circlestretchy blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 1 velScale 0.01
+
+# StunStarExplosion  (Assets/References/Epic Toon FX/Prefabs/Combat/Explosions (Misc)/StunStarExplosion.prefab)
+## StunStarExplosion  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1.1 loop False delay 0 life 0.6..1 speed 4..16 size 0.4 rot 0..6.283 grav 0.7 space Local max 1000 color #FFE93CFF
+  emission: rate 0 bursts [t0 n8 x1]
+  shape: Sphere r 0.2 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.8:1 1:0}
+  sizeOverLife: x1 [0:0.802 0.77:1 1:0]
+  rotationOverLife: x12.566 [0:-0.925 1:0.011]..[0:1 1:0.011]
+  renderer: Billboard mat star_AB tex star blend Alpha tint #FFFFFFFF order 0 fudge 0
+## StunStarExplosion/StarBurstDebris  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.3..0.65 speed 4..28 size 0.03 rot 0..6.283 grav 0.7 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n43 x1]
+  shape: Sphere r 0.38 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.438:1 1:0}
+  sizeOverLife: x1 [0:0.802 0.77:1 1:0]
+  renderer: Stretch mat circlestretchy_AB tex circlestretchy blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 2 velScale 0.02
+## StunStarExplosion/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.2 speed 0 size 3.5 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0.009:#FFFF00 0.994:#FF8F00} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.692]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+
+# StarPoof  (Assets/References/Epic Toon FX/Prefabs/Interactive/Stars/StarPoof.prefab)
+## StarPoof  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop False delay 0 life 0.4..1 speed 3..9 size 0.6..1 rot 0..6.283 grav 0.12 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n17 x1]
+  shape: Sphere r 0.2 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 0.411:#FFFFFF} a{0:1 0.9:1 1:0}
+  sizeOverLife: x1 [0.204:1 1:0]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_default_AB tex cloud_2x2_hardshadow blend Alpha tint #FFFFFFFF order 0 fudge 0
+## StarPoof/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.6 speed 0 size 4 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFF00 1:#FFB700} a{0:1 1:0}
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 25
+## StarPoof/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.2..0.6 speed 7..15 size 0.05 rot 0 grav 0 space Local max 1000 color #FFFF00FF
+  emission: rate 0 bursts [t0 n25 x1]
+  shape: Sphere r 0.25 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.25 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.097:1 0.729:1 1:0}
+  sizeOverLife: x1 [0:0.802 0.621:0.975 1:0]
+  renderer: Stretch mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 1 velScale 0.02
+## StarPoof/TinyStars  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop False delay 0 life 0.8..1.5 speed 0.5..2.5 size 0.3..0.5 rot -0.785..0.785 grav -0.1 space Local max 1000 color #FFE400FF
+  emission: rate 0 bursts [t0 n8 x1]
+  shape: Sphere r 0.51 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.7 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.774:1 1:0}
+  sizeOverLife: x1 [0:1 0.669:1 0.981:0.027]
+  rotationOverLife: x3.142 [0:-0.925 1:0.011]..[0:1 1:0.011]
+  renderer: Billboard mat star_AB tex star blend Alpha tint #FFFFFFFF order 1 fudge 0
+## StarPoof/BigStar  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop False delay 0 life 1.5 speed 0 size 2.3 rot 0 grav -0.04 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.901:1 1:0}
+  sizeOverLife: x1 [0:0.28 0.846:0.648 0.997:0.236]
+  renderer: Billboard mat star_outlined_colored_AB tex star_outlined_colored blend Alpha tint #FFFFFFFF order 0 fudge 25
+
+# StarExplosion  (Assets/References/Epic Toon FX/Prefabs/Interactive/Stars/StarExplosion.prefab)
+## StarExplosion  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop False delay 0 life 0.7..1.5 speed 0.5..5 size 0.3..0.5 rot 0..6.283 grav -0.1 space Local max 1000 color #FFFF00FF..#FFE400FF
+  emission: rate 0 bursts [t0 n8 x1]
+  shape: Sphere r 0.1 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.7 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.863:1 1:0}
+  sizeOverLife: x1 [0:0.394 0.321:1 0.669:1 0.981:0.027]
+  rotationOverLife: x1.571 [0.273:-0.011 1:-0.901]..[0.273:0.033 1:0.978]
+  renderer: Billboard mat star_AB tex star blend Alpha tint #FFFFFFFF order 1 fudge 0
+## StarExplosion/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.4 speed 0 size 3.3 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFF00 0.994:#FF6F00} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.692]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+## StarExplosion/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.2..0.4 speed 7..16 size 0.05 rot 0 grav 0.1 space Local max 1000 color #FFED00FF
+  emission: rate 0 bursts [t0 n12 x1]
+  shape: Sphere r 0.15 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.35 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0.461:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.756]
+  renderer: Stretch mat circlestretchy_AB tex circlestretchy blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 1 velScale 0.05
+
+# HeartPoof  (Assets/References/Epic Toon FX/Prefabs/Interactive/Hearts/HeartPoof.prefab)
+## HeartPoof  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop False delay 0 life 0.4..0.8 speed 5..10 size 0.8..1.3 rot 0..6.283 grav 0.12 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n17 x1]
+  shape: Sphere r 0.2 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0.003:#DB00FF 0.584:#FFFFFF} a{0:1 0.9:1 1:0}
+  sizeOverLife: x1 [0.204:1 1:0]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_default_AB tex cloud_2x2_hardshadow blend Alpha tint #FFFFFFFF order 0 fudge 0
+## HeartPoof/TinyHearts  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop False delay 0 life 0.8..1.2 speed 4..5 size 0.3..0.5 rot -0.262..0.262 grav -0.1 space Local max 1000 color #FF00FFFF
+  emission: rate 0 bursts [t0 n8 x1]
+  shape: Sphere r 0.51 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.7 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.774:1 1:0}
+  sizeOverLife: x x1 [0:0.686 0.312:0.995 0.556:0.716 0.723:0.958 0.981:0.027] y x1 [0:1 0.34:0.716 0.987:0.03]
+  renderer: Billboard mat heart_AB tex heart blend Alpha tint #FFFFFFFF order 1 fudge 0
+## HeartPoof/BigHeart  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop False delay 0 life 1 speed 0 size 2.3 rot 0 grav -0.08 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0.689:#FFFFFF 1:#FF00FF} a{0:1 0.901:1 1:0}
+  sizeOverLife: x x1 [0:0.28 0.179:0.934 0.37:0.774 0.547:0.983 1:0.339] y x1 [0:0.284 0.332:0.988 0.556:0.797 0.763:0.918 1:0.345]
+  rotationOverLife: x0.611 [0:0.03 0.377:0.503 0.7:-1 1:0.018]
+  renderer: Billboard mat heart2_AB tex heart2 blend Alpha tint #FFFFFFFF order 0 fudge 25
+
+# SmokeBurstWhite  (Assets/References/Epic Toon FX/Prefabs/Environment/Smoke/White/SmokeBurstWhite.prefab)
+## SmokeBurstWhite  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.3..0.4 speed 3..4 size 0.1..0.2 rot 0..6.283 grav -0.3 space Local max 1000 color #FFFFFFFF
+  emission: rate 15 bursts []
+  shape: Cone r 0.01 thick 1 angle 3.65 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.8 dampen 0.08 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.37:1 1:0}
+  sizeOverLife: x1 [0:0.546 1:0.033]
+  rotationOverLife: x6.283 [0:-1 1:-0.495]..[0:1 1:0.407]
+  renderer: Stretch mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 1 velScale 0.2
+## SmokeBurstWhite/Clouds  pos(0.00, 0.00, -0.25) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.6 speed 2 size 0.4..0.9 rot 0..6.283 grav -0.3 space Local max 1000 color #FFFFFFFF
+  emission: rate 16 bursts []
+  shape: Cone r 0.01 thick 1 angle 7 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  velocity: x 0 y 0 z 1 radial 0 orbital 0 space Local
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.105:1 0.682:1 1:0}
+  sizeOverLife: x1 [0:0 0.507:1 1:0]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_default_AB tex cloud_2x2_hardshadow blend Alpha tint #FFFFFFFF order 0 fudge 0
+
+# DustDirtyPoof  (Assets/References/Epic Toon FX/Prefabs/Environment/Dust/DustDirtyPoof.prefab)
+## DustDirtyPoof  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 3 loop False delay 0 life 0.3..0.7 speed 3..8 size 0.05..0.07 rot 0 grav 0.2 space Local max 1000 color #707070FF..#4D4D4DFF
+  emission: rate 0 bursts [t0 n12 x1]
+  shape: Sphere r 0.2 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  velocity: x -0.1..0.1 y -0.1..0.1 z -0.1..0.1 radial 0 orbital 0 space Local
+  limitVelocity: limit 0 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.125:1 0.869:1 1:0}
+  sizeOverLife: x1 [0.003:0.372 0.496:1 1:0.372]
+  renderer: Billboard mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0
+## DustDirtyPoof/Cloud  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.5..1 speed 1..4 size 0.6..0.9 rot 0..6.283 grav 0 space Local max 1000 color #424242FF..#545453FF
+  emission: rate 0 bursts [t0 n15 x1]
+  shape: Sphere r 0.1 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.1 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:0 0.166:1 0.501:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.313]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_default_AB tex cloud_2x2_hardshadow blend Alpha tint #FFFFFFFF order 0 fudge 5
+
+# SparkleSoloYellow  (Assets/References/Epic Toon FX/Prefabs/Interactive/Sparkle/SparkleSolo/SparkleSoloYellow.prefab)
+## SparkleSoloYellow  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.25..0.4 speed 0 size 0.3..0.4 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  colorOverLife: rgb{0.253:#FFFFFF 0.701:#FFFF00 1:#FF8B00} a{0:1 1:1}
+  sizeOverLife: x1 [0:0 0.295:1 0.535:0.148 0.654:0.693 1:0]
+  renderer: Billboard mat sparkle_ADD tex sparkle3 blend Additive tint #FFFFFFFF order 0 fudge 0
+## SparkleSoloYellow/SparkleGlow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.3..0.4 speed 0 size 1.2 rot 0 grav 0 space World max 1000 color #FFFFFF7C
+  emission: rate 0 bursts [t0 n1 x1]
+  shape: Sphere r 0.01 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0.009:#FFFFFF 1:#FFFF00} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Billboard mat Default-Particle tex Default-Particle blend ? tint  order 0 fudge 0
+
+# TinySparkle  (Assets/References/Epic Toon FX/Prefabs/Interactive/Sparkle/TinySparkle.prefab)
+## TinySparkle  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.25..0.3 speed 0 size 0.7 rot 0.785 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  shape: Sphere r 0.01 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  sizeOverLife: x1 [0:0.484 0.452:1 0.992:0]
+  renderer: Billboard mat sparkle2_ADD tex sparkle2 blend Additive tint #FFFFFFFF order 0 fudge 0
+## TinySparkle/LingeringSparkle  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.4 speed 0 size 0.5 rot 3.142 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  shape: Sphere r 0.01 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0.009:#FFFFFF 0.994:#FFFFFF} a{0.48:1 1:0}
+  sizeOverLife: x1 [0:0.484 0.452:1 0.992:0]
+  renderer: Billboard mat sparkle2_ADD tex sparkle2 blend Additive tint #FFFFFFFF order 0 fudge 0
+## TinySparkle/SparkleGlow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop True delay 0 life 0.1..0.6 speed 0 size 1.2 rot 0 grav 0 space World max 1000 color #FFFFFF40
+  emission: rate 0 bursts [t0 n1 x1]
+  shape: Sphere r 0.01 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0.009:#FFFFFF 0.994:#FFE760} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Billboard mat Default-Particle tex Default-Particle blend ? tint  order 0 fudge 0
+
+# ConfettiBlastRainbow  (Assets/References/Epic Toon FX/Prefabs/Environment/Confetti/Blast/ConfettiBlastRainbow.prefab)
+## ConfettiBlastRainbow  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.60, 1.60, 1.60)
+  main: dur 5 loop True delay 0 life 1.5..2.2 speed 2..10 size 0.05..0.2 rot 0..6.283 grav 0.4 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n60 x1]
+  shape: Sphere r 0.01 thick 1 angle 14.134 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.5..1 dampen 0.21 drag 0
+  sizeOverLife: x1 [0:1 0.782:1 1:0]
+  rotationOverLife: 0..0.785
+  textureSheet: Grid 3x3 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat confetti_AB tex confetti blend Alpha tint #FFFFFFFF order 0 fudge 0
+## ConfettiBlastRainbow/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.15 speed 0 size 2.25 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0.692]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+## ConfettiBlastRainbow/Clouds  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 3 loop False delay 0 life 0.3..1 speed 1..6 size 0.2..0.4 rot 0..6.283 grav -0.15 space Local max 1000 color #DDDDDDFF..#FFFFFFFF
+  emission: rate 0 bursts [t0 n22 x1]
+  shape: Sphere r 0.07 thick 1 angle 12 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.9:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  textureSheet: Grid 2x2 anim WholeSheet frame 0..1 start 0 cycles 1
+  renderer: Billboard mat cloud_2x2_default_AB tex cloud_2x2_hardshadow blend Alpha tint #FFFFFFFF order 0 fudge -5
+
+# SparkExplosionYellow  (Assets/References/Epic Toon FX/Prefabs/Environment/Sparks/SparkExplosionYellow.prefab)
+## SparkExplosionYellow  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 5 loop False delay 0 life 0.75..1.5 speed 4..11 size 0.05 rot 0 grav 2.2 space World max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n10 x1]
+  shape: Cone r 0.2 thick 1 angle 15.613 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0:#FFFFFF 0.278:#FFF800 1:#FF7900} a{0:1 1:1}
+  sizeOverLife: x1 [0:1 1:0]
+  subEmitters: 3
+  renderer: Stretch mat circle_ADD tex circle blend Additive tint #FFFFFFFF order 0 fudge 0 lengthScale 1 velScale 0.01
+## SparkExplosionYellow/StartGlow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.15 speed 0 size 3.3 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 0.493:#FFD800} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Billboard mat glow2_ADD tex glow2 blend Additive tint #FFFFFFFF order 0 fudge 0
+## SparkExplosionYellow/SubSpark  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 5 loop False delay 0 life 0.2..0.3 speed 3..6 size 0.05 rot 0 grav 1.8 space World max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n2..5 x1]
+  shape: Cone r 0.05 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0:#FFF800 1:#FF7900} a{0:1 1:1}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Stretch mat circle_ADD tex circle blend Additive tint #FFFFFFFF order 0 fudge 0 lengthScale 1 velScale 0.01
+## SparkExplosionYellow/SparkGlow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 5 loop False delay 0 life 0.15..0.3 speed 0 size 0.5..1.5 rot 0 grav 2.2 space World max 1000 color #FFB00640
+  emission: rate 0 bursts [t0 n1 x1]
+  shape: Sphere r 0.01 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  colorOverLife: rgb{0.009:#FFFFFF 0.994:#FFE760} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+## SparkExplosionYellow/SparkImpactGlow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 5 loop False delay 0 life 0.1..0.15 speed 0 size 1.2 rot 0 grav 0 space World max 1000 color #FFB00640
+  emission: rate 0 bursts [t0 n1 x1]
+  colorOverLife: rgb{0:#FFFFFF 0.994:#FFE760} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+
+# LevelupNovaYellow  (Assets/References/Epic Toon FX/Prefabs/Interactive/Level Up/Nova/LevelupNovaYellow.prefab)
+## LevelupNovaYellow  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 1 speed 0 size 9.13 rot 6.283..0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFA600} a{0:1 1:0}
+  sizeOverLife: x1 [0:0.321 1:1]
+  renderer: Mesh mat ring_shockwave_ADD tex ring_shockwave blend Additive tint #FFFFFFFF order 0 fudge 0 mesh Quad
+## LevelupNovaYellow/RotatingSparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 0.7 loop False delay 0 life 0.6 speed 1.5 size x0.08 [0:0.287 0.319:1 1:0.213] rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate x355 [0:1 1:0.382] bursts [t0 n0 x1]
+  shape: Cone r 1.37 thick 0 angle 0.67 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  velocity: x 0 y 0 z 0 radial 0 orbital 2 space Local
+  colorOverLife: rgb{0:#FFFFFF 1:#FFE572} a{0:1 1:1}
+  sizeOverLife: x1 [0:0 0.18:1 1:0]
+  renderer: Billboard mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0
+## LevelupNovaYellow/Glow  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.4 speed 0 size 5 rot 0..6.283 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n1 x1]
+  limitVelocity: limit 0.7 dampen 0.09 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFA600} a{0:1 1:0}
+  sizeOverLife: x1 [0:1 1:0]
+  rotationOverLife: x3.142 [0:-1 1:0.022]..[0:1 1:0]
+  renderer: Billboard mat glow1_ADD tex glow1 blend Additive tint #FFFFFFFF order 0 fudge 0
+## LevelupNovaYellow/Sparks  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.35..2 speed 2..7 size 0.06 rot 0 grav 0 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n125 x1]
+  shape: Circle r 1.37 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0.25 dampen 0.06 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFE572} a{0:1 1:1}
+  sizeOverLife: x1 [0:0 0.204:1 0.426:0.284 0.626:0.91 1:0]
+  renderer: Billboard mat circle_AB tex circle blend Alpha tint #FFFFFFFF order 0 fudge 0
+
+# StarBurst2D  (Assets/References/Epic Toon FX/Prefabs 2D/Explosions/StarBurst2D.prefab)
+## StarBurst2D  pos(0.00, 0.00, 0.00) rot(270.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 2 loop False delay 0 life 0.5..0.75 speed 4..16 size 0.4 rot 0..6.283 grav 0.7 space Local max 1000 color #FFE93CFF
+  emission: rate 0 bursts [t0 n8 x1]
+  shape: Sphere r 0.2 thick 1 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.15 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.8:1 1:0}
+  sizeOverLife: x1 [0:0.802 0.77:1 1:0]
+  rotationOverLife: x12.566 [0:-0.176 0.392:-0.198 1:-0.978]..[0:0.121 0.384:0.143 1:1]
+  renderer: Billboard mat star_ADD tex star blend Additive tint #FFFFFFFF order 0 fudge 0
+## StarBurst2D/StarBurstDebris  pos(0.00, 0.00, 0.00) rot(0.00, 0.00, 0.00) scale(1.00, 1.00, 1.00)
+  main: dur 1 loop False delay 0 life 0.3..0.65 speed 4..28 size 0.05 rot 0..6.283 grav 0.7 space Local max 1000 color #FFFFFFFF
+  emission: rate 0 bursts [t0 n43 x1]
+  shape: Sphere r 0.38 thick 0 angle 25 arc 360 rot (0.00, 0.00, 0.00) scale (1.00, 1.00, 1.00)
+  limitVelocity: limit 0 dampen 0.2 drag 0
+  colorOverLife: rgb{0:#FFFFFF 1:#FFFFFF} a{0:1 0.438:1 1:0}
+  sizeOverLife: x1 [0:0.802 0.77:1 1:0]
+  renderer: Stretch mat circlestretchy_AB tex circlestretchy blend Alpha tint #FFFFFFFF order 0 fudge 0 lengthScale 4 velScale 0.01
+

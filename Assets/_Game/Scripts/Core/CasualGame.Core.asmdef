@@ -1,0 +1,6 @@
+{
+  "name": "CasualGame.Core",
+  "rootNamespace": "CasualGame.Core",
+  "references": ["Unity.TextMeshPro", "Unity.InputSystem"],
+  "autoReferenced": true
+}

@@ -1,0 +1,6 @@
+{
+  "name": "CasualGame.ArrowOut",
+  "rootNamespace": "CasualGame.ArrowOut",
+  "references": ["CasualGame.Core", "Unity.TextMeshPro", "Unity.InputSystem"],
+  "autoReferenced": true
+}

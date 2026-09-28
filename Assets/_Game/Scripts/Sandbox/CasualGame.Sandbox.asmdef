@@ -1,0 +1,6 @@
+{
+  "name": "CasualGame.Sandbox",
+  "rootNamespace": "CasualGame.Sandbox",
+  "references": ["CasualGame.Core", "Unity.InputSystem"],
+  "autoReferenced": true
+}

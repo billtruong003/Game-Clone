@@ -1,0 +1,7 @@
+{
+  "name": "CasualGame.Editor",
+  "rootNamespace": "CasualGame.EditorTools",
+  "references": ["CasualGame.Core", "CasualGame.ArrowOut", "CasualGame.Sandbox", "Unity.RenderPipelines.Universal.Runtime", "Unity.RenderPipelines.Core.Runtime", "Unity.2D.Sprite.Editor", "Unity.TextMeshPro", "UnityEditor.TestRunner", "UnityEngine.TestRunner"],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": false
+}

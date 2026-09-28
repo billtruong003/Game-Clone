@@ -1,0 +1,11 @@
+{
+  "name": "casual-game-art",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node make-art.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.35.5"
+  }
+}

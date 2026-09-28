@@ -1,0 +1,6 @@
+{
+  "name": "CasualGame.EyeBlast",
+  "rootNamespace": "CasualGame.EyeBlast",
+  "references": ["CasualGame.Core", "Unity.TextMeshPro", "Unity.InputSystem"],
+  "autoReferenced": true
+}

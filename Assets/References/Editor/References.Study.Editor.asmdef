@@ -1,0 +1,7 @@
+{
+  "name": "References.Study.Editor",
+  "rootNamespace": "References.Study",
+  "references": [],
+  "includePlatforms": ["Editor"],
+  "autoReferenced": true
+}
