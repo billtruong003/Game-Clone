@@ -27,84 +27,113 @@ namespace CasualGame.Core
 
         public bool Playing { get; private set; }
 
-        public IEnumerator Run(Camera cam)
+        // what Restore() puts back
+        private Camera cam;
+        private Color savedBg;
+        private float savedTimeScale = 1f;
+
+        public IEnumerator Run(Camera camera)
         {
             if (Playing) yield break;
-            Playing = true;
-            EnsureMaterials();
-            var bg = cam.backgroundColor;
-            var timeScale = Time.timeScale;
-            Time.timeScale = 0f; // the impact frame is a freeze
-
-            sprites.Clear();
-            hidden.Clear();
-            foreach (var r in FindObjectsByType<Renderer>(FindObjectsSortMode.None))
+            Begin(camera);
+            try
             {
-                if (!r.enabled || !r.gameObject.activeInHierarchy) continue;
-                if (r is SpriteRenderer sr) sprites.Add((sr, sr.sharedMaterial));
-                else { r.enabled = false; hidden.Add(r); }
-            }
-
-            Apply(inkMat);
-            cam.backgroundColor = paper;
-            yield return new WaitForSecondsRealtime(frameTime);
-            if (invertSecond)
-            {
-                Apply(paperMat);
-                cam.backgroundColor = ink;
+                foreach (var r in FindObjectsByType<Renderer>(FindObjectsSortMode.None))
+                {
+                    if (!r.enabled || !r.gameObject.activeInHierarchy) continue;
+                    if (r is SpriteRenderer sr) sprites.Add((sr, sr.sharedMaterial));
+                    else { r.enabled = false; hidden.Add(r); }
+                }
+                SetSprites(inkMat);
+                cam.backgroundColor = paper;
                 yield return new WaitForSecondsRealtime(frameTime);
+                if (invertSecond)
+                {
+                    SetSprites(paperMat);
+                    cam.backgroundColor = ink;
+                    yield return new WaitForSecondsRealtime(frameTime);
+                }
             }
-
-            foreach (var (r, m) in sprites) if (r != null) r.sharedMaterial = m;
-            foreach (var r in hidden) if (r != null) r.enabled = true;
-            cam.backgroundColor = bg;
-            Time.timeScale = timeScale;
-            Playing = false;
+            finally { Restore(); } // always: an exception or a destroyed object must never leave the game frozen/white
         }
 
-        public IEnumerator RunUI(Camera cam, Canvas canvas, ICollection<Graphic> subjects)
+        public IEnumerator RunUI(Camera camera, Canvas canvas, ICollection<Graphic> subjects)
         {
             if (Playing) yield break;
+            Begin(camera);
+            try
+            {
+                foreach (var g in canvas.GetComponentsInChildren<Graphic>())
+                {
+                    if (!g.enabled) continue;
+                    if (subjects.Contains(g)) uiSubjects.Add((g, g.material == g.defaultMaterial ? null : g.material));
+                    else { g.enabled = false; uiHidden.Add(g); }
+                }
+                foreach (var r in FindObjectsByType<Renderer>(FindObjectsSortMode.None))
+                    if (r.enabled && r.gameObject.activeInHierarchy) { r.enabled = false; hidden.Add(r); }
+
+                SetGraphics(uiInkMat);
+                cam.backgroundColor = paper;
+                yield return new WaitForSecondsRealtime(frameTime);
+                if (invertSecond)
+                {
+                    SetGraphics(uiPaperMat);
+                    cam.backgroundColor = ink;
+                    yield return new WaitForSecondsRealtime(frameTime);
+                }
+            }
+            finally { Restore(); }
+        }
+
+        private void Begin(Camera camera)
+        {
             Playing = true;
             EnsureMaterials();
-            var bg = cam.backgroundColor;
-            var timeScale = Time.timeScale;
-            Time.timeScale = 0f;
+            cam = camera;
+            savedBg = cam.backgroundColor;
+            savedTimeScale = Time.timeScale;
+            Time.timeScale = 0f; // the impact frame is a freeze
+            sprites.Clear();
+            hidden.Clear();
+            uiSubjects.Clear();
+            uiHidden.Clear();
+        }
 
+        // Objects may be destroyed during the frozen frames (tweens that finish, a cleared block): skip them one by one.
+        private void Restore()
+        {
+            if (!Playing) return;
+            foreach (var (r, m) in sprites) Safe(r, () => r.sharedMaterial = m);
+            foreach (var (g, m) in uiSubjects) Safe(g, () => g.material = m);
+            foreach (var b in uiHidden) Safe(b, () => b.enabled = true);
+            foreach (var r in hidden) Safe(r, () => r.enabled = true);
+            sprites.Clear();
             uiSubjects.Clear();
             uiHidden.Clear();
             hidden.Clear();
-            foreach (var g in canvas.GetComponentsInChildren<Graphic>())
-            {
-                if (!g.enabled) continue;
-                if (subjects.Contains(g)) uiSubjects.Add((g, g.material == g.defaultMaterial ? null : g.material));
-                else { g.enabled = false; uiHidden.Add(g); }
-            }
-            foreach (var r in FindObjectsByType<Renderer>(FindObjectsSortMode.None))
-                if (r.enabled && r.gameObject.activeInHierarchy) { r.enabled = false; hidden.Add(r); }
-
-            foreach (var (g, _) in uiSubjects) g.material = uiInkMat;
-            cam.backgroundColor = paper;
-            yield return new WaitForSecondsRealtime(frameTime);
-            if (invertSecond)
-            {
-                foreach (var (g, _) in uiSubjects) g.material = uiPaperMat;
-                cam.backgroundColor = ink;
-                yield return new WaitForSecondsRealtime(frameTime);
-            }
-
-            foreach (var (g, m) in uiSubjects) if (g != null) g.material = m;
-            foreach (var b in uiHidden) if (b != null) b.enabled = true;
-            foreach (var r in hidden) if (r != null) r.enabled = true;
-            cam.backgroundColor = bg;
-            Time.timeScale = timeScale;
+            if (cam != null) cam.backgroundColor = savedBg;
+            Time.timeScale = savedTimeScale;
             Playing = false;
         }
 
-        private void Apply(Material m)
+        private void SetSprites(Material m)
         {
-            foreach (var (r, _) in sprites) if (r != null) r.sharedMaterial = m;
+            foreach (var (r, _) in sprites) Safe(r, () => r.sharedMaterial = m);
         }
+
+        private void SetGraphics(Material m)
+        {
+            foreach (var (g, _) in uiSubjects) Safe(g, () => g.material = m);
+        }
+
+        private static void Safe(Object o, System.Action a)
+        {
+            if (o == null) return;
+            try { a(); }
+            catch (MissingReferenceException) { } // destroyed this frame
+        }
+
+        private void OnDisable() => Restore();
 
         private void EnsureMaterials()
         {

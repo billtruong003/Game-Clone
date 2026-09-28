@@ -303,7 +303,9 @@ namespace CasualGame.EyeBlast
             var subjects = new HashSet<Graphic>();
             foreach (var b in blocks) if (b != null) subjects.UnionWith(b.Rect.GetComponentsInChildren<Graphic>());
             foreach (var (b, _) in views) subjects.UnionWith(b.Rect.GetComponentsInChildren<Graphic>());
-            foreach (var t in trayViews) if (t != null) subjects.UnionWith(t.GetComponentsInChildren<Graphic>());
+            // skip the piece just dropped: its view is destroyed at the end of this frame (tray[i] is already null)
+            for (int i = 0; i < trayViews.Length; i++)
+                if (tray[i] != null && trayViews[i] != null) subjects.UnionWith(trayViews[i].GetComponentsInChildren<Graphic>());
             if (impact == null) impact = gameObject.AddComponent<ImpactFrame>();
             yield return impact.RunUI(Camera.main, canvas, subjects);
             GameFx.Play("Blast_MultiLine", boardRect.position, 1.3f);
