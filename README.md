@@ -11,6 +11,7 @@ Unity 6000.3.10f1 · URP 2D · portrait 1080×1920.
 | `Sandbox/FxSandbox` | FX design bench (goo merge, jelly wobble, glass jar, impact frame, ink brush) |
 
 Full docs (Vietnamese): [Docs/README.md](Docs/README.md), FX: [Docs/FX_SANDBOX.md](Docs/FX_SANDBOX.md).
+Next phase (glass fixes, asset regen, UI mockups, standalone games without Hub): [Docs/NEXT_PHASE.md](Docs/NEXT_PHASE.md).
 
 ## After cloning: import Epic Toon FX
 The game effects are prefab variants of **Epic Toon FX** (paid, Unity Asset Store). Its license does not allow
