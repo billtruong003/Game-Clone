@@ -96,9 +96,31 @@ namespace CasualGame.EditorTools
             }
         }
 
+        // Shaders the games create materials for at runtime (Shader.Find): must be in every build.
+        private static readonly string[] RuntimeShaders =
+            { "CasualGame/GooMerge", "CasualGame/GlassJar", "CasualGame/Silhouette", "CasualGame/UISilhouette", "CasualGame/InkBrush" };
+
+        public static void EnsureRuntimeShaders()
+        {
+            var gs = new SerializedObject(AssetDatabase.LoadAllAssetsAtPath("ProjectSettings/GraphicsSettings.asset")[0]);
+            var list = gs.FindProperty("m_AlwaysIncludedShaders");
+            foreach (var name in RuntimeShaders)
+            {
+                var shader = Shader.Find(name);
+                if (shader == null) { Debug.LogWarning("Missing shader " + name); continue; }
+                bool has = false;
+                for (int i = 0; i < list.arraySize; i++) if (list.GetArrayElementAtIndex(i).objectReferenceValue == shader) has = true;
+                if (has) continue;
+                list.arraySize++;
+                list.GetArrayElementAtIndex(list.arraySize - 1).objectReferenceValue = shader;
+            }
+            gs.ApplyModifiedPropertiesWithoutUndo();
+        }
+
         /// <summary>Puts a GameContext in every scene pointing at the right libraries (Hub → all games, game → its own).</summary>
         public static void WireScenes()
         {
+            EnsureRuntimeShaders();
             var profiles = Profiles();
             var dev = profiles.First(p => p.isDev);
             var active = SceneManager.GetActiveScene().path;
@@ -112,7 +134,8 @@ namespace CasualGame.EditorTools
                 var ctx = UnityEngine.Object.FindFirstObjectByType<GameContext>() ?? new GameObject("GameContext").AddComponent<GameContext>();
                 ctx.EditorWire(owner.gameId,
                     AssetDatabase.LoadAssetAtPath<ArtLibrary>(ArtLibraryPath(owner)),
-                    AssetDatabase.LoadAssetAtPath<AudioLibrary>(AudioLibraryPath(owner)));
+                    AssetDatabase.LoadAssetAtPath<AudioLibrary>(AudioLibraryPath(owner)),
+                    AssetDatabase.LoadAssetAtPath<FxCatalog>(EtfxPicks.CatalogPath(owner.isDev ? "Dev" : owner.gameId)));
                 EditorUtility.SetDirty(ctx);
                 WireGameSpecific(sceneName);
                 EditorSceneManager.MarkSceneDirty(scene);
@@ -123,6 +146,18 @@ namespace CasualGame.EditorTools
 
         private static void WireGameSpecific(string sceneName)
         {
+            if (sceneName == "EyeMerge")
+            {
+                // the jar's glass refracts: this camera uses the renderer with the Camera Sorting Layer Texture
+                var cam = UnityEngine.Object.FindFirstObjectByType<Camera>();
+                if (cam != null)
+                {
+                    var data = cam.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
+                    if (data == null) data = cam.gameObject.AddComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
+                    data.SetRenderer(GlassRendererSetup.Setup());
+                    EditorUtility.SetDirty(data);
+                }
+            }
             if (sceneName != "ArrowOut") return;
             var game = UnityEngine.Object.FindFirstObjectByType<ArrowOut.ArrowOutGame>();
             if (game == null) return;

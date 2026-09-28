@@ -151,6 +151,7 @@ MonoBehaviour:
   gameId: Dev
   art: {fileID: 11400000, guid: 171d6ac224419764c813b070007966cd, type: 2}
   audio: {fileID: 11400000, guid: 33074b6b51f8b3f469a0438b8e115a44, type: 2}
+  fx: {fileID: 11400000, guid: e3e075644a704774e86d6779f1eca3e0, type: 2}
 --- !u!4 &278993548
 Transform:
   m_ObjectHideFlags: 0

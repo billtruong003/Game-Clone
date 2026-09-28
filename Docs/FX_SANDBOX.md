@@ -30,7 +30,16 @@ Mở: **Tools ▸ Casual Game ▸ FX Sandbox**. Menu này mở scene `Assets/_Ga
 - **Jelly wobble**: `Core/JellyWobble.cs` đặt trên transform *hình* của bi (không phải thân vật lý). `Impact(lực, pháp tuyến, bán kính)` nén theo trục va, phình ngang giữ thể tích, rung lò xo tắt dần, mặt tiếp xúc giữ nguyên chỗ. Demo **Drop & wobble**: rơi thì dãn, chạm thì nén + nhắm mắt ^^, nảy nhẹ, khói `Land_Poof` (ETFX "Poof") bật hai bên, nằm sau bi.
 - Khi đưa vào game: `GooMerge` dùng `Shader.Find`, nên cần thêm `CasualGame/GooMerge` vào Always Included Shaders (hoặc tham chiếu qua một material) để shader có trong build.
 
-## Kính hũ, impact frame, nét cọ mực (chờ duyệt, chưa đưa vào game)
+## Đã đưa vào game (2026-09-28)
+| Game | Hiệu ứng |
+|---|---|
+| Eye Merge | Goo merge (2 bi chảy vào nhau → flash → bi mới bật ra), jelly wobble khi va, khói `Land_Poof` lần chạm đầu sau khi thả, kính hũ (rim, streak, khúc xạ, glint khi bi đập thành), SparkleExplosion theo màu cấp, StarIntense cho cấp 9+ |
+| Eye Blast | Bụi `Blast_Place` khi đặt, glitter theo màu khối khi xóa, **impact frame** (bản UI) + FlashExplosionRadial + rung khi xóa ≥ 2 hàng, MagicNova khi dọn sạch bàn |
+| Arrow Out | Vệt cọ mực kéo theo đuôi mũi tên khi bay ra, khói ở mép bàn, StarPoof + confetti khi qua màn, lấp lánh ở sao đánh giá |
+
+Hạ tầng: `Core/GameFx` (phát effect theo tên, có pool) + `FxCatalog` riêng từng game (`Build/Libraries/FxCatalog_*.asset`, gắn qua `GameContext`). Menu **Tools ▸ Casual Game ▸ FX ▸ Rebuild FX Catalogs**. Build Switcher tự gắn catalog, đặt renderer kính cho camera EyeMerge và thêm các shader `CasualGame/*` vào Always Included Shaders.
+
+## Kính hũ, impact frame, nét cọ mực (chi tiết)
 - **Kính hũ (Merge)**: `Core/GlassJar.cs` + shader `Fx/Shaders/GlassJar.shader`, vẽ trên sorting layer **Glass** (sau Default). Gồm rim sáng ở thành, vệt phản chiếu dọc, tint xanh nhạt, **khúc xạ thật** gần thành (lấy ảnh những gì đã vẽ trên Default rồi bẻ lệch vào tâm), và glint quét chéo khi `Glint()` được gọi (bi đập thành) hoặc định kỳ khi rảnh.
   - Khúc xạ cần **Camera Sorting Layer Texture**. Nó tốn một lần copy toàn màn hình mỗi khung, nên nằm ở renderer riêng `Settings/Renderer2D_Glass.asset` (index 1 trong URP asset). Chỉ camera nào chọn renderer này mới tốn. Menu: **Tools ▸ Casual Game ▸ FX ▸ Setup Glass Renderer**.
   - Demo nút **Jar: drop / fill / clear**: bi vật lý thật, va chạm → `JellyWobble`, đập thành đủ mạnh → glint.

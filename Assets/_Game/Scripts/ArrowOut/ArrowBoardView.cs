@@ -21,6 +21,8 @@ namespace CasualGame.ArrowOut
         public static readonly Color ErrorColor = UIKit.Hex("#E76F51");
         private static readonly Color GridColor = UIKit.Hex("#D9D2C5");
         private const float StepSeconds = 0.028f;
+        private const float InkTrailTime = 0.45f, InkWidth = 0.3f; // ink width as a fraction of a cell
+        private static Material inkMaterial;
 
         public event Action<Arrow> Tapped;
         public float Cell { get; private set; }
@@ -123,6 +125,8 @@ namespace CasualGame.ArrowOut
         {
             var wait = new WaitForSeconds(StepSeconds);
             int steps = Mathf.Max(Board.Rows, Board.Cols) + a.Cells.Length;
+            var ink = CreateInkTrail(a, imgs[^1].transform.position);
+            bool puffed = false;
             for (int step = 1; step <= steps; step++)
             {
                 var cells = Board.Slide(a, step);
@@ -132,9 +136,50 @@ namespace CasualGame.ArrowOut
                     imgs[i].rectTransform.anchoredPosition = CellPos(cells[i]);
                     imgs[i].enabled = Board.Inside(cells[i].R, cells[i].C);
                 }
+                // the ink is laid by the TAIL, so it never covers the arrow's own body
+                ink.transform.position = imgs[^1].transform.position;
+                if (!puffed && !Board.Inside(cells[0].R, cells[0].C))
+                {
+                    puffed = true;
+                    var edge = (WorldPos(Board.Slide(a, step - 1)[0]) + WorldPos(cells[0])) * 0.5f;
+                    GameFx.Play("Land_Poof", edge, WorldCell() * 0.35f);
+                }
                 yield return wait;
             }
             foreach (var img in imgs) Destroy(img.gameObject);
+            ink.emitting = false;
+            Destroy(ink.gameObject, InkTrailTime + 0.1f);
+        }
+
+        private float WorldCell() => (WorldPos(new Pos(0, 1)) - WorldPos(new Pos(0, 0))).magnitude;
+
+        // Ink brush stroke (InkBrush shader): bristles along the stroke, dries out from the tail end.
+        private TrailRenderer CreateInkTrail(Arrow a, Vector3 start)
+        {
+            if (inkMaterial == null)
+            {
+                inkMaterial = new Material(Shader.Find("CasualGame/InkBrush"));
+                inkMaterial.SetFloat("_Length", WorldCell() * 6f);
+            }
+            var go = new GameObject("Ink");
+            go.transform.position = start;
+            var trail = go.AddComponent<TrailRenderer>();
+            trail.sharedMaterial = inkMaterial;
+            trail.time = InkTrailTime;
+            trail.widthMultiplier = WorldCell() * InkWidth;
+            trail.widthCurve = AnimationCurve.Linear(0f, 1f, 1f, 0.2f);
+            trail.textureMode = LineTextureMode.Stretch;
+            trail.minVertexDistance = 0.04f;
+            trail.numCornerVertices = 3;
+            trail.numCapVertices = 2;
+            trail.startColor = trail.endColor = Palette[a.Color];
+            var canvas = GetComponentInParent<Canvas>();
+            if (canvas != null)
+            {
+                trail.sortingLayerID = canvas.sortingLayerID;
+                trail.sortingOrder = canvas.sortingOrder + 1; // over the paper card
+            }
+            return trail;
         }
 
         public void Shake(Arrow a)

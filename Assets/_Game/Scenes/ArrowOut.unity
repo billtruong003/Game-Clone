@@ -243,6 +243,7 @@ MonoBehaviour:
   gameId: ArrowOut
   art: {fileID: 11400000, guid: 3ae8577ed14636749b2fe03d150dc309, type: 2}
   audio: {fileID: 11400000, guid: 66818ca5c4bdd03448cd703ee0a7a643, type: 2}
+  fx: {fileID: 11400000, guid: a05fadda76ae0584d868594f521c4b66, type: 2}
 --- !u!4 &980171863
 Transform:
   m_ObjectHideFlags: 0

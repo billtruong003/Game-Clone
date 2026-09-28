@@ -38,6 +38,42 @@ namespace CasualGame.EditorTools
             ("Fire", "Environment/Fire/Cartoon/Tall/ToonTallFireRed", false),
         };
 
+        // Which effects each game ships (by name prefix); "Dev" (Hub + all games) gets everything.
+        private static readonly (string game, string[] prefixes)[] CatalogContents =
+        {
+            ("EyeMerge", new[] { "Merge_", "Land_", "Win_", "Sparkle" }),
+            ("EyeBlast", new[] { "Blast_", "Combo_", "Win_", "Sparkle" }),
+            ("ArrowOut", new[] { "Arrow_", "Land_", "Win_", "Sparkle" }),
+            ("Dev", new[] { "" }),
+        };
+
+        public static string CatalogPath(string game) => $"{BuildSwitcher.LibrariesFolder}/FxCatalog_{game}.asset";
+
+        [MenuItem("Tools/Casual Game/FX/Rebuild FX Catalogs")]
+        public static void BuildCatalogs()
+        {
+            var all = new System.Collections.Generic.List<FxEffect>();
+            foreach (var guid in AssetDatabase.FindAssets("t:Prefab", new[] { FxSandbox.EffectsFolder }))
+            {
+                var fx = AssetDatabase.LoadAssetAtPath<FxEffect>(AssetDatabase.GUIDToAssetPath(guid));
+                if (fx != null) all.Add(fx);
+            }
+            Directory.CreateDirectory(BuildSwitcher.LibrariesFolder);
+            foreach (var (game, prefixes) in CatalogContents)
+            {
+                var path = CatalogPath(game);
+                var cat = AssetDatabase.LoadAssetAtPath<FxCatalog>(path);
+                if (cat == null)
+                {
+                    cat = ScriptableObject.CreateInstance<FxCatalog>();
+                    AssetDatabase.CreateAsset(cat, path);
+                }
+                cat.EditorSet(all.FindAll(e => System.Array.Exists(prefixes, p => e.name.StartsWith(p))));
+                EditorUtility.SetDirty(cat);
+            }
+            AssetDatabase.SaveAssets();
+        }
+
         [MenuItem("Tools/Casual Game/FX/Build Epic Toon FX Picks")]
         public static void Build()
         {
@@ -68,6 +104,7 @@ namespace CasualGame.EditorTools
                 made++;
             }
             AssetDatabase.Refresh();
+            BuildCatalogs();
             Debug.Log($"ETFX picks: {made} variant prefab(s) in {FxSandbox.EffectsFolder}");
         }
     }

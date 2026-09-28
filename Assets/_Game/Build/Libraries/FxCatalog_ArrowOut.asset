@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc69e6512d554a4587b41d2ee3af575, type: 3}
+  m_Name: FxCatalog_ArrowOut
+  m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.FxCatalog
+  effects:
+  - {fileID: 4096469275913597371, guid: acb4237b7e468c8428ad0c65df3fcbb7, type: 3}
+  - {fileID: 529180719840939231, guid: 08cb5f18ca614bd4bab9996ba8cda8f2, type: 3}
+  - {fileID: 6369883843506824058, guid: da80d9936a02c524fa477360ea9fefdc, type: 3}
+  - {fileID: 1940043223343036009, guid: bd94efd819c6ec24ba3ddb700623467a, type: 3}

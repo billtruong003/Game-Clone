@@ -13,6 +13,7 @@ namespace CasualGame.Core
         [SerializeField] private string gameId;
         [SerializeField] private ArtLibrary art;
         [SerializeField] private AudioLibrary audio;
+        [SerializeField] private FxCatalog fx;
 
         public string GameId => gameId;
 
@@ -20,14 +21,16 @@ namespace CasualGame.Core
         {
             if (art != null) ArtLibrary.SetCurrent(art);
             if (audio != null) GameAudio.SetLibrary(audio);
+            GameFx.SetCatalog(fx);
         }
 
 #if UNITY_EDITOR
-        public void EditorWire(string id, ArtLibrary artLibrary, AudioLibrary audioLibrary)
+        public void EditorWire(string id, ArtLibrary artLibrary, AudioLibrary audioLibrary, FxCatalog fxCatalog)
         {
             gameId = id;
             art = artLibrary;
             audio = audioLibrary;
+            fx = fxCatalog;
         }
 #endif
     }

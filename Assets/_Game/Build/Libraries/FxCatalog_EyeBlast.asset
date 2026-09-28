@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bc69e6512d554a4587b41d2ee3af575, type: 3}
+  m_Name: FxCatalog_EyeBlast
+  m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.FxCatalog
+  effects:
+  - {fileID: 1919255463868069499, guid: ae37b452f0e66a44fb5434b86f1f1422, type: 3}
+  - {fileID: 6131061662885363445, guid: 849871c1e42ca20499c6d5191a33432d, type: 3}
+  - {fileID: 6527944017704194432, guid: 9f3a267de772b3c47b95a4a023c963ec, type: 3}
+  - {fileID: 4019673721048824202, guid: 1454f3ebb6da56f4b8bb0d01e648f8a3, type: 3}
+  - {fileID: 9081763756913715016, guid: 95258674a0a45c2459cc7a40499a1c06, type: 3}
+  - {fileID: 4256301842206617274, guid: 8034c8531265617428309c80972cf709, type: 3}
+  - {fileID: 5221684038768348006, guid: 2e2c16d1c6e4a5f4b8a889c75987a82c, type: 3}
+  - {fileID: 6369883843506824058, guid: da80d9936a02c524fa477360ea9fefdc, type: 3}
+  - {fileID: 1940043223343036009, guid: bd94efd819c6ec24ba3ddb700623467a, type: 3}

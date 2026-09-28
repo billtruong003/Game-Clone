@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using CasualGame.Core;
 using TMPro;
@@ -32,6 +33,7 @@ namespace CasualGame.EyeBlast
         private readonly BlockView[,] blocks = new BlockView[BlastBoard.Size, BlastBoard.Size];
         private readonly Piece[] tray = new Piece[3];
         private readonly RectTransform[] trayViews = new RectTransform[3];
+        private ImpactFrame impact;
         private readonly List<Image> ghosts = new();
         private readonly List<int> rows = new(), cols = new();
         private readonly HashSet<BlockView> previewing = new();
@@ -238,6 +240,7 @@ namespace CasualGame.EyeBlast
                 blocks[r0 + r, c0 + c] = b;
             }
             GameAudio.Play("place");
+            PlaceDust(p, r0, c0);
             var gained = p.Cells.Length;
 
             board.FullLines(rows, cols);
@@ -248,13 +251,26 @@ namespace CasualGame.EyeBlast
                 var cleared = new HashSet<(int, int)>();
                 foreach (var r in rows) for (int c = 0; c < BlastBoard.Size; c++) cleared.Add((r, c));
                 foreach (var c in cols) for (int r = 0; r < BlastBoard.Size; r++) cleared.Add((r, c));
-                foreach (var (r, c) in cleared) ClearCell(r, c, (Mathf.Abs(r - r0) + Mathf.Abs(c - c0)) * 0.035f);
+                // the board data clears now (so the next move / game-over check is right); the views animate after
+                var views = new List<(BlockView b, float delay)>();
+                foreach (var (r, c) in cleared)
+                {
+                    var b = TakeCell(r, c);
+                    if (b != null) views.Add((b, (Mathf.Abs(r - r0) + Mathf.Abs(c - c0)) * 0.035f));
+                }
+                var perfect = board.Empty();
                 gained += Mathf.RoundToInt(BlastBoard.LineScore(lines) * (1f + 0.5f * (streak - 1)));
-                if (board.Empty()) gained += 300;
+                if (perfect) gained += 300;
                 GameAudio.Play("clear", 1f + 0.08f * Mathf.Min(lines, 4));
                 GameAudio.Haptic();
-                if (lines >= 2) Shake(0.25f);
                 Toast(streak > 1 ? $"Combo x{streak}\n+{gained}" : $"+{gained}", boardRect.TransformPoint(CellPos(r0, c0)));
+                // started after the toast exists, so the impact frame hides it too
+                if (lines >= 2) StartCoroutine(BigClear(views, perfect));
+                else
+                {
+                    foreach (var (b, delay) in views) AnimateClear(b, delay);
+                    if (perfect) GameFx.Play("Combo_Nova", boardRect.position, 1.2f);
+                }
             }
             else streak = 0;
 
@@ -262,19 +278,46 @@ namespace CasualGame.EyeBlast
             RefreshScore();
         }
 
-        private void ClearCell(int r, int c, float delay)
+        private BlockView TakeCell(int r, int c)
         {
             board.Grid[r, c] = 0;
             var b = blocks[r, c];
             blocks[r, c] = null;
-            if (b == null) return;
+            return b;
+        }
+
+        private void AnimateClear(BlockView b, float delay)
+        {
             var color = b.Rect.GetComponent<Image>().color;
             b.Face.React("laugh", 5f);
             Tween.Scale(b.Rect, Vector3.one * 1.15f, 0.1f, Ease.OutQuad, delay, () =>
             {
-                Fx.Burst(FxKind.Sparkle, b.Rect.position, color, 6);
+                GameFx.Play(GameFx.Colored("Blast_BlockPop_{color}", color), b.Rect.position, 0.8f);
                 Tween.Scale(b.Rect, Vector3.zero, 0.18f, Ease.InBack, 0f, () => Destroy(b.Rect.gameObject));
             });
+        }
+
+        // 2+ lines: a two-frame impact frame (blocks as silhouettes), then a big flash, a shake and the pops.
+        private IEnumerator BigClear(List<(BlockView b, float delay)> views, bool perfect)
+        {
+            var subjects = new HashSet<Graphic>();
+            foreach (var b in blocks) if (b != null) subjects.UnionWith(b.Rect.GetComponentsInChildren<Graphic>());
+            foreach (var (b, _) in views) subjects.UnionWith(b.Rect.GetComponentsInChildren<Graphic>());
+            foreach (var t in trayViews) if (t != null) subjects.UnionWith(t.GetComponentsInChildren<Graphic>());
+            if (impact == null) impact = gameObject.AddComponent<ImpactFrame>();
+            yield return impact.RunUI(Camera.main, canvas, subjects);
+            GameFx.Play("Blast_MultiLine", boardRect.position, 1.3f);
+            if (perfect) GameFx.Play("Combo_Nova", boardRect.position, 1.4f);
+            Shake(0.25f);
+            foreach (var (b, delay) in views) AnimateClear(b, delay);
+        }
+
+        // soft dust puff under the piece that was just placed
+        private void PlaceDust(Piece p, int r0, int c0)
+        {
+            var sum = Vector3.zero;
+            foreach (var (r, c) in p.Cells) sum += boardRect.TransformPoint(CellPos(r0 + r, c0 + c));
+            GameFx.Play("Blast_Place", sum / p.Cells.Length, 0.7f);
         }
 
         private void Shake(float strength)
@@ -332,7 +375,11 @@ namespace CasualGame.EyeBlast
         {
             revived = true;
             for (int r = 2; r < 6; r++)
-                for (int c = 2; c < 6; c++) ClearCell(r, c, (r + c) * 0.02f);
+                for (int c = 2; c < 6; c++)
+                {
+                    var b = TakeCell(r, c);
+                    if (b != null) AnimateClear(b, (r + c) * 0.02f);
+                }
             foreach (var b in blocks) b?.Face.ClearReaction();
             for (int i = 0; i < 3; i++)
             {

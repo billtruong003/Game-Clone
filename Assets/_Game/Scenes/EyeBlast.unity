@@ -243,6 +243,7 @@ MonoBehaviour:
   gameId: EyeBlast
   art: {fileID: 11400000, guid: e6849a394cd386d4fbd506bcde7c588c, type: 2}
   audio: {fileID: 11400000, guid: bb517e8dc3c70104880a143f34136639, type: 2}
+  fx: {fileID: 11400000, guid: 05a2145a3454b024a98c6e17f42de3a9, type: 2}
 --- !u!4 &980171863
 Transform:
   m_ObjectHideFlags: 0

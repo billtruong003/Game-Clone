@@ -265,7 +265,6 @@ namespace CasualGame.ArrowOut
                 board.Remove(a.Id);
                 view.AnimateExit(a);
                 GameAudio.Play("fly", 1f + Random.Range(-0.04f, 0.06f));
-                Fx.Burst(FxKind.Pop, view.WorldPos(a.Head), ArrowBoardView.Palette[a.Color], 8);
                 RefreshHud();
                 if (board.Count == 0) Win();
                 return;
@@ -274,7 +273,7 @@ namespace CasualGame.ArrowOut
             var res = run.Exit(a.Id);
             view.AnimateExit(res.Arrow);
             GameAudio.Play("fly", 1f + (res.Combo - 1) * 0.08f);
-            Fx.Burst(res.Combo >= EndlessRun.BreatherCombo ? FxKind.Sparkle : FxKind.Pop, view.WorldPos(a.Head), ArrowBoardView.Palette[a.Color], res.Combo >= 3 ? 16 : 8);
+            if (res.Combo >= 3) GameFx.Play("Sparkle", view.WorldPos(a.Head), 1f + 0.1f * Mathf.Min(res.Combo, 8));
             foreach (var spawned in res.Spawned) view.AddArrow(spawned, true, 0.2f);
             if (res.StageUp)
             {
@@ -372,7 +371,8 @@ namespace CasualGame.ArrowOut
             var stars = mistakes == 0 ? 3 : mistakes <= 2 ? 2 : 1;
             ArrowProgress.Complete(level.n, stars);
             GameAudio.Play("win");
-            Fx.Burst(FxKind.Confetti, view.transform.position + Vector3.down * 3f, ArrowBoardView.Palette[1], 40);
+            GameFx.Play("Arrow_LevelStar", view.transform.position, 1.2f);
+            GameFx.Play("Win_Confetti", view.transform.position + Vector3.down * 3f, 1f);
             Tween.Delay(this, 0.5f, () =>
             {
                 var last = level.n >= ArrowProgress.LevelCount;
@@ -388,7 +388,7 @@ namespace CasualGame.ArrowOut
                     Tween.Scale(star.transform, Vector3.one, 0.35f, Ease.OutBack, 0.2f + idx * 0.18f, () =>
                     {
                         GameAudio.Play("star", 1f + idx * 0.12f);
-                        Fx.Burst(FxKind.Stars, star.transform.position, UIKit.Hex("#FFD23F"), 10);
+                        GameFx.Play("Sparkle", star.transform.position, 1.2f);
                     });
                 }
                 p.Text(mistakes == 0 ? "Hoàn hảo, không sai lần nào!" : $"Sai {mistakes} lần", 48, UIKit.Muted);

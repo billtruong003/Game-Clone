@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Collections.Generic;
 using CasualGame.Core;
 using TMPro;
@@ -48,6 +49,11 @@ namespace CasualGame.EyeMerge
         private float lastDrop = -10f, overTimer;
         private bool playing, revived, aiming;
         private PhysicsMaterial2D material;
+        private GlassJar glass;
+
+        // Merge feel (goo melt -> white flash -> new ball pops out of the blob)
+        private const float MeltTime = 0.14f, FlashTime = 0.035f, PopTime = 0.1f, SettleTime = 0.18f;
+        private const float GooBlend = 1.1f, JarCorner = 0.9f;
 
         private void Start()
         {
@@ -55,7 +61,8 @@ namespace CasualGame.EyeMerge
             cam.backgroundColor = Background;
             // Keep the 10.8-unit-wide jar area visible on tall and wide screens alike.
             cam.orthographicSize = Mathf.Max(9.6f, 5.4f / cam.aspect);
-            canvas = UIKit.CreateCameraCanvas("EyeMergeUI", cam, 100); // above world sprites (0–30), below Fx (500)
+            canvas = UIKit.CreateCameraCanvas("EyeMergeUI", cam, 100);
+            canvas.sortingLayerName = "Glass"; // HUD and popups above the jar glass (which is on the Glass layer)
             hud = UIKit.Stretch(UIKit.Rect("Safe", canvas.transform));
             hud.gameObject.AddComponent<SafeArea>();
             material = new PhysicsMaterial2D("Ball") { bounciness = 0.12f, friction = 0.35f };
@@ -86,7 +93,9 @@ namespace CasualGame.EyeMerge
             var jarSize = new Vector2(JarRight - JarLeft + 0.36f, JarTop - JarBottom + 0.36f);
             var center = new Vector3(0f, (JarTop + JarBottom) / 2f, 0f);
             Sprite(world, "jar_back", center, jarSize, UIKit.Hex("#3A3F72"), 0, SpriteDrawMode.Sliced);
-            Sprite(world, "jar_line", center, jarSize, Color.white, 30, SpriteDrawMode.Sliced);
+            Sprite(world, "jar_line", center, jarSize, Color.white, 1, SpriteDrawMode.Sliced).sortingLayerName = "Glass"; // outline over the glass
+            // front glass: rim, reflection streak, refraction near the walls, glint when a ball hits the glass
+            glass = GlassJar.Create(world, new Rect(JarLeft, JarBottom, JarRight - JarLeft, JarTop - JarBottom), JarCorner, "Glass", 0);
             dangerLine = Sprite(world, "danger_dash", new Vector3(0, DangerY, 0), new Vector2(JarRight - JarLeft - 0.2f, 0.16f), UIKit.Hex("#FF5A5F"), 25, SpriteDrawMode.Tiled);
 
             void Wall(Vector2 pos, Vector2 size)
@@ -177,12 +186,15 @@ namespace CasualGame.EyeMerge
 
             // 256 px body sprite at 100 PPU is 2.56 units across; the drawn circle is 244 px.
             var visualScale = 2f * r / 2.44f;
-            var fill = Sprite(go.transform, "circle_fill", pos, new Vector2(2.56f, 2.56f), TierColors[tier - 1], 10, SpriteDrawMode.Simple);
+            // everything drawn lives under "Visual" so the jelly wobble can squash it without touching the physics body
+            var visual = new GameObject("Visual").transform;
+            visual.SetParent(go.transform, false);
+            var fill = Sprite(visual, "circle_fill", pos, new Vector2(2.56f, 2.56f), TierColors[tier - 1], 10, SpriteDrawMode.Simple);
             fill.transform.localScale = Vector3.one * visualScale;
-            var line = Sprite(go.transform, "circle_line", pos, new Vector2(2.56f, 2.56f), Color.white, 11, SpriteDrawMode.Simple);
+            var line = Sprite(visual, "circle_line", pos, new Vector2(2.56f, 2.56f), Color.white, 11, SpriteDrawMode.Simple);
             line.transform.localScale = Vector3.one * visualScale;
             var faceGo = new GameObject("Face", typeof(SpriteRenderer));
-            faceGo.transform.SetParent(go.transform, false);
+            faceGo.transform.SetParent(visual, false);
             faceGo.transform.localScale = Vector3.one * visualScale;
             var faceSr = faceGo.GetComponent<SpriteRenderer>();
             faceSr.sortingOrder = 12;
@@ -191,7 +203,7 @@ namespace CasualGame.EyeMerge
             if (tier == Tiers) face.SetEmoji(ArtLibrary.Instance.GetEmoji("cool"));
 
             var ball = go.AddComponent<MergeBall>();
-            ball.Init(this, tier, face, body);
+            ball.Init(this, tier, face, body, visual.gameObject.AddComponent<JellyWobble>(), r, fill, line);
             if (simulated) LightStrip(tier);
             return ball;
         }
@@ -216,36 +228,86 @@ namespace CasualGame.EyeMerge
             foreach (var (a, b) in merges)
             {
                 if (a == null || b == null) continue;
-                var tier = a.Tier;
-                var mid = (a.transform.position + b.transform.position) / 2f;
                 balls.Remove(a);
                 balls.Remove(b);
-                Destroy(a.gameObject);
-                Destroy(b.gameObject);
-                var color = TierColors[tier - 1];
-                if (tier == Tiers)
-                {
-                    AddScore(100);
-                    GameAudio.Play("big");
-                    Fx.Burst(FxKind.Confetti, mid, TierColors[Random.Range(0, Tiers)], 40);
-                    Fx.Burst(FxKind.Ring, mid, Color.white, 1, 3f);
-                    continue;
-                }
-                var next = tier + 1;
-                var ball = CreateBall(next, mid, true);
-                ball.Born = Time.time;
-                balls.Add(ball);
-                var target = ball.transform.localScale;
-                ball.transform.localScale = target * 0.6f;
-                Tween.Scale(ball.transform, target, 0.2f, Ease.OutBack);
-                ball.Face.React("laugh", 1.2f);
-                AddScore(next * (next + 1) / 2);
-                GameAudio.Play("merge", 0.8f + next * 0.07f);
-                Fx.Burst(FxKind.Pop, mid, color, 10 + next);
-                Fx.Burst(FxKind.Ring, mid, TierColors[next - 1], 1, Radius(next) * 1.4f);
-                if (next >= 8) { Fx.Burst(FxKind.Sparkle, mid, Color.white, 16); GameAudio.Haptic(); }
+                StartCoroutine(Merge(a, b));
             }
             merges.Clear();
+        }
+
+        // Two same-tier balls melt into one goo blob (GooMerge), flash white, and the next tier pops out of it.
+        private IEnumerator Merge(MergeBall a, MergeBall b)
+        {
+            var tier = a.Tier;
+            var color = TierColors[tier - 1];
+            float r = Radius(tier);
+            a.Body.simulated = b.Body.simulated = false;
+            a.SetBodyVisible(false);
+            b.SetBodyVisible(false);
+            a.Face.React("surprised", 1f);
+            b.Face.React("surprised", 1f);
+            var goo = GooMerge.Create(world, 10);
+            Vector3 pa = a.transform.position, pb = b.transform.position, mid = (pa + pb) / 2f;
+            float grow = tier < Tiers ? Radius(tier + 1) / r : 1.25f;
+            for (float t = 0f; t < MeltTime; t += Time.deltaTime)
+            {
+                if (a == null || b == null) { Destroy(goo.gameObject); yield break; } // game reset mid-merge
+                var u = t / MeltTime;
+                var m = Tween.Evaluate(Ease.InOutSine, u);
+                a.transform.position = Vector3.Lerp(pa, mid, m);
+                b.transform.position = Vector3.Lerp(pb, mid, m);
+                var rr = r * Mathf.Lerp(1f, grow, m);
+                goo.Set(a.transform.position, rr, color, b.transform.position, rr, color, 0.02f + r * GooBlend * Tween.Evaluate(Ease.OutQuad, Mathf.Min(1f, u * 2.5f)));
+                a.FadeFace(1f - Mathf.SmoothStep(0.05f, 0.35f, u));
+                b.FadeFace(1f - Mathf.SmoothStep(0.05f, 0.35f, u));
+                yield return null;
+            }
+            goo.Set(mid, r * grow, color, mid, r * grow, color, r * GooBlend, 1f); // white flash
+            Destroy(a.gameObject);
+            Destroy(b.gameObject);
+            yield return new WaitForSeconds(FlashTime);
+            Destroy(goo.gameObject);
+
+            if (tier == Tiers)
+            {
+                AddScore(100);
+                GameAudio.Play("big");
+                GameFx.Play("Merge_BigFusion", mid, 1.6f);
+                GameFx.Play("Win_Confetti", mid, 1f);
+                yield break;
+            }
+            var next = tier + 1;
+            var ball = CreateBall(next, mid, true);
+            ball.Born = Time.time;
+            ball.Landed = true;
+            balls.Add(ball);
+            ball.Face.React("laugh", 1.2f);
+            AddScore(next * (next + 1) / 2);
+            GameAudio.Play("merge", 0.8f + next * 0.07f);
+            GameFx.Play(GameFx.Colored("Merge_Fusion_{color}", TierColors[next - 1]), mid, Radius(next) * 1.6f);
+            if (next >= 9) { GameFx.Play("Merge_BigFusion", mid, Radius(next)); GameAudio.Haptic(); }
+            // pop: from the blob's size -> overshoot -> settle
+            var target = ball.transform.localScale;
+            Tween.Run(ball, PopTime + SettleTime, k =>
+            {
+                var t = k * (PopTime + SettleTime);
+                var s = t < PopTime ? Mathf.Lerp(1f, 1.15f, Tween.Evaluate(Ease.OutQuad, t / PopTime))
+                                    : Mathf.Lerp(1.15f, 1f, Tween.Evaluate(Ease.OutElastic, (t - PopTime) / SettleTime));
+                ball.transform.localScale = target * s;
+            }, Ease.Linear);
+        }
+
+        /// <summary>A ball hit something: the glass glints when it is a wall; the first landing after a drop puffs smoke.</summary>
+        internal void OnBallHit(MergeBall ball, Collision2D c, float speed)
+        {
+            if (c.collider.name == "Wall" && speed > 2.5f && glass != null) glass.Glint(speed / 10f);
+            if (ball.Landed) return;
+            ball.Landed = true;
+            if (speed <= 3f) return;
+            var contact = c.GetContact(0).point;
+            var r = Radius(ball.Tier);
+            GameFx.Play("Land_Poof", contact + Vector2.left * r * 0.6f, r * 0.45f);
+            GameFx.Play("Land_Poof", contact + Vector2.right * r * 0.6f, r * 0.45f);
         }
 
         private void LightStrip(int tier)
@@ -346,7 +408,7 @@ namespace CasualGame.EyeMerge
                 var b = balls[i];
                 if (b.transform.position.y + Radius(b.Tier) > DangerY - 3.2f)
                 {
-                    Fx.Burst(FxKind.Pop, b.transform.position, TierColors[b.Tier - 1], 8);
+                    GameFx.Play(GameFx.Colored("Merge_Fusion_{color}", TierColors[b.Tier - 1]), b.transform.position, Radius(b.Tier));
                     balls.RemoveAt(i);
                     Destroy(b.gameObject);
                 }
@@ -372,7 +434,7 @@ namespace CasualGame.EyeMerge
         }
     }
 
-    /// <summary>One ball: reports touching same-tier balls to the game.</summary>
+    /// <summary>One ball: reports touching same-tier balls to the game; wobbles like jelly on every hit.</summary>
     public class MergeBall : MonoBehaviour
     {
         public int Tier { get; private set; }
@@ -380,17 +442,44 @@ namespace CasualGame.EyeMerge
         public Rigidbody2D Body { get; private set; }
         public float Born;
         public bool Merging;
+        public bool Landed;
         private EyeMergeGame game;
+        private JellyWobble wobble;
+        private float radius;
+        private SpriteRenderer fill, line, faceRenderer;
 
-        public void Init(EyeMergeGame owner, int tier, EmojiFace face, Rigidbody2D body)
+        public void Init(EyeMergeGame owner, int tier, EmojiFace face, Rigidbody2D body, JellyWobble jelly, float r, SpriteRenderer fillRenderer, SpriteRenderer lineRenderer)
         {
             game = owner;
             Tier = tier;
             Face = face;
             Body = body;
+            wobble = jelly;
+            radius = r;
+            fill = fillRenderer;
+            line = lineRenderer;
+            faceRenderer = face.GetComponent<SpriteRenderer>();
         }
 
-        private void OnCollisionEnter2D(Collision2D c) => Check(c);
+        public void SetBodyVisible(bool visible) => fill.enabled = line.enabled = visible;
+
+        public void FadeFace(float alpha) => faceRenderer.color = new Color(1f, 1f, 1f, alpha);
+
+        private void OnCollisionEnter2D(Collision2D c)
+        {
+            if (Body.simulated)
+            {
+                float speed = c.relativeVelocity.magnitude;
+                if (speed > 1f)
+                {
+                    var normal = ((Vector2)transform.position - c.GetContact(0).point).normalized; // from the contact into this ball
+                    wobble.Impact(speed / 12f, normal, radius);
+                }
+                game.OnBallHit(this, c, speed);
+            }
+            Check(c);
+        }
+
         private void OnCollisionStay2D(Collision2D c) => Check(c);
 
         private void Check(Collision2D c)
