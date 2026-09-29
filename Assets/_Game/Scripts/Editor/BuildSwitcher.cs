@@ -147,13 +147,13 @@ namespace CasualGame.EditorTools
         {
             if (sceneName == "EyeMerge")
             {
-                // the jar's glass refracts: this camera uses the renderer with the Camera Sorting Layer Texture
+                // flat toon glass: the default renderer (the old refraction renderer is removed by Setup)
+                GlassRendererSetup.Setup();
                 var cam = UnityEngine.Object.FindFirstObjectByType<Camera>();
-                if (cam != null)
+                var data = cam != null ? cam.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>() : null;
+                if (data != null)
                 {
-                    var data = cam.GetComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
-                    if (data == null) data = cam.gameObject.AddComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>();
-                    data.SetRenderer(GlassRendererSetup.Setup());
+                    data.SetRenderer(-1);
                     EditorUtility.SetDirty(data);
                 }
             }
@@ -326,6 +326,8 @@ namespace CasualGame.EditorTools
         /// </summary>
         public static string Build(GameProfile p, bool release)
         {
+            // Switch and the build reload assets, which kills this reference: reload the profile by path after each
+            var profilePath = AssetDatabase.GetAssetPath(p);
             var errors = Validate(p, release).Where(i => i.error).ToList();
             if (errors.Count > 0)
             {
@@ -336,6 +338,8 @@ namespace CasualGame.EditorTools
             if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
                 EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
             Switch(p, release);
+            p = AssetDatabase.LoadAssetAtPath<GameProfile>(profilePath);
+            Directory.CreateDirectory("Assets/Plugins/Android");
             EditorUserBuildSettings.buildAppBundle = release;
             var output = $"Builds/{p.gameId}/{p.gameId}-{p.version}-{p.versionCode}{(release ? ".aab" : "-test.apk")}";
             var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
@@ -346,6 +350,7 @@ namespace CasualGame.EditorTools
                 options = release ? BuildOptions.None : BuildOptions.Development,
             });
             var result = report.summary.result.ToString();
+            p = AssetDatabase.LoadAssetAtPath<GameProfile>(profilePath);
             p.history.Add(new GameProfile.BuildRecord
             {
                 date = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),

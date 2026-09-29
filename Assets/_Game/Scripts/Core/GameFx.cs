@@ -54,6 +54,12 @@ namespace CasualGame.Core
             runner.Track(fx, fx.Duration + 0.1f);
         }
 
+        /// <summary>Ends every running effect, e.g. when the screen changes so nothing keeps falling over the new one.</summary>
+        public static void StopAll()
+        {
+            if (runner != null) runner.StopAll();
+        }
+
         internal static void Return(FxEffect fx)
         {
             if (fx == null) return;

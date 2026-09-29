@@ -60,6 +60,7 @@ namespace CasualGame.ArrowOut
         {
             if (screen != null) Destroy(screen.gameObject);
             Tween.Kill(this);
+            GameFx.StopAll();
             screen = UIKit.Stretch(UIKit.Rect(name, safe));
             var group = screen.gameObject.AddComponent<CanvasGroup>();
             group.alpha = 0f;

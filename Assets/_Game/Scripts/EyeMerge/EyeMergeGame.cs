@@ -53,7 +53,7 @@ namespace CasualGame.EyeMerge
 
         // Merge feel (goo melt -> white flash -> new ball pops out of the blob)
         private const float MeltTime = 0.14f, FlashTime = 0.035f, PopTime = 0.1f, SettleTime = 0.18f;
-        private const float GooBlend = 1.1f, JarCorner = 0.9f;
+        private const float GooBlend = 1.1f, JarCorner = 0.7f;
 
         private void Start()
         {

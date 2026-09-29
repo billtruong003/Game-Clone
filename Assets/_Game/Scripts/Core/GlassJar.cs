@@ -3,9 +3,9 @@ using UnityEngine;
 namespace CasualGame.Core
 {
     /// <summary>
-    /// The front glass of the Merge jar (GlassJar shader): rim light, reflection streak, faint tint, refraction near the
-    /// walls, and a glint band that sweeps across when Glint() is called (a ball hitting the glass) plus now and then
-    /// on its own. Lives on the "Glass" sorting layer so it can refract everything drawn on "Default".
+    /// The front glass of the Merge jar (GlassJar shader), flat toon: faint tint, one hard highlight stripe, and a
+    /// hard-edged glint band that sweeps across when Glint() is called (a ball hitting the glass) plus now and then on
+    /// its own. Lives on the "Glass" sorting layer, over the balls.
     /// </summary>
     public sealed class GlassJar : MonoBehaviour
     {

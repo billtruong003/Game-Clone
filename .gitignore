@@ -45,3 +45,4 @@ ExportedObj/
 # OS
 .DS_Store
 Thumbs.db
+.utmp/

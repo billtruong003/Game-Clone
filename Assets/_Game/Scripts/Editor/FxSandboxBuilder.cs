@@ -90,9 +90,7 @@ namespace CasualGame.EditorTools
             Wire(jar, "sandbox", sandbox);
             Wire(sandbox, "ink", ink);
             Wire(ink, "sandbox", sandbox);
-            // the jar's glass refracts: this camera uses the renderer with the Camera Sorting Layer Texture
-            var index = GlassRendererSetup.Setup();
-            cam.gameObject.AddComponent<UnityEngine.Rendering.Universal.UniversalAdditionalCameraData>().SetRenderer(index);
+            GlassRendererSetup.Setup(); // "Glass" sorting layer for the jar glass
             EditorSceneManager.SaveScene(s, ScenePath);
         }
 

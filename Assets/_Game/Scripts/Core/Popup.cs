@@ -95,7 +95,7 @@ namespace CasualGame.Core
         public static Popup Show(Transform parent, Action onClose, params (string label, string sprite, string icon, Action action)[] actions)
         {
             Popup popup = null;
-            var extra = (Ads.RemoveAdsOwned ? 0 : 1) + (Privacy.HasPolicy ? 1 : 0) + (Privacy.OptionsRequired ? 1 : 0);
+            var extra = (Ads.RemoveAdsOwned ? 0 : 1) + (Privacy.HasPolicy ? 1 : 0) + (Privacy.OptionsRequired ? 1 : 0) + (Debug.isDebugBuild && MaxAdProvider.Ready ? 1 : 0);
             popup = Popup.Open(parent, Loc.T("Settings", "Cài đặt"), 520 + 170 * (actions.Length + extra));
             ToggleRow(popup, "icon_sound_on", Loc.T("Sound", "Âm thanh"), () => GameSettings.Sound, v => GameSettings.Sound = v);
             ToggleRow(popup, "icon_play", Loc.T("Music", "Nhạc nền"), () => GameSettings.Music, v => GameSettings.Music = v);
@@ -112,6 +112,8 @@ namespace CasualGame.Core
                 popup.Button("btn_white", Loc.T("Privacy options", "Quyền riêng tư"), Privacy.ShowOptions, "icon_lock");
             if (Privacy.HasPolicy)
                 popup.Button("btn_white", Loc.T("Privacy policy", "Chính sách bảo mật"), Privacy.OpenPolicy, "icon_lock");
+            if (Debug.isDebugBuild && MaxAdProvider.Ready) // test builds only: MAX's own check of keys, ad units, consent, networks
+                popup.Button("btn_gray", "Ad debugger", MaxSdk.ShowMediationDebugger, "icon_ad");
             var close = UIKit.IconButton(popup.Card, "round_white", "icon_close", () => popup.Close(onClose), new Vector2(1f, 1f), new Vector2(-40, -40), 110);
             close.transform.SetAsLastSibling();
             return popup.Fit();

@@ -15,7 +15,7 @@ namespace CasualGame.Sandbox
 
         [Header("Jar (world units, interior)")]
         [SerializeField] private Rect interior = new(-2.6f, -4.7f, 5.2f, 7.0f);
-        [SerializeField] private float cornerRadius = 0.9f;
+        [SerializeField] private float cornerRadius = 0.7f;
         [SerializeField] private string glassLayer = "Glass";
 
         [Header("Balls")]

@@ -177,8 +177,7 @@ add('shapes', 'grid_dot', 32, 32, circle(16, 16, 7, C.white));
 add('shapes', 'dot', 64, 64, circle(32, 32, 28, C.white));
 // Jar (Eye Merge) and board frame (Eye Blast): 9-sliced.
 add('shapes', 'jar_back', 256, 256, `<rect x="8" y="8" width="240" height="240" rx="70" fill="${C.white}"/>`, { border: [90, 90, 90, 90] });
-add('shapes', 'jar_line', 256, 256, `<rect x="14" y="14" width="228" height="228" rx="64" fill="none" stroke="${C.ink}" stroke-width="16"/>` +
-  `<rect x="40" y="60" width="22" height="136" rx="11" fill="${C.white}" opacity="0.18"/>`, { border: [90, 90, 90, 90] });
+add('shapes', 'jar_line', 256, 256, `<rect x="14" y="14" width="228" height="228" rx="64" fill="none" stroke="${C.ink}" stroke-width="16"/>`, { border: [90, 90, 90, 90] });
 add('shapes', 'danger_dash', 64, 16, `<rect x="4" y="2" width="40" height="12" rx="6" fill="${C.white}"/>`);
 add('shapes', 'frame', 192, 192, `<rect x="8" y="8" width="176" height="176" rx="48" fill="${C.white}" stroke="${C.ink}" stroke-width="12"/>`, { border: [64, 64, 64, 64] });
 add('shapes', 'round_rect', 96, 96, `<rect x="0" y="0" width="96" height="96" rx="28" fill="${C.white}"/>`, { border: [36, 36, 36, 36] });

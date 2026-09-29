@@ -12,6 +12,13 @@ namespace CasualGame.Core
 
         public void Track(FxEffect fx, float seconds) => live.Add((fx, Time.time + seconds));
 
+        /// <summary>Ends every running effect now (screen change).</summary>
+        public void StopAll()
+        {
+            foreach (var (fx, _) in live) GameFx.Return(fx);
+            live.Clear();
+        }
+
         private void Update()
         {
             for (int i = live.Count - 1; i >= 0; i--)
