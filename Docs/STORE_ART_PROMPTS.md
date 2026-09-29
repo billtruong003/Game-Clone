@@ -13,6 +13,7 @@
 
 | File | Dùng cho |
 |---|---|
+| `C:\Projects\Casual Game\Store\screenshots\<game>\*.png` | **Ảnh chụp gameplay thật (1080×1920, có FX)**: nguồn chính. Danh sách: `Store\screenshots\README.md` |
 | `C:\Projects\Casual Game\Tools\art\gpt-refs\REF_current_look.png` | Style nhân vật / nét / màu hiện tại (mọi game) |
 | `C:\Projects\Casual Game\Store\graphics\arrow-out-icon-512.png` | Bố cục icon tạm của Arrow Out |
 | `C:\Projects\Casual Game\Store\graphics\eye-blast-icon-512.png` | Bố cục icon tạm của Eye Blast |
@@ -30,9 +31,12 @@ in this chat, one image at a time, in this order: APP ICON -> TITLE LOGO -> FEAT
 for my APPROVE or my notes. Every approved image becomes a style reference for the next one: match it exactly.
 
 REFERENCE FILES I ATTACH (folder on my PC, you only see what I attach):
+  C:\Projects\Casual Game\Store\screenshots\<game>\*.png           = REAL gameplay screenshots with the real FX. This is
+      the truth about what the game looks and plays like: use its characters, board / jar, colors and FX moments.
+      Store\screenshots\README.md says what each screenshot shows.
   C:\Projects\Casual Game\Tools\art\gpt-refs\REF_current_look.png  = the in-game style and character identity
-  C:\Projects\Casual Game\Store\graphics\<game>-icon-512.png         = our rough icon: KEEP its idea and layout, redraw it well
-  C:\Projects\Casual Game\Store\graphics\<game>-feature.png          = our rough feature graphic layout
+  C:\Projects\Casual Game\Store\graphics\<game>-icon-512.png         = a rough layout idea only (drawn in code, NOT the real
+      look). Improve freely; the screenshots win when they disagree.
 First tell me the file names you received. If one is missing, ask for it by its full path. Before each image, write 3
 short Vietnamese bullets: what you take from the refs, the layout, and what you will improve. Then draw.
 
