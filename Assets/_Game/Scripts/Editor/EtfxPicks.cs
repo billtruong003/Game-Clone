@@ -38,13 +38,12 @@ namespace CasualGame.EditorTools
             ("Fire", "Environment/Fire/Cartoon/Tall/ToonTallFireRed", false),
         };
 
-        // Which effects each game ships (by name prefix); "Dev" (Hub + all games) gets everything.
+        // Which effects each game ships (by name prefix).
         private static readonly (string game, string[] prefixes)[] CatalogContents =
         {
             ("EyeMerge", new[] { "Merge_", "Land_", "Win_", "Sparkle" }),
             ("EyeBlast", new[] { "Blast_", "Combo_", "Win_", "Sparkle" }),
             ("ArrowOut", new[] { "Arrow_", "Land_", "Win_", "Sparkle" }),
-            ("Dev", new[] { "" }),
         };
 
         public static string CatalogPath(string game) => $"{BuildSwitcher.LibrariesFolder}/FxCatalog_{game}.asset";

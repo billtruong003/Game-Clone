@@ -10,7 +10,7 @@ using UnityEngine;
 namespace CasualGame.EditorTools
 {
     /// <summary>
-    /// Creates the four scenes (Hub + one per game) with a camera and the game's root component, and registers
+    /// Creates one scene per game with a camera and the game's root component, and registers
     /// them in Build Settings. Games build their UI in code, so a scene only needs this minimal skeleton.
     /// </summary>
     public static class SceneBuilder
@@ -19,7 +19,6 @@ namespace CasualGame.EditorTools
 
         private static readonly (string scene, string type)[] Scenes =
         {
-            ("Hub", "CasualGame.Core.HubMenu, CasualGame.Core"),
             ("ArrowOut", "CasualGame.ArrowOut.ArrowOutGame, CasualGame.ArrowOut"),
             ("EyeBlast", "CasualGame.EyeBlast.EyeBlastGame, CasualGame.EyeBlast"),
             ("EyeMerge", "CasualGame.EyeMerge.EyeMergeGame, CasualGame.EyeMerge"),
@@ -49,7 +48,7 @@ namespace CasualGame.EditorTools
                 built.Add(new EditorBuildSettingsScene(path, true));
             }
             EditorBuildSettings.scenes = built.ToArray();
-            EditorSceneManager.OpenScene(Folder + "Hub.unity");
+            EditorSceneManager.OpenScene(Folder + Scenes[0].scene + ".unity");
             Debug.Log("SceneBuilder: " + string.Join(", ", built.Select(b => b.path)));
         }
 

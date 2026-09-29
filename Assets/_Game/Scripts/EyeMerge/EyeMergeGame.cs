@@ -429,8 +429,7 @@ namespace CasualGame.EyeMerge
                     foreach (var b in balls) b.Body.simulated = true;
                     playing = true;
                 },
-                ("Chơi lại", "btn_green", "icon_restart", NewGame),
-                ("Về menu", "btn_white", "icon_home", () => SceneFlow.Load(Application.CanStreamedLevelBeLoaded("Hub") ? "Hub" : "EyeMerge")));
+                ("Chơi lại", "btn_green", "icon_restart", NewGame));
         }
     }
 

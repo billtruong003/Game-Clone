@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using CasualGame.Core;
 using UnityEditor;
 using UnityEditor.Build;
@@ -13,9 +14,10 @@ using UnityEngine.SceneManagement;
 namespace CasualGame.EditorTools
 {
     /// <summary>
-    /// One project, many games. A profile says which scenes, art sheets and sounds a game ships with, plus its
-    /// store identity. Switching a profile rewires Build Settings, Player Settings, define symbols and the game's
-    /// own art/audio libraries, so a build only contains that game (Unity strips everything unreferenced).
+    /// One project, many games. A profile holds everything one game ships with: store identity (name, package,
+    /// version code), scenes, art sheets, sounds, ads/IAP ids and its build history. Applying a profile rewires Build
+    /// Settings, Player Settings (Android: IL2CPP/ARM64/target API/keystore), define symbols, the game's own
+    /// libraries and its runtime GameConfig, so a build only contains that game. Builds are validated first.
     /// </summary>
     public class BuildSwitcher : EditorWindow
     {
@@ -47,7 +49,7 @@ namespace CasualGame.EditorTools
             EnsureProfiles();
             return AssetDatabase.FindAssets("t:GameProfile", new[] { ProfilesFolder })
                 .Select(g => AssetDatabase.LoadAssetAtPath<GameProfile>(AssetDatabase.GUIDToAssetPath(g)))
-                .OrderBy(p => p.isDev ? 0 : 1).ThenBy(p => p.gameId)
+                .OrderBy(p => p.gameId)
                 .ToList();
         }
 
@@ -56,16 +58,15 @@ namespace CasualGame.EditorTools
         private static void EnsureProfiles()
         {
             Directory.CreateDirectory(ProfilesFolder);
-            Make("Dev", "Casual Game (Dev)", "com.casualgame.dev", true, new[] { "Hub", "ArrowOut", "EyeBlast", "EyeMerge" }, null, null);
-            Make("ArrowOut", "Arrow Out", "com.casualgame.arrowout", false, new[] { "ArrowOut" },
+            Make("ArrowOut", "Arrow Out", "com.casualgame.arrowout", new[] { "ArrowOut" },
                 new[] { "shapes", "ui", "fx" }, UiSounds.Concat(new[] { "fly", "blocked", "hint", "music_arrow" }).ToArray());
-            Make("EyeBlast", "Eye Blast", "com.casualgame.eyeblast", false, new[] { "EyeBlast" },
+            Make("EyeBlast", "Eye Blast", "com.casualgame.eyeblast", new[] { "EyeBlast" },
                 new[] { "faces_a", "faces_b", "shapes", "ui", "fx" }, UiSounds.Concat(new[] { "pick", "place", "clear", "music_blast" }).ToArray());
-            Make("EyeMerge", "Eye Merge", "com.casualgame.eyemerge", false, new[] { "EyeMerge" },
+            Make("EyeMerge", "Eye Merge", "com.casualgame.eyemerge", new[] { "EyeMerge" },
                 new[] { "faces_a", "faces_b", "shapes", "ui", "fx" }, UiSounds.Concat(new[] { "drop", "merge", "thud", "music_merge" }).ToArray());
         }
 
-        private static void Make(string id, string product, string appId, bool dev, string[] scenes, string[] sheets, string[] sounds)
+        private static void Make(string id, string product, string appId, string[] scenes, string[] sheets, string[] sounds)
         {
             var path = $"{ProfilesFolder}/{id}.asset";
             if (AssetDatabase.LoadAssetAtPath<GameProfile>(path) != null) return; // never overwrite hand edits
@@ -73,7 +74,6 @@ namespace CasualGame.EditorTools
             p.gameId = id;
             p.productName = product;
             p.applicationId = appId;
-            p.isDev = dev;
             p.scenes = scenes;
             p.artSheets = sheets ?? Array.Empty<string>();
             p.audioClips = sounds ?? Array.Empty<string>();
@@ -83,13 +83,13 @@ namespace CasualGame.EditorTools
 
         // ---------------- libraries & scene wiring ----------------
 
-        public static string ArtLibraryPath(GameProfile p) => p.isDev ? ArtLibrary.EditorAllPath : $"{LibrariesFolder}/ArtLibrary_{p.gameId}.asset";
-        public static string AudioLibraryPath(GameProfile p) => p.isDev ? ProjectSetup.AudioAllPath : $"{LibrariesFolder}/AudioLibrary_{p.gameId}.asset";
+        public static string ArtLibraryPath(GameProfile p) => $"{LibrariesFolder}/ArtLibrary_{p.gameId}.asset";
+        public static string AudioLibraryPath(GameProfile p) => $"{LibrariesFolder}/AudioLibrary_{p.gameId}.asset";
 
         /// <summary>Per-game art/audio libraries containing only that game's sheets and clips.</summary>
         public static void RebuildGameLibraries()
         {
-            foreach (var p in Profiles().Where(p => !p.isDev))
+            foreach (var p in Profiles())
             {
                 SheetSlicer.RebuildLibrary(ArtLibraryPath(p), p.artSheets);
                 ProjectSetup.BuildAudioLibrary(AudioLibraryPath(p), p.audioClips);
@@ -117,25 +117,24 @@ namespace CasualGame.EditorTools
             gs.ApplyModifiedPropertiesWithoutUndo();
         }
 
-        /// <summary>Puts a GameContext in every scene pointing at the right libraries (Hub → all games, game → its own).</summary>
+        /// <summary>Puts a GameContext in every scene pointing at the right libraries (each game → its own).</summary>
         public static void WireScenes()
         {
             EnsureRuntimeShaders();
             var profiles = Profiles();
-            var dev = profiles.First(p => p.isDev);
             var active = SceneManager.GetActiveScene().path;
             EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
-            foreach (var sceneName in dev.scenes)
+            foreach (var (owner, sceneName) in profiles.SelectMany(p => p.scenes.Select(s => (p, s))))
             {
                 var path = ScenesFolder + sceneName + ".unity";
                 if (!File.Exists(path)) continue;
-                var owner = profiles.FirstOrDefault(p => !p.isDev && p.scenes.Contains(sceneName)) ?? dev;
                 var scene = EditorSceneManager.OpenScene(path, OpenSceneMode.Single);
                 var ctx = UnityEngine.Object.FindFirstObjectByType<GameContext>() ?? new GameObject("GameContext").AddComponent<GameContext>();
                 ctx.EditorWire(owner.gameId,
                     AssetDatabase.LoadAssetAtPath<ArtLibrary>(ArtLibraryPath(owner)),
                     AssetDatabase.LoadAssetAtPath<AudioLibrary>(AudioLibraryPath(owner)),
-                    AssetDatabase.LoadAssetAtPath<FxCatalog>(EtfxPicks.CatalogPath(owner.isDev ? "Dev" : owner.gameId)));
+                    AssetDatabase.LoadAssetAtPath<FxCatalog>(EtfxPicks.CatalogPath(owner.gameId)),
+                    AssetDatabase.LoadAssetAtPath<GameConfig>(GameConfigPath(owner)));
                 EditorUtility.SetDirty(ctx);
                 WireGameSpecific(sceneName);
                 EditorSceneManager.MarkSceneDirty(scene);
@@ -166,11 +165,87 @@ namespace CasualGame.EditorTools
             so.ApplyModifiedPropertiesWithoutUndo();
         }
 
+        // ---------------- runtime config ----------------
+
+        public static string GameConfigPath(GameProfile p) => $"{LibrariesFolder}/GameConfig_{p.gameId}.asset";
+
+        /// <summary>Writes the profile's release data into the runtime GameConfig the game reads.</summary>
+        public static GameConfig WriteConfig(GameProfile p, bool release)
+        {
+            var path = GameConfigPath(p);
+            var c = AssetDatabase.LoadAssetAtPath<GameConfig>(path);
+            if (c == null)
+            {
+                Directory.CreateDirectory(LibrariesFolder);
+                c = CreateInstance<GameConfig>();
+                AssetDatabase.CreateAsset(c, path);
+            }
+            var studio = StudioSettings.Get();
+            c.gameId = p.gameId;
+            c.productName = p.productName;
+            c.applicationId = p.applicationId;
+            c.version = p.version;
+            c.versionCode = p.versionCode;
+            c.maxSdkKey = studio.maxSdkKey;
+            c.interstitialAdUnit = p.interstitialAdUnit;
+            c.rewardedAdUnit = p.rewardedAdUnit;
+            c.bannerAdUnit = p.bannerAdUnit;
+            c.fakeAds = !release;
+            c.removeAdsProductId = p.removeAdsProductId;
+            c.privacyPolicyUrl = p.privacyPolicyUrl;
+            EditorUtility.SetDirty(c);
+            return c;
+        }
+
+        // ---------------- validation ----------------
+
+        public struct Issue
+        {
+            public bool error;
+            public string text;
+            public Issue(bool error, string text) { this.error = error; this.text = text; }
+        }
+
+        private static readonly Regex PackageName = new Regex(@"^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*){2,}$");
+
+        /// <summary>Everything that would make a build of this profile wrong or rejected by Play. Errors block a build.</summary>
+        public static List<Issue> Validate(GameProfile p, bool release)
+        {
+            var list = new List<Issue>();
+            void Err(string t) => list.Add(new Issue(true, t));
+            void Warn(string t) => list.Add(new Issue(false, t));
+            void ReleaseErr(string t) => list.Add(new Issue(release, t));
+            var others = Profiles().Where(o => o != p).ToList();
+            var studio = StudioSettings.Get();
+
+            if (string.IsNullOrWhiteSpace(p.productName)) Err("Product name is empty");
+            if (string.IsNullOrEmpty(p.applicationId) || !PackageName.IsMatch(p.applicationId)) Err($"Package name '{p.applicationId}' is not valid (lowercase, at least 3 parts)");
+            if (others.Any(o => o.applicationId == p.applicationId)) Err($"Package name '{p.applicationId}' is used by another game");
+            if (others.Any(o => o.defineSymbol == p.defineSymbol)) Err($"Define '{p.defineSymbol}' is used by another game");
+            if (p.applicationId != null && p.applicationId.StartsWith("com.casualgame.")) ReleaseErr("Package name still uses the placeholder prefix 'com.casualgame.' (permanent after the first upload)");
+            if (p.scenes == null || p.scenes.Length == 0) Err("No scenes");
+            else foreach (var s in p.scenes) if (!File.Exists(ScenesFolder + s + ".unity")) Err($"Scene '{s}' does not exist");
+            if (p.icon == null) ReleaseErr("No app icon");
+            if (p.versionCode <= p.LastReleasedCode()) Err($"versionCode {p.versionCode} was already released (last {p.LastReleasedCode()})");
+
+            if (string.IsNullOrEmpty(studio.maxSdkKey) || string.IsNullOrEmpty(p.interstitialAdUnit) || string.IsNullOrEmpty(p.rewardedAdUnit))
+                ReleaseErr("AppLovin MAX SDK key / ad unit ids missing: fake ads only");
+            if (string.IsNullOrEmpty(p.privacyPolicyUrl)) ReleaseErr("Privacy policy URL missing (required by Play and for ads)");
+            if (release)
+            {
+                if (string.IsNullOrEmpty(studio.keystorePath) || !File.Exists(studio.keystorePath)) Err("Upload keystore not set in Studio settings");
+                else if (string.IsNullOrEmpty(PlayerSettings.Android.keystorePass)) Err("Keystore passwords not entered this session");
+            }
+            if (studio.targetSdk < 35) Warn($"Target API {studio.targetSdk} is below the Google Play minimum");
+            return list;
+        }
+
         // ---------------- switching ----------------
 
-        public static void Switch(GameProfile p)
+        public static void Switch(GameProfile p, bool release = false)
         {
             RebuildGameLibraries();
+            foreach (var o in Profiles()) WriteConfig(o, release && o == p);
             WireScenes();
 
             EditorBuildSettings.scenes = p.scenes
@@ -179,11 +254,25 @@ namespace CasualGame.EditorTools
                 .Select(path => new EditorBuildSettingsScene(path, true))
                 .ToArray();
 
+            var studio = StudioSettings.Get();
+            PlayerSettings.companyName = studio.companyName;
             PlayerSettings.productName = p.productName;
             foreach (var t in Targets) PlayerSettings.SetApplicationIdentifier(t, p.applicationId);
             PlayerSettings.bundleVersion = p.version;
             PlayerSettings.Android.bundleVersionCode = p.versionCode;
-            if (p.icon != null) PlayerSettings.SetIcons(NamedBuildTarget.Unknown, new[] { p.icon }, IconKind.Any);
+            PlayerSettings.SetIcons(NamedBuildTarget.Unknown, p.icon != null ? new[] { p.icon } : Array.Empty<Texture2D>(), IconKind.Any);
+
+            // Play requirements: 64-bit (IL2CPP + ARM64), current target API
+            PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
+            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
+            PlayerSettings.Android.minSdkVersion = (AndroidSdkVersions)studio.minSdk;
+            PlayerSettings.Android.targetSdkVersion = (AndroidSdkVersions)studio.targetSdk;
+            if (!string.IsNullOrEmpty(studio.keystorePath))
+            {
+                PlayerSettings.Android.useCustomKeystore = true;
+                PlayerSettings.Android.keystoreName = studio.keystorePath;
+                PlayerSettings.Android.keyaliasName = p.keyAlias;
+            }
 
             foreach (var t in Targets)
             {
@@ -198,22 +287,92 @@ namespace CasualGame.EditorTools
             AssetDatabase.SaveAssets();
             var first = ScenesFolder + p.scenes[0] + ".unity";
             if (File.Exists(first)) EditorSceneManager.OpenScene(first);
-            Debug.Log($"Build Switcher: now building '{p.productName}' ({p.applicationId}) with {EditorBuildSettings.scenes.Length} scene(s)");
+            Debug.Log($"Build Switcher: now building '{p.productName}' ({p.applicationId} {p.version}/{p.versionCode}) with {EditorBuildSettings.scenes.Length} scene(s)");
         }
 
-        public static void Build(GameProfile p, BuildTarget target)
+        // ---------------- building ----------------
+
+        /// <summary>Scriptable entry: BuildSwitcher.BuildById("ArrowOut", release: false).</summary>
+        public static string BuildById(string gameId, bool release)
         {
-            Switch(p);
-            var ext = target == BuildTarget.Android ? (EditorUserBuildSettings.buildAppBundle ? ".aab" : ".apk") : ".exe";
-            var output = $"Builds/{p.gameId}/{target}/{p.gameId}{ext}";
-            var result = BuildPipeline.BuildPlayer(new BuildPlayerOptions
+            var p = Profiles().FirstOrDefault(o => o.gameId == gameId);
+            return p == null ? "No profile " + gameId : Build(p, release);
+        }
+
+        /// <summary>
+        /// Release = signed AAB for Play with real ads; test = development APK with fake ads for a device. A release
+        /// build that succeeds is recorded and bumps versionCode so the next upload can never reuse it.
+        /// </summary>
+        public static string Build(GameProfile p, bool release)
+        {
+            var errors = Validate(p, release).Where(i => i.error).ToList();
+            if (errors.Count > 0)
+            {
+                var msg = $"Build {p.gameId} blocked:\n  " + string.Join("\n  ", errors.Select(e => e.text));
+                Debug.LogError(msg);
+                return msg;
+            }
+            if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
+                EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
+            Switch(p, release);
+            EditorUserBuildSettings.buildAppBundle = release;
+            var output = $"Builds/{p.gameId}/{p.gameId}-{p.version}-{p.versionCode}{(release ? ".aab" : "-test.apk")}";
+            var report = BuildPipeline.BuildPlayer(new BuildPlayerOptions
             {
                 scenes = EditorBuildSettings.scenes.Select(s => s.path).ToArray(),
                 locationPathName = output,
-                target = target,
-                options = BuildOptions.None,
+                target = BuildTarget.Android,
+                options = release ? BuildOptions.None : BuildOptions.Development,
             });
-            Debug.Log($"Build Switcher: {p.gameId} → {output}: {result.summary.result}, {result.summary.totalSize / 1048576f:0.0} MB");
+            var result = report.summary.result.ToString();
+            p.history.Add(new GameProfile.BuildRecord
+            {
+                date = DateTime.Now.ToString("yyyy-MM-dd HH:mm"),
+                kind = release ? "release" : "test",
+                version = p.version,
+                versionCode = p.versionCode,
+                result = result,
+                sizeMB = (float)Math.Round(report.summary.totalSize / 1048576.0, 1),
+                output = output,
+                commit = GitHead(),
+            });
+            if (release && report.summary.result == UnityEditor.Build.Reporting.BuildResult.Succeeded) p.versionCode++;
+            EditorUtility.SetDirty(p);
+            AssetDatabase.SaveAssets();
+            var line = $"Build {p.gameId} {(release ? "AAB" : "APK")} {p.version}: {result}, {report.summary.totalSize / 1048576f:0.0} MB -> {output}";
+            Debug.Log(line);
+            return line;
+        }
+
+        private static string GitHead()
+        {
+            try
+            {
+                var head = File.ReadAllText(".git/HEAD").Trim();
+                if (!head.StartsWith("ref: ")) return head.Substring(0, Math.Min(7, head.Length));
+                var refPath = ".git/" + head.Substring(5);
+                return File.Exists(refPath) ? File.ReadAllText(refPath).Trim().Substring(0, 7) : "";
+            }
+            catch (Exception) { return ""; }
+        }
+
+        // ---------------- new game ----------------
+
+        /// <summary>Creates a profile (and an empty scene) for a new game: package name from the studio prefix, own define.</summary>
+        public static GameProfile NewGame(string id, string product)
+        {
+            id = new string(id.Where(char.IsLetterOrDigit).ToArray());
+            if (id.Length == 0 || AssetDatabase.LoadAssetAtPath<GameProfile>($"{ProfilesFolder}/{id}.asset") != null) return null;
+            Make(id, product, $"{StudioSettings.Get().packagePrefix}.{id.ToLowerInvariant()}", new[] { id }, new[] { "ui", "fx" }, UiSounds);
+            var scenePath = ScenesFolder + id + ".unity";
+            if (!File.Exists(scenePath))
+            {
+                EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+                var s = EditorSceneManager.NewScene(NewSceneSetup.DefaultGameObjects, NewSceneMode.Single);
+                EditorSceneManager.SaveScene(s, scenePath);
+            }
+            AssetDatabase.SaveAssets();
+            return AssetDatabase.LoadAssetAtPath<GameProfile>($"{ProfilesFolder}/{id}.asset");
         }
 
         // ---------------- content report ----------------
@@ -230,9 +389,9 @@ namespace CasualGame.EditorTools
                 .Where(a => !a.EndsWith(".cs") && !a.EndsWith(".asmdef") && !a.StartsWith("Packages/"))
                 .Distinct().ToList();
 
-            var otherSheets = Profiles().Where(o => !o.isDev).SelectMany(o => o.artSheets).Distinct().Except(p.isDev ? Array.Empty<string>() : p.artSheets).ToArray();
-            var otherScenes = Profiles().First(o => o.isDev).scenes.Except(p.scenes).ToArray();
-            bool Foreign(string a) => !p.isDev &&
+            var otherSheets = Profiles().SelectMany(o => o.artSheets).Distinct().Except(p.artSheets).ToArray();
+            var otherScenes = Profiles().SelectMany(o => o.scenes).Distinct().Except(p.scenes).ToArray();
+            bool Foreign(string a) =>
                 (otherSheets.Any(s => a == $"{SheetSlicer.Folder}{s}.png") || otherScenes.Any(s => a == $"{ScenesFolder}{s}.unity"));
 
             var sb = new StringBuilder();
@@ -282,43 +441,85 @@ namespace CasualGame.EditorTools
 
         // ---------------- window ----------------
 
+        private string newId = "", newName = "";
+        private string keystorePass = "", keyPass = "";
+
         private void OnGUI()
         {
             var profiles = Profiles();
             var active = ActiveProfileId;
-            EditorGUILayout.LabelField("Active build", string.IsNullOrEmpty(active) ? "(none)" : active, EditorStyles.boldLabel);
+            var studio = StudioSettings.Get();
+            scroll = EditorGUILayout.BeginScrollView(scroll);
+
+            EditorGUILayout.LabelField("Active game", string.IsNullOrEmpty(active) ? "(none)" : active, EditorStyles.boldLabel);
             EditorGUILayout.LabelField("Platform", EditorUserBuildSettings.activeBuildTarget.ToString());
             EditorGUILayout.Space();
 
             foreach (var p in profiles)
             {
+                var issues = Validate(p, true);
+                var status = issues.Any(i => i.error) ? "✗" : issues.Count > 0 ? "!" : "✓";
                 using (new EditorGUILayout.HorizontalScope("box"))
                 {
-                    var label = (p.gameId == active ? "● " : "   ") + p.productName;
+                    var label = (p.gameId == active ? "● " : "   ") + status + " " + p.productName;
                     if (GUILayout.Button(label, EditorStyles.label, GUILayout.Width(170))) selected = p;
-                    EditorGUILayout.LabelField(p.applicationId, GUILayout.Width(200));
-                    if (GUILayout.Button("Switch", GUILayout.Width(70))) { Switch(p); report = Report(p); }
-                    if (GUILayout.Button("Report", GUILayout.Width(70))) report = Report(p);
-                    if (GUILayout.Button("Build Android", GUILayout.Width(100)) &&
-                        EditorUtility.DisplayDialog("Build", $"Build {p.productName} for Android?", "Build", "Cancel"))
-                        Build(p, BuildTarget.Android);
+                    EditorGUILayout.LabelField($"{p.applicationId}  v{p.version} ({p.versionCode})", GUILayout.Width(280));
+                    if (GUILayout.Button("Apply", GUILayout.Width(60))) { Switch(p); report = Report(p); selected = p; }
+                    if (GUILayout.Button("Test APK", GUILayout.Width(75)) &&
+                        EditorUtility.DisplayDialog("Build", $"Build a test APK of {p.productName}?", "Build", "Cancel"))
+                        report = Build(p, false);
+                    if (GUILayout.Button("Release AAB", GUILayout.Width(90)) &&
+                        EditorUtility.DisplayDialog("Build", $"Build release AAB {p.productName} {p.version} ({p.versionCode})?", "Build", "Cancel"))
+                        report = Build(p, true);
                 }
             }
 
             EditorGUILayout.Space();
-            if (GUILayout.Button("Rebuild libraries + rewire scenes")) { RebuildGameLibraries(); WireScenes(); }
-
-            if (selected != null)
+            using (new EditorGUILayout.HorizontalScope())
             {
-                EditorGUILayout.Space();
-                EditorGUILayout.LabelField($"Profile: {selected.gameId}", EditorStyles.boldLabel);
+                if (GUILayout.Button("Rebuild libraries + rewire scenes")) { RebuildGameLibraries(); foreach (var o in profiles) WriteConfig(o, false); WireScenes(); }
+                if (GUILayout.Button("Studio settings")) selected = null;
+            }
+
+            using (new EditorGUILayout.HorizontalScope("box"))
+            {
+                EditorGUILayout.LabelField("New game", GUILayout.Width(70));
+                newId = EditorGUILayout.TextField(newId, GUILayout.Width(120));
+                newName = EditorGUILayout.TextField(newName);
+                if (GUILayout.Button("Create", GUILayout.Width(60)) && newId.Length > 0)
+                {
+                    selected = NewGame(newId, string.IsNullOrEmpty(newName) ? newId : newName);
+                    newId = newName = "";
+                }
+            }
+
+            using (new EditorGUILayout.VerticalScope("box"))
+            {
+                EditorGUILayout.LabelField("Keystore passwords (this session only, never saved)", EditorStyles.miniBoldLabel);
+                keystorePass = EditorGUILayout.PasswordField("Keystore", keystorePass);
+                keyPass = EditorGUILayout.PasswordField("Key", keyPass);
+                if (keystorePass.Length > 0) PlayerSettings.Android.keystorePass = keystorePass;
+                if (keyPass.Length > 0) PlayerSettings.Android.keyaliasPass = keyPass;
+            }
+
+            EditorGUILayout.Space();
+            if (selected == null)
+            {
+                EditorGUILayout.LabelField("Studio settings (all games)", EditorStyles.boldLabel);
+                Editor.CreateCachedEditor(studio, null, ref profileEditor);
+                profileEditor.OnInspectorGUI();
+            }
+            else
+            {
+                EditorGUILayout.LabelField($"Profile: {selected.gameId}  (release checks)", EditorStyles.boldLabel);
+                foreach (var i in Validate(selected, true))
+                    EditorGUILayout.HelpBox(i.text, i.error ? MessageType.Error : MessageType.Warning);
                 Editor.CreateCachedEditor(selected, null, ref profileEditor);
                 profileEditor.OnInspectorGUI();
             }
 
             EditorGUILayout.Space();
-            scroll = EditorGUILayout.BeginScrollView(scroll);
-            EditorGUILayout.TextArea(report, GUILayout.ExpandHeight(true));
+            EditorGUILayout.TextArea(report, GUILayout.MinHeight(120));
             EditorGUILayout.EndScrollView();
         }
     }

@@ -18,7 +18,7 @@
 
 ## 3. Phase mockup lại UI toàn bộ game
 - Mockup lại UI cho cả 3 game trước khi sửa code UI.
-- **Loại bỏ Hub chính thức.** Mỗi game là một app độc lập, không còn menu chọn game. Những chỗ đang dính Hub:
+- ~~**Loại bỏ Hub chính thức.**~~ Đã xong (2026-09-29): Hub, HubMenu, profile Dev đã xoá; build từng game qua Build Switcher. Mỗi game là một app độc lập, không còn menu chọn game. Những chỗ đang dính Hub:
   - `Core/HubMenu.cs`, scene `Hub.unity`, `SceneBuilder` (dòng `("Hub", …HubMenu)`).
   - Nút home/"Về menu" gọi `SceneFlow.Load("Hub")`: `ArrowOutGame.cs:75`, `EyeBlastGame.cs:79` và `:401`, `EyeMergeGame` (popup tạm dừng).
   - Build Switcher: profile **Dev** (`isDev`, scenes gồm Hub), `ArtLibrary_All` / `AudioLibrary_All` / `FxCatalog_Dev` dùng cho Hub.

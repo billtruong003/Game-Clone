@@ -152,6 +152,7 @@ MonoBehaviour:
   art: {fileID: 11400000, guid: 342f539181254874896848f3f5ad52a3, type: 2}
   audio: {fileID: 11400000, guid: 43c5805b8279bf947bc6a9d682a1a055, type: 2}
   fx: {fileID: 11400000, guid: 9947d66ee11bd4a49a5dee389c07e8c9, type: 2}
+  config: {fileID: 11400000, guid: 18e1186925d85d248b1937bf8d93c5a3, type: 2}
 --- !u!4 &802634318
 Transform:
   m_ObjectHideFlags: 0

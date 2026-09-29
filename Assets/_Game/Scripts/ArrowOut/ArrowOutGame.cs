@@ -72,8 +72,6 @@ namespace CasualGame.ArrowOut
         {
             var s = NewScreen("Home");
             var top = new Vector2(0.5f, 1f);
-            if (Application.CanStreamedLevelBeLoaded("Hub"))
-                UIKit.IconButton(s, "round_white", "icon_home", () => SceneFlow.Load("Hub"), new Vector2(0f, 1f), new Vector2(100, -100), 116);
 
             // Title with a little snake doodle built from the real tiles.
             var doodle = UIKit.Rect("Doodle", s);

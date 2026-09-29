@@ -76,8 +76,6 @@ namespace CasualGame.EyeBlast
             bestText = UIKit.Label(playRoot, "", 46, top, new Vector2(0, -225), new Vector2(700, 70), UIKit.Hex("#AEB3D9"));
             UIKit.Image(playRoot, "icon_star", top, new Vector2(-110, -222), new Vector2(60, 60));
             UIKit.IconButton(playRoot, "round_white", "icon_pause", OpenPause, new Vector2(1f, 1f), new Vector2(-100, -100), 116);
-            if (Application.CanStreamedLevelBeLoaded("Hub"))
-                UIKit.IconButton(playRoot, "round_white", "icon_home", () => SceneFlow.Load("Hub"), new Vector2(0f, 1f), new Vector2(100, -100), 116);
 
             var frameSize = Cell * BlastBoard.Size + 44;
             var frame = UIKit.Image(playRoot, "frame", new Vector2(0.5f, 0.5f), new Vector2(0, 60), new Vector2(frameSize, frameSize), UIKit.Hex("#1A1D3A"));
@@ -397,8 +395,7 @@ namespace CasualGame.EyeBlast
             if (!playing) return;
             playing = false;
             SettingsPopup.Show(root, () => playing = true,
-                ("Chơi lại", "btn_green", "icon_restart", NewGame),
-                ("Về menu", "btn_white", "icon_home", () => SceneFlow.Load(Application.CanStreamedLevelBeLoaded("Hub") ? "Hub" : "EyeBlast")));
+                ("Chơi lại", "btn_green", "icon_restart", NewGame));
         }
 
         /// <summary>Forwards drag events of one tray slot.</summary>
