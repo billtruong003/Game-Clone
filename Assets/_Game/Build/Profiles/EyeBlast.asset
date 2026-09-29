@@ -40,10 +40,18 @@ MonoBehaviour:
   - clear
   - music_blast
   keyAlias: upload
-  adMobAppId: 
-  interstitialAdUnit: 
-  rewardedAdUnit: 
+  adMobAppId: ca-app-pub-2681948403948920~6417059443
+  interstitialAdUnit: ca-app-pub-2681948403948920/9066525085
+  rewardedAdUnit: ca-app-pub-2681948403948920/6440361746
   bannerAdUnit: 
   removeAdsProductId: remove_ads
   privacyPolicyUrl: 
-  history: []
+  history:
+  - date: 2026-09-29 14:09
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Succeeded
+    sizeMB: 1449.5
+    output: Builds/EyeBlast/EyeBlast-0.1.0-1-test.apk
+    commit: 884961c

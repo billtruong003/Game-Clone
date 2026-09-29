@@ -1,12 +1,18 @@
 <dependencies>
   <packages>
-    <package>com.applovin:applovin-sdk:13.6.4</package>
+    <package>androidx.constraintlayout:constraintlayout:2.1.4</package>
+    <package>androidx.fragment:fragment:1.7.1</package>
+    <package>androidx.lifecycle:lifecycle-process:2.6.2</package>
+    <package>com.google.ads.mediation:unity:4.20.1.0</package>
+    <package>com.google.android.gms:play-services-ads:25.4.0</package>
     <package>com.google.android.play:review:2.0.2</package>
+    <package>com.google.android.ump:user-messaging-platform:4.0.0</package>
+    <package>com.unity3d.ads:unity-ads:4.20.1</package>
   </packages>
   <files />
   <settings>
     <setting name="androidAbis" value="arm64-v8a,armeabi-v7a" />
-    <setting name="bundleId" value="com.casualgame.arrowout" />
+    <setting name="bundleId" value="com.casualgame.eyemerge" />
     <setting name="explodeAars" value="True" />
     <setting name="gradleBuildEnabled" value="True" />
     <setting name="gradlePropertiesTemplateEnabled" value="True" />

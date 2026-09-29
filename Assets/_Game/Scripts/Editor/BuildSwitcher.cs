@@ -180,17 +180,15 @@ namespace CasualGame.EditorTools
                 c = CreateInstance<GameConfig>();
                 AssetDatabase.CreateAsset(c, path);
             }
-            var studio = StudioSettings.Get();
             c.gameId = p.gameId;
             c.productName = p.productName;
             c.applicationId = p.applicationId;
             c.version = p.version;
             c.versionCode = p.versionCode;
-            c.maxSdkKey = studio.maxSdkKey;
-            c.interstitialAdUnit = p.interstitialAdUnit;
-            c.rewardedAdUnit = p.rewardedAdUnit;
-            c.bannerAdUnit = p.bannerAdUnit;
-            c.fakeAds = !release;
+            // test builds always use Google's test units (real ads on a dev device risk the AdMob account)
+            c.interstitialAdUnit = release ? p.interstitialAdUnit : TestInterstitial;
+            c.rewardedAdUnit = release ? p.rewardedAdUnit : TestRewarded;
+            c.bannerAdUnit = release ? p.bannerAdUnit : TestBanner;
             c.removeAdsProductId = p.removeAdsProductId;
             c.privacyPolicyUrl = p.privacyPolicyUrl;
             EditorUtility.SetDirty(c);
@@ -228,15 +226,15 @@ namespace CasualGame.EditorTools
             if (p.icon == null) ReleaseErr("No app icon");
             if (p.versionCode <= p.LastReleasedCode()) Err($"versionCode {p.versionCode} was already released (last {p.LastReleasedCode()})");
 
-            if (string.IsNullOrEmpty(studio.maxSdkKey) || string.IsNullOrEmpty(p.interstitialAdUnit) || string.IsNullOrEmpty(p.rewardedAdUnit))
-                ReleaseErr("AppLovin MAX SDK key / ad unit ids missing: fake ads only");
+            if (string.IsNullOrEmpty(p.adMobAppId) || string.IsNullOrEmpty(p.interstitialAdUnit) || string.IsNullOrEmpty(p.rewardedAdUnit))
+                ReleaseErr("AdMob app id / ad unit ids missing (test builds use Google's test ids)");
+            else if (p.adMobAppId.StartsWith("ca-app-pub-3940256099942544")) ReleaseErr("AdMob app id is Google's test id");
             if (string.IsNullOrEmpty(p.privacyPolicyUrl)) ReleaseErr("Privacy policy URL missing (required by Play and for ads)");
             if (release)
             {
                 if (string.IsNullOrEmpty(studio.keystorePath) || !File.Exists(studio.keystorePath)) Err("Upload keystore not set in Studio settings");
                 else if (string.IsNullOrEmpty(PlayerSettings.Android.keystorePass)) Err("Keystore passwords not entered this session");
             }
-            if (AdMobAdapterInstalled && string.IsNullOrEmpty(p.adMobAppId)) Err("AdMob adapter is installed but the AdMob app id is empty (the app would crash at launch)");
             if (studio.targetSdk < 35) Warn($"Target API {studio.targetSdk} is below the Google Play minimum");
             return list;
         }
@@ -275,7 +273,7 @@ namespace CasualGame.EditorTools
                 PlayerSettings.Android.keyaliasName = p.keyAlias;
             }
 
-            ApplyMaxSettings(p, studio);
+            ApplyAdMobSettings(p, release);
 
             foreach (var t in Targets)
             {
@@ -293,22 +291,30 @@ namespace CasualGame.EditorTools
             Debug.Log($"Build Switcher: now building '{p.productName}' ({p.applicationId} {p.version}/{p.versionCode}) with {EditorBuildSettings.scenes.Length} scene(s)");
         }
 
-        public static bool AdMobAdapterInstalled => Directory.Exists("Assets/MaxSdk/Mediation/Google");
+        // Google's published test ids (https://developers.google.com/admob/android/test-ads)
+        private const string TestAppId = "ca-app-pub-3940256099942544~3347511713";
+        private const string TestInterstitial = "ca-app-pub-3940256099942544/1033173712";
+        private const string TestRewarded = "ca-app-pub-3940256099942544/5224354917";
+        private const string TestBanner = "ca-app-pub-3940256099942544/6300978111";
 
         /// <summary>
-        /// AppLovin's settings are project-wide, so each switch writes this game's values into them: SDK key,
-        /// AdMob app id, and Google's consent flow (Terms &amp; Privacy Policy) pointing at this game's privacy policy.
+        /// The Google Mobile Ads settings are project-wide, so each switch writes this game's AdMob app id into them
+        /// (Google's test app id for test builds without one: the SDK crashes at launch without any app id).
         /// </summary>
-        private static void ApplyMaxSettings(GameProfile p, StudioSettings studio)
+        private static void ApplyAdMobSettings(GameProfile p, bool release)
         {
-            var max = AppLovinSettings.Instance;
-            max.SdkKey = studio.maxSdkKey;
-            max.AdMobAndroidAppId = p.adMobAppId ?? "";
-            max.SaveAsync();
-            var consent = AppLovinMax.Scripts.IntegrationManager.Editor.AppLovinInternalSettings.Instance;
-            consent.ConsentFlowEnabled = !string.IsNullOrEmpty(p.privacyPolicyUrl);
-            if (consent.ConsentFlowEnabled) consent.ConsentFlowPrivacyPolicyUrl = p.privacyPolicyUrl;
-            consent.Save();
+            var guid = AssetDatabase.FindAssets("t:GoogleMobileAdsSettings").FirstOrDefault();
+            if (guid == null)
+            {
+                EditorApplication.ExecuteMenuItem("Assets/Google Mobile Ads/Settings...");
+                guid = AssetDatabase.FindAssets("t:GoogleMobileAdsSettings").FirstOrDefault();
+                if (guid == null) { Debug.LogError("Google Mobile Ads settings asset not found"); return; }
+            }
+            var settings = new SerializedObject(AssetDatabase.LoadMainAssetAtPath(AssetDatabase.GUIDToAssetPath(guid)));
+            var appId = !release && string.IsNullOrEmpty(p.adMobAppId) ? TestAppId : p.adMobAppId ?? "";
+            settings.FindProperty("adMobAndroidAppId").stringValue = appId;
+            settings.ApplyModifiedPropertiesWithoutUndo();
+            AssetDatabase.SaveAssets();
         }
 
         // ---------------- building ----------------

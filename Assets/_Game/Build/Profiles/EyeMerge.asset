@@ -40,10 +40,18 @@ MonoBehaviour:
   - thud
   - music_merge
   keyAlias: upload
-  adMobAppId: 
-  interstitialAdUnit: 
-  rewardedAdUnit: 
+  adMobAppId: ca-app-pub-2681948403948920~6840740435
+  interstitialAdUnit: ca-app-pub-2681948403948920/5127280079
+  rewardedAdUnit: ca-app-pub-2681948403948920/1759804144
   bannerAdUnit: 
   removeAdsProductId: remove_ads
   privacyPolicyUrl: 
-  history: []
+  history:
+  - date: 2026-09-29 14:13
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Succeeded
+    sizeMB: 1448.2
+    output: Builds/EyeMerge/EyeMerge-0.1.0-1-test.apk
+    commit: 884961c

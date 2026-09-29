@@ -38,9 +38,9 @@ MonoBehaviour:
   - hint
   - music_arrow
   keyAlias: upload
-  adMobAppId: 
-  interstitialAdUnit: 
-  rewardedAdUnit: 
+  adMobAppId: ca-app-pub-2681948403948920~6611752139
+  interstitialAdUnit: ca-app-pub-2681948403948920/4005770099
+  rewardedAdUnit: ca-app-pub-2681948403948920/1379606757
   bannerAdUnit: 
   removeAdsProductId: remove_ads
   privacyPolicyUrl: 

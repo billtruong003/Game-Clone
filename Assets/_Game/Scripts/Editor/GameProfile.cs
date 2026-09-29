@@ -30,8 +30,8 @@ namespace CasualGame.EditorTools
         [Header("Android")]
         [Tooltip("Key alias inside the studio upload keystore")] public string keyAlias = "upload";
 
-        [Header("Ads (AppLovin MAX ad unit ids, Android)")]
-        [Tooltip("AdMob app id (ca-app-pub-…~…), needed once the AdMob adapter is installed in MAX")] public string adMobAppId;
+        [Header("Ads (AdMob, Android). Empty = Google's test ids in test builds")]
+        [Tooltip("AdMob app id, ca-app-pub-XXXX~YYYY")] public string adMobAppId;
         public string interstitialAdUnit;
         public string rewardedAdUnit;
         public string bannerAdUnit;

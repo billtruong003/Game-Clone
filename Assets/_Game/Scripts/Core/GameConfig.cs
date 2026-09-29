@@ -15,19 +15,16 @@ namespace CasualGame.Core
         public string version;
         public int versionCode;
 
-        [Header("Ads (AppLovin MAX)")]
-        public string maxSdkKey;
+        [Header("Ads (AdMob ad unit ids; test builds get Google's test units)")]
         public string interstitialAdUnit;
         public string rewardedAdUnit;
         public string bannerAdUnit;
-        [Tooltip("Dev builds: fake ads even when ids are set")] public bool fakeAds = true;
 
         [Header("Store")]
         public string removeAdsProductId = "remove_ads";
         public string privacyPolicyUrl;
 
-        public bool HasRealAds => !fakeAds && !string.IsNullOrEmpty(maxSdkKey) &&
-                                  (!string.IsNullOrEmpty(interstitialAdUnit) || !string.IsNullOrEmpty(rewardedAdUnit));
+        public bool HasAdUnits => !string.IsNullOrEmpty(interstitialAdUnit) || !string.IsNullOrEmpty(rewardedAdUnit);
 
         public string StoreUrl => "https://play.google.com/store/apps/details?id=" + applicationId;
 

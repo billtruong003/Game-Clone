@@ -21,8 +21,6 @@ namespace CasualGame.EditorTools
         [Tooltip("Upload keystore (outside the repo). Passwords are typed in the Build Switcher each session, never saved.")]
         public string keystorePath = "";
 
-        [Header("AppLovin MAX (account-wide)")]
-        public string maxSdkKey = "";
 
         public static StudioSettings Get()
         {

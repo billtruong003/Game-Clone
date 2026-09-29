@@ -11,8 +11,8 @@ namespace CasualGame.Core
 
     /// <summary>
     /// Ads facade used by all games. Rewarded ads always run (the player asked for them); interstitials are
-    /// frequency-capped and skipped entirely once "Remove Ads" is owned. The provider is AppLovin MAX (with AdMob
-    /// through MAX mediation) when the game's GameConfig carries real ids, the fake overlay otherwise.
+    /// frequency-capped and skipped entirely once "Remove Ads" is owned. On a device the provider is AdMob (with Unity
+    /// Ads through AdMob mediation); in the editor, or without ad unit ids, a fake overlay.
     /// </summary>
     public static class Ads
     {
@@ -34,8 +34,8 @@ namespace CasualGame.Core
         {
             if (initialized) return;
             initialized = true;
-            if (config != null && config.HasRealAds && !Application.isEditor)
-                Provider = new MaxAdProvider(config);
+            if (config != null && config.HasAdUnits && !Application.isEditor)
+                Provider = new AdMobAdProvider(config);
             Store.Init(config);
         }
 
