@@ -44,4 +44,20 @@ MonoBehaviour:
   bannerAdUnit: 
   removeAdsProductId: remove_ads
   privacyPolicyUrl: 
-  history: []
+  history:
+  - date: 2026-09-29 17:26
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Failed
+    sizeMB: 0
+    output: Builds/ArrowOut/ArrowOut-0.1.0-1-test.apk
+    commit: 0828778
+  - date: 2026-09-29 17:51
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Succeeded
+    sizeMB: 1448.2
+    output: Builds/ArrowOut/ArrowOut-0.1.0-1-test.apk
+    commit: 0828778

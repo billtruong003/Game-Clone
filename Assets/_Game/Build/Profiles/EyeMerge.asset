@@ -55,3 +55,19 @@ MonoBehaviour:
     sizeMB: 1448.2
     output: Builds/EyeMerge/EyeMerge-0.1.0-1-test.apk
     commit: 884961c
+  - date: 2026-09-29 17:41
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Failed
+    sizeMB: 68.1
+    output: Builds/EyeMerge/EyeMerge-0.1.0-1-test.apk
+    commit: 0828778
+  - date: 2026-09-29 17:59
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Succeeded
+    sizeMB: 1458.5
+    output: Builds/EyeMerge/EyeMerge-0.1.0-1-test.apk
+    commit: 0828778

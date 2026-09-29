@@ -55,3 +55,19 @@ MonoBehaviour:
     sizeMB: 1449.5
     output: Builds/EyeBlast/EyeBlast-0.1.0-1-test.apk
     commit: 884961c
+  - date: 2026-09-29 17:34
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Failed
+    sizeMB: 68.8
+    output: Builds/EyeBlast/EyeBlast-0.1.0-1-test.apk
+    commit: 0828778
+  - date: 2026-09-29 17:55
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Succeeded
+    sizeMB: 1459.8
+    output: Builds/EyeBlast/EyeBlast-0.1.0-1-test.apk
+    commit: 0828778

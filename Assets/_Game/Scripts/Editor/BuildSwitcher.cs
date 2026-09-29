@@ -263,7 +263,11 @@ namespace CasualGame.EditorTools
 
             // Play requirements: 64-bit (IL2CPP + ARM64), current target API
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);
-            PlayerSettings.Android.targetArchitectures = AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7;
+            // test builds: one CPU architecture and a quick C++ compile (minutes instead of tens of minutes);
+            // release: both architectures, fully optimized
+            PlayerSettings.Android.targetArchitectures = release ? AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7 : AndroidArchitecture.ARM64;
+            PlayerSettings.SetIl2CppCompilerConfiguration(NamedBuildTarget.Android, release ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
+            PlayerSettings.SetIl2CppCodeGeneration(NamedBuildTarget.Android, release ? Il2CppCodeGeneration.OptimizeSpeed : Il2CppCodeGeneration.OptimizeSize);
             PlayerSettings.Android.minSdkVersion = (AndroidSdkVersions)studio.minSdk;
             PlayerSettings.Android.targetSdkVersion = (AndroidSdkVersions)studio.targetSdk;
             if (!string.IsNullOrEmpty(studio.keystorePath))
@@ -364,14 +368,14 @@ namespace CasualGame.EditorTools
                 version = p.version,
                 versionCode = p.versionCode,
                 result = result,
-                sizeMB = (float)Math.Round(report.summary.totalSize / 1048576.0, 1),
+                sizeMB = File.Exists(output) ? (float)Math.Round(new FileInfo(output).Length / 1048576.0, 1) : 0f,
                 output = output,
                 commit = GitHead(),
             });
             if (release && report.summary.result == UnityEditor.Build.Reporting.BuildResult.Succeeded) p.versionCode++;
             EditorUtility.SetDirty(p);
             AssetDatabase.SaveAssets();
-            var line = $"Build {p.gameId} {(release ? "AAB" : "APK")} {p.version}: {result}, {report.summary.totalSize / 1048576f:0.0} MB -> {output}";
+            var line = $"Build {p.gameId} {(release ? "AAB" : "APK")} {p.version}: {result}, {(File.Exists(output) ? new FileInfo(output).Length / 1048576f : 0f):0.0} MB -> {output}";
             Debug.Log(line);
             return line;
         }
