@@ -15,9 +15,10 @@ MonoBehaviour:
   gameId: EyeBlast
   productName: Eye Blast
   applicationId: com.casualgame.eyeblast
+  defineSymbol: CG_EYEBLAST
+  icon: {fileID: 2800000, guid: 5cc3baa21289dd046a82feb2eb62f54a, type: 3}
   version: 0.1.0
   versionCode: 1
-  isDev: 0
   scenes:
   - EyeBlast
   artSheets:
@@ -38,5 +39,11 @@ MonoBehaviour:
   - place
   - clear
   - music_blast
-  defineSymbol: CG_EYEBLAST
-  icon: {fileID: 0}
+  keyAlias: upload
+  adMobAppId: 
+  interstitialAdUnit: 
+  rewardedAdUnit: 
+  bannerAdUnit: 
+  removeAdsProductId: remove_ads
+  privacyPolicyUrl: 
+  history: []

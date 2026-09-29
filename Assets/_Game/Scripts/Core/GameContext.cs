@@ -24,6 +24,7 @@ namespace CasualGame.Core
             if (audio != null) GameAudio.SetLibrary(audio);
             GameFx.SetCatalog(fx);
             GameConfig.SetCurrent(config);
+            Ads.Init(config);
         }
 
 #if UNITY_EDITOR

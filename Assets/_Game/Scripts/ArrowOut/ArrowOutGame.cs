@@ -84,14 +84,14 @@ namespace CasualGame.ArrowOut
                 img.rectTransform.localEulerAngles = new Vector3(0, 0, -angle);
             }
             UIKit.Label(s, "ARROW OUT", 150, top, new Vector2(0, -520), new Vector2(1000, 180));
-            UIKit.Label(s, "Trò chơi trí tuệ · gỡ mũi tên", 50, top, new Vector2(0, -625), new Vector2(1000, 70), UIKit.Muted);
+            UIKit.Label(s, Loc.T("Brain puzzle · clear the arrows", "Trò chơi trí tuệ · gỡ mũi tên"), 50, top, new Vector2(0, -625), new Vector2(1000, 70), UIKit.Muted);
 
             var mid = new Vector2(0.5f, 0.5f);
             var next = Mathf.Min(ArrowProgress.Unlocked, ArrowProgress.LevelCount);
-            UIKit.Button(s, "btn_green", $"Chơi · Màn {next}", () => StartLevel(next), mid, new Vector2(0, 120), new Vector2(720, 170), "icon_play", 64);
-            UIKit.Button(s, "btn_blue", "Chọn màn", () => ShowLevelSelect((next - 1) / PerPage), mid, new Vector2(0, -80), new Vector2(720, 150), "icon_levels");
-            UIKit.Button(s, "btn_yellow", "Chế độ vô hạn", () => StartEndless(false), mid, new Vector2(0, -260), new Vector2(720, 150), "icon_infinity");
-            UIKit.Button(s, "btn_white", "Thử thách hôm nay", () => StartEndless(true), mid, new Vector2(0, -440), new Vector2(720, 150), "icon_calendar");
+            UIKit.Button(s, "btn_green", Loc.F("Play · Level {0}", "Chơi · Màn {0}", next), () => StartLevel(next), mid, new Vector2(0, 120), new Vector2(720, 170), "icon_play", 64);
+            UIKit.Button(s, "btn_blue", Loc.T("Levels", "Chọn màn"), () => ShowLevelSelect((next - 1) / PerPage), mid, new Vector2(0, -80), new Vector2(720, 150), "icon_levels");
+            UIKit.Button(s, "btn_yellow", Loc.T("Endless mode", "Chế độ vô hạn"), () => StartEndless(false), mid, new Vector2(0, -260), new Vector2(720, 150), "icon_infinity");
+            UIKit.Button(s, "btn_white", Loc.T("Daily challenge", "Thử thách hôm nay"), () => StartEndless(true), mid, new Vector2(0, -440), new Vector2(720, 150), "icon_calendar");
 
             var bottom = new Vector2(0.5f, 0f);
             UIKit.IconButton(s, "round_white", "icon_settings", () => SettingsPopup.Show(safe, null), bottom, new Vector2(-200, 150));
@@ -103,13 +103,13 @@ namespace CasualGame.ArrowOut
         private void ShowRecords()
         {
             Popup p = null;
-            p = Popup.Open(safe, "Thành tích", 900);
-            p.Text($"Đã qua: {ArrowProgress.Cleared}/{ArrowProgress.LevelCount} màn", 54);
-            p.Text($"Tổng sao: {ArrowProgress.TotalStars}/{ArrowProgress.LevelCount * 3}", 54);
-            p.Text($"Kỷ lục vô hạn: {ArrowProgress.EndlessBest}", 54);
-            p.Text($"Hôm nay: {ArrowProgress.DailyBest}", 54);
+            p = Popup.Open(safe, Loc.T("Stats", "Thành tích"), 900);
+            p.Text(Loc.F("Cleared: {0}/{1} levels", "Đã qua: {0}/{1} màn", ArrowProgress.Cleared, ArrowProgress.LevelCount), 54);
+            p.Text(Loc.F("Stars: {0}/{1}", "Tổng sao: {0}/{1}", ArrowProgress.TotalStars, ArrowProgress.LevelCount * 3), 54);
+            p.Text(Loc.F("Endless best: {0}", "Kỷ lục vô hạn: {0}", ArrowProgress.EndlessBest), 54);
+            p.Text(Loc.F("Today: {0}", "Hôm nay: {0}", ArrowProgress.DailyBest), 54);
             p.Space(20);
-            p.Button("btn_green", "Đóng", () => p.Close());
+            p.Button("btn_green", Loc.T("Close", "Đóng"), () => p.Close());
             p.Fit();
         }
 
@@ -120,7 +120,7 @@ namespace CasualGame.ArrowOut
             var s = NewScreen("Levels");
             var top = new Vector2(0.5f, 1f);
             UIKit.IconButton(s, "round_white", "icon_back", ShowHome, new Vector2(0f, 1f), new Vector2(100, -100), 116);
-            UIKit.Label(s, "Chọn màn", 84, top, new Vector2(0, -100), new Vector2(600, 110));
+            UIKit.Label(s, Loc.T("Levels", "Chọn màn"), 84, top, new Vector2(0, -100), new Vector2(600, 110));
             UIKit.Image(s, "icon_star", top, new Vector2(-95, -185), new Vector2(64, 64));
             UIKit.Label(s, $"{ArrowProgress.TotalStars}/{ArrowProgress.LevelCount * 3}", 50, top, new Vector2(40, -185), new Vector2(240, 70), UIKit.Hex("#E9A23B"));
 
@@ -168,7 +168,7 @@ namespace CasualGame.ArrowOut
             BuildPlayScreen();
 
             if (level.n == 1 && !ArrowProgress.TutorialSeen) ShowTutorial();
-            else if (level.n <= 3) Tip("Chạm mũi tên có đường thoáng tới mép bàn để nó bay ra.");
+            else if (level.n <= 3) Tip(Loc.T("Tap an arrow with a clear path to the edge to send it flying.", "Chạm mũi tên có đường thoáng tới mép bàn để nó bay ra."));
         }
 
         private void StartEndless(bool daily)
@@ -178,7 +178,7 @@ namespace CasualGame.ArrowOut
             run = new EndlessRun(daily ? Rng.Seeded(Rng.DailySeed(System.DateTime.Now)) : Rng.Unity());
             board = run.Board;
             BuildPlayScreen();
-            Tip(daily ? "Mọi người cùng một đề hôm nay. Bay liên tiếp cùng màu để nhân điểm!" : "Bay liên tiếp cùng màu để nhân điểm. Combo x3 được nghỉ 1 lượt.");
+            Tip(daily ? Loc.T("Everyone plays the same board today. Chain arrows of one color to multiply your score!", "Mọi người cùng một đề hôm nay. Bay liên tiếp cùng màu để nhân điểm!") : Loc.T("Chain arrows of one color to multiply your score. A x3 combo gives you a free move.", "Bay liên tiếp cùng màu để nhân điểm. Combo x3 được nghỉ 1 lượt."));
         }
 
         private void BuildPlayScreen()
@@ -198,7 +198,7 @@ namespace CasualGame.ArrowOut
             if (mode == Mode.Level)
             {
                 bool boss = level.n % 10 == 0;
-                scoreText = UIKit.Label(s, $"Màn {level.n}", 92, top, new Vector2(0, -100), new Vector2(600, 120), boss ? ArrowBoardView.ErrorColor : UIKit.Ink);
+                scoreText = UIKit.Label(s, Loc.F("Level {0}", "Màn {0}", level.n), 92, top, new Vector2(0, -100), new Vector2(600, 120), boss ? ArrowBoardView.ErrorColor : UIKit.Ink);
                 stageText = UIKit.Label(s, boss ? "BOSS" : "", 40, top, new Vector2(0, -175), new Vector2(400, 60), ArrowBoardView.ErrorColor);
                 UIKit.IconButton(s, "round_white", "icon_restart", () => StartLevel(level.n), tr, new Vector2(-240, -100), 116);
                 var hint = UIKit.IconButton(s, "round_yellow", "icon_hint", UseHint, tl, new Vector2(240, -100), 116);
@@ -211,7 +211,7 @@ namespace CasualGame.ArrowOut
                 scoreText = UIKit.Label(s, "0", 110, top, new Vector2(0, -100), new Vector2(600, 130));
                 var best = mode == Mode.Daily ? ArrowProgress.DailyBest : ArrowProgress.EndlessBest;
                 stageText = UIKit.Label(s, "", 40, top, new Vector2(0, -180), new Vector2(700, 60), UIKit.Muted);
-                UIKit.Label(s, $"{(mode == Mode.Daily ? "Hôm nay" : "Kỷ lục")} {best}", 40, tr, new Vector2(-240, -100), new Vector2(220, 60), UIKit.Muted);
+                UIKit.Label(s, (mode == Mode.Daily ? Loc.T("Today", "Hôm nay") : Loc.T("Best", "Kỷ lục")) + " " + best, 40, tr, new Vector2(-240, -100), new Vector2(220, 60), UIKit.Muted);
                 hintBadge = null;
             }
 
@@ -229,8 +229,8 @@ namespace CasualGame.ArrowOut
             if (mode == Mode.Level)
             {
                 var bottom = new Vector2(0.5f, 0f);
-                var prev = UIKit.Button(s, "btn_white", "Màn trước", () => StartLevel(level.n - 1), bottom, new Vector2(-250, 140), new Vector2(430, 140), "icon_back", 50);
-                var next = UIKit.Button(s, "btn_white", "Màn sau", () => StartLevel(level.n + 1), bottom, new Vector2(250, 140), new Vector2(430, 140), "icon_next", 50);
+                var prev = UIKit.Button(s, "btn_white", Loc.T("Previous", "Màn trước"), () => StartLevel(level.n - 1), bottom, new Vector2(-250, 140), new Vector2(430, 140), "icon_back", 50);
+                var next = UIKit.Button(s, "btn_white", Loc.T("Next", "Màn sau"), () => StartLevel(level.n + 1), bottom, new Vector2(250, 140), new Vector2(430, 140), "icon_next", 50);
                 UIKit.SetInteractable(prev, level.n > 1);
                 UIKit.SetInteractable(next, level.n < ArrowProgress.Unlocked && level.n < ArrowProgress.LevelCount);
             }
@@ -252,7 +252,7 @@ namespace CasualGame.ArrowOut
                 view.Shake(a);
                 GameAudio.Play("blocked");
                 GameAudio.Haptic();
-                if (mistakes == 1 && mode == Mode.Level && level.n <= 10) Tip("Mũi tên đó bị chặn! Gỡ mũi tên đang cản đường trước.");
+                if (mistakes == 1 && mode == Mode.Level && level.n <= 10) Tip(Loc.T("That arrow is blocked! Clear the one in its way first.", "Mũi tên đó bị chặn! Gỡ mũi tên đang cản đường trước."));
                 RefreshHud();
                 if (lives <= 0) Lose();
                 return;
@@ -276,7 +276,7 @@ namespace CasualGame.ArrowOut
             if (res.StageUp)
             {
                 GameAudio.Play("big");
-                Tip($"Lên cấp {EndlessRun.DifficultyAt(run.Cleared).Stage + 1}! Mũi tên dài hơn, nhiều màu hơn.");
+                Tip(Loc.F("Stage {0}! Longer arrows, more colors.", "Lên cấp {0}! Mũi tên dài hơn, nhiều màu hơn.", EndlessRun.DifficultyAt(run.Cleared).Stage + 1));
             }
             if (run.Cleared % HeartEvery == 0 && lives < MaxHearts) lives++;
             RefreshHud();
@@ -291,13 +291,13 @@ namespace CasualGame.ArrowOut
             if (mode == Mode.Level)
             {
                 comboDot.enabled = false;
-                comboText.text = $"Còn {board.Count} mũi tên";
+                comboText.text = Loc.F("{0} arrows left", "Còn {0} mũi tên", board.Count);
                 comboText.color = UIKit.Muted;
                 comboText.rectTransform.anchoredPosition = new Vector2(0, -330);
                 return;
             }
             scoreText.text = run.Score.ToString();
-            stageText.text = $"Cấp {EndlessRun.DifficultyAt(run.Cleared).Stage + 1} · đã gỡ {run.Cleared}";
+            stageText.text = Loc.F("Stage {0} · cleared {1}", "Cấp {0} · đã gỡ {1}", EndlessRun.DifficultyAt(run.Cleared).Stage + 1, run.Cleared);
             var on = run.ComboColor >= 0 && run.Combo >= 1;
             comboDot.enabled = on;
             if (on) comboDot.color = ArrowBoardView.Palette[run.ComboColor];
@@ -350,7 +350,7 @@ namespace CasualGame.ArrowOut
             var home = tutorialHand.anchoredPosition;
             Tween.Run(tutorialHand, 30f, k => tutorialHand.anchoredPosition = home + new Vector2(0, Mathf.Abs(Mathf.Sin(k * 60f)) * 30f), Ease.Linear);
             view.Hint(target);
-            Tip("Chạm vào mũi tên có đường thoáng tới mép bàn cờ để nó bay ra.");
+            Tip(Loc.T("Tap an arrow with a clear path to the edge of the board to send it flying.", "Chạm vào mũi tên có đường thoáng tới mép bàn cờ để nó bay ra."));
         }
 
         private void HideTutorial()
@@ -368,6 +368,7 @@ namespace CasualGame.ArrowOut
             playing = false;
             var stars = mistakes == 0 ? 3 : mistakes <= 2 ? 2 : 1;
             ArrowProgress.Complete(level.n, stars);
+            if (stars >= 2) ReviewPrompt.GoodMoment();
             GameAudio.Play("win");
             GameFx.Play("Arrow_LevelStar", view.transform.position, 1.2f);
             GameFx.Play("Win_Confetti", view.transform.position + Vector3.down * 3f, 1f);
@@ -375,7 +376,7 @@ namespace CasualGame.ArrowOut
             {
                 var last = level.n >= ArrowProgress.LevelCount;
                 Popup p = null;
-                p = Popup.Open(safe, last ? "Phá đảo!" : "Hoàn thành!", 980);
+                p = Popup.Open(safe, last ? Loc.T("All clear!", "Phá đảo!") : Loc.T("Level clear!", "Hoàn thành!"), 980);
                 var row = p.Row(170);
                 for (int k = 0; k < 3; k++)
                 {
@@ -389,12 +390,12 @@ namespace CasualGame.ArrowOut
                         GameFx.Play("Sparkle", star.transform.position, 1.2f);
                     });
                 }
-                p.Text(mistakes == 0 ? "Hoàn hảo, không sai lần nào!" : $"Sai {mistakes} lần", 48, UIKit.Muted);
+                p.Text(mistakes == 0 ? Loc.T("Perfect, no mistakes!", "Hoàn hảo, không sai lần nào!") : Loc.F("{0} mistakes", "Sai {0} lần", mistakes), 48, UIKit.Muted);
                 p.Space(10);
                 if (!last)
-                    p.Button("btn_green", "Màn tiếp", () => p.Close(() => Ads.OnBreak("arrow_level", () => StartLevel(level.n + 1))), "icon_next");
-                p.Button("btn_white", "Chơi lại", () => p.Close(() => StartLevel(level.n)), "icon_restart");
-                p.Button("btn_blue", "Chọn màn", () => p.Close(() => ShowLevelSelect((level.n - 1) / PerPage)), "icon_levels");
+                    p.Button("btn_green", Loc.T("Next level", "Màn tiếp"), () => p.Close(() => Ads.OnBreak("arrow_level", () => StartLevel(level.n + 1))), "icon_next");
+                p.Button("btn_white", Loc.T("Play again", "Chơi lại"), () => p.Close(() => StartLevel(level.n)), "icon_restart");
+                p.Button("btn_blue", Loc.T("Levels", "Chọn màn"), () => p.Close(() => ShowLevelSelect((level.n - 1) / PerPage)), "icon_levels");
                 p.Fit();
             });
         }
@@ -410,22 +411,22 @@ namespace CasualGame.ArrowOut
             Tween.Delay(this, 0.45f, () =>
             {
                 Popup p = null;
-                p = Popup.Open(safe, mode == Mode.Level ? "Hết tim!" : "Hết lượt!", 1050);
-                if (mode == Mode.Level) p.Text($"Màn {level.n} · còn {board.Count} mũi tên", 50, UIKit.Muted);
+                p = Popup.Open(safe, mode == Mode.Level ? Loc.T("Out of hearts!", "Hết tim!") : Loc.T("Out of moves!", "Hết lượt!"), 1050);
+                if (mode == Mode.Level) p.Text(Loc.F("Level {0} · {1} arrows left", "Màn {0} · còn {1} mũi tên", level.n, board.Count), 50, UIKit.Muted);
                 else
                 {
                     p.Text(run.Score.ToString(), 130, UIKit.Ink, 150);
-                    p.Text($"Kỷ lục {best}", 48, UIKit.Muted);
+                    p.Text(Loc.F("Best {0}", "Kỷ lục {0}", best), 48, UIKit.Muted);
                 }
                 p.Space(10);
                 if (!revived)
-                    p.Button("btn_blue", mode == Mode.Level ? "+1 tim" : "Hồi sinh", () => p.Close(() => Ads.ShowRewarded("arrow_revive", ok => { if (ok) Revive(); })), "icon_ad");
-                p.Button("btn_green", "Chơi lại", () => p.Close(() => Ads.OnBreak("arrow_gameover", () =>
+                    p.Button("btn_blue", mode == Mode.Level ? Loc.T("+1 heart", "+1 tim") : Loc.T("Revive", "Hồi sinh"), () => p.Close(() => Ads.ShowRewarded("arrow_revive", ok => { if (ok) Revive(); })), "icon_ad");
+                p.Button("btn_green", Loc.T("Play again", "Chơi lại"), () => p.Close(() => Ads.OnBreak("arrow_gameover", () =>
                 {
                     if (mode == Mode.Level) StartLevel(level.n);
                     else StartEndless(mode == Mode.Daily);
                 })), "icon_restart");
-                p.Button("btn_white", "Về menu", () => p.Close(ShowHome), "icon_home");
+                p.Button("btn_white", Loc.T("Menu", "Về menu"), () => p.Close(ShowHome), "icon_home");
                 p.Fit();
             });
         }
@@ -449,8 +450,8 @@ namespace CasualGame.ArrowOut
         {
             playing = false;
             SettingsPopup.Show(safe, () => playing = true,
-                ("Chơi lại", "btn_green", "icon_restart", () => { if (mode == Mode.Level) StartLevel(level.n); else StartEndless(mode == Mode.Daily); }),
-                ("Về menu", "btn_white", "icon_home", ShowHome));
+                (Loc.T("Play again", "Chơi lại"), "btn_green", "icon_restart", () => { if (mode == Mode.Level) StartLevel(level.n); else StartEndless(mode == Mode.Daily); }),
+                (Loc.T("Menu", "Về menu"), "btn_white", "icon_home", ShowHome));
         }
     }
 }

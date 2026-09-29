@@ -95,10 +95,11 @@ namespace CasualGame.Core
         public static Popup Show(Transform parent, Action onClose, params (string label, string sprite, string icon, Action action)[] actions)
         {
             Popup popup = null;
-            popup = Popup.Open(parent, "Cài đặt", 520 + 170 * actions.Length + (Ads.RemoveAdsOwned ? 0 : 170));
-            ToggleRow(popup, "icon_sound_on", "Âm thanh", () => GameSettings.Sound, v => GameSettings.Sound = v);
-            ToggleRow(popup, "icon_play", "Nhạc nền", () => GameSettings.Music, v => GameSettings.Music = v);
-            ToggleRow(popup, "icon_vibrate", "Rung", () => GameSettings.Vibration, v => GameSettings.Vibration = v);
+            var extra = (Ads.RemoveAdsOwned ? 0 : 1) + (Privacy.HasPolicy ? 1 : 0) + (Privacy.OptionsRequired ? 1 : 0);
+            popup = Popup.Open(parent, Loc.T("Settings", "Cài đặt"), 520 + 170 * (actions.Length + extra));
+            ToggleRow(popup, "icon_sound_on", Loc.T("Sound", "Âm thanh"), () => GameSettings.Sound, v => GameSettings.Sound = v);
+            ToggleRow(popup, "icon_play", Loc.T("Music", "Nhạc nền"), () => GameSettings.Music, v => GameSettings.Music = v);
+            ToggleRow(popup, "icon_vibrate", Loc.T("Vibration", "Rung"), () => GameSettings.Vibration, v => GameSettings.Vibration = v);
             popup.Space(10);
             foreach (var a in actions)
             {
@@ -106,7 +107,11 @@ namespace CasualGame.Core
                 popup.Button(a.sprite, a.label, () => popup.Close(action), a.icon);
             }
             if (!Ads.RemoveAdsOwned)
-                popup.Button("btn_yellow", "Gỡ quảng cáo", () => Store.BuyRemoveAds(_ => popup.Close(onClose)), "icon_noads");
+                popup.Button("btn_yellow", Loc.T("Remove ads", "Gỡ quảng cáo"), () => Store.BuyRemoveAds(_ => popup.Close(onClose)), "icon_noads");
+            if (Privacy.OptionsRequired)
+                popup.Button("btn_white", Loc.T("Privacy options", "Quyền riêng tư"), Privacy.ShowOptions, "icon_lock");
+            if (Privacy.HasPolicy)
+                popup.Button("btn_white", Loc.T("Privacy policy", "Chính sách bảo mật"), Privacy.OpenPolicy, "icon_lock");
             var close = UIKit.IconButton(popup.Card, "round_white", "icon_close", () => popup.Close(onClose), new Vector2(1f, 1f), new Vector2(-40, -40), 110);
             close.transform.SetAsLastSibling();
             return popup.Fit();

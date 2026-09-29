@@ -236,6 +236,7 @@ namespace CasualGame.EditorTools
                 if (string.IsNullOrEmpty(studio.keystorePath) || !File.Exists(studio.keystorePath)) Err("Upload keystore not set in Studio settings");
                 else if (string.IsNullOrEmpty(PlayerSettings.Android.keystorePass)) Err("Keystore passwords not entered this session");
             }
+            if (AdMobAdapterInstalled && string.IsNullOrEmpty(p.adMobAppId)) Err("AdMob adapter is installed but the AdMob app id is empty (the app would crash at launch)");
             if (studio.targetSdk < 35) Warn($"Target API {studio.targetSdk} is below the Google Play minimum");
             return list;
         }
@@ -274,6 +275,8 @@ namespace CasualGame.EditorTools
                 PlayerSettings.Android.keyaliasName = p.keyAlias;
             }
 
+            ApplyMaxSettings(p, studio);
+
             foreach (var t in Targets)
             {
                 var defines = PlayerSettings.GetScriptingDefineSymbols(t)
@@ -288,6 +291,24 @@ namespace CasualGame.EditorTools
             var first = ScenesFolder + p.scenes[0] + ".unity";
             if (File.Exists(first)) EditorSceneManager.OpenScene(first);
             Debug.Log($"Build Switcher: now building '{p.productName}' ({p.applicationId} {p.version}/{p.versionCode}) with {EditorBuildSettings.scenes.Length} scene(s)");
+        }
+
+        public static bool AdMobAdapterInstalled => Directory.Exists("Assets/MaxSdk/Mediation/Google");
+
+        /// <summary>
+        /// AppLovin's settings are project-wide, so each switch writes this game's values into them: SDK key,
+        /// AdMob app id, and Google's consent flow (Terms &amp; Privacy Policy) pointing at this game's privacy policy.
+        /// </summary>
+        private static void ApplyMaxSettings(GameProfile p, StudioSettings studio)
+        {
+            var max = AppLovinSettings.Instance;
+            max.SdkKey = studio.maxSdkKey;
+            max.AdMobAndroidAppId = p.adMobAppId ?? "";
+            max.SaveAsync();
+            var consent = AppLovinMax.Scripts.IntegrationManager.Editor.AppLovinInternalSettings.Instance;
+            consent.ConsentFlowEnabled = !string.IsNullOrEmpty(p.privacyPolicyUrl);
+            if (consent.ConsentFlowEnabled) consent.ConsentFlowPrivacyPolicyUrl = p.privacyPolicyUrl;
+            consent.Save();
         }
 
         // ---------------- building ----------------

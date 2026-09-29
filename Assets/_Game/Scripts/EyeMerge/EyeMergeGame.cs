@@ -131,7 +131,7 @@ namespace CasualGame.EyeMerge
             bestText = UIKit.Label(hud, "", 44, top, new Vector2(0, -200), new Vector2(600, 60), UIKit.Hex("#AEB3D9"));
             UIKit.IconButton(hud, "round_white", "icon_pause", OpenPause, new Vector2(0f, 1f), new Vector2(100, -100), 116);
 
-            UIKit.Label(hud, "Tiếp", 40, new Vector2(1f, 1f), new Vector2(-110, -60), new Vector2(200, 60), UIKit.Hex("#AEB3D9"));
+            UIKit.Label(hud, Loc.T("Next", "Tiếp"), 40, new Vector2(1f, 1f), new Vector2(-110, -60), new Vector2(200, 60), UIKit.Hex("#AEB3D9"));
             var bubble = UIKit.Image(hud, "round_white", new Vector2(1f, 1f), new Vector2(-110, -150), new Vector2(130, 130));
             nextFill = UIKit.Image(bubble.transform, "circle_fill", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(80, 80));
             UIKit.Image(nextFill.transform, "circle_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(80, 80));
@@ -150,7 +150,7 @@ namespace CasualGame.EyeMerge
         private void RefreshHud()
         {
             scoreText.text = score.ToString();
-            bestText.text = $"Kỷ lục {Mathf.Max(best, score)}";
+            bestText.text = Loc.F("Best {0}", "Kỷ lục {0}", Mathf.Max(best, score));
             nextFill.color = TierColors[nextTier - 1];
             var s = Mathf.Lerp(0.6f, 1f, (nextTier - 1) / 4f);
             nextFill.transform.localScale = Vector3.one * s;
@@ -385,16 +385,17 @@ namespace CasualGame.EyeMerge
             foreach (var b in balls) { b.Body.simulated = false; b.Face.React("dizzy", -1f); }
             if (held != null) held.gameObject.SetActive(false);
             best = SaveStore.SubmitBest("merge.best", score);
+            if (score >= best && score > 0) ReviewPrompt.GoodMoment();
             Tween.Delay(this, 0.6f, () =>
             {
                 Popup p = null;
-                p = Popup.Open(hud, "Hũ đầy rồi!", 1050);
+                p = Popup.Open(hud, Loc.T("The jar is full!", "Hũ đầy rồi!"), 1050);
                 p.Text(score.ToString(), 140, UIKit.Ink, 160);
-                p.Text(score >= best && score > 0 ? "Kỷ lục mới!" : $"Kỷ lục {best}", 50, UIKit.Muted);
+                p.Text(score >= best && score > 0 ? Loc.T("New best!", "Kỷ lục mới!") : Loc.F("Best {0}", "Kỷ lục {0}", best), 50, UIKit.Muted);
                 p.Space(10);
                 if (!revived)
-                    p.Button("btn_blue", "Hồi sinh", () => p.Close(() => Ads.ShowRewarded("merge_revive", ok => { if (ok) Revive(); })), "icon_ad");
-                p.Button("btn_green", "Chơi lại", () => p.Close(() => Ads.OnBreak("merge_gameover", NewGame)), "icon_restart");
+                    p.Button("btn_blue", Loc.T("Revive", "Hồi sinh"), () => p.Close(() => Ads.ShowRewarded("merge_revive", ok => { if (ok) Revive(); })), "icon_ad");
+                p.Button("btn_green", Loc.T("Play again", "Chơi lại"), () => p.Close(() => Ads.OnBreak("merge_gameover", NewGame)), "icon_restart");
                 p.Fit();
             });
         }
@@ -429,7 +430,7 @@ namespace CasualGame.EyeMerge
                     foreach (var b in balls) b.Body.simulated = true;
                     playing = true;
                 },
-                ("Chơi lại", "btn_green", "icon_restart", NewGame));
+                (Loc.T("Play again", "Chơi lại"), "btn_green", "icon_restart", NewGame));
         }
     }
 

@@ -15,9 +15,10 @@ MonoBehaviour:
   gameId: ArrowOut
   productName: Arrow Out
   applicationId: com.casualgame.arrowout
+  defineSymbol: CG_ARROWOUT
+  icon: {fileID: 2800000, guid: 863e810c422bbd04fbac86c86d8515a5, type: 3}
   version: 0.1.0
   versionCode: 1
-  isDev: 0
   scenes:
   - ArrowOut
   artSheets:
@@ -36,5 +37,11 @@ MonoBehaviour:
   - blocked
   - hint
   - music_arrow
-  defineSymbol: CG_ARROWOUT
-  icon: {fileID: 0}
+  keyAlias: upload
+  adMobAppId: 
+  interstitialAdUnit: 
+  rewardedAdUnit: 
+  bannerAdUnit: 
+  removeAdsProductId: remove_ads
+  privacyPolicyUrl: 
+  history: []

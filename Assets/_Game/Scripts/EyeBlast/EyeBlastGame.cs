@@ -356,16 +356,17 @@ namespace CasualGame.EyeBlast
             GameAudio.Play("lose");
             foreach (var b in blocks) b?.Face.React("cry", -1f);
             best = SaveStore.SubmitBest("blast.best", score);
+            if (score >= best && score > 0) ReviewPrompt.GoodMoment();
             Tween.Delay(this, 0.7f, () =>
             {
                 Popup p = null;
-                p = Popup.Open(root, "Hết chỗ rồi!", 1050);
+                p = Popup.Open(root, Loc.T("No room left!", "Hết chỗ rồi!"), 1050);
                 p.Text(score.ToString(), 140, UIKit.Ink, 160);
-                p.Text(score >= best && score > 0 ? "Kỷ lục mới!" : $"Kỷ lục {best}", 50, UIKit.Muted);
+                p.Text(score >= best && score > 0 ? Loc.T("New best!", "Kỷ lục mới!") : Loc.F("Best {0}", "Kỷ lục {0}", best), 50, UIKit.Muted);
                 p.Space(10);
                 if (!revived)
-                    p.Button("btn_blue", "Hồi sinh", () => p.Close(() => Ads.ShowRewarded("blast_revive", ok => { if (ok) Revive(); })), "icon_ad");
-                p.Button("btn_green", "Chơi lại", () => p.Close(() => Ads.OnBreak("blast_gameover", NewGame)), "icon_restart");
+                    p.Button("btn_blue", Loc.T("Revive", "Hồi sinh"), () => p.Close(() => Ads.ShowRewarded("blast_revive", ok => { if (ok) Revive(); })), "icon_ad");
+                p.Button("btn_green", Loc.T("Play again", "Chơi lại"), () => p.Close(() => Ads.OnBreak("blast_gameover", NewGame)), "icon_restart");
                 p.Fit();
             });
         }
@@ -395,7 +396,7 @@ namespace CasualGame.EyeBlast
             if (!playing) return;
             playing = false;
             SettingsPopup.Show(root, () => playing = true,
-                ("Chơi lại", "btn_green", "icon_restart", NewGame));
+                (Loc.T("Play again", "Chơi lại"), "btn_green", "icon_restart", NewGame));
         }
 
         /// <summary>Forwards drag events of one tray slot.</summary>

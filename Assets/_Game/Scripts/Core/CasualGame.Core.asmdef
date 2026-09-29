@@ -1,6 +1,6 @@
 {
   "name": "CasualGame.Core",
   "rootNamespace": "CasualGame.Core",
-  "references": ["Unity.TextMeshPro", "Unity.InputSystem"],
+  "references": ["Unity.TextMeshPro", "Unity.InputSystem", "MaxSdk.Scripts", "Unity.Purchasing"],
   "autoReferenced": true
 }

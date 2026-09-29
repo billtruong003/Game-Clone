@@ -15,9 +15,10 @@ MonoBehaviour:
   gameId: EyeMerge
   productName: Eye Merge
   applicationId: com.casualgame.eyemerge
+  defineSymbol: CG_EYEMERGE
+  icon: {fileID: 2800000, guid: 9e51e4bb503674341920a008b387cc37, type: 3}
   version: 0.1.0
   versionCode: 1
-  isDev: 0
   scenes:
   - EyeMerge
   artSheets:
@@ -38,5 +39,11 @@ MonoBehaviour:
   - merge
   - thud
   - music_merge
-  defineSymbol: CG_EYEMERGE
-  icon: {fileID: 0}
+  keyAlias: upload
+  adMobAppId: 
+  interstitialAdUnit: 
+  rewardedAdUnit: 
+  bannerAdUnit: 
+  removeAdsProductId: remove_ads
+  privacyPolicyUrl: 
+  history: []

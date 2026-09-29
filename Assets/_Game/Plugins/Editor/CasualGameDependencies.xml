@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Android libraries resolved by the External Dependency Manager (bundled with the AppLovin MAX plugin). -->
+<dependencies>
+  <androidPackages>
+    <!-- Google Play In-App Review (ReviewPrompt.cs) -->
+    <androidPackage spec="com.google.android.play:review:2.0.2" />
+  </androidPackages>
+</dependencies>
