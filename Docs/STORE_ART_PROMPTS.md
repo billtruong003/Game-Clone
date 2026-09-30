@@ -1,5 +1,6 @@
 # Việc cho ChatGPT (v2): icon, logo, feature graphic, khung screenshot
-n> Bản gộp 1 prompt (đủ đường dẫn file ref): **Docs/CHATGPT_PROMPT.md**. File này giữ làm tham khảo.
+
+> Bản gộp 1 prompt (đủ đường dẫn file ref): **Docs/CHATGPT_PROMPT.md**. File này giữ làm tham khảo.
 
 ChatGPT làm art cho trang Google Play **và bàn tay trong game** (mục cuối). Mọi asset trong game khác (nhân vật, skin, UI, FX) Claude vẽ
 bằng `Tools/art`.
