@@ -1,4 +1,5 @@
 # Việc cho ChatGPT (v2): icon, logo, feature graphic, khung screenshot
+n> Bản gộp 1 prompt (đủ đường dẫn file ref): **Docs/CHATGPT_PROMPT.md**. File này giữ làm tham khảo.
 
 ChatGPT làm art cho trang Google Play **và bàn tay trong game** (mục cuối). Mọi asset trong game khác (nhân vật, skin, UI, FX) Claude vẽ
 bằng `Tools/art`.
@@ -53,6 +54,7 @@ First list the file names you received; if one is missing ask for it. Before eac
 bullets: what you take from the refs, the layout, what you will do. Then draw.
 
 STYLE (every image)
+- NO bling: no sparkles, glitter, glow, lens flare, light rays, confetti, speed lines or particles (the game adds them with particles).
 - Flat vector, like a hand-made Illustrator sticker. NOT glossy 3D, no plastic shine, no soft gradients (one hard cel
   shadow at most), no noise, bokeh, lens flare, sparkles everywhere or realistic light. It must NOT look AI-made:
   few elements, clean shapes, consistent line width, lots of calm space.
