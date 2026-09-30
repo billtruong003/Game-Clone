@@ -22,6 +22,7 @@ MonoBehaviour:
   scenes:
   - ArrowOut
   artSheets:
+  - hands
   - shapes
   - ui
   - fx

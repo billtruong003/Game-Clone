@@ -1,0 +1,15 @@
+{
+ "sheet": "hands",
+ "width": 256,
+ "height": 256,
+ "pixelsPerUnit": 100,
+ "sprites": [
+  {
+   "name": "hand_glove",
+   "x": 0,
+   "y": 0,
+   "w": 256,
+   "h": 256
+  }
+ ]
+}

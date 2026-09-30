@@ -188,10 +188,10 @@ namespace CasualGame.EyeMerge
         private void ShowTutorial()
         {
             tutorialRoot = UIKit.Stretch(UIKit.Rect("Tutorial", hud));
-            var bubble = UIKit.Image(tutorialRoot, "panel", new Vector2(0.5f, 0.5f), new Vector2(0, 300), new Vector2(660, 190));
+            var bubble = UIKit.Image(tutorialRoot, "panel", new Vector2(0.5f, 0.5f), new Vector2(0, 40), new Vector2(660, 190));
             var t = UIKit.Label(bubble.transform, Loc.T("Drag to aim,\nrelease to drop", "Kéo để ngắm,\nthả để rơi"), 56);
             UIKit.Stretch(t.rectTransform, 20);
-            var hand = (RectTransform)UIKit.Image(tutorialRoot, "hand", new Vector2(0.5f, 1f), new Vector2(60, -640), new Vector2(170, 170)).transform;
+            var hand = UIKit.Hand(tutorialRoot, new Vector2(0.5f, 1f), new Vector2(12, -448));
             var home = hand.anchoredPosition;
             Tween.Run(hand, 60f, k => hand.anchoredPosition = home + new Vector2(Mathf.Sin(k * 60f * 2.2f) * 180f, 0f), Ease.Linear);
         }

@@ -616,7 +616,7 @@ namespace CasualGame.EyeBlast
 
         private void ShowTutorial()
         {
-            tutorialHand = (RectTransform)UIKit.Image(playRoot, "hand", new Vector2(0.5f, 0f), new Vector2(40, TrayY - 40), new Vector2(170, 170)).transform;
+            tutorialHand = UIKit.Hand(playRoot, new Vector2(0.5f, 0f), new Vector2(20, TrayY + 10));
             var from = tutorialHand.anchoredPosition;
             var to = from + new Vector2(0, 700);
             Tween.Run(tutorialHand, 60f, k =>
@@ -624,7 +624,7 @@ namespace CasualGame.EyeBlast
                 var t = Mathf.Repeat(k * 60f / 1.6f, 1f);
                 tutorialHand.anchoredPosition = Vector2.Lerp(from, to, Tween.Evaluate(Ease.InOutSine, Mathf.Clamp01(t * 1.3f)));
             }, Ease.Linear);
-            tutorialText = UIKit.Label(playRoot, Loc.T("Drag a block onto the board", "Kéo một khối lên bàn"), 52, new Vector2(0.5f, 0f), new Vector2(0, TrayY + 210), new Vector2(900, 70), UIKit.Paper);
+            tutorialText = UIKit.Label(playRoot, Loc.T("Drag a block onto the board", "Kéo một khối lên bàn"), 44, new Vector2(0.5f, 0f), new Vector2(0, TrayY + 168), new Vector2(900, 70), UIKit.Paper);
         }
 
         private void HideTutorial()

@@ -576,11 +576,14 @@ namespace CasualGame.ArrowOut
         private void ShowTutorial()
         {
             var target = BestFreeArrow();
-            tutorialHand = (RectTransform)UIKit.Image(view.transform, "hand", new Vector2(0.5f, 0.5f), view.CellPos(target.Cells[^1]) + new Vector2(40, -80), new Vector2(170, 170)).transform;
+            // fingertip on the middle of the arrow's body, the hand coming from the emptier side
+            var mid = (view.CellPos(target.Cells[0]) + view.CellPos(target.Cells[^1])) * 0.5f;
+            bool fromLeft = mid.x < 0f;
+            tutorialHand = UIKit.Hand(view.transform, new Vector2(0.5f, 0.5f), mid + new Vector2(fromLeft ? -8f : 8f, -10f), mirror: fromLeft);
             var home = tutorialHand.anchoredPosition;
             Tween.Run(tutorialHand, 30f, k => tutorialHand.anchoredPosition = home + new Vector2(0, Mathf.Abs(Mathf.Sin(k * 60f)) * 30f), Ease.Linear);
             view.Hint(target);
-            Tip(Loc.T("Tap an arrow to slide it off the board. Clear them all to win.", "Chạm mũi tên để nó trượt ra khỏi bàn. Gỡ hết để thắng."));
+            Tip(Loc.T("Tap an arrow to slide it out.\nClear them all to win.", "Chạm mũi tên để nó trượt ra.\nGỡ hết để thắng."));
         }
 
         private void HideTutorial()

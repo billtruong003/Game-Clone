@@ -56,7 +56,7 @@ vẽ bằng pipeline của mình (`Tools/art`, faces.mjs, shader). **Ngoại l�
 | SH5 | All Skins (IAP) | Non-consumable, mỗi game 1 gói **All Skins** (~2,99 $) + gói **All Skins + Gỡ QC** (~4,99 $). Mở hết skin hiện tại và sau này. Khôi phục khi cài lại. Giá hiển thị lấy từ Google Play | M | ❌ |
 | SH6 | Skin mở bằng QC | 2–3 skin mỗi game mở bằng xem QC có thưởng (đếm 1/3, 2/3…), tiến độ lưu | S | ❌ |
 | SH7 | Chấm đỏ "mới" | Nút Shop có chấm khi đủ xu mua ít nhất 1 skin chưa có | S | ❌ |
-| SH8 | Skin bàn tay | Tab **Tay** dùng chung cả 3 game (6 skin theo đúng ảnh ref, PNG do ChatGPT vẽ, xem STORE_ART_PROMPTS "Bàn tay"). Tay đang dùng hiện ở hướng dẫn, gợi ý, và ở điểm chạm khi kéo/chạm (chọc nhẹ khi tap, bám theo ngón khi kéo). Tắt được trong Cài đặt | M | ❌ |
+| SH8 | Bàn tay | Một bàn tay duy nhất (`Tools/art/src/hand_glove.png`, sheet `hands`, `UIKit.Hand`) cho hướng dẫn/gợi ý. Không bán skin tay | M | ✅ |
 
 **Danh sách skin v1.0** (mỗi game 8–10, 1 mặc định miễn phí):
 
@@ -68,7 +68,6 @@ vẽ bằng pipeline của mình (`Tools/art`, faces.mjs, shader). **Ngoại l�
 | Nah Blocks | Bàn | Navy (free), Paper (nền kem), Midnight |
 | Bruh Arrows | Mũi tên | Classic (free), Candy, Ocean, Forest, Mono, Neon |
 | Bruh Arrows | Giấy | Cream (free), Grid (giấy ô ly), Kraft, Night (giấy tối, mực sáng) |
-| Cả 3 | Tay | Găng trắng (free), Tay trần, Bộ xương, Hiệp sĩ, Cổ động, Đá quý |
 | Cả 3 | Mặt | Deadpan (free), Sleepy, Grumpy, Derp — mỗi bộ 9 mặt = 1 Texture2DArray riêng vẽ bằng faces.mjs |
 
 Luật policy: không random, không bán xu, giá IAP hiện rõ, không có nút "mua" giả dạng nút chơi, trẻ em không bị ép xem

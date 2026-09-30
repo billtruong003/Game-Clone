@@ -1,112 +1,142 @@
-# Prompt tổng cho ChatGPT
+# Prompt batch cho ChatGPT
 
-Dán nguyên khối dưới vào **1 chat mới**, kèm các file ở mục ATTACHMENTS (kéo thả từ đúng đường dẫn).
-Làm lần lượt từng ảnh. File ChatGPT trả về: tải xuống, đặt đúng tên ở mục DELIVERABLES, bỏ vào thư mục ghi bên cạnh.
+Luật: **chỉ icon ứng dụng là vẽ mới.** Mọi ảnh khác là **chỉnh sửa (edit) ảnh chụp thật trong game**: giữ nguyên nội
+dung game, chỉ thêm chữ. Không bling (sparkle, glow, confetti, tia sáng): hiệu ứng là việc của particle system.
+
+Mở **1 chat mới cho mỗi game**. Dán khối **SETUP**, rồi dán từng khối việc bên dưới, mỗi lần kèm đúng file ảnh ghi trong
+khối (kéo thả từ đường dẫn). Tải ảnh về, đặt tên như ghi, bỏ vào `C:\Projects\Casual Game\Store\gpt\`.
+
+---
+
+## SETUP (dán đầu mỗi chat)
 
 ```text
-ROLE
-You are the lead 2D artist of "Bill The Dev", a one-person mobile game studio. Talk to me in Vietnamese. You make art
-for 3 casual Android games. Work on ONE image per turn. After each image stop and wait for my "APPROVE" or my notes.
-Every approved image becomes a style reference for the next ones: keep it consistent.
+Talk to me in Vietnamese. You help me make Google Play store images for a casual mobile game by Bill The Dev.
+I will send jobs one by one. There are two kinds of jobs:
 
-THE GAMES
-1. "Bruh Arrows"  - calm puzzle: thick rounded arrows on a cream dotted paper board; tap an arrow whose way out is clear
-   and it slides off. Each arrow has a round deadpan face on its tail.
-   Colors: paper #F4EFE8, arrows navy #2E3A59, teal #35B09F, purple #7B4FAE, amber #EDA93C, title red #D6334A.
-2. "Nah Blocks"   - 8x8 block puzzle: drag pieces in, full rows/columns clear. Every block is a rounded square with a
-   deadpan face. Colors: background navy #2B2F55, board cells #232748, blocks yellow #FFD23F, pink #F15BB5,
-   blue #4EA8DE, green #3DDC97, orange #FF9F1C, purple #9B5DE5.
-3. "Meh Merge"    - drop round balls with deadpan faces into a glass jar; two equal balls merge into a bigger one.
-   The jar is FLAT TOON GLASS: navy outline, very light blue tint, a few hard diagonal white bands, no refraction.
-   Colors: background navy #2B2F55, balls red #FF5A5F, yellow #FFD23F, blue #4EA8DE, green #3DDC97,
-   orange #FF9F1C, pink #F15BB5, purple #9B5DE5.
-
-ATTACHMENTS (files on my PC; you only see what I attach. First list the ones you received and ask for any missing one
-by its full path.)
-  A. C:\Projects\Casual Game\Tools\art\preview\faces_preview.png
-       The 9 official faces: stare, smug, meh, grin, blink, shock, panic, cry, dizzy, on balls and on blocks.
-       Faces are short brush strokes: small oval eyes, flat lines, tiny mouth. They are funny because they are
-       unimpressed. Copy them exactly. NO blush, NO big shiny eyes, NO lashes, NO teeth.
-  B. C:\Projects\Casual Game\Store\screenshots\v2\bruh-arrows\01_home.png
-  C. C:\Projects\Casual Game\Store\screenshots\v2\bruh-arrows\02_level.png
-  D. C:\Projects\Casual Game\Store\screenshots\v2\nah-blocks\01_board.png
-  E. C:\Projects\Casual Game\Store\screenshots\v2\meh-merge\01_jar.png
-       B-E are REAL gameplay captures: the truth for colors, board, jar and characters.
-  F. C:\Projects\Casual Game\Tools\art\gpt-refs\REF_hands.png
-       6 pointing hands (skeleton, bare hand, white glove, knight gauntlet, foam-finger glove, gem gauntlet).
-       This is the exact style and pose for every hand sprite.
-
-GLOBAL RULES (every image)
-- NO "bling": no sparkles, no twinkle stars, no glitter, no lens flare, no glow halos, no light rays, no confetti,
-  no motion/speed lines, no floating particles. The game adds those with its particle system at runtime; if they are
-  baked into the image they look wrong and cannot be animated. One plain highlight shape on an object is fine.
-- Must not look AI-made: few elements, clean closed shapes, consistent outline width, calm empty space, no noise,
-  no texture, no bokeh, no random tiny details, no warped text.
-- Never copy other games, brands or characters (no Suika, Block Blast, Marvel Infinity Gauntlet, Mickey glove...).
-- Spelling of game names is EXACT: "BRUH ARROWS", "NAH BLOCKS", "MEH MERGE".
-- Before drawing, write 3 short Vietnamese bullets: what you take from the refs, the layout, what you will do.
-
-PART 1 - STORE ART (style: flat vector sticker, thick uniform dark navy #1E2240 outline, round caps, at most one
-hard cel shadow, readable at 48 px, max 3 main elements; humor = one character reacts, the others just stare)
-  ICON        1024x1024, FULL BLEED background edge to edge, no rounded corners, no border, no outer shadow.
-              Everything important inside the central circle (~80 % width). No text.
-  LOGO        1600x600, background solid pure #00FF00 (I key it out), chunky rounded bold letters with the navy
-              outline, may include ONE tiny character.
-  FEATURE     1024x500, approved logo on the left half, characters/scene on the right, flat background in the
-              game's main color, nothing important in the outer 60 px.
-  FRAME BG    1080x1920, the game's main color with 2-4 big calm shapes or characters peeking from the edges.
-              The central 860x1500 area (from 300 px below the top) stays EMPTY: a phone screenshot goes there. No text.
-  Per game:
-  - Bruh Arrows (refs A, B, C)
-      icon:    cream background; a teal arrow sliding out to the right with a SHOCK face on its tail; behind it a
-               navy arrow with a MEH face staring at it.
-      logo:    "BRUH ARROWS", navy letters, the W or last S ends in a small arrow head.
-      feature: cream background, logo left, a few faced arrows on a dotted board right, one sliding off the edge.
-      frame:   cream paper with a faint dot grid, two big faced arrows peeking from top-left and bottom-right.
-  - Nah Blocks (refs A, D)
-      icon:    navy background, 2x2 blocks, three STARE, the yellow one in front is SMUG, a small pink block falling
-               in with a PANIC face.
-      logo:    "NAH BLOCKS", white letters with navy outline, the O is a tiny block with a MEH face.
-      feature: navy background, logo left, a board corner right, one full row about to clear, its blocks GRIN.
-      frame:   navy, a few big blocks peeking from the corners, staring at the empty center.
-  - Meh Merge (refs A, E)
-      icon:    the toon glass jar with 3 balls (big yellow SMUG in front, blue and green STARE), a small pink ball
-               dropping in from above with a SHOCK face; jar inside the safe circle.
-      logo:    "MEH MERGE", white slightly squishy letters with navy outline, a small MEH ball leaning on the last E.
-      feature: navy background, logo left, jar right, two equal balls touching, both GRIN.
-      frame:   navy, a few big balls peeking from the edges, staring at the empty center.
-
-PART 2 - HAND SPRITES (in-game; style = ref F, NOT the flat store style)
-  - Cartoon mobile-game sticker exactly like ref F: thick black outline (~14 px at 1024), cel shading with 2-3 tones,
-    one soft highlight, a small dark drop shadow offset down-right that stays attached to the hand's outline.
-  - SAME POSE for all 6 so they can swap: index finger pointing to the UPPER-LEFT at 45 degrees, other fingers curled,
-    wrist at the bottom-right. Index fingertip at about x=190, y=190; wrist ends near x=820, y=860. Same size.
-  - 1024x1024 PNG with REAL TRANSPARENT background (alpha). No checkerboard pattern, no white or colored backdrop,
-    no ground shadow, no text, no sparkles on metal or gems.
-  - glove    = plain white cartoon glove, three stitch lines on the back (default skin)
-  - bare     = bare cartoon hand, warm neutral skin tone
-  - skeleton = ivory bone hand, dark gaps between bones
-  - knight   = steel plate gauntlet, brown leather visible between plates
-  - foam     = blue foam-finger glove with a red cuff and yellow-orange rim bands
-  - gems     = silver gauntlet with 3 round gems (green, red, blue) in a row on the knuckles, rivets on the cuff
-
-ORDER
-Start with PART 2 "glove". Then the other 5 hands. Then PART 1: Bruh Arrows (icon, logo, feature, frame), Nah Blocks,
-Meh Merge. Tell me the file name for each image as listed below so I can save it.
-
-FILE NAMES
-  hand_glove.png hand_bare.png hand_skeleton.png hand_knight.png hand_foam.png hand_gems.png
-  bruh-arrows-icon.png bruh-arrows-logo.png bruh-arrows-feature.png bruh-arrows-frame-bg.png
-  nah-blocks-icon.png  nah-blocks-logo.png  nah-blocks-feature.png  nah-blocks-frame-bg.png
-  meh-merge-icon.png   meh-merge-logo.png   meh-merge-feature.png   meh-merge-frame-bg.png
+1) GENERATE (only the app icon). Draw a new image following the job description.
+2) EDIT (every other job). I attach a REAL in-game screenshot. You must EDIT it, not redraw it:
+   - Keep the game screenshot content exactly as it is: same characters, faces, colors, board/jar, UI, hand
+     pointer, positions. Do NOT redraw, restyle, re-color, add, move or remove anything inside the game image.
+   - Only add what the job asks for (caption text on a background band, or extending the canvas).
+   - Text: chunky rounded bold sans-serif, white with a thick dark navy (#1E2240) outline, spelled EXACTLY as given,
+     max 2 lines, centered, easy to read on a phone. A " | " inside a caption means a line break (do not draw it).
+   - No sparkles, glitter, glow, lens flare, light rays, confetti, speed lines, stickers, badges, arrows or extra
+     characters. Flat and clean.
+Before each image, repeat back in one Vietnamese line which file you got and what you will change.
+After each image, wait for my APPROVE or my notes.
 ```
 
-## DELIVERABLES: lưu vào đâu
+---
 
-| File | Thư mục |
-|---|---|
-| `hand_*.png` (6 file) | `C:\Projects\Casual Game\Store\gpt\hands\` |
-| `*-icon.png`, `*-logo.png`, `*-feature.png`, `*-frame-bg.png` (12 file) | `C:\Projects\Casual Game\Store\gpt\` |
+## Bruh Arrows
 
-Mẹo: chat dài quá thì ChatGPT hay quên style. Có thể tách 2 chat (PART 2 riêng, PART 1 riêng), dán cùng prompt này.
-Nếu ảnh tay ra nền caro hoặc nền trắng thay vì trong suốt, nhắn: "Background must be real transparency (alpha), redo."
+**B1 · Icon (GENERATE)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\bruh-arrows\02_level.png` và
+`C:\Projects\Casual Game\Tools\art\preview\faces_preview.png`
+```text
+JOB: GENERATE the app icon for "Bruh Arrows" (calm puzzle: tap an arrow whose way out is clear and it slides off).
+Use the attached screenshot for the arrow shape and colors (navy #2E3A59, teal #35B09F, purple #7B4FAE,
+amber #EDA93C on cream #F4EFE8), and faces_preview.png for the face style (short brush strokes, deadpan, no blush).
+Scene: cream background; one thick teal arrow pointing right with a SHOCK face on its round tail; behind it a navy
+arrow with a MEH face (one eyebrow up) looking at it. Flat vector, thick navy outline, one hard cel shadow at most.
+1024x1024, FULL BLEED (no rounded corners, no border, no outer shadow), all key shapes inside the central 80 % circle,
+no text. File name: bruh-arrows-icon.png
+```
+
+**B2 · Screenshot 1 (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\bruh-arrows\02_level.png`
+```text
+JOB: EDIT. Output 1080x1920. Put a flat cream (#F4EFE8) band across the top 300 px and shrink the attached
+screenshot to fit the remaining area below it (keep its aspect, centered, no crop of the board).
+Caption in the band: "Tap an arrow. | Watch it slide out." File name: bruh-arrows-shot-1.png
+```
+
+**B3 · Screenshot 2 (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\bruh-arrows\03_tutorial.png`
+```text
+JOB: EDIT, same layout as the previous screenshot. Caption: "Learn it in one tap". File name: bruh-arrows-shot-2.png
+```
+
+**B4 · Screenshot 3 (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\bruh-arrows\01_home.png`
+```text
+JOB: EDIT, same layout. Caption: "100 calm levels. | Plus a daily puzzle." File name: bruh-arrows-shot-3.png
+```
+
+**B5 · Feature graphic (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\bruh-arrows\02_level.png`
+```text
+JOB: EDIT. Output 1024x500. Canvas filled with flat cream #F4EFE8. Place the board area of the attached screenshot
+(the arrows, not the top bar or buttons) on the right half, unchanged. On the left half write the title
+"BRUH ARROWS" big, and under it smaller "Calm brain puzzle". Nothing important within 60 px of the edges.
+File name: bruh-arrows-feature.png
+```
+
+---
+
+## Nah Blocks
+
+**N1 · Icon (GENERATE)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\nah-blocks\01_board.png` và
+`C:\Projects\Casual Game\Tools\art\preview\faces_preview.png`
+```text
+JOB: GENERATE the app icon for "Nah Blocks" (8x8 block puzzle, every block is a rounded square with a deadpan face).
+Use the screenshot for block shape and colors and faces_preview.png for the faces.
+Scene: navy #2B2F55 background, a 2x2 group of blocks (yellow, pink, blue, green); three STARE, the yellow one in
+front is SMUG; a small pink block falling in from the top with a PANIC face. Flat vector, thick navy outline.
+1024x1024, FULL BLEED, key shapes inside the central 80 % circle, no text. File name: nah-blocks-icon.png
+```
+
+**N2 · Screenshot 1 (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\nah-blocks\01_board.png`
+```text
+JOB: EDIT. Output 1080x1920. Flat navy (#2B2F55) band across the top 300 px, the attached screenshot shrunk to fit
+below it (keep aspect, centered, no crop of the board or tray). Caption: "Fill a line. | Watch it pop."
+File name: nah-blocks-shot-1.png
+```
+
+**N3 · Screenshot 2 (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\nah-blocks\02_tutorial.png`
+```text
+JOB: EDIT, same layout. Caption: "Drag. Drop. Nah." File name: nah-blocks-shot-2.png
+```
+
+**N4 · Feature graphic (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\nah-blocks\01_board.png`
+```text
+JOB: EDIT. Output 1024x500, flat navy #2B2F55. The board of the attached screenshot on the right half, unchanged.
+Left half: title "NAH BLOCKS" big, under it smaller "Line puzzle". Nothing important within 60 px of the edges.
+File name: nah-blocks-feature.png
+```
+
+---
+
+## Meh Merge
+
+**M1 · Icon (GENERATE)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\meh-merge\01_jar.png` và
+`C:\Projects\Casual Game\Tools\art\preview\faces_preview.png`
+```text
+JOB: GENERATE the app icon for "Meh Merge" (drop round deadpan balls into a glass jar, equal balls merge).
+Use the screenshot for the jar: FLAT toon glass, navy outline, light tint, a few hard diagonal white bands, no
+refraction. Faces from faces_preview.png.
+Scene: navy-purple #2F2552 background, the jar holding 3 balls (big yellow SMUG in front, blue and green STARE),
+a small pink ball dropping in from above with a SHOCK face. Flat vector, thick navy outline.
+1024x1024, FULL BLEED, key shapes inside the central 80 % circle, no text. File name: meh-merge-icon.png
+```
+
+**M2 · Screenshot 1 (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\meh-merge\01_jar.png`
+```text
+JOB: EDIT. Output 1080x1920. Flat #2F2552 band across the top 300 px, the attached screenshot shrunk to fit below it
+(keep aspect, centered, no crop of the jar). Caption: "Two alike? | They merge." File name: meh-merge-shot-1.png
+```
+
+**M3 · Screenshot 2 (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\meh-merge\02_tutorial.png`
+```text
+JOB: EDIT, same layout. Caption: "Drag to aim. | Let go. Meh." File name: meh-merge-shot-2.png
+```
+
+**M4 · Feature graphic (EDIT)**: đính kèm `C:\Projects\Casual Game\Store\screenshots\v2\meh-merge\01_jar.png`
+```text
+JOB: EDIT. Output 1024x500, flat #2F2552. The jar of the attached screenshot on the right half, unchanged (it may
+be cropped at the bottom of the jar only). Left half: title "MEH MERGE" big, under it smaller "Drop & merge".
+Nothing important within 60 px of the edges. File name: meh-merge-feature.png
+```
+
+---
+
+## Nếu ChatGPT vẽ lại thay vì edit
+
+Nhắn: `You changed the game image. Keep the screenshot pixels exactly as attached, only add the band and the text. Redo.`
+Nếu vẫn sai: bỏ qua, báo Claude. Claude ghép band + chữ bằng code từ đúng ảnh chụp (giữ nguyên từng pixel).

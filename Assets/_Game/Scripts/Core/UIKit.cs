@@ -99,6 +99,22 @@ namespace CasualGame.Core
             return AddImage(rt, spriteName, color);
         }
 
+        // Where the index fingertip sits in the hand sprites (Tools/art/make-hands.py), as a pivot (bottom-left origin).
+        private static readonly Vector2 HandTip = new(0.16f, 0.81f);
+
+        /// <summary>The pointing hand (painted art, Art/Sheets/hands) with its fingertip exactly on <paramref name="tip"/>.</summary>
+        /// <param name="mirror">Point up-right instead of up-left (the hand then comes from the lower-left).</param>
+        public static RectTransform Hand(Transform parent, Vector2 anchor, Vector2 tip, float size = 190f, bool mirror = false)
+        {
+            var img = Image(parent, "hand_glove", anchor, tip, new Vector2(size, size));
+            var rt = img.rectTransform;
+            rt.pivot = HandTip;
+            if (mirror) rt.localScale = new Vector3(-1f, 1f, 1f);
+            rt.anchoredPosition = tip;
+            img.preserveAspect = true;
+            return rt;
+        }
+
         public static TextMeshProUGUI Label(Transform parent, string text, float size, Color? color = null)
         {
             var rt = Rect("Label", parent);
