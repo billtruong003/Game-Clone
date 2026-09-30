@@ -146,8 +146,6 @@ Ref: ảnh 6 bàn tay của bạn (bộ xương, tay trần, găng trắng, găn
 | H4 | Găng hiệp sĩ | `hand_knight.png` | |
 | H5 | Găng cổ động | `hand_foam.png` | xanh + băng cổ tay đỏ vàng |
 | H6 | Găng đá quý | `hand_gems.png` | **không** giống Infinity Gauntlet của Marvel |
-| H7 | Tay robot | `hand_robot.png` | |
-| H8 | Tay vàng | `hand_gold.png` | skin đắt nhất |
 
 Một chat riêng, dán khối dưới, đính kèm `REF_hands.png`, mỗi lượt 1 bàn tay:
 
@@ -175,8 +173,6 @@ Hand to draw now: <paste one line>
   knight   = steel plate gauntlet, brown leather under the plates
   foam     = blue foam finger glove with a red cuff and yellow-orange rim bands
   gems     = silver gauntlet with 3 round gems (green, red, blue) set in a row along the knuckles, rivets on the cuff
-  robot    = white and teal robot hand, round joints, small screws
-  gold     = polished gold hand, like a trophy, darker gold shading
 ```
 
 Nộp xong báo Claude: Claude cắt, thu về 256 px, nén ASTC, nối vào hướng dẫn và Shop.

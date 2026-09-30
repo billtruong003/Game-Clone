@@ -79,7 +79,7 @@ hard cel shadow, readable at 48 px, max 3 main elements; humor = one character r
 PART 2 - HAND SPRITES (in-game; style = ref F, NOT the flat store style)
   - Cartoon mobile-game sticker exactly like ref F: thick black outline (~14 px at 1024), cel shading with 2-3 tones,
     one soft highlight, a small dark drop shadow offset down-right that stays attached to the hand's outline.
-  - SAME POSE for all 8 so they can swap: index finger pointing to the UPPER-LEFT at 45 degrees, other fingers curled,
+  - SAME POSE for all 6 so they can swap: index finger pointing to the UPPER-LEFT at 45 degrees, other fingers curled,
     wrist at the bottom-right. Index fingertip at about x=190, y=190; wrist ends near x=820, y=860. Same size.
   - 1024x1024 PNG with REAL TRANSPARENT background (alpha). No checkerboard pattern, no white or colored backdrop,
     no ground shadow, no text, no sparkles on metal or gems.
@@ -89,16 +89,13 @@ PART 2 - HAND SPRITES (in-game; style = ref F, NOT the flat store style)
   - knight   = steel plate gauntlet, brown leather visible between plates
   - foam     = blue foam-finger glove with a red cuff and yellow-orange rim bands
   - gems     = silver gauntlet with 3 round gems (green, red, blue) in a row on the knuckles, rivets on the cuff
-  - robot    = white and teal robot hand, round joints, a few small screws
-  - gold     = polished gold hand like a trophy, darker gold shading
 
 ORDER
-Start with PART 2 "glove". Then the other hands. Then PART 1: Bruh Arrows (icon, logo, feature, frame), Nah Blocks,
+Start with PART 2 "glove". Then the other 5 hands. Then PART 1: Bruh Arrows (icon, logo, feature, frame), Nah Blocks,
 Meh Merge. Tell me the file name for each image as listed below so I can save it.
 
 FILE NAMES
-  hand_glove.png hand_bare.png hand_skeleton.png hand_knight.png hand_foam.png hand_gems.png hand_robot.png
-  hand_gold.png
+  hand_glove.png hand_bare.png hand_skeleton.png hand_knight.png hand_foam.png hand_gems.png
   bruh-arrows-icon.png bruh-arrows-logo.png bruh-arrows-feature.png bruh-arrows-frame-bg.png
   nah-blocks-icon.png  nah-blocks-logo.png  nah-blocks-feature.png  nah-blocks-frame-bg.png
   meh-merge-icon.png   meh-merge-logo.png   meh-merge-feature.png   meh-merge-frame-bg.png
@@ -108,7 +105,7 @@ FILE NAMES
 
 | File | Thư mục |
 |---|---|
-| `hand_*.png` (8 file) | `C:\Projects\Casual Game\Store\gpt\hands\` |
+| `hand_*.png` (6 file) | `C:\Projects\Casual Game\Store\gpt\hands\` |
 | `*-icon.png`, `*-logo.png`, `*-feature.png`, `*-frame-bg.png` (12 file) | `C:\Projects\Casual Game\Store\gpt\` |
 
 Mẹo: chat dài quá thì ChatGPT hay quên style. Có thể tách 2 chat (PART 2 riêng, PART 1 riêng), dán cùng prompt này.
