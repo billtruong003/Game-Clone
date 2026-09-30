@@ -1,4 +1,5 @@
 using System;
+using System.Globalization;
 using CasualGame.Core;
 
 namespace CasualGame.ArrowOut
@@ -53,14 +54,23 @@ namespace CasualGame.ArrowOut
         public static int EndlessBest => SaveStore.GetInt("arrow.endless.best");
         public static int SubmitEndless(int score) => SaveStore.SubmitBest("arrow.endless.best", score);
 
-        public static string DailyKey => $"arrow.daily.{Rng.DailySeed(DateTime.Now)}";
-        public static int DailyBest => SaveStore.GetInt(DailyKey);
-        public static int SubmitDaily(int score) => SaveStore.SubmitBest(DailyKey, score);
+        // Daily: one board per UTC day for everyone; a run's score is filed under the day it started (A10, AO8).
+        public static string DailyKeyFor(DateTime utc) => "arrow.daily." + Rng.DailySeed(utc).ToString(CultureInfo.InvariantCulture);
+        public static string TodayKey => DailyKeyFor(DateTime.UtcNow);
+        public static int DailyBest(string key) => key == null ? 0 : SaveStore.GetInt(key);
+        public static int SubmitDaily(string key, int score) => SaveStore.SubmitBest(key, score);
+        public static bool PlayedToday => SaveStore.GetBool(TodayKey + ".played", false);
+
+        public static void MarkPlayed(string key)
+        {
+            SaveStore.SetBool(key + ".played", true);
+            SaveStore.Save();
+        }
 
         public static bool TutorialSeen
         {
             get => SaveStore.GetBool("arrow.tutorial", false);
-            set => SaveStore.SetBool("arrow.tutorial", value);
+            set { SaveStore.SetBool("arrow.tutorial", value); SaveStore.Save(); }
         }
     }
 }

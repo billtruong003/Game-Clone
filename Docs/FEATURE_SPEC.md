@@ -1,4 +1,6 @@
-# Feature spec v1.0 — Arrow Out · Eye Blast · Eye Merge
+# Feature spec v1.0 — Bruh Arrows · Nah Blocks · Meh Merge
+
+(Tên cũ trong code/scene: ArrowOut · EyeBlast · EyeMerge.)
 
 Tài liệu gốc cho 3 bước tiếp theo: **spec này → mockup (design) → dev**. Mockup vẽ theo đúng layout ở đây; dev làm theo
 đúng feature ID và kiểm bằng user scenario ở đây. Có gì đổi thì sửa file này trước rồi mới sửa mockup/code.
@@ -11,8 +13,8 @@ Trạng thái: ✅ có trong code · ⚠️ có nhưng sai/thiếu (kèm lý do)
 ## 0. Nguyên tắc scope
 
 - Game casual: **một vòng chơi, làm thật mượt**. Không thêm chế độ, không thêm hệ thống chỉ để thu tiền.
-- Kiếm tiền v1.0 gói gọn trong 3 thứ: **quảng cáo có thưởng** (người chơi tự chọn), **quảng cáo xen ván** (ở điểm nghỉ, có giới hạn), **Gỡ quảng cáo** (1 lần mua).
-- **Không làm ở v1.0**: shop theme/skin, gói trả phí, tiền ảo, vòng quay, pass, chế độ Phiêu lưu, cơ chế chương mới của Arrow Out. (Xem mục 6.)
+- Kiếm tiền v1.0: **quảng cáo có thưởng** (người chơi tự chọn), **quảng cáo xen ván** (ở điểm nghỉ, có giới hạn), **Gỡ quảng cáo** (1 lần mua), **Shop skin** (xu kiếm trong game + gói All Skins mua 1 lần, mục 1b).
+- **Không làm ở v1.0**: bán xu bằng tiền thật, hộp quà ngẫu nhiên (loot box), vòng quay, pass, chế độ Phiêu lưu, cơ chế chương mới của Bruh Arrows. (Xem mục 6.)
 - Ưu tiên theo thứ tự: **không kẹt, không mất dữ liệu** → **cảm giác tay (feel)** → **hiểu luật mà không cần đọc** → đẹp.
 
 ---
@@ -37,6 +39,38 @@ Trạng thái: ✅ có trong code · ⚠️ có nhưng sai/thiếu (kèm lý do)
 | G14 | Chạm | Một ngón. Ngón thứ 2 bị bỏ qua hoàn toàn | M | ⚠️ đang dùng API input cũ, không có tác dụng |
 | G15 | Hiệu ứng mạnh | Tùy chọn "Giảm nháy màn hình" (tắt impact frame, rung camera) trong Cài đặt | S | ❌ |
 | G16 | Bảng xếp hạng Play Games | Kỷ lục lên bảng xếp hạng toàn cầu | L | ❌ |
+
+---
+
+## 1b. Shop & skin (v1.0)
+
+Mục tiêu: người chơi có thứ để "cày" và có lý do mua 1 lần, **không ảnh hưởng luật chơi** (skin chỉ đổi hình). Mọi skin
+vẽ bằng pipeline của mình (`Tools/art`, faces.mjs, shader), **không dùng ảnh ChatGPT trong game**.
+
+| ID | Tính năng | Chi tiết | Mức | Hiện tại |
+|---|---|---|---|---|
+| SH1 | Xu | Mỗi game ví riêng. Kiếm: Merge = điểm/50 khi hết ván; Blast = 2 xu/hàng xóa; Arrow = 10 xu/màn, 30 xu/Hôm nay, 1 xu/mũi tên ở Vô hạn. Bảng kết quả: "+N xu", nút **x2 xu (QC)** | M | ❌ |
+| SH2 | Danh mục skin | ScriptableObject `SkinCatalog` mỗi game: id, tên EN/VI, loại (tab), giá xu / "xem QC x lần" / "chỉ All Skins", dữ liệu hình (bảng màu, lát mặt, tint kính…) | M | ❌ |
+| SH3 | Màn Shop | Nút **Shop** ở Home (Arrow) / Pause + nút túi ở HUD (Blast, Merge, ngoài ván). Trên: preview lớn đang sống (mặt chớp mắt). Dưới: tab + lưới 2 cột thẻ skin. Thẻ: preview nhỏ + nút giá (xu / QC 1/3 / "Đang dùng" / "Dùng") | M | ❌ |
+| SH4 | Mua & trang bị | Bấm thẻ → preview đổi ngay (thử trước khi mua). Đủ xu → mua + trang bị + confetti. Thiếu xu → nút rung + toast "Chưa đủ xu". Lưu ngay (SaveStore), áp dụng từ ván tiếp theo không cần khởi động lại | M | ❌ |
+| SH5 | All Skins (IAP) | Non-consumable, mỗi game 1 gói **All Skins** (~2,99 $) + gói **All Skins + Gỡ QC** (~4,99 $). Mở hết skin hiện tại và sau này. Khôi phục khi cài lại. Giá hiển thị lấy từ Google Play | M | ❌ |
+| SH6 | Skin mở bằng QC | 2–3 skin mỗi game mở bằng xem QC có thưởng (đếm 1/3, 2/3…), tiến độ lưu | S | ❌ |
+| SH7 | Chấm đỏ "mới" | Nút Shop có chấm khi đủ xu mua ít nhất 1 skin chưa có | S | ❌ |
+
+**Danh sách skin v1.0** (mỗi game 8–10, 1 mặc định miễn phí):
+
+| Game | Tab | Skin |
+|---|---|---|
+| Meh Merge | Bóng | Classic (free), Candy, Ocean, Forest, Sunset, Mono (đen trắng), Neon, Pastel — mỗi bộ = 11 màu theo tier |
+| Meh Merge | Hũ | Glass (free), Frosted (sọc dày hơn), Amber tint, Mint tint, Night (nền tối + kính xanh) |
+| Nah Blocks | Khối | Classic (free), Candy, Ocean, Retro (4 màu gameboy), Mono, Neon, Pastel, Jelly (bo tròn hơn) |
+| Nah Blocks | Bàn | Navy (free), Paper (nền kem), Midnight |
+| Bruh Arrows | Mũi tên | Classic (free), Candy, Ocean, Forest, Mono, Neon |
+| Bruh Arrows | Giấy | Cream (free), Grid (giấy ô ly), Kraft, Night (giấy tối, mực sáng) |
+| Cả 3 | Mặt | Deadpan (free), Sleepy, Grumpy, Derp — mỗi bộ 9 mặt = 1 Texture2DArray riêng vẽ bằng faces.mjs |
+
+Luật policy: không random, không bán xu, giá IAP hiện rõ, không có nút "mua" giả dạng nút chơi, trẻ em không bị ép xem
+QC (QC có thưởng luôn là tùy chọn).
 
 ---
 
@@ -267,7 +301,7 @@ Chế độ: **100 màn** (có sao) · **Vô hạn** (mũi tên mới liên tụ
 ---
 
 ## 6. Không làm ở v1.0 (để sau khi có số liệu)
-- Shop + 10 theme Eye Merge, theme khối Eye Blast, gói All Skins, mở theme bằng QC.
+- (Shop, skin, All Skins đã chuyển vào v1.0, mục 1b.) Bán xu bằng tiền thật, skin theo mùa/sự kiện.
 - Cơ chế chương mới của Arrow Out (mũi tên khóa, ô cấm, mũi tên đôi…).
 - Chế độ Phiêu lưu Eye Blast, nhiệm vụ ngày, phần thưởng đăng nhập, album sưu tập.
 - Bảng xếp hạng / thành tựu Play Games (G16).

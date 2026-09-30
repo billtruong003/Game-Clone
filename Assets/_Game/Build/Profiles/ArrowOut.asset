@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: ArrowOut
   m_EditorClassIdentifier: CasualGame.Editor::CasualGame.EditorTools.GameProfile
   gameId: ArrowOut
-  productName: Arrow Out
-  applicationId: com.casualgame.arrowout
+  productName: Bruh Arrows
+  applicationId: com.billthedev.bruharrows
   defineSymbol: CG_ARROWOUT
   icon: {fileID: 2800000, guid: 863e810c422bbd04fbac86c86d8515a5, type: 3}
   version: 0.1.0
@@ -43,7 +43,7 @@ MonoBehaviour:
   rewardedAdUnit: ca-app-pub-2681948403948920/1379606757
   bannerAdUnit: 
   removeAdsProductId: remove_ads
-  privacyPolicyUrl: 
+  privacyPolicyUrl: https://billtruong003.github.io/billthedev-legal/arrow-out.html
   history:
   - date: 2026-09-29 17:26
     kind: test

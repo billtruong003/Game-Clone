@@ -1,25 +1,29 @@
-// Front glass of the Eye Merge jar, drawn on the "Glass" sorting layer over the balls. Flat toon glass: a flat tint,
-// one hard-edged highlight stripe on the left, and a hard-edged glint band that sweeps across when a ball hits the wall.
-// No gradients, no refraction, no soft reflections (the dark outline is the jar_line sprite on top).
-// All geometry is in world units, set by GlassJar.cs: _Jar = interior (xMin, yMin, xMax, yMax), _Corner = corner radius.
+// Front glass of the Eye Merge jar, on the "Glass" sorting layer over the balls. Toon glass after Cyanilux's
+// "Toon Glass Shader Breakdown": a faint translucent tint plus a few hard diagonal highlight lines, nothing else.
+//   d     = |x + y| of the position relative to a pivot (the camera in the original; here the jar centre, nudged
+//           by _Shift so a ball hitting the wall slides the lines across)
+//   lines = step(width, frac(pow(1 - saturate((d - offset) * scale), A + 1.01) * B)) * lineAlpha
+// Tuned for a tall jar: per side one thin line then one wide line, close to the centre diagonal. The dark outline is the jar_line sprite on top.
+// Geometry is in world units, set by GlassJar.cs: _Jar = interior (xMin, yMin, xMax, yMax), _Corner = corner radius.
 Shader "CasualGame/GlassJar"
 {
     Properties
     {
         _Jar ("Interior (xMin, yMin, xMax, yMax)", Vector) = (-3, -4, 3, 4)
         _Corner ("Corner radius", Float) = 0.7
-        _Tint ("Glass tint (a = amount)", Color) = (0.62, 0.8, 1, 0.08)
-        _StreakX ("Highlight stripe x (0..1 across)", Range(0, 1)) = 0.08
-        _StreakWidth ("Highlight stripe width (0..1)", Range(0, 0.2)) = 0.03
-        _StreakStrength ("Highlight stripe opacity", Range(0, 1)) = 0.35
-        _GlintPos ("Glint position (0..1 across, <0 = off)", Float) = -1
-        _GlintWidth ("Glint width (0..1)", Range(0, 0.3)) = 0.05
-        _GlintStrength ("Glint opacity", Range(0, 1)) = 0.5
+        _Color ("Glass colour (a = tint)", Color) = (0.85, 0.93, 1, 0.05)
+        _Offset ("Offset", Float) = 0.35
+        _Scale ("Scale", Float) = 2.2
+        _A ("A (line falloff)", Float) = 3
+        _B ("B (lines per side)", Float) = 2
+        _LineWidth ("Line width", Range(0, 1)) = 0.55
+        _LineAlpha ("Line alpha", Range(0, 1)) = 0.3
+        _Shift ("Pattern shift", Float) = 0
     }
     SubShader
     {
         Tags { "Queue" = "Transparent" "RenderType" = "Transparent" "RenderPipeline" = "UniversalPipeline" "IgnoreProjector" = "True" "PreviewType" = "Plane" }
-        Blend One OneMinusSrcAlpha   // premultiplied: layers are composited in the shader
+        Blend SrcAlpha OneMinusSrcAlpha
         ZWrite Off
         Cull Off
 
@@ -32,8 +36,8 @@ Shader "CasualGame/GlassJar"
 
             CBUFFER_START(UnityPerMaterial)
                 float4 _Jar;
-                float _Corner, _StreakX, _StreakWidth, _StreakStrength, _GlintPos, _GlintWidth, _GlintStrength;
-                half4 _Tint;
+                float _Corner, _Offset, _Scale, _A, _B, _LineWidth, _LineAlpha, _Shift;
+                half4 _Color;
             CBUFFER_END
 
             struct Attributes { float4 positionOS : POSITION; };
@@ -48,52 +52,23 @@ Shader "CasualGame/GlassJar"
                 return o;
             }
 
-            void Over(inout half3 c, inout half a, half3 lc, half la)
-            {
-                c = c * (1.0 - la) + lc * la;
-                a = a * (1.0 - la) + la;
-            }
-
-            // 1 inside a band of half-width w around 0, with a one-pixel anti-aliased edge (hard, not soft)
-            float HardBand(float x, float w)
-            {
-                float aa = max(fwidth(x), 1e-4);
-                return 1.0 - smoothstep(w - aa, w + aa, abs(x));
-            }
-
             half4 frag(Varyings i) : SV_Target
             {
-                float2 p = i.world;
-                // rounded rectangle silhouette, same corner as the jar outline
-                float2 hb = (_Jar.zw - _Jar.xy) * 0.5;
-                float2 q = abs(p - (_Jar.xy + hb)) - hb + _Corner;
-                float sdBox = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - _Corner;
-                float aa = max(fwidth(sdBox), 1e-4);
-                float inside = 1.0 - smoothstep(-aa, aa, sdBox);
+                float2 halfSize = (_Jar.zw - _Jar.xy) * 0.5;
+                float2 centre = _Jar.xy + halfSize;
+                // rounded-rectangle mask, same corner as the jar outline
+                float2 q = abs(i.world - centre) - halfSize + _Corner;
+                float sd = length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - _Corner;
+                float aa = max(fwidth(sd), 1e-4);
+                float inside = 1.0 - smoothstep(-aa, aa, sd);
                 if (inside <= 0.0) discard;
 
-                float2 size = _Jar.zw - _Jar.xy;
-                float u = (p.x - _Jar.x) / size.x;
-                float v = (p.y - _Jar.y) / size.y;
-
-                half3 c = 0;
-                half a = 0;
-                Over(c, a, _Tint.rgb, _Tint.a);
-
-                // flat highlight stripe on the left wall, cut square between 18% and 82% of the height
-                float stripe = HardBand(u - _StreakX, _StreakWidth * 0.5) * HardBand(v - 0.5, 0.32);
-                Over(c, a, half3(1, 1, 1), (half)(stripe * _StreakStrength));
-
-                if (_GlintPos >= 0.0)
-                {
-                    float g = u + (1.0 - v) * 0.6;   // diagonal band, leaning right
-                    float band = HardBand(g - _GlintPos, _GlintWidth * 0.5);
-                    float thin = HardBand(g - _GlintPos - _GlintWidth * 1.4, _GlintWidth * 0.12);
-                    float along = HardBand(v - 0.5, 0.36);
-                    Over(c, a, half3(1, 1, 1), (half)(saturate(band * 0.6 + thin) * along * _GlintStrength));
-                }
-
-                return half4(c * inside, a * inside);
+                // pattern in units of the jar's half width, so it scales with the jar
+                float2 p = (i.world - centre) / halfSize.x;
+                float d = abs(p.x + _Shift + p.y);
+                float g = pow(1.0 - saturate((d - _Offset) * _Scale), _A + 1.01) * _B;
+                float lines = step(_LineWidth, frac(g));
+                return half4(_Color.rgb, saturate(_Color.a + lines * _LineAlpha) * inside);
             }
             ENDHLSL
         }

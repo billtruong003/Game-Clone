@@ -9,19 +9,19 @@ namespace CasualGame.Core
         public static bool Sound
         {
             get => SaveStore.GetBool("set.sound", true);
-            set { SaveStore.SetBool("set.sound", value); Changed?.Invoke(); }
+            set { SaveStore.SetBool("set.sound", value); SaveStore.Save(); Changed?.Invoke(); }
         }
 
         public static bool Music
         {
             get => SaveStore.GetBool("set.music", true);
-            set { SaveStore.SetBool("set.music", value); Changed?.Invoke(); }
+            set { SaveStore.SetBool("set.music", value); SaveStore.Save(); Changed?.Invoke(); }
         }
 
         public static bool Vibration
         {
             get => SaveStore.GetBool("set.vibration", true);
-            set { SaveStore.SetBool("set.vibration", value); Changed?.Invoke(); }
+            set { SaveStore.SetBool("set.vibration", value); SaveStore.Save(); Changed?.Invoke(); }
         }
     }
 }

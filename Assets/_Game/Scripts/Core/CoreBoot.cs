@@ -13,8 +13,8 @@ namespace CasualGame.Core
         private static void Init()
         {
             Application.targetFrameRate = 60;
-            Input.multiTouchEnabled = false;
             GameAudio.Create();
+            AppEvents.Create();
             SceneManager.sceneLoaded += (_, _) => EnsureEventSystem();
         }
 

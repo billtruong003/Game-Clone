@@ -1,4 +1,4 @@
-# Google Play Data safety answers (Arrow Out, Eye Blast, Eye Merge)
+# Google Play Data safety answers (Bruh Arrows, Nah Blocks, Meh Merge)
 
 Shared by all three games. Developer: Bill The Dev. Prepared 2026-09-29 (ad stack: Google AdMob + Unity Ads).
 

@@ -1,17 +1,17 @@
-# Arrow Out: Google Play listing draft
+# Bruh Arrows: Google Play listing draft
 
-Developer: Bill The Dev · Package: see GameProfile in Build Switcher · Privacy policy: `<host>/arrow-out.html` (TODO: fill in hosted URL)
+Developer: Bill The Dev · Package: see GameProfile in Build Switcher · Privacy policy: https://billtruong003.github.io/billthedev-legal/arrow-out.html
 
 ## English
 
-**App name** (≤30): `Arrow Out: Calm Brain Puzzle` (28 chars)
+**App name** (≤30): `Bruh Arrows: Calm Brain Puzzle` (30 chars)
 
 **Short description** (≤80): `Tap arrows with a clear path and watch them fly out. A calm, clever puzzle.` (75 chars)
 
 **Full description** (≤4000; EN counted at 1614 chars)
 
 ```
-Arrow Out is a calm brain puzzle about order and timing.
+Bruh Arrows is a calm brain puzzle about order and timing.
 
 The board is packed with bending arrows. Tap an arrow and it slides along its path and flies off the edge, but only if nothing is in the way. Pick the wrong one and it bumps into its neighbour. Work out which arrow has to go first, clear the board, and enjoy the satisfying whoosh as the last one leaves.
 
@@ -22,7 +22,7 @@ HOW TO PLAY
 • Stuck? Use a hint to see a safe move.
 
 WHAT'S INSIDE
-• 100 handcrafted levels that grow from quick warm-ups to large, tangled boards.
+• 100 levels that grow from quick warm-ups to large, tangled boards.
 • A tougher board every 10th level.
 • Earn up to 3 stars per level. Finish with no mistakes for a perfect clear.
 • Endless mode: keep clearing as new stages arrive. Chain arrows of the same color to multiply your score, and a x3 combo gives you a free move.
@@ -37,7 +37,7 @@ RELAXED BY DESIGN
 • Available in English and Vietnamese.
 
 FAIR AND FREE
-Arrow Out is free to play and supported by ads. Watching a video ad is always optional and gives you a hint or an extra heart. A one-time "Remove ads" purchase turns off the ads between levels.
+Bruh Arrows is free to play and supported by ads. Watching a video ad is always optional and gives you a hint or an extra heart. A one-time "Remove ads" purchase turns off the ads between levels.
 
 No account or login needed. Your progress is saved on your device.
 ```
@@ -48,14 +48,14 @@ No account or login needed. Your progress is saved on your device.
 
 ## Tiếng Việt
 
-**Tên ứng dụng** (≤30): `Arrow Out: Gỡ Mũi Tên` (21 ký tự)
+**Tên ứng dụng** (≤30): `Bruh Arrows: Gỡ Mũi Tên` (23 ký tự)
 
 **Mô tả ngắn** (≤80): `Chạm mũi tên có đường thoáng để nó bay ra. Trò chơi trí tuệ nhẹ nhàng.` (70 ký tự)
 
 **Mô tả đầy đủ** (≤4000; 1485 ký tự)
 
 ```
-Arrow Out là trò chơi trí tuệ nhẹ nhàng về thứ tự và sự tính toán.
+Bruh Arrows là trò chơi trí tuệ nhẹ nhàng về thứ tự và sự tính toán.
 
 Bàn cờ đầy những mũi tên uốn lượn. Chạm vào một mũi tên, nó sẽ trượt theo đường của mình và bay ra khỏi mép bàn, nhưng chỉ khi không có gì cản đường. Chọn sai là nó va vào mũi tên bên cạnh. Hãy tìm xem mũi tên nào phải đi trước, dọn sạch bàn và tận hưởng tiếng vút khi mũi tên cuối cùng bay đi.
 
@@ -81,7 +81,7 @@ THƯ GIÃN
 • Hỗ trợ tiếng Việt và tiếng Anh.
 
 MIỄN PHÍ, CÔNG BẰNG
-Arrow Out miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn nhận gợi ý hoặc thêm tim. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các màn.
+Bruh Arrows miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn nhận gợi ý hoặc thêm tim. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các màn.
 
 Không cần tài khoản hay đăng nhập. Tiến trình được lưu ngay trên máy của bạn.
 ```

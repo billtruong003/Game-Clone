@@ -1,17 +1,17 @@
-# Eye Blast: Google Play listing draft
+# Nah Blocks: Google Play listing draft
 
-Developer: Bill The Dev · Privacy policy: `<host>/eye-blast.html` (TODO: fill in hosted URL)
+Developer: Bill The Dev · Privacy policy: https://billtruong003.github.io/billthedev-legal/eye-blast.html
 
 ## English
 
-**App name** (≤30): `Eye Blast: Cute Block Puzzle` (28 chars)
+**App name** (≤30): `Nah Blocks: Line Puzzle` (23 chars)
 
-**Short description** (≤80): `Place blocks, clear lines and make the cute faces smile. Easy to learn, fun!` (76 chars)
+**Short description** (≤80): `Place blocks, clear rows and columns, chase your best. Easy to learn, hard to stop.` (83 chars)
 
 **Full description** (≤4000; EN counted at 1333 chars)
 
 ```
-Eye Blast is a block puzzle with a lot of personality. Every block has its own little face, and they react to everything you do.
+Nah Blocks is a block puzzle with a lot of personality. Every block has its own little face, and they react to everything you do.
 
 Drag pieces from your tray onto the 8×8 board. Fill a whole row or column and it clears with a pop. Line up a big clear and watch the faces light up with excitement before you even let go. Run out of room and they will let you know how they feel.
 
@@ -25,7 +25,7 @@ HOW TO PLAY
 
 WHY YOU'LL LIKE IT
 • Simple rules, deep strategy: plan ahead and keep space open.
-• Cute emoji-style faces on every block that laugh, cheer and cry.
+• Every block has a deadpan face that reacts when you lift, clear or run out of room.
 • Punchy clear effects and satisfying sounds.
 • No timer. Play at your own pace.
 • Chase your best score and beat it.
@@ -33,7 +33,7 @@ WHY YOU'LL LIKE IT
 • Available in English and Vietnamese.
 
 FAIR AND FREE
-Eye Blast is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the board is full. A one-time "Remove ads" purchase turns off the ads between games.
+Nah Blocks is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the board is full. A one-time "Remove ads" purchase turns off the ads between games.
 
 No account or login needed. Your best score is saved on your device.
 ```
@@ -44,14 +44,14 @@ No account or login needed. Your best score is saved on your device.
 
 ## Tiếng Việt
 
-**Tên ứng dụng** (≤30): `Eye Blast: Xếp Khối Dễ Thương` (29 ký tự)
+**Tên ứng dụng** (≤30): `Nah Blocks: Xếp Khối Xóa Hàng` (29 ký tự)
 
-**Mô tả ngắn** (≤80): `Xếp khối, xóa hàng và làm các khuôn mặt dễ thương vui lên. Dễ chơi, cuốn!` (73 ký tự)
+**Mô tả ngắn** (≤80): `Xếp khối, xóa hàng và cột, phá kỷ lục của chính bạn. Dễ chơi, khó dừng.` (71 ký tự)
 
 **Mô tả đầy đủ** (≤4000; 1240 ký tự)
 
 ```
-Eye Blast là trò xếp khối đầy cá tính. Mỗi khối đều có một khuôn mặt nhỏ, và chúng phản ứng với mọi nước đi của bạn.
+Nah Blocks là trò xếp khối đầy cá tính. Mỗi khối đều có một khuôn mặt nhỏ, và chúng phản ứng với mọi nước đi của bạn.
 
 Kéo các khối từ khay lên bàn 8×8. Lấp đầy một hàng ngang hoặc hàng dọc là hàng đó nổ tung. Sắp được một pha xóa lớn, các khuôn mặt đã háo hức sáng rực trước cả khi bạn thả tay. Hết chỗ thì chúng cũng cho bạn biết cảm xúc của mình.
 
@@ -73,7 +73,7 @@ VÌ SAO BẠN SẼ THÍCH
 • Hỗ trợ tiếng Việt và tiếng Anh.
 
 MIỄN PHÍ, CÔNG BẰNG
-Eye Blast miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn được hồi sinh một lần khi bàn đầy. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các ván.
+Nah Blocks miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn được hồi sinh một lần khi bàn đầy. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các ván.
 
 Không cần tài khoản hay đăng nhập. Kỷ lục được lưu ngay trên máy của bạn.
 ```

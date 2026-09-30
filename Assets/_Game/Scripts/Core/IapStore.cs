@@ -17,6 +17,7 @@ namespace CasualGame.Core
         private readonly StoreController store;
         private Product product;
         private Action<bool> pendingBuy;
+        private bool connecting;
 
         public IapStore(string productId, Action onOwned)
         {
@@ -44,8 +45,11 @@ namespace CasualGame.Core
             Connect();
         }
 
+        // Offline or Play Store not signed in at launch: try again later, and whenever the player taps Buy.
         private async void Connect()
         {
+            if (connecting) return;
+            connecting = true;
             try
             {
                 await store.Connect();
@@ -54,13 +58,19 @@ namespace CasualGame.Core
             catch (Exception e)
             {
                 Debug.LogWarning("IAP connect failed: " + e.Message);
+                await System.Threading.Tasks.Task.Delay(30000);
+                connecting = false;
+                if (product == null) Connect();
+                return;
             }
+            connecting = false;
         }
 
         public void Buy(Action<bool> onDone)
         {
             if (product == null || !product.availableToPurchase)
             {
+                Connect();
                 FakeAdProvider.ShowOverlay(Loc.T("The store is not available right now.", "Cửa hàng chưa sẵn sàng."), 1.4f, () => onDone?.Invoke(false));
                 return;
             }

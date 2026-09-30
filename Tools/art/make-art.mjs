@@ -7,7 +7,7 @@
 // Reuse rules that keep the sheets small:
 //  - bodies (circle / block) and arrow tiles are WHITE and tinted in Unity; outline + highlight live on a
 //    separate untinted "line" sprite drawn on top.
-//  - emoji faces are a separate overlay shared by Eye Merge and Eye Blast.
+//  - faces are a Texture2DArray built by make-faces.mjs (faces.mjs is the one source, shared with the mockup).
 //  - buttons, panels, bars, the jar and the board frame are 9-sliced.
 //
 // Final art: drop a same-named PNG into Tools/art/override/<sheet>/<name>.png (e.g. from ChatGPT) and rebuild.
@@ -61,103 +61,11 @@ function spiralD(cx, cy, r, rotDeg, turns = 2.2) {
   return `M${pts.join(' L')}`;
 }
 
-// ---------- emoji faces (256px cell, face fits a circle of radius ~96 around the center) ----------
-const EX = 42, EY = 108, MY = 158; // eye x offset, eye y, mouth y
-const L = 128 - EX, R = 128 + EX;
-
-const eye = (x, y, { look = 0, lookY = 0, s = 1 } = {}) =>
-  ellipse(x, y, 23 * s, 27 * s, C.white, C.ink, 6) + circle(x + look * 9, y + 5 + lookY * 7, 12 * s, C.ink) + circle(x + look * 9 - 4, y - 1 + lookY * 7, 4 * s, C.white);
-const eyeClosed = (x, y, up = true) => line(up ? `M${x - 20},${y + 6} Q${x},${y - 16} ${x + 20},${y + 6}` : `M${x - 20},${y - 4} Q${x},${y + 16} ${x + 20},${y - 4}`);
-const eyeHalf = (x, y) => shape(`M${x - 23},${y} A23,15 0 0 0 ${x + 23},${y} Z`, C.white, C.ink, 6) + circle(x, y + 5, 9, C.ink) + line(`M${x - 25},${y} L${x + 25},${y}`, C.ink, 7);
-const smile = (w, depth, y = MY) => line(`M${128 - w},${y} Q128,${y + depth} ${128 + w},${y}`);
-const openMouth = (w, h, y = MY - 6, tongue = true) =>
-  shape(`M${128 - w},${y} L${128 + w},${y} A${w},${h} 0 0 1 ${128 - w},${y} Z`, C.mouth, C.ink, 7) +
-  (tongue && h > 18 ? ellipse(128, y + h * 0.72, w * 0.45, h * 0.25, C.tongue) : '');
-const oMouth = (r, y = MY + 8) => ellipse(128, y, r * 0.8, r, C.mouth, C.ink, 7);
-const blush = () => ellipse(128 - 70, 142, 15, 9, C.blush, 'none', 0, 'opacity="0.75"') + ellipse(128 + 70, 142, 15, 9, C.blush, 'none', 0, 'opacity="0.75"');
-const brows = (tilt, dy = 0) =>
-  line(`M${L - 22},${EY - 36 + dy - tilt} L${L + 20},${EY - 36 + dy + tilt}`, C.ink, 8) + line(`M${R - 20},${EY - 36 + dy + tilt} L${R + 22},${EY - 36 + dy - tilt}`, C.ink, 8);
-
-// Each emoji is a function of the loop phase t in [0,1) rendered into FRAMES frames, so motion is continuous
-// (breathing bob, blinks with in-between lids, pulsing hearts, spinning stars, falling tears...).
-// `seq` lets Unity hold a frame (e.g. eyes open most of the time, then a quick blink).
-const FRAMES = 12;
-const TAU = Math.PI * 2;
-const range = (n) => Array.from({ length: n }, (_, i) => i);
-const bob = (t, amp = 3) => amp * Math.sin(t * TAU);
-const lift = (dy, body) => `<g transform="translate(0 ${dy.toFixed(2)})">${body}</g>`;
-const shift = (dx, dy, body) => `<g transform="translate(${dx.toFixed(2)} ${dy.toFixed(2)})">${body}</g>`;
-// lid 0 = open, 1 = closed; in-between frames squash the eye instead of popping
-const blinkEye = (x, y, lid, opts = {}) => lid >= 0.95 ? eyeClosed(x, y + 2) :
-  lid <= 0.05 ? eye(x, y, opts) : `<g transform="translate(0 ${y}) scale(1 ${(1 - lid * 0.85).toFixed(3)}) translate(0 ${-y})">${eye(x, y, opts)}</g>`;
-const blinkCurve = [0, 0, 0, 0, 0, 0, 0, 0, 0.5, 1, 0.5, 0];
-const holdThenPlay = (hold, from = 8) => [...range(hold).map((i) => i % from), ...range(FRAMES - from).map((i) => i + from)];
-const star = (x, y, r, rotDeg, s = 1) =>
-  `<polygon points="${starPts(x, y, r * s, r * 0.43 * s, 5, rotDeg)}" fill="${C.yellow}" stroke="${C.ink}" stroke-width="6" stroke-linejoin="round"/>`;
-const tear = (x, y, a = 1) => shape(`M${x},${y} q-10,16 0,22 q10,-6 0,-22 z`, C.tear, C.ink, 4, `opacity="${a.toFixed(2)}"`);
-
-const EMOJI = [
-  { name: 'happy', fps: 12, seq: holdThenPlay(24), draw: (t, i) => lift(bob(t),
-    blinkEye(L, EY, blinkCurve[i]) + blinkEye(R, EY, blinkCurve[i]) + smile(34, 28 + 4 * Math.sin(t * TAU)) + blush()) },
-  { name: 'grin', fps: 12, draw: (t) => { const k = 0.5 + 0.5 * Math.sin(t * TAU); return lift(bob(t, 4),
-    eye(L, EY - 2 * k) + eye(R, EY - 2 * k) + openMouth(40 + 4 * k, 30 + 10 * k, MY - 8, false) + line(`M${88 - 4 * k},${MY - 8} L${168 + 4 * k},${MY - 8}`, C.white, 6)); } },
-  { name: 'laugh', fps: 14, draw: (t) => { const k = Math.abs(Math.sin(t * TAU * 2)); return shift(2 * Math.sin(t * TAU * 4), -3 * k,
-    eyeClosed(L, EY + 3 * k) + eyeClosed(R, EY + 3 * k) + openMouth(42, 24 + 18 * k, MY - 10) + blush()); } },
-  { name: 'wink', fps: 12, seq: [...range(8).map(() => 0), ...range(FRAMES)], draw: (t, i) => {
-    const lid = [0, 0, 0, 0.35, 0.75, 1, 1, 1, 1, 0.75, 0.35, 0][i];
-    return lift(bob(t, 2), eye(L, EY) + blinkEye(R, EY, lid) + line(`M100,${MY + 2} Q128,${MY + 26} 158,${MY - 6}`) + (lid > 0.5 ? blush() : '')); } },
-  { name: 'love', fps: 12, draw: (t) => { const s = 0.9 + 0.22 * Math.max(0, Math.sin(t * TAU)) ** 2; return lift(bob(t, 2),
-    shape(heartD(L, EY, 22 * s), C.red, C.ink, 6) + shape(heartD(R, EY, 22 * s), C.red, C.ink, 6) + smile(30, 26) + blush()); } },
-  { name: 'cool', fps: 12, seq: [...range(12).map(() => 0), ...range(FRAMES)], draw: (t, i) => {
-    const glint = i >= 4 ? (i - 4) / 7 : -1;
-    const g = (x) => glint < 0 ? '' : line(`M${x - 22 + glint * 44},${EY + 8} L${x - 10 + glint * 44},${EY - 8}`, C.white, 6);
-    return lift(bob(t, 2),
-      shape(`M${L - 34},${EY - 18} L${L + 30},${EY - 18} L${L + 26},${EY + 16} Q${L},${EY + 30} ${L - 30},${EY + 14} Z`, C.ink, C.ink, 6) +
-      shape(`M${R - 30},${EY - 18} L${R + 34},${EY - 18} L${R + 30},${EY + 14} Q${R},${EY + 30} ${R - 26},${EY + 16} Z`, C.ink, C.ink, 6) +
-      line(`M${L + 28},${EY - 14} L${R - 28},${EY - 14}`, C.ink, 8) + g(L) + g(R) + line(`M104,${MY + 6} Q134,${MY + 22} 158,${MY}`)); } },
-  { name: 'surprised', fps: 12, draw: (t) => { const k = 0.5 + 0.5 * Math.sin(t * TAU); return lift(-2 * k,
-    eye(L, EY - 4, { s: 1 + 0.1 * k }) + eye(R, EY - 4, { s: 1 + 0.1 * k }) + brows(0, -4 * k) + oMouth(15 + 6 * k)); } },
-  { name: 'sleepy', fps: 8, draw: (t, i) => lift(bob(t, 1.5),
-    eyeClosed(L, EY + 4, false) + eyeClosed(R, EY + 4, false) + smile(16, 8, MY + 6) +
-    (i < 11 ? circle(128 - 38, MY - 16, 6 + i * 2.4, '#CFEFFF', C.ink, 5, 'opacity="0.95"') : '')) },
-  { name: 'silly', fps: 12, draw: (t) => { const a = 14 * Math.sin(t * TAU); const look = Math.sin(t * TAU * 2) * 0.3; return lift(bob(t, 3),
-    eye(L, EY, { look: 1 - look }) + eye(R, EY, { look: -1 + look }) + smile(34, 20, MY - 4) +
-    `<g ${rot(a, 128, MY + 6)}>${shape(`M110,${MY + 4} L146,${MY + 4} L146,${MY + 26} A18,18 0 0 1 110,${MY + 26} Z`, C.tongue, C.ink, 6)}${line(`M128,${MY + 8} L128,${MY + 26}`, '#D9546E', 4)}</g>`); } },
-  { name: 'starstruck', fps: 14, draw: (t) => { const s = 1 + 0.08 * Math.sin(t * TAU * 2); return lift(bob(t, 2),
-    star(L, EY, 30, t * 72, s) + star(R, EY, 30, t * 72, s) + openMouth(34, 26 + 4 * Math.sin(t * TAU))); } },
-  { name: 'dizzy', fps: 14, draw: (t) => { const ph = t * TAU; return shift(3 * Math.sin(ph), 2 * Math.cos(ph),
-    line(spiralD(L, EY, 24, t * 360), C.ink, 6) + line(spiralD(R, EY, 24, t * 360), C.ink, 6) +
-    line(`M96,${MY + 6 + 4 * Math.sin(ph)} Q108,${MY - 6} 120,${MY + 6} T144,${MY + 6} T168,${MY + 6 + 4 * Math.sin(ph + 2)}`)); } },
-  { name: 'angry', fps: 16, draw: (t) => { const dx = 3 * Math.sin(t * TAU * 3); const puff = 0.5 + 0.5 * Math.sin(t * TAU);
-    return shift(dx, 0, eye(L, EY + 6, { lookY: 0.3 }) + eye(R, EY + 6, { lookY: 0.3 }) + brows(10 + 3 * puff, 10) +
-      line(`M100,${MY + 18} Q128,${MY - 4 - 4 * puff} 156,${MY + 18}`)) +
-      line(`M${204 - 6 * puff},60 L214,${48 - 4 * puff}`, C.ink, 6) + line(`M${210 - 6 * puff},72 L224,${66 - 2 * puff}`, C.ink, 6); } },
-  { name: 'cry', fps: 12, draw: (t) => {
-    const fall = (p) => ({ y: EY + 28 + p * 60, a: p < 0.8 ? 1 : 1 - (p - 0.8) * 5 });
-    const a = fall(t), b = fall((t + 0.5) % 1);
-    return lift(bob(t, 1.5), eye(L, EY, { lookY: 0.4 }) + eye(R, EY, { lookY: 0.4 }) +
-      line(`M${L - 20},${EY - 30} L${L + 16},${EY - 38}`, C.ink, 7) + line(`M${R - 16},${EY - 38} L${R + 20},${EY - 30}`, C.ink, 7) +
-      line(`M104,${MY + 16} Q128,${MY - 2 + 3 * Math.sin(t * TAU * 2)} 152,${MY + 16}`)) + tear(L, a.y, a.a) + tear(R, b.y, b.a); } },
-  { name: 'shy', fps: 10, draw: (t) => { const look = Math.sin(t * TAU); const o = (0.55 + 0.35 * Math.abs(look)).toFixed(2); return lift(bob(t, 1.5),
-    eye(L, EY, { look }) + eye(R, EY, { look }) + smile(18, 10, MY + 2) +
-    ellipse(128 - 70, 142, 15 + 3 * Math.abs(look), 9, C.blush, 'none', 0, `opacity="${o}"`) +
-    ellipse(128 + 70, 142, 15 + 3 * Math.abs(look), 9, C.blush, 'none', 0, `opacity="${o}"`)); } },
-];
-EMOJI.forEach((e) => {
-  e.frames = range(FRAMES).map((i) => e.draw(i / FRAMES, i));
-  e.seq = e.seq ?? range(FRAMES);
-});
-
 // ---------- sprite definitions per sheet ----------
-const sprites = { faces_a: [], faces_b: [], shapes: [], ui: [], fx: [] };
+const sprites = { shapes: [], ui: [], fx: [] };
 const add = (sheet, name, w, h, body, opts = {}) => sprites[sheet].push({ name, w, h, body, ...opts });
 
-// Faces are authored on a 256 canvas but only use the middle ~204px, so each cell is cropped to 204.
-// 2 sheets of 2048x2048 (power of two: compresses with ETC2/ASTC/PVRTC): 7 emoji x 12 frames each on a 10x10 grid.
-const FACE = 204;
-const FACE_SHEETS = ['faces_a', 'faces_b'];
-EMOJI.forEach((e, k) => e.frames.forEach((body, i) =>
-  add(FACE_SHEETS[k < 7 ? 0 : 1], `face_${e.name}_${i}`, FACE, FACE, body, { viewBox: '26 26 204 204' })));
+// Faces are no longer sprites: make-faces.mjs builds the Texture2DArray atlas (Assets/_Game/Art/Faces/faces.png).
 
 // Bodies: white fill (tinted) + untinted line layer.
 add('shapes', 'circle_fill', 256, 256, circle(128, 128, 122, C.white));
@@ -217,6 +125,7 @@ I('settings', circle(48, 48, 18, 'none', C.ink, 10) + [0, 45, 90, 135, 180, 225,
   `<rect x="43" y="14" width="10" height="16" rx="3" fill="${C.ink}" ${rot(a, 48, 48)}/>`).join(''));
 I('sound_on', shape('M18,38 L32,38 L50,22 L50,74 L32,58 L18,58 Z', C.ink, C.ink, 6) + ic('M62,34 Q72,48 62,62', 8) + ic('M70,24 Q88,48 70,72', 8));
 I('sound_off', shape('M18,38 L32,38 L50,22 L50,74 L32,58 L18,58 Z', C.ink, C.ink, 6) + ic('M62,36 L82,60', 8) + ic('M82,36 L62,60', 8));
+I('music', ic('M36,70 L36,26 L72,18 L72,62', 8) + circle(28, 70, 11, C.ink) + circle(64, 62, 11, C.ink));
 I('vibrate', `<rect x="32" y="16" width="32" height="64" rx="8" fill="none" stroke="${C.ink}" stroke-width="8"/>` + ic('M18,36 L18,60', 7) + ic('M78,36 L78,60', 7));
 I('trophy', shape('M30,18 L66,18 L64,46 Q48,62 32,46 Z', C.ink, C.ink, 6) + ic('M30,24 Q14,26 22,40 Q26,46 32,46', 6) + ic('M66,24 Q82,26 74,40 Q70,46 64,46', 6) +
   `<rect x="43" y="56" width="10" height="12" fill="${C.ink}"/><rect x="30" y="68" width="36" height="10" rx="4" fill="${C.ink}"/>`);
@@ -299,9 +208,6 @@ async function buildSheet(sheet, width, meta = {}, pad = 2) {
   console.log(`${sheet}.png  ${width}x${height}  ${list.length} sprites`);
 }
 
-const emojiMeta = (list) => list.map((e) => ({ name: e.name, fps: e.fps, sequence: e.seq, frames: e.frames.length }));
-await buildSheet('faces_a', 2048, { emoji: emojiMeta(EMOJI.slice(0, 7)) }, 0);
-await buildSheet('faces_b', 2048, { emoji: emojiMeta(EMOJI.slice(7)) }, 0);
 await buildSheet('shapes', 1024);
 await buildSheet('ui', 1024);
 await buildSheet('fx', 256);

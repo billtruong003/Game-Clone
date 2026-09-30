@@ -13,11 +13,11 @@ namespace CasualGame.EditorTools
 
         [Tooltip("Player Settings company name")] public string companyName = "Bill The Dev";
         [Tooltip("Prefix for new games' package names. The package name is permanent once a game is uploaded to Play.")]
-        public string packagePrefix = "com.casualgame";
+        public string packagePrefix = "com.billthedev";
 
         [Header("Android")]
-        [Tooltip("Google Play's current minimum target API for new apps and updates")] public int targetSdk = 35;
-        public int minSdk = 24;
+        [Tooltip("Google Play's current minimum target API for new apps and updates")] public int targetSdk = 36;
+        public int minSdk = 25;
         [Tooltip("Upload keystore (outside the repo). Passwords are typed in the Build Switcher each session, never saved.")]
         public string keystorePath = "";
 

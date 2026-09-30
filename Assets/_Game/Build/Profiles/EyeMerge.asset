@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EyeMerge
   m_EditorClassIdentifier: CasualGame.Editor::CasualGame.EditorTools.GameProfile
   gameId: EyeMerge
-  productName: Eye Merge
-  applicationId: com.casualgame.eyemerge
+  productName: Meh Merge
+  applicationId: com.billthedev.mehmerge
   defineSymbol: CG_EYEMERGE
   icon: {fileID: 2800000, guid: 9e51e4bb503674341920a008b387cc37, type: 3}
   version: 0.1.0
@@ -22,8 +22,6 @@ MonoBehaviour:
   scenes:
   - EyeMerge
   artSheets:
-  - faces_a
-  - faces_b
   - shapes
   - ui
   - fx
@@ -45,7 +43,7 @@ MonoBehaviour:
   rewardedAdUnit: ca-app-pub-2681948403948920/1759804144
   bannerAdUnit: 
   removeAdsProductId: remove_ads
-  privacyPolicyUrl: 
+  privacyPolicyUrl: https://billtruong003.github.io/billthedev-legal/eye-merge.html
   history:
   - date: 2026-09-29 14:13
     kind: test
@@ -71,3 +69,19 @@ MonoBehaviour:
     sizeMB: 1458.5
     output: Builds/EyeMerge/EyeMerge-0.1.0-1-test.apk
     commit: 0828778
+  - date: 2026-09-30 12:47
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Succeeded
+    sizeMB: 85.5
+    output: Builds/EyeMerge/EyeMerge-0.1.0-1-test.apk
+    commit: 729d182
+  - date: 2026-09-30 12:53
+    kind: test
+    version: 0.1.0
+    versionCode: 1
+    result: Succeeded
+    sizeMB: 85.5
+    output: Builds/EyeMerge/EyeMerge-0.1.0-1-test.apk
+    commit: 729d182

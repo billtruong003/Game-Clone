@@ -1,0 +1,13 @@
+# R8 keep rules for release builds (minify on). Everything below is reached from C# through JNI by name,
+# which R8 cannot see.
+-keep class com.unity3d.** { *; }
+-keep class com.google.unity.** { *; }
+-keep class com.google.android.gms.ads.** { *; }
+-keep class com.google.android.ump.** { *; }
+-keep class com.google.ads.mediation.** { *; }
+-keep class com.android.billingclient.** { *; }
+-keep class com.unity.purchasing.** { *; }
+-keep class com.google.android.play.core.** { *; }
+-keep class com.google.android.gms.tasks.** { *; }
+-dontwarn com.google.android.gms.**
+-dontwarn com.unity3d.**

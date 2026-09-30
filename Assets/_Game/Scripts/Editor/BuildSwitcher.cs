@@ -58,12 +58,12 @@ namespace CasualGame.EditorTools
         private static void EnsureProfiles()
         {
             Directory.CreateDirectory(ProfilesFolder);
-            Make("ArrowOut", "Arrow Out", "com.casualgame.arrowout", new[] { "ArrowOut" },
+            Make("ArrowOut", "Bruh Arrows", "com.billthedev.bruharrows", new[] { "ArrowOut" },
                 new[] { "shapes", "ui", "fx" }, UiSounds.Concat(new[] { "fly", "blocked", "hint", "music_arrow" }).ToArray());
-            Make("EyeBlast", "Eye Blast", "com.casualgame.eyeblast", new[] { "EyeBlast" },
-                new[] { "faces_a", "faces_b", "shapes", "ui", "fx" }, UiSounds.Concat(new[] { "pick", "place", "clear", "music_blast" }).ToArray());
-            Make("EyeMerge", "Eye Merge", "com.casualgame.eyemerge", new[] { "EyeMerge" },
-                new[] { "faces_a", "faces_b", "shapes", "ui", "fx" }, UiSounds.Concat(new[] { "drop", "merge", "thud", "music_merge" }).ToArray());
+            Make("EyeBlast", "Nah Blocks", "com.billthedev.nahblocks", new[] { "EyeBlast" },
+                new[] { "shapes", "ui", "fx" }, UiSounds.Concat(new[] { "pick", "place", "clear", "music_blast" }).ToArray());
+            Make("EyeMerge", "Meh Merge", "com.billthedev.mehmerge", new[] { "EyeMerge" },
+                new[] { "shapes", "ui", "fx" }, UiSounds.Concat(new[] { "drop", "merge", "thud", "music_merge" }).ToArray());
         }
 
         private static void Make(string id, string product, string appId, string[] scenes, string[] sheets, string[] sounds)
@@ -98,7 +98,7 @@ namespace CasualGame.EditorTools
 
         // Shaders the games create materials for at runtime (Shader.Find): must be in every build.
         private static readonly string[] RuntimeShaders =
-            { "CasualGame/GooMerge", "CasualGame/GlassJar", "CasualGame/Silhouette", "CasualGame/UISilhouette", "CasualGame/InkBrush" };
+            { "CasualGame/GooMerge", "CasualGame/GlassJar", "CasualGame/Silhouette", "CasualGame/UISilhouette", "CasualGame/InkBrush", "Universal Render Pipeline/2D/Sprite-Unlit-Default" };
 
         public static void EnsureRuntimeShaders()
         {
@@ -235,7 +235,7 @@ namespace CasualGame.EditorTools
                 if (string.IsNullOrEmpty(studio.keystorePath) || !File.Exists(studio.keystorePath)) Err("Upload keystore not set in Studio settings");
                 else if (string.IsNullOrEmpty(PlayerSettings.Android.keystorePass)) Err("Keystore passwords not entered this session");
             }
-            if (studio.targetSdk < 35) Warn($"Target API {studio.targetSdk} is below the Google Play minimum");
+            if (studio.targetSdk < 36) Warn($"Target API {studio.targetSdk} is below the Google Play minimum");
             return list;
         }
 
@@ -267,7 +267,16 @@ namespace CasualGame.EditorTools
             // release: both architectures, fully optimized
             PlayerSettings.Android.targetArchitectures = release ? AndroidArchitecture.ARM64 | AndroidArchitecture.ARMv7 : AndroidArchitecture.ARM64;
             PlayerSettings.SetIl2CppCompilerConfiguration(NamedBuildTarget.Android, release ? Il2CppCompilerConfiguration.Release : Il2CppCompilerConfiguration.Debug);
-            PlayerSettings.SetIl2CppCodeGeneration(NamedBuildTarget.Android, release ? Il2CppCodeGeneration.OptimizeSpeed : Il2CppCodeGeneration.OptimizeSize);
+            // size: casual 2D games are nowhere near CPU bound, so both configs optimise for size
+            PlayerSettings.SetIl2CppCodeGeneration(NamedBuildTarget.Android, Il2CppCodeGeneration.OptimizeSize);
+            PlayerSettings.SetManagedStrippingLevel(NamedBuildTarget.Android, ManagedStrippingLevel.High);
+            PlayerSettings.stripEngineCode = true;
+            // R8 shrinks the Java side (ads / billing SDKs); keep rules for JNI-called classes live in Assets/Plugins/Android/proguard-user.txt
+            PlayerSettings.Android.minifyRelease = true;
+            PlayerSettings.Android.minifyDebug = false;
+            // no Unity splash (2.7 MB of logo textures); each game shows its own splash screen
+            PlayerSettings.SplashScreen.show = false;
+            PlayerSettings.SplashScreen.showUnityLogo = false;
             PlayerSettings.Android.minSdkVersion = (AndroidSdkVersions)studio.minSdk;
             PlayerSettings.Android.targetSdkVersion = (AndroidSdkVersions)studio.targetSdk;
             if (!string.IsNullOrEmpty(studio.keystorePath))

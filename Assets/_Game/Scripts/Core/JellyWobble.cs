@@ -55,7 +55,10 @@ namespace CasualGame.Core
                 : new Vector3(restScale.x * along, restScale.y * across, restScale.z);
             // keep the contact side where it was: shift the center toward it by the squash amount
             var shift = radius * v * side;
-            transform.localPosition = restPos + (vertical ? new Vector3(0f, shift, 0f) : new Vector3(shift, 0f, 0f));
+            var offset = vertical ? new Vector3(0f, shift, 0f) : new Vector3(shift, 0f, 0f);
+            // world axes: the parent may be a rolling ball, while this transform is kept world-aligned
+            if (transform.parent != null) transform.position = transform.parent.TransformPoint(restPos) + offset;
+            else transform.localPosition = restPos + offset;
         }
 
         public bool IsWobbling => active;

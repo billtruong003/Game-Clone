@@ -283,12 +283,12 @@ TextureImporter:
     buildTarget: Android
     maxTextureSize: 2048
     resizeAlgorithm: 0
-    textureFormat: -1
+    textureFormat: 50
     textureCompression: 1
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
-    overridden: 0
+    overridden: 1
     ignorePlatformSupport: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
@@ -611,7 +611,7 @@ TextureImporter:
       name: bar_bg
       rect:
         serializedVersion: 2
-        x: 816
+        x: 914
         y: 138
         width: 96
         height: 48
@@ -633,8 +633,8 @@ TextureImporter:
       name: bar_fill
       rect:
         serializedVersion: 2
-        x: 914
-        y: 138
+        x: 2
+        y: 40
         width: 96
         height: 48
       alignment: 0
@@ -743,7 +743,7 @@ TextureImporter:
       name: toggle_on
       rect:
         serializedVersion: 2
-        x: 492
+        x: 590
         y: 98
         width: 160
         height: 88
@@ -765,7 +765,7 @@ TextureImporter:
       name: toggle_off
       rect:
         serializedVersion: 2
-        x: 654
+        x: 752
         y: 98
         width: 160
         height: 88
@@ -941,7 +941,7 @@ TextureImporter:
       name: icon_vibrate
       rect:
         serializedVersion: 2
-        x: 590
+        x: 688
         y: 286
         width: 96
         height: 96
@@ -963,7 +963,7 @@ TextureImporter:
       name: icon_trophy
       rect:
         serializedVersion: 2
-        x: 688
+        x: 786
         y: 286
         width: 96
         height: 96
@@ -985,7 +985,7 @@ TextureImporter:
       name: icon_lock
       rect:
         serializedVersion: 2
-        x: 786
+        x: 884
         y: 286
         width: 96
         height: 96
@@ -1007,8 +1007,8 @@ TextureImporter:
       name: icon_close
       rect:
         serializedVersion: 2
-        x: 884
-        y: 286
+        x: 2
+        y: 188
         width: 96
         height: 96
       alignment: 0
@@ -1029,7 +1029,7 @@ TextureImporter:
       name: icon_hint
       rect:
         serializedVersion: 2
-        x: 2
+        x: 100
         y: 188
         width: 96
         height: 96
@@ -1051,7 +1051,7 @@ TextureImporter:
       name: icon_restart
       rect:
         serializedVersion: 2
-        x: 100
+        x: 198
         y: 188
         width: 96
         height: 96
@@ -1073,7 +1073,7 @@ TextureImporter:
       name: icon_back
       rect:
         serializedVersion: 2
-        x: 198
+        x: 296
         y: 188
         width: 96
         height: 96
@@ -1095,7 +1095,7 @@ TextureImporter:
       name: icon_next
       rect:
         serializedVersion: 2
-        x: 296
+        x: 394
         y: 188
         width: 96
         height: 96
@@ -1117,7 +1117,7 @@ TextureImporter:
       name: icon_levels
       rect:
         serializedVersion: 2
-        x: 394
+        x: 492
         y: 188
         width: 96
         height: 96
@@ -1139,7 +1139,7 @@ TextureImporter:
       name: icon_star
       rect:
         serializedVersion: 2
-        x: 492
+        x: 590
         y: 188
         width: 96
         height: 96
@@ -1161,7 +1161,7 @@ TextureImporter:
       name: icon_star_empty
       rect:
         serializedVersion: 2
-        x: 590
+        x: 688
         y: 188
         width: 96
         height: 96
@@ -1183,7 +1183,7 @@ TextureImporter:
       name: icon_heart
       rect:
         serializedVersion: 2
-        x: 688
+        x: 786
         y: 188
         width: 96
         height: 96
@@ -1205,7 +1205,7 @@ TextureImporter:
       name: icon_heart_empty
       rect:
         serializedVersion: 2
-        x: 786
+        x: 884
         y: 188
         width: 96
         height: 96
@@ -1227,8 +1227,8 @@ TextureImporter:
       name: icon_ad
       rect:
         serializedVersion: 2
-        x: 884
-        y: 188
+        x: 2
+        y: 90
         width: 96
         height: 96
       alignment: 0
@@ -1249,7 +1249,7 @@ TextureImporter:
       name: icon_noads
       rect:
         serializedVersion: 2
-        x: 2
+        x: 100
         y: 90
         width: 96
         height: 96
@@ -1271,7 +1271,7 @@ TextureImporter:
       name: icon_check
       rect:
         serializedVersion: 2
-        x: 100
+        x: 198
         y: 90
         width: 96
         height: 96
@@ -1293,7 +1293,7 @@ TextureImporter:
       name: icon_infinity
       rect:
         serializedVersion: 2
-        x: 198
+        x: 296
         y: 90
         width: 96
         height: 96
@@ -1315,7 +1315,7 @@ TextureImporter:
       name: icon_calendar
       rect:
         serializedVersion: 2
-        x: 296
+        x: 394
         y: 90
         width: 96
         height: 96
@@ -1337,7 +1337,7 @@ TextureImporter:
       name: icon_gift
       rect:
         serializedVersion: 2
-        x: 394
+        x: 492
         y: 90
         width: 96
         height: 96
@@ -1351,6 +1351,28 @@ TextureImporter:
       bones: []
       spriteID: e7a2a216ed3a3730086bdf88a4f1dbae
       internalID: -514631502
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: icon_music
+      rect:
+        serializedVersion: 2
+        x: 590
+        y: 286
+        width: 96
+        height: 96
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b1473534f6694fa2d47495263e087228
+      internalID: -270553606
       vertices: []
       indices: 
       edges: []
@@ -1391,6 +1413,7 @@ TextureImporter:
       icon_infinity: 1183378306
       icon_levels: 331435775
       icon_lock: 1404446232
+      icon_music: -270553606
       icon_next: 245714299
       icon_noads: 1538306690
       icon_pause: 567994055

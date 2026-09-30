@@ -3,21 +3,20 @@ using UnityEngine;
 namespace CasualGame.Core
 {
     /// <summary>
-    /// The front glass of the Merge jar (GlassJar shader), flat toon: faint tint, one hard highlight stripe, and a
-    /// hard-edged glint band that sweeps across when Glint() is called (a ball hitting the glass) plus now and then on
-    /// its own. Lives on the "Glass" sorting layer, over the balls.
+    /// The front glass of the Merge jar (GlassJar shader, toon glass: translucent tint + hard diagonal lines).
+    /// A ball hitting the wall nudges the lines sideways and lets them spring back. Lives on the "Glass" sorting
+    /// layer, over the balls.
     /// </summary>
     public sealed class GlassJar : MonoBehaviour
     {
         private static readonly int JarId = Shader.PropertyToID("_Jar"), CornerId = Shader.PropertyToID("_Corner");
-        private static readonly int GlintPosId = Shader.PropertyToID("_GlintPos"), GlintStrengthId = Shader.PropertyToID("_GlintStrength");
+        private static readonly int ShiftId = Shader.PropertyToID("_Shift");
 
-        [SerializeField, Tooltip("Seconds for one glint sweep across the jar.")] private float glintTime = 0.45f;
-        [SerializeField, Tooltip("Idle glint every N seconds (0 = never).")] private float idleEvery = 5f;
-        [SerializeField, Tooltip("Hits closer together than this don't restart the sweep.")] private float minGap = 0.25f;
+        [SerializeField, Tooltip("How far a hard hit slides the lines (in jar half-widths).")] private float maxShift = 0.25f;
+        [SerializeField, Tooltip("Spring back speed.")] private float returnSpeed = 6f;
 
         private Material material;
-        private float glint = -1f, strength, idleTimer, lastGlint = -10f;
+        private float shift, velocity;
 
         public Material Material => material;
 
@@ -40,35 +39,20 @@ namespace CasualGame.Core
             go.transform.localScale = new Vector3(interior.width, interior.height, 1f);
             jar.material.SetVector(JarId, new Vector4(interior.xMin, interior.yMin, interior.xMax, interior.yMax));
             jar.material.SetFloat(CornerId, cornerRadius);
-            jar.material.SetFloat(GlintPosId, -1f);
             return jar;
         }
 
-        /// <summary>Sweep a glint across the glass; <paramref name="strength01"/> scales its brightness (e.g. impact speed).</summary>
-        public void Glint(float strength01 = 1f)
-        {
-            if (Time.time - lastGlint < minGap && glint >= 0f) { strength = Mathf.Max(strength, Mathf.Clamp01(strength01)); return; }
-            lastGlint = Time.time;
-            glint = 0f;
-            strength = Mathf.Clamp(strength01, 0.35f, 1f);
-            idleTimer = 0f;
-        }
+        /// <summary>A ball hit the wall: kick the lines sideways; <paramref name="strength01"/> scales the kick.</summary>
+        public void Glint(float strength01 = 1f) => velocity += Mathf.Clamp01(strength01) * maxShift * 12f * (Random.value < 0.5f ? -1f : 1f);
 
         private void Update()
         {
-            if (idleEvery > 0f && (idleTimer += Time.deltaTime) >= idleEvery) Glint(0.5f);
-            if (glint < 0f) return;
-            glint += Time.deltaTime / glintTime;
-            if (glint > 1f)
-            {
-                glint = -1f;
-                material.SetFloat(GlintPosId, -1f);
-                return;
-            }
-            // band travels from beyond the left edge to beyond the right edge, easing out
-            float t = 1f - (1f - glint) * (1f - glint);
-            material.SetFloat(GlintPosId, Mathf.Lerp(-0.25f, 1.35f, t));
-            material.SetFloat(GlintStrengthId, strength * Mathf.Sin(glint * Mathf.PI) * 0.9f + 0.1f * strength);
+            if (Mathf.Abs(shift) < 1e-4f && Mathf.Abs(velocity) < 1e-3f) return;
+            // damped spring back to 0
+            var dt = Time.deltaTime;
+            velocity += (-shift * returnSpeed * returnSpeed - velocity * returnSpeed * 0.9f) * dt;
+            shift = Mathf.Clamp(shift + velocity * dt, -maxShift, maxShift);
+            material.SetFloat(ShiftId, shift);
         }
 
         private void OnDestroy()

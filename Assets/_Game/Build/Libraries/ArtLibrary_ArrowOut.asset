@@ -55,6 +55,7 @@ MonoBehaviour:
   - {fileID: 1183378306, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   - {fileID: 331435775, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   - {fileID: 1404446232, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
+  - {fileID: -270553606, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   - {fileID: 245714299, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   - {fileID: 1538306690, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   - {fileID: 567994055, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
@@ -83,4 +84,4 @@ MonoBehaviour:
   - {fileID: 119100019, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   - {fileID: 1948047294, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   - {fileID: -1529428675, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
-  emojis: []
+  faceMaterial: {fileID: 2100000, guid: 225230e226342df4a9afa056cbe8cb7f, type: 2}

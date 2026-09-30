@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: EyeBlast
   m_EditorClassIdentifier: CasualGame.Editor::CasualGame.EditorTools.GameProfile
   gameId: EyeBlast
-  productName: Eye Blast
-  applicationId: com.casualgame.eyeblast
+  productName: Nah Blocks
+  applicationId: com.billthedev.nahblocks
   defineSymbol: CG_EYEBLAST
   icon: {fileID: 2800000, guid: 5cc3baa21289dd046a82feb2eb62f54a, type: 3}
   version: 0.1.0
@@ -22,8 +22,6 @@ MonoBehaviour:
   scenes:
   - EyeBlast
   artSheets:
-  - faces_a
-  - faces_b
   - shapes
   - ui
   - fx
@@ -45,7 +43,7 @@ MonoBehaviour:
   rewardedAdUnit: ca-app-pub-2681948403948920/6440361746
   bannerAdUnit: 
   removeAdsProductId: remove_ads
-  privacyPolicyUrl: 
+  privacyPolicyUrl: https://billtruong003.github.io/billthedev-legal/eye-blast.html
   history:
   - date: 2026-09-29 14:09
     kind: test

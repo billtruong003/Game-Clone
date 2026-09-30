@@ -21,9 +21,8 @@ namespace CasualGame.EditorTools
         public const string Folder = "Assets/_Game/Art/Sheets/";
         public const string LibraryPath = ArtLibrary.EditorAllPath;
 
-        [Serializable] private class SheetJson { public string sheet; public int width; public int height; public float pixelsPerUnit = 100; public SpriteJson[] sprites; public EmojiJson[] emoji; }
+        [Serializable] private class SheetJson { public string sheet; public int width; public int height; public float pixelsPerUnit = 100; public SpriteJson[] sprites; }
         [Serializable] private class SpriteJson { public string name; public int x; public int y; public int w; public int h; public int[] border; }
-        [Serializable] private class EmojiJson { public string name; public float fps; public int[] sequence; public int frames; }
 
         private void OnPreprocessTexture()
         {
@@ -38,6 +37,12 @@ namespace CasualGame.EditorTools
             ti.wrapMode = TextureWrapMode.Clamp;
             ti.maxTextureSize = 4096;
             ti.textureCompression = TextureImporterCompression.CompressedHQ;
+            // flat art with hard edges survives ASTC 6×6 fine at half the size of the default 4×4
+            var android = ti.GetPlatformTextureSettings("Android");
+            android.overridden = true;
+            android.maxTextureSize = 2048;
+            android.format = TextureImporterFormat.ASTC_6x6;
+            ti.SetPlatformTextureSettings(android);
             // Full Rect meshes: required by 9-sliced / tiled SpriteRenderers (jar, danger line) and cheap for flat art.
             var settings = new TextureImporterSettings();
             ti.ReadTextureSettings(settings);
@@ -125,23 +130,10 @@ namespace CasualGame.EditorTools
         public static ArtLibrary RebuildLibrary(string libraryPath, string[] sheetNames)
         {
             var sprites = new List<Sprite>();
-            var emojis = new List<EmojiDef>();
             foreach (var png in Directory.GetFiles(Folder, "*.png").Select(p => p.Replace('\\', '/')))
             {
                 if (sheetNames != null && !sheetNames.Contains(Path.GetFileNameWithoutExtension(png))) continue;
-                var sheetSprites = AssetDatabase.LoadAllAssetsAtPath(png).OfType<Sprite>().ToList();
-                sprites.AddRange(sheetSprites);
-
-                var json = JsonUtility.FromJson<SheetJson>(File.ReadAllText(Path.ChangeExtension(png, ".json")));
-                if (json.emoji == null) continue;
-                foreach (var e in json.emoji)
-                {
-                    var frames = Enumerable.Range(0, e.frames)
-                        .Select(i => sheetSprites.FirstOrDefault(s => s.name == $"face_{e.name}_{i}"))
-                        .ToArray();
-                    if (frames.Any(f => f == null)) continue; // sheet not sliced yet; next import fills it in
-                    emojis.Add(new EmojiDef { name = e.name, fps = e.fps, sequence = e.sequence, frames = frames });
-                }
+                sprites.AddRange(AssetDatabase.LoadAllAssetsAtPath(png).OfType<Sprite>());
             }
 
             var library = AssetDatabase.LoadAssetAtPath<ArtLibrary>(libraryPath);
@@ -151,7 +143,7 @@ namespace CasualGame.EditorTools
                 library = ScriptableObject.CreateInstance<ArtLibrary>();
                 AssetDatabase.CreateAsset(library, libraryPath);
             }
-            library.EditorSet(sprites.OrderBy(s => s.name).ToList(), emojis);
+            library.EditorSet(sprites.OrderBy(s => s.name).ToList(), FaceTextureImporter.EnsureMaterial());
             EditorUtility.SetDirty(library);
             AssetDatabase.SaveAssetIfDirty(library);
             return library;

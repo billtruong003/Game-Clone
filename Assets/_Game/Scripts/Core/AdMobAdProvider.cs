@@ -24,18 +24,31 @@ namespace CasualGame.Core
         {
             interstitialId = config.interstitialAdUnit;
             rewardedId = config.rewardedAdUnit;
-            // consent first (EEA/UK/CH get Google's form); ads start once UMP allows requests
+            RequestConsent();
+            // consent from an earlier session: no need to wait for the update round trip
+            if (ConsentInformation.CanRequestAds()) StartAds();
+        }
+
+        public bool RewardedReady => rewarded != null && rewarded.CanShowAd();
+
+        // Consent first (EEA/UK/CH get Google's form); ads start once UMP allows requests.
+        // Offline at launch: the game plays without ads and consent is asked again every 30 s until it goes through.
+        private void RequestConsent()
+        {
             ConsentInformation.Update(new ConsentRequestParameters(), updateError => Main(() =>
             {
-                if (updateError != null) Debug.LogWarning("UMP update: " + updateError.Message);
+                if (updateError != null)
+                {
+                    Debug.LogWarning("UMP update: " + updateError.Message);
+                    if (!ConsentInformation.CanRequestAds()) RetryTimer.After(30f, RequestConsent);
+                    return;
+                }
                 ConsentForm.LoadAndShowConsentFormIfRequired(formError => Main(() =>
                 {
                     if (formError != null) Debug.LogWarning("UMP form: " + formError.Message);
                     if (ConsentInformation.CanRequestAds()) StartAds();
                 }));
             }));
-            // consent from an earlier session: no need to wait for the update round trip
-            if (ConsentInformation.CanRequestAds()) StartAds();
         }
 
         private void StartAds()
@@ -49,17 +62,17 @@ namespace CasualGame.Core
             }));
         }
 
-        public void ShowInterstitial(string placement, Action onDone)
+        public void ShowInterstitial(string placement, Action<bool> onDone)
         {
             if (interstitial == null || !interstitial.CanShowAd())
             {
-                onDone?.Invoke();
+                onDone?.Invoke(false);
                 return;
             }
             var ad = interstitial;
             interstitial = null;
-            ad.OnAdFullScreenContentClosed += () => Main(() => { ad.Destroy(); LoadInterstitial(); onDone?.Invoke(); });
-            ad.OnAdFullScreenContentFailed += _ => Main(() => { ad.Destroy(); LoadInterstitial(); onDone?.Invoke(); });
+            ad.OnAdFullScreenContentClosed += () => Main(() => { ad.Destroy(); LoadInterstitial(); onDone?.Invoke(true); });
+            ad.OnAdFullScreenContentFailed += _ => Main(() => { ad.Destroy(); LoadInterstitial(); onDone?.Invoke(false); });
             ad.Show();
         }
 
@@ -67,8 +80,8 @@ namespace CasualGame.Core
         {
             if (rewarded == null || !rewarded.CanShowAd())
             {
-                FakeAdProvider.ShowOverlay(Loc.T("No video available right now.\nPlease try again in a moment.", "Chưa có video.\nThử lại sau ít phút nhé."), 1.4f, () => onDone?.Invoke(false));
                 if (rewarded == null) LoadRewarded();
+                onDone?.Invoke(false);
                 return;
             }
             var ad = rewarded;

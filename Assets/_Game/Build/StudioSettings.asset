@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: StudioSettings
   m_EditorClassIdentifier: CasualGame.Editor::CasualGame.EditorTools.StudioSettings
   companyName: Bill The Dev
-  packagePrefix: com.casualgame
-  targetSdk: 35
-  minSdk: 24
+  packagePrefix: com.billthedev
+  targetSdk: 36
+  minSdk: 25
   keystorePath: 
   maxSdkKey: 

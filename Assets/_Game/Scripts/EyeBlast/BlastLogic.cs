@@ -114,7 +114,10 @@ namespace CasualGame.EyeBlast
             return new Piece { Cells = shape, Color = color, Width = w, Height = h };
         }
 
-        /// <summary>Three random pieces; re-rolled (up to 5 times) until at least one fits. Small pieces get likelier on a crowded board.</summary>
+        /// <summary>
+        /// Three random pieces, re-rolled (up to 8 times) until all three can be placed in at least one order (counting
+        /// the lines they clear on the way). Small pieces get likelier on a crowded board.
+        /// </summary>
         public Piece[] Deal(Func<float> rand)
         {
             var crowded = FillRatio() > 0.6f;
@@ -132,13 +135,89 @@ namespace CasualGame.EyeBlast
             }
 
             var pieces = new Piece[3];
-            for (int attempt = 0; attempt < 5; attempt++)
+            for (int attempt = 0; attempt < 8; attempt++)
             {
                 for (int i = 0; i < 3; i++) pieces[i] = Roll();
-                foreach (var p in pieces) if (FitsAnywhere(p)) return pieces;
+                if (AllPlaceable(pieces)) return pieces;
             }
-            pieces[0] = MakePiece(Shapes[0], pieces[0].Color);
+            // fallback: the smallest pieces, which fit whenever the board has room at all
+            for (int i = 0; i < 3; i++) pieces[i] = MakePiece(Shapes[0], 1 + (int)(rand() * Colors));
             return pieces;
+        }
+
+        /// <summary>True if some order places every piece (line clears between placements included). Search is capped.</summary>
+        public bool AllPlaceable(IList<Piece> pieces)
+        {
+            int budget = 6000;
+            return Search((int[,])Grid.Clone(), pieces, new bool[pieces.Count], ref budget);
+        }
+
+        private static bool Search(int[,] grid, IList<Piece> pieces, bool[] used, ref int budget)
+        {
+            bool any = false;
+            for (int i = 0; i < pieces.Count; i++)
+            {
+                if (used[i] || pieces[i] == null) continue;
+                any = true;
+                var p = pieces[i];
+                for (int r = 0; r <= Size - p.Height; r++)
+                    for (int c = 0; c <= Size - p.Width; c++)
+                    {
+                        if (!Fits(grid, p, r, c)) continue;
+                        if (--budget < 0) return false;
+                        var next = (int[,])grid.Clone();
+                        foreach (var (pr, pc) in p.Cells) next[r + pr, c + pc] = p.Color;
+                        ClearFull(next);
+                        used[i] = true;
+                        var ok = Search(next, pieces, used, ref budget);
+                        used[i] = false;
+                        if (ok) return true;
+                    }
+            }
+            return !any;
+        }
+
+        private static bool Fits(int[,] grid, Piece p, int r0, int c0)
+        {
+            foreach (var (r, c) in p.Cells)
+                if (grid[r0 + r, c0 + c] != 0) return false;
+            return true;
+        }
+
+        private static void ClearFull(int[,] grid)
+        {
+            Span<bool> rows = stackalloc bool[Size], cols = stackalloc bool[Size];
+            for (int i = 0; i < Size; i++)
+            {
+                bool row = true, col = true;
+                for (int j = 0; j < Size; j++) { row &= grid[i, j] != 0; col &= grid[j, i] != 0; }
+                rows[i] = row;
+                cols[i] = col;
+            }
+            for (int r = 0; r < Size; r++)
+                for (int c = 0; c < Size; c++)
+                    if (rows[r] || cols[c]) grid[r, c] = 0;
+        }
+
+        /// <summary>The <paramref name="count"/> fullest rows/columns (revive clears them).</summary>
+        public List<(bool row, int index)> FullestLines(int count)
+        {
+            var all = new List<(bool row, int index, int filled)>();
+            for (int i = 0; i < Size; i++)
+            {
+                int r = 0, c = 0;
+                for (int j = 0; j < Size; j++) { if (Grid[i, j] != 0) r++; if (Grid[j, i] != 0) c++; }
+                all.Add((true, i, r));
+                all.Add((false, i, c));
+            }
+            all.Sort((x, y) => y.filled.CompareTo(x.filled));
+            var result = new List<(bool, int)>();
+            foreach (var l in all)
+            {
+                if (result.Count == count || l.filled == 0) break;
+                result.Add((l.row, l.index));
+            }
+            return result;
         }
     }
 }

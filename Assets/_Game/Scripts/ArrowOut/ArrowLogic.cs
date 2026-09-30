@@ -258,7 +258,7 @@ namespace CasualGame.ArrowOut
             new() { MinLen = 3, MaxLen = 7, Colors = 4, TwoChance = 0.45f, MinArrows = 11 },
         };
 
-        public readonly Board Board = new();
+        public readonly Board Board;
         public readonly Func<float> Rand;
         public int Cleared, Score, Combo, ComboColor = -1;
         public bool Over;
@@ -266,8 +266,20 @@ namespace CasualGame.ArrowOut
         public EndlessRun(Func<float> rand)
         {
             Rand = rand;
+            Board = new Board();
             var d = DifficultyAt(0);
             for (int i = 0; i < StartArrows; i++) Board.Spawn(rand, d.MinLen, d.MaxLen, d.Colors);
+        }
+
+        /// <summary>Resumes a saved run on its saved board.</summary>
+        public EndlessRun(Func<float> rand, Board board, int cleared, int score, int combo, int comboColor)
+        {
+            Rand = rand;
+            Board = board;
+            Cleared = cleared;
+            Score = score;
+            Combo = combo;
+            ComboColor = comboColor;
         }
 
         public static Difficulty DifficultyAt(int cleared)
@@ -353,7 +365,38 @@ namespace CasualGame.ArrowOut
                 for (int i = 0; i < cells.Length; i++) cells[i] = new Pos(a.cells[i * 2], a.cells[i * 2 + 1]);
                 b.Place(new Arrow { Id = b.NextId++, Cells = cells, Dir = a.dir, Color = a.color });
             }
+            Recolor(b);
             return b;
+        }
+
+        /// <summary>
+        /// Colour is decoration in level mode: arrows that touch never share a colour and all four get used, so a
+        /// board never reads as one blob (some baked levels came out single-coloured).
+        /// </summary>
+        public static void Recolor(Board b)
+        {
+            var used = new int[4];
+            var ids = new List<int>(b.Arrows.Keys);
+            ids.Sort();
+            foreach (var id in ids)
+            {
+                var a = b.Arrows[id];
+                var banned = new bool[4];
+                foreach (var p in a.Cells)
+                    for (int d = 0; d < 4; d++)
+                    {
+                        int r = p.R + Board.DY[d], c = p.C + Board.DX[d];
+                        if (!Board.Inside(r, c)) continue;
+                        var other = b.Grid[r, c];
+                        if (other != -1 && other != id && other < id) banned[b.Arrows[other].Color] = true;
+                    }
+                int best = -1;
+                for (int k = 0; k < 4; k++)
+                    if (!banned[k] && (best == -1 || used[k] < used[best])) best = k;
+                if (best == -1) best = (id * 7) % 4;
+                a.Color = best;
+                used[best]++;
+            }
         }
 
         public static LevelData FromBoard(int n, int w, int h, Board b, float coverage)

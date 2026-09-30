@@ -1,17 +1,17 @@
-# Eye Merge: Google Play listing draft
+# Meh Merge: Google Play listing draft
 
-Developer: Bill The Dev · Privacy policy: `<host>/eye-merge.html` (TODO: fill in hosted URL)
+Developer: Bill The Dev · Privacy policy: https://billtruong003.github.io/billthedev-legal/eye-merge.html
 
 ## English
 
-**App name** (≤30): `Eye Merge: Drop & Merge Jar` (27 chars)
+**App name** (≤30): `Meh Merge: Drop & Merge Jar` (27 chars)
 
-**Short description** (≤80): `Drop cute faces into a glass jar. Match two to merge them into a bigger one!` (76 chars)
+**Short description** (≤80): `Drop balls into a glass jar. Two of a kind merge into a bigger one. Keep it low!` (80 chars)
 
 **Full description** (≤4000; EN counted at 1317 chars)
 
 ```
-Eye Merge is a relaxing drop-and-merge puzzle starring a jar full of round, cheerful faces.
+Meh Merge is a relaxing drop-and-merge puzzle starring a jar full of round, cheerful faces.
 
 Move your ball left or right, let go, and watch it tumble into the glass jar. When two balls of the same kind touch, they squish together and pop out as a bigger ball. Chain merges, make room, and work your way up to the largest ball of all.
 
@@ -33,7 +33,7 @@ WHY YOU'LL LIKE IT
 • Available in English and Vietnamese.
 
 FAIR AND FREE
-Eye Merge is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the jar is full. A one-time "Remove ads" purchase turns off the ads between games.
+Meh Merge is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the jar is full. A one-time "Remove ads" purchase turns off the ads between games.
 
 No account or login needed. Your best score is saved on your device.
 ```
@@ -44,14 +44,14 @@ No account or login needed. Your best score is saved on your device.
 
 ## Tiếng Việt
 
-**Tên ứng dụng** (≤30): `Eye Merge: Thả Bóng Hợp Nhất` (28 ký tự)
+**Tên ứng dụng** (≤30): `Meh Merge: Thả Bóng Hợp Nhất` (28 ký tự)
 
-**Mô tả ngắn** (≤80): `Thả những khuôn mặt dễ thương vào hũ. Hai quả giống nhau gộp thành quả to hơn!` (78 ký tự)
+**Mô tả ngắn** (≤80): `Thả bi vào hũ thủy tinh. Hai quả giống nhau gộp thành quả to hơn. Đừng để tràn!` (79 ký tự)
 
 **Mô tả đầy đủ** (≤4000; 1190 ký tự)
 
 ```
-Eye Merge là trò chơi thả và gộp bóng thư giãn, với nhân vật chính là một hũ thủy tinh đầy những khuôn mặt tròn vui vẻ.
+Meh Merge là trò chơi thả và gộp bóng thư giãn, với nhân vật chính là một hũ thủy tinh đầy những khuôn mặt tròn vui vẻ.
 
 Kéo quả bóng sang trái hoặc phải, thả tay, và xem nó lăn vào hũ. Hai quả cùng loại chạm nhau sẽ tan vào nhau rồi bật ra thành một quả to hơn. Gộp liên tiếp, dọn chỗ và tiến tới quả bóng lớn nhất.
 
@@ -73,7 +73,7 @@ VÌ SAO BẠN SẼ THÍCH
 • Hỗ trợ tiếng Việt và tiếng Anh.
 
 MIỄN PHÍ, CÔNG BẰNG
-Eye Merge miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn được hồi sinh một lần khi hũ đầy. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các ván.
+Meh Merge miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn được hồi sinh một lần khi hũ đầy. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các ván.
 
 Không cần tài khoản hay đăng nhập. Kỷ lục được lưu ngay trên máy của bạn.
 ```
@@ -88,7 +88,7 @@ Không cần tài khoản hay đăng nhập. Kỷ lục được lưu ngay trên
 2. A merge caught mid-goo (two balls melting into one, white flash). Caption: "Squish two into one."
 3. Chain merge with several faces laughing. Caption: "Chain merges for big points."
 4. The tier strip at the bottom with most sizes unlocked, plus a large late-tier ball in the jar. Caption: "11 sizes to discover."
-5. Close-up of the glass jar showing reflections and readable faces. Caption: "Cute faces, shiny jar."
+5. Close-up of the glass jar showing reflections and readable faces. Caption: "Merge, don't overflow."
 6. Balls near the red danger line with surprised faces. Caption: "Don't let it overflow!"
 7. "New best!" score moment. Caption: "Beat your best."
 8. "The jar is full!" game-over popup with the optional Revive button. Caption: "One more try? You decide." (lower priority)

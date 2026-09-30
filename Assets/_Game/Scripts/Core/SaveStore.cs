@@ -26,6 +26,10 @@ namespace CasualGame.Core
 
         public static void SetJson<T>(string key, T value) => SetString(key, JsonUtility.ToJson(value));
 
+        public static bool Has(string key) => PlayerPrefs.HasKey(Prefix + key);
+
+        public static void Delete(string key) => PlayerPrefs.DeleteKey(Prefix + key);
+
         /// <summary>Stores max(current, value) and returns the new best.</summary>
         public static int SubmitBest(string key, int value)
         {

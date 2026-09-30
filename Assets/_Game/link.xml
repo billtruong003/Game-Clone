@@ -1,0 +1,9 @@
+<!-- Managed stripping is High. Keep what is only reached through reflection: our own assemblies (JsonUtility save
+     data, AddComponent by type) and Unity IAP. Google Mobile Ads ships its own link.xml (Assets/GoogleMobileAds). -->
+<linker>
+  <assembly fullname="CasualGame.Core" preserve="all"/>
+  <assembly fullname="CasualGame.ArrowOut" preserve="all"/>
+  <assembly fullname="CasualGame.EyeBlast" preserve="all"/>
+  <assembly fullname="CasualGame.EyeMerge" preserve="all"/>
+  <assembly fullname="Unity.Purchasing" preserve="all"/>
+</linker>

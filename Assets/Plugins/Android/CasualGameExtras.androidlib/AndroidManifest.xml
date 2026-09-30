@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Merged into every game's manifest: GameAudio.Haptic() needs VIBRATE (without it the call fails silently). -->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.billthedev.extras">
+    <uses-permission android:name="android.permission.VIBRATE" />
+</manifest>

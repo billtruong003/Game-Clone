@@ -1,24 +1,36 @@
-# Prompt ChatGPT cho icon, logo tên game, feature graphic
+# Việc cho ChatGPT (v2): icon, logo, feature graphic, khung screenshot
 
-**Cách dùng**
-- Mỗi game mở **1 chat ChatGPT mới**. Dán **khối SETUP** + khối của game đó, kéo thả đúng các file ref ghi trong khối.
-- ChatGPT không mở được file trên máy hay link claude.ai. Mọi context nằm trong prompt và ảnh đính kèm.
-- Làm theo thứ tự: **ICON → LOGO → FEATURE**. Duyệt từng ảnh (`APPROVE` hoặc góp ý), ảnh đã duyệt làm ref cho ảnh sau.
-- Tải ảnh về, đặt đúng tên, bỏ vào `C:\Projects\Casual Game\Store\gpt\` rồi báo t. T sẽ cắt, resize và gắn vào profile:
-  - `arrow-out-icon.png`, `eye-blast-icon.png`, `eye-merge-icon.png`
-  - `arrow-out-logo.png`, `eye-blast-logo.png`, `eye-merge-logo.png`
-  - `arrow-out-feature.png`, `eye-blast-feature.png`, `eye-merge-feature.png`
+ChatGPT **chỉ làm art cho trang Google Play**. Không làm asset trong game (nhân vật, skin, UI, FX): phần đó Claude vẽ
+bằng `Tools/art`.
 
-**File ref** (có sẵn trên máy):
+## Checklist
 
-| File | Dùng cho |
+| # | Việc | File nộp (bỏ vào `C:\Projects\Casual Game\Store\gpt\`) | Kích thước |
+|---|---|---|---|
+| 1 | Icon Bruh Arrows | `bruh-arrows-icon.png` | 1024×1024, full bleed |
+| 2 | Icon Nah Blocks | `nah-blocks-icon.png` | 1024×1024, full bleed |
+| 3 | Icon Meh Merge | `meh-merge-icon.png` | 1024×1024, full bleed |
+| 4 | Logo chữ ×3 | `bruh-arrows-logo.png`, `nah-blocks-logo.png`, `meh-merge-logo.png` | 1600×600, nền #00FF00 |
+| 5 | Feature graphic ×3 | `bruh-arrows-feature.png`, `nah-blocks-feature.png`, `meh-merge-feature.png` | 1024×500 |
+| 6 | Nền khung screenshot ×3 | `bruh-arrows-frame-bg.png`, `nah-blocks-frame-bg.png`, `meh-merge-frame-bg.png` | 1080×1920, không chữ |
+
+Việc 6 là nền trang trí phía sau ảnh chụp game. Claude tự ghép ảnh chụp thật + caption lên nền này (caption không nhờ
+ChatGPT viết vào ảnh, vì hay sai chính tả).
+
+**Cách làm**
+- Mỗi game **1 chat mới**. Dán khối **SETUP**, rồi khối của game đó, kéo thả các file ref ghi trong khối.
+- Thứ tự: ICON → LOGO → FEATURE → FRAME BG. Mỗi ảnh: `APPROVE` hoặc góp ý. Ảnh đã duyệt làm ref cho ảnh sau.
+- Xong thì báo Claude: Claude cắt, resize (512 icon, 1024×500 feature), gắn vào profile và ghép screenshot.
+- Ảnh cũ `Store\gpt\*-batch01.png` là tên cũ (Eye …), bỏ.
+
+**File ref** (trên máy):
+
+| File | Là gì |
 |---|---|
-| `C:\Projects\Casual Game\Store\screenshots\<game>\*.png` | **Ảnh chụp gameplay thật (1080×1920, có FX)**: nguồn chính. Danh sách: `Store\screenshots\README.md` |
-| `C:\Projects\Casual Game\Tools\art\gpt-refs\REF_current_look.png` | Style nhân vật / nét / màu hiện tại (mọi game) |
-| `C:\Projects\Casual Game\Store\graphics\arrow-out-icon-512.png` | Bố cục icon tạm của Arrow Out |
-| `C:\Projects\Casual Game\Store\graphics\eye-blast-icon-512.png` | Bố cục icon tạm của Eye Blast |
-| `C:\Projects\Casual Game\Store\graphics\eye-merge-icon-512.png` | Bố cục icon tạm của Eye Merge |
-| `C:\Projects\Casual Game\Store\graphics\<game>-feature.png` | Bố cục feature graphic tạm |
+| `Tools\art\preview\faces_preview.png` | **9 mặt deadpan** (stare, smug, meh, grin, blink, shock, panic, cry, dizzy) trên bóng tròn và khối vuông. Đây là bản gốc của nhân vật. |
+| `Store\screenshots\v2\bruh-arrows\01_home.png`, `02_level.png` | Ảnh chụp thật Bruh Arrows |
+| `Store\screenshots\v2\nah-blocks\01_board.png` | Ảnh chụp thật Nah Blocks |
+| `Store\screenshots\v2\meh-merge\01_jar.png` | Ảnh chụp thật Meh Merge (hũ kính toon) |
 
 ---
 
@@ -26,99 +38,91 @@
 
 ```text
 ROLE
-You are the lead artist for a small mobile game studio. Talk to me in Vietnamese. You will make store art for ONE game
-in this chat, one image at a time, in this order: APP ICON -> TITLE LOGO -> FEATURE GRAPHIC. After each image, wait
-for my APPROVE or my notes. Every approved image becomes a style reference for the next one: match it exactly.
+You are the lead artist for a tiny mobile game studio ("Bill The Dev"). Talk to me in Vietnamese. In this chat you
+make Google Play store art for ONE game, one image at a time: APP ICON -> TITLE LOGO -> FEATURE GRAPHIC ->
+SCREENSHOT FRAME BACKGROUND. After each image wait for my APPROVE or notes. Every approved image is a style reference
+for the next one: match it exactly.
 
-REFERENCE FILES I ATTACH (folder on my PC, you only see what I attach):
-  C:\Projects\Casual Game\Store\screenshots\<game>\*.png           = REAL gameplay screenshots with the real FX. This is
-      the truth about what the game looks and plays like: use its characters, board / jar, colors and FX moments.
-      Store\screenshots\README.md says what each screenshot shows.
-  C:\Projects\Casual Game\Tools\art\gpt-refs\REF_current_look.png  = the in-game style and character identity
-  C:\Projects\Casual Game\Store\graphics\<game>-icon-512.png         = a rough layout idea only (drawn in code, NOT the real
-      look). Improve freely; the screenshots win when they disagree.
-First tell me the file names you received. If one is missing, ask for it by its full path. Before each image, write 3
-short Vietnamese bullets: what you take from the refs, the layout, and what you will improve. Then draw.
+REFERENCE FILES I ATTACH
+  faces_preview.png = the 9 official character faces. Characters are flat round balls or rounded squares with a thick
+      dark navy outline, one small white highlight top-left, and a DEADPAN face drawn with short brush strokes:
+      stare, smug, meh (one eyebrow up), grin, blink, shock, panic, cry, dizzy. Copy these faces exactly. They are
+      funny because they are unimpressed. NO blush, NO big shiny anime eyes, NO eyelashes, NO teeth, NO extra details.
+  *_screenshot / 0x_*.png = REAL gameplay. This is the truth about colors, board / jar and characters.
+First list the file names you received; if one is missing ask for it. Before each image write 3 short Vietnamese
+bullets: what you take from the refs, the layout, what you will do. Then draw.
 
 STYLE (every image)
-- Flat vector look, like a hand-made Illustrator sticker / premium casual mobile game. NOT glossy AI 3D, no plastic
-  shine, no gradients except one soft cel shadow, no noise, no bokeh, no lens flare, no realistic lighting.
-- Thick, uniform dark navy outline (#1E2240) on every character and object, round line caps.
-- Characters = simple shapes with cute faces exactly like REF_current_look.png: navy oval eyes with one white dot,
-  simple curved mouth, flat pink blush. Keep faces simple (emoji-like), never realistic, never extra details.
-- Palette: navy #2B2F55, cream #F5F1EA, paper #FFF8EC, yellow #FFD23F, orange #FF9F1C, green #3DDC97,
-  blue #4EA8DE, pink #F15BB5, red #FF5A5F, purple #9B5DE5, teal #2A9D8F, amber #E9A23B, slate #2E3A59.
-- Big, bold, readable at 48 px. Max 3 main elements. Strong silhouette and contrast.
+- Flat vector, like a hand-made Illustrator sticker. NOT glossy 3D, no plastic shine, no soft gradients (one hard cel
+  shadow at most), no noise, bokeh, lens flare, sparkles everywhere or realistic light. It must NOT look AI-made:
+  few elements, clean shapes, consistent line width, lots of calm space.
+- Thick uniform dark navy outline (#1E2240), round caps.
+- Big and readable at 48 px. Max 3 main elements. Strong silhouette.
+- Humor = deadpan: one character reacts (shock / panic / smug) while the others just stare.
 
 OUTPUT RULES
-- APP ICON: exactly square 1024x1024, FULL BLEED background (edge to edge, NO rounded corners, NO border, NO drop
-  shadow around the icon). Google Play crops it to a rounded shape: keep every important element inside the central
-  circle of about 80% width. NO text, NO letters, NO numbers, NO logos of other games.
-- TITLE LOGO: the game name as a wordmark, 1600x600, on a plain flat background of ONE solid color I can key out
-  (pure #00FF00), chunky rounded bold letters with the navy outline, can include one tiny character or icon element.
-  Spelling must be EXACT.
-- FEATURE GRAPHIC: exactly 1024x500, the approved title logo on the left half, the icon's characters / scene on the
-  right half, flat background in the game's main color. Keep all important content away from the outer 60 px.
-- Never copy the style, characters or names of existing games (no Suika, no Block Blast, no Arrows).
+- APP ICON: 1024x1024, FULL BLEED background edge to edge, NO rounded corners, NO border, NO shadow around the icon.
+  Everything important inside the central circle (~80 % width). NO text, letters or numbers.
+- TITLE LOGO: 1600x600, flat pure #00FF00 background (I key it out), chunky rounded bold letters with the navy outline,
+  may include ONE tiny character. Spelling EXACT.
+- FEATURE GRAPHIC: 1024x500, approved logo on the left half, characters / scene on the right half, flat background in
+  the game's main color. Nothing important in the outer 60 px.
+- FRAME BACKGROUND: 1080x1920, the game's main color with 2-4 big calm flat shapes or characters peeking from the
+  edges. Keep the central area 860x1500 (starting 300 px from the top) EMPTY and quiet: a phone screenshot goes there.
+  NO text.
+- Never copy existing games (no Suika, no Block Blast, no "Arrows" apps), no brand names.
 ```
 
 ---
 
-## Arrow Out
-Đính kèm: `REF_current_look.png`, `arrow-out-icon-512.png`, `arrow-out-feature.png`.
+## Bruh Arrows
+Đính kèm: `faces_preview.png`, `01_home.png`, `02_level.png`.
 
 ```text
-GAME: "Arrow Out" - a calm brain puzzle. Snake-like arrows lie on a dotted paper card; tap an arrow whose path to the
-board edge is clear and it slides out. Mood: calm, clever, satisfying. Main colors: cream paper #F5F1EA background,
-arrows in teal #2A9D8F, slate #2E3A59, amber #E9A23B, plum #8E5BB5. Arrows are thick rounded strokes with a round tail
-dot and a chevron head, drawn with the navy outline. No faces in this game.
+GAME: "Bruh Arrows" - a calm brain puzzle. Thick rounded arrows lie on a cream paper board with small grey dots. Tap an
+arrow whose path to the edge is clear and it slides out. Each arrow has a round deadpan face on its tail (see
+faces_preview.png and the screenshots). Mood: calm, clever, a little sarcastic.
+Colors: cream paper #F4EFE8 background, arrows navy #2E3A59, teal #35B09F, purple #7B4FAE, amber #EDA93C,
+title red #D6334A.
 
-1) APP ICON: one bold teal L-shaped arrow sliding out of a cream dotted card to the right, a second slate arrow still on
-   the card, 2-3 short speed lines. Clean, geometric, satisfying.
-2) TITLE LOGO: "ARROW OUT" (exact), letters in navy with cream inner highlight; the O of OUT can be a small arrow
-   circle or an arrow can shoot out of the last T.
-3) FEATURE GRAPHIC: cream background, logo left, a few arrows on a dotted card on the right with one flying out.
+1) APP ICON: cream background, one bold teal arrow shooting out to the right with a SHOCK face on its tail and 2 short
+   speed lines; behind it one navy arrow with a MEH face (one eyebrow up) staring at it.
+2) TITLE LOGO: "BRUH ARROWS" (exact), navy letters, the last S or the W turns into a small arrow head.
+3) FEATURE GRAPHIC: cream background, logo left, a few faced arrows on a dotted board right, one flying out.
+4) FRAME BACKGROUND: cream paper with a faint dot grid, two big faced arrows peeking from the top-left and bottom-right.
 ```
 
-## Eye Blast
-Đính kèm: `REF_current_look.png`, `eye-blast-icon-512.png`, `eye-blast-feature.png`.
+## Nah Blocks
+Đính kèm: `faces_preview.png`, `01_board.png`.
 
 ```text
-GAME: "Eye Blast" - a block puzzle on an 8x8 board: drag pieces onto the board, full rows and columns clear. Every block
-is a cute square character with a face (see REF_current_look.png). Mood: bright, cheerful, satisfying pops.
-Main colors: navy #2B2F55 background, dark board cells #232748, blocks in yellow, pink, blue, green (palette above).
+GAME: "Nah Blocks" - block puzzle on an 8x8 board: drag pieces in, full rows and columns clear. Every block is a rounded
+square character with a deadpan face. Mood: bright, satisfying, unbothered.
+Colors: navy #2B2F55 background, dark board cells #232748, blocks yellow #FFD23F, pink #F15BB5, blue #4EA8DE,
+green #3DDC97, orange #FF9F1C, purple #9B5DE5.
 
-1) APP ICON: a few rounded-square blocks with happy faces on a dark board, one big yellow laughing block in front,
-   one pink surprised block. Strong contrast against the navy.
-2) TITLE LOGO: "EYE BLAST" (exact), chunky white letters with the navy outline; the two E's or the O-like shapes may
-   carry tiny eyes. A small burst behind BLAST.
-3) FEATURE GRAPHIC: navy background, logo left, a board corner with faced blocks on the right, one line clearing with
-   a flat star burst.
+1) APP ICON: navy background, a 2x2 group of blocks; three just STARE, the yellow one in front is SMUG. One small pink
+   block falling in with a PANIC face.
+2) TITLE LOGO: "NAH BLOCKS" (exact), chunky white letters with navy outline, the O is a tiny block with a MEH face.
+3) FEATURE GRAPHIC: navy background, logo left, a board corner right with one row clearing (flat white flash),
+   the clearing blocks GRIN.
+4) FRAME BACKGROUND: navy with a few big blocks peeking from the corners, all staring at the empty center.
 ```
 
-## Eye Merge
-Đính kèm: `REF_current_look.png`, `eye-merge-icon-512.png`, `eye-merge-feature.png`.
+## Meh Merge
+Đính kèm: `faces_preview.png`, `01_jar.png`.
 
 ```text
-GAME: "Eye Merge" - drop round characters into a glass jar; two of the same size merge into a bigger one. Characters
-are round balls with cute faces (see REF_current_look.png). The jar is FLAT TOON GLASS: a dark navy outline, a very
-light tint inside, one hard-edged white highlight stripe, NO refraction, NO soft reflections.
-Main colors: navy #2B2F55 background, balls in yellow, orange, green, pink.
+GAME: "Meh Merge" - drop round characters into a glass jar; two of the same size merge into a bigger one. Balls have
+deadpan faces. The jar is FLAT TOON GLASS exactly like the screenshot: navy outline, very light blue tint, a few hard
+diagonal white stripe bands, NO refraction, NO soft reflections.
+Colors: navy #2B2F55 background, balls red #FF5A5F, yellow #FFD23F, blue #4EA8DE, green #3DDC97, orange #FF9F1C,
+pink #F15BB5, purple #9B5DE5.
 
-1) APP ICON: a glass jar holding 3 balls (big yellow laughing ball in front, orange and green behind), a small pink
-   ball dropping in from above the rim. Keep the jar inside the safe circle.
-2) TITLE LOGO: "EYE MERGE" (exact), chunky white letters with navy outline; the letters can look a little squishy
-   like goo, one small ball character leaning on the logo.
-3) FEATURE GRAPHIC: navy background, logo left, the jar with balls on the right, two same balls merging with a flat pop.
-```
-
----
-
-## (Tuỳ chọn) Brainstorm tên game
-Nếu muốn đổi tên trước khi lên store (tên có thể đổi sau, package name thì không):
-
-```text
-Suggest 10 English names for a casual mobile game: <mô tả game>. Rules: max 20 characters, easy to say, no existing
-big game names or trademarks, works for kids and adults worldwide. For each name give a 1-line reason and one possible
-short subtitle (max 30 characters incl. the name, for the Google Play title). Then pick your top 3.
+1) APP ICON: the toon glass jar with 3 balls inside (big yellow SMUG in front, blue and green STARE), a small pink ball
+   dropping in from above with a SHOCK face. Jar inside the safe circle.
+2) TITLE LOGO: "MEH MERGE" (exact), chunky white letters with navy outline, slightly squishy; one small ball with a
+   MEH face leaning on the last E.
+3) FEATURE GRAPHIC: navy background, logo left, jar right, two same balls touching with a flat pop, both GRIN.
+4) FRAME BACKGROUND: navy with a few big balls peeking from the edges, staring at the empty center.
 ```

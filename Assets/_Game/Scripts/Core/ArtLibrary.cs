@@ -1,27 +1,17 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace CasualGame.Core
 {
-    [Serializable]
-    public class EmojiDef
-    {
-        public string name;
-        public float fps = 8f;
-        public int[] sequence;
-        public Sprite[] frames;
-    }
-
     /// <summary>
-    /// Every sprite sliced from Assets/_Game/Art/Sheets plus the emoji animation table.
+    /// Every sprite sliced from Assets/_Game/Art/Sheets plus the face material (Texture2DArray of expressions, see Face).
     /// Rebuilt automatically by the editor when a sheet is imported (see SheetSlicer), so code looks sprites up by name.
     /// </summary>
     [CreateAssetMenu(menuName = "Casual Game/Art Library")]
     public class ArtLibrary : ScriptableObject
     {
         [SerializeField] private List<Sprite> sprites = new();
-        [SerializeField] private List<EmojiDef> emojis = new();
+        [SerializeField] private Material faceMaterial;
 
         [System.NonSerialized] private Dictionary<string, Sprite> byName;
         private static ArtLibrary instance;
@@ -42,7 +32,7 @@ namespace CasualGame.Core
 
         public static void SetCurrent(ArtLibrary library) => instance = library;
 
-        public IReadOnlyList<EmojiDef> Emojis => emojis;
+        public Material FaceMaterial => faceMaterial;
 
         public Sprite Get(string spriteName)
         {
@@ -57,28 +47,12 @@ namespace CasualGame.Core
             return null;
         }
 
-        public EmojiDef GetEmoji(string emojiName) => emojis.Find(e => e.name == emojiName);
-
-        // Negative faces are kept for reactions (game over, danger) so they stand out when they appear.
-        private static readonly HashSet<string> ReactionOnly = new() { "angry", "cry", "dizzy" };
-        // NonSerialized: Unity would otherwise restore this cache as an empty list after a domain reload, and the
-        // empty-pool fallback then hands out reaction-only faces (cry, angry) as idle faces.
-        [System.NonSerialized] private List<EmojiDef> idlePool;
-
-        public EmojiDef RandomEmoji()
-        {
-            idlePool ??= emojis.FindAll(e => !ReactionOnly.Contains(e.name));
-            var pool = idlePool.Count > 0 ? idlePool : emojis;
-            return pool[UnityEngine.Random.Range(0, pool.Count)];
-        }
-
 #if UNITY_EDITOR
-        public void EditorSet(List<Sprite> allSprites, List<EmojiDef> allEmojis)
+        public void EditorSet(List<Sprite> allSprites, Material faces)
         {
             sprites = allSprites;
-            emojis = allEmojis;
+            faceMaterial = faces;
             byName = null;
-            idlePool = null;
         }
 #endif
     }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -13,6 +14,9 @@ namespace CasualGame.Core
     {
         public RectTransform Root { get; private set; }
         public RectTransform Card { get; private set; }
+        /// <summary>What the Android Back button does while this is the top popup; null = Back is ignored (e.g. game over).</summary>
+        public Action OnBack;
+        private static readonly List<Popup> open = new();
         private float cursor;
         private readonly float width;
 
@@ -20,6 +24,13 @@ namespace CasualGame.Core
         {
             var p = new Popup(width);
             p.Root = UIKit.Stretch(UIKit.Rect("Popup", parent));
+            // own canvas above everything else, world-space FX particles included
+            var parentCanvas = parent.GetComponentInParent<Canvas>();
+            var c = p.Root.gameObject.AddComponent<Canvas>();
+            c.overrideSorting = true;
+            if (parentCanvas != null) c.sortingLayerID = parentCanvas.rootCanvas.sortingLayerID;
+            c.sortingOrder = 1000;
+            p.Root.gameObject.AddComponent<GraphicRaycaster>();
             var dim = UIKit.AddImage(p.Root, (Sprite)null, new Color(0.05f, 0.06f, 0.15f, 0.62f));
             dim.raycastTarget = true;
             p.Card = UIKit.Place(UIKit.Rect("Card", p.Root), new Vector2(0.5f, 0.5f), new Vector2(0, -20), new Vector2(width, height));
@@ -38,7 +49,25 @@ namespace CasualGame.Core
             p.Card.localScale = Vector3.one * 0.7f;
             Tween.Scale(p.Card, Vector3.one, 0.28f, Ease.OutBack);
             GameAudio.Play("ui_open");
+            open.Add(p);
             return p;
+        }
+
+        public static bool AnyOpen
+        {
+            get
+            {
+                open.RemoveAll(x => x.Root == null);
+                return open.Count > 0;
+            }
+        }
+
+        /// <summary>Routes Back to the top popup. True when a popup is open (Back is consumed even if it ignores it).</summary>
+        internal static bool HandleBack()
+        {
+            if (!AnyOpen) return false;
+            open[^1].OnBack?.Invoke();
+            return true;
         }
 
         private Popup(float width) => this.width = width;
@@ -81,6 +110,7 @@ namespace CasualGame.Core
             GameAudio.Play("ui_close");
             var root = Root;
             Root = null;
+            open.Remove(this);
             Tween.Scale(Card, Vector3.one * 0.8f, 0.14f, Ease.InBack, 0f, () =>
             {
                 UnityEngine.Object.Destroy(root.gameObject);
@@ -89,29 +119,49 @@ namespace CasualGame.Core
         }
     }
 
-    /// <summary>Shared pause/settings popup: sound, music, vibration, remove ads, plus caller-provided actions.</summary>
+    /// <summary>
+    /// Shared pause / settings popup (G3). In a game (caller passes actions): "Paused" with Resume on top, the caller's
+    /// actions, a row of three round toggles (sound, music, vibration), Remove ads (or "Ads removed"), and the privacy
+    /// links. On a menu (no actions): "Settings" with the same toggles and links.
+    /// </summary>
     public static class SettingsPopup
     {
         public static Popup Show(Transform parent, Action onClose, params (string label, string sprite, string icon, Action action)[] actions)
         {
-            Popup popup = null;
-            var extra = (Ads.RemoveAdsOwned ? 0 : 1) + (Privacy.HasPolicy ? 1 : 0) + (Privacy.OptionsRequired ? 1 : 0) + (Debug.isDebugBuild && AdMobAdProvider.Ready ? 1 : 0);
-            popup = Popup.Open(parent, Loc.T("Settings", "Cài đặt"), 520 + 170 * (actions.Length + extra));
-            ToggleRow(popup, "icon_sound_on", Loc.T("Sound", "Âm thanh"), () => GameSettings.Sound, v => GameSettings.Sound = v);
-            ToggleRow(popup, "icon_play", Loc.T("Music", "Nhạc nền"), () => GameSettings.Music, v => GameSettings.Music = v);
-            ToggleRow(popup, "icon_vibrate", Loc.T("Vibration", "Rung"), () => GameSettings.Vibration, v => GameSettings.Vibration = v);
-            popup.Space(10);
+            var inGame = actions.Length > 0;
+            var popup = Popup.Open(parent, inGame ? Loc.T("Paused", "Tạm dừng") : Loc.T("Settings", "Cài đặt"), 1400);
+            popup.OnBack = () => popup.Close(onClose);
+            if (inGame) popup.Button("btn_green", Loc.T("Resume", "Tiếp tục"), () => popup.Close(onClose), "icon_play");
             foreach (var a in actions)
             {
                 var action = a.action;
-                popup.Button(a.sprite, a.label, () => popup.Close(action), a.icon);
+                popup.Button("btn_white", a.label, () => popup.Close(action), a.icon);
             }
+
+            var row = popup.Row(150);
+            RoundToggle(row, -170, "icon_sound_on", () => GameSettings.Sound, v => GameSettings.Sound = v);
+            RoundToggle(row, 0, "icon_music", () => GameSettings.Music, v => GameSettings.Music = v);
+            RoundToggle(row, 170, "icon_vibrate", () => GameSettings.Vibration, v => GameSettings.Vibration = v);
+
             if (!Ads.RemoveAdsOwned)
-                popup.Button("btn_yellow", Loc.T("Remove ads", "Gỡ quảng cáo"), () => Store.BuyRemoveAds(_ => popup.Close(onClose)), "icon_noads");
-            if (Privacy.OptionsRequired)
-                popup.Button("btn_white", Loc.T("Privacy options", "Quyền riêng tư"), Privacy.ShowOptions, "icon_lock");
-            if (Privacy.HasPolicy)
-                popup.Button("btn_white", Loc.T("Privacy policy", "Chính sách bảo mật"), Privacy.OpenPolicy, "icon_lock");
+                popup.Button("btn_yellow", Loc.T("Remove ads", "Gỡ quảng cáo"), () => Store.BuyRemoveAds(ok => { if (ok) popup.Close(onClose); }), "icon_noads");
+            else
+            {
+                var chip = popup.Row(90);
+                UIKit.Image(chip, "icon_check", new Vector2(0.5f, 0.5f), new Vector2(-170, 0), new Vector2(56, 56)).color = UIKit.Hex("#1E7A55");
+                UIKit.Label(chip, Loc.T("Ads removed", "Đã gỡ quảng cáo"), 46, new Vector2(0.5f, 0.5f), new Vector2(30, 0), new Vector2(420, 80), UIKit.Hex("#1E7A55"));
+            }
+
+            // privacy links: the policy always, Google's options form only where UMP requires it
+            if (Privacy.HasPolicy || Privacy.OptionsRequired)
+            {
+                var links = popup.Row(80);
+                var both = Privacy.HasPolicy && Privacy.OptionsRequired;
+                if (Privacy.HasPolicy) Link(links, Loc.T("Privacy policy", "Chính sách bảo mật"), both ? -210 : 0, Privacy.OpenPolicy);
+                if (Privacy.OptionsRequired) Link(links, Loc.T("Privacy options", "Quyền riêng tư"), both ? 210 : 0, Privacy.ShowOptions);
+            }
+            var credit = popup.Row(60);
+            Link(credit, Loc.T("Made by Bill The Dev", "Làm bởi Bill The Dev"), 0, Credits.Open);
             if (Debug.isDebugBuild && AdMobAdProvider.Ready) // test builds only: Google's check of app id, ad units, consent, networks
                 popup.Button("btn_gray", "Ad inspector", AdMobAdProvider.OpenInspector, "icon_ad");
             var close = UIKit.IconButton(popup.Card, "round_white", "icon_close", () => popup.Close(onClose), new Vector2(1f, 1f), new Vector2(-40, -40), 110);
@@ -119,23 +169,38 @@ namespace CasualGame.Core
             return popup.Fit();
         }
 
-        private static void ToggleRow(Popup popup, string icon, string label, Func<bool> get, Action<bool> set)
+        // Round on/off button: yellow when on, grey with a red slash when off.
+        private static void RoundToggle(RectTransform row, float x, string icon, Func<bool> get, Action<bool> set)
         {
-            var row = popup.Row(110);
-            UIKit.Image(row, icon, new Vector2(0f, 0.5f), new Vector2(60, 0), new Vector2(72, 72)).preserveAspect = true;
-            var t = UIKit.Label(row, label, 54, new Vector2(0f, 0.5f), new Vector2(300, 0), new Vector2(380, 100));
-            t.alignment = TextAlignmentOptions.Left;
-            var toggle = UIKit.Place(UIKit.Rect("Toggle", row), new Vector2(1f, 0.5f), new Vector2(-100, 0), new Vector2(160, 88));
-            var img = UIKit.AddImage(toggle, get() ? "toggle_on" : "toggle_off");
-            img.raycastTarget = true;
-            var btn = toggle.gameObject.AddComponent<Button>();
-            btn.transition = Selectable.Transition.None;
-            btn.onClick.AddListener(() =>
+            Button btn = null;
+            Image slash = null;
+            void Paint()
             {
-                set(!get());
-                img.sprite = ArtLibrary.Instance.Get(get() ? "toggle_on" : "toggle_off");
-                GameAudio.Play("ui_click");
-            });
+                var on = get();
+                btn.GetComponent<Image>().sprite = ArtLibrary.Instance.Get(on ? "round_yellow" : "round_white");
+                slash.enabled = !on;
+            }
+            btn = UIKit.IconButton(row, "round_yellow", icon, () => { set(!get()); Paint(); }, new Vector2(0.5f, 0.5f), new Vector2(x, 0), 140);
+            slash = UIKit.Image(btn.transform, "round_rect", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(120, 14), UIKit.Hex("#FF5A5F"));
+            slash.rectTransform.localEulerAngles = new Vector3(0, 0, 45);
+            Paint();
         }
+
+        private static void Link(RectTransform row, string text, float x, Action onClick)
+        {
+            var t = UIKit.Label(row, $"<u>{text}</u>", 40, new Vector2(0.5f, 0.5f), new Vector2(x, 0), new Vector2(400, 70), UIKit.Muted);
+            t.raycastTarget = true;
+            var b = t.gameObject.AddComponent<Button>();
+            b.transition = Selectable.Transition.None;
+            b.onClick.AddListener(() => { GameAudio.Play("ui_click"); onClick(); });
+        }
+    }
+
+    /// <summary>Studio credit: every "Bill The Dev" line opens the studio site.</summary>
+    public static class Credits
+    {
+        public const string Url = "https://www.billthedev.com";
+
+        public static void Open() => Application.OpenURL(Url);
     }
 }
