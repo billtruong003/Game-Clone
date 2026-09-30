@@ -1,6 +1,6 @@
 # Việc cho ChatGPT (v2): icon, logo, feature graphic, khung screenshot
 
-ChatGPT **chỉ làm art cho trang Google Play**. Không làm asset trong game (nhân vật, skin, UI, FX): phần đó Claude vẽ
+ChatGPT làm art cho trang Google Play **và bàn tay trong game** (mục cuối). Mọi asset trong game khác (nhân vật, skin, UI, FX) Claude vẽ
 bằng `Tools/art`.
 
 ## Checklist
@@ -126,3 +126,54 @@ pink #F15BB5, purple #9B5DE5.
 3) FEATURE GRAPHIC: navy background, logo left, jar right, two same balls touching with a flat pop, both GRIN.
 4) FRAME BACKGROUND: navy with a few big balls peeking from the edges, staring at the empty center.
 ```
+
+---
+
+## Bàn tay (asset TRONG game, ngoại lệ duy nhất)
+
+Bàn tay chỉ hướng dẫn và các skin tay trong Shop **không vẽ bằng code**: ChatGPT làm, **PNG nền trong suốt**.
+Ref: ảnh 6 bàn tay của bạn (bộ xương, tay trần, găng trắng, găng hiệp sĩ, găng tay cổ động, găng đá quý), lưu thành
+`Tools\art\gpt-refs\REF_hands.png` rồi đính kèm.
+
+| # | Skin | File nộp (`Store\gpt\hands\`) | Ghi chú |
+|---|---|---|---|
+| H1 | Găng trắng (mặc định, miễn phí) | `hand_glove.png` | dùng cho hướng dẫn |
+| H2 | Tay trần | `hand_bare.png` | |
+| H3 | Bộ xương | `hand_skeleton.png` | |
+| H4 | Găng hiệp sĩ | `hand_knight.png` | |
+| H5 | Găng cổ động | `hand_foam.png` | xanh + băng cổ tay đỏ vàng |
+| H6 | Găng đá quý | `hand_gems.png` | **không** giống Infinity Gauntlet của Marvel |
+| H7 | Tay robot | `hand_robot.png` | |
+| H8 | Tay vàng | `hand_gold.png` | skin đắt nhất |
+
+Một chat riêng, dán khối dưới, đính kèm `REF_hands.png`, mỗi lượt 1 bàn tay:
+
+```text
+ROLE
+You draw game UI sprites. Talk to me in Vietnamese. I attach REF_hands.png: 6 pointing hands in one style. Make ONE
+hand per image in EXACTLY that style, and every hand must share the same pose so they can swap in the game.
+
+STYLE (copy the reference)
+- Cartoon mobile-game sticker: thick black outline (~14 px at 1024), cel shading with 2-3 tones, one soft white
+  highlight, small dark drop shadow offset down-right inside the outline shape.
+- Same pose for all: index finger pointing to the UPPER-LEFT at 45 degrees, other fingers curled, wrist at the
+  bottom-right. The TIP of the index finger sits at about x=190, y=190 of the canvas; the wrist ends near x=820,
+  y=860. Same size and angle every time.
+
+OUTPUT
+- 1024x1024 PNG with a TRANSPARENT background (real alpha, no checkerboard, no white or colored backdrop, no floor
+  shadow outside the hand). One hand only, no text, no sparkles.
+- No logos or characters from other brands (no Marvel Infinity Gauntlet, no Mickey glove).
+
+Hand to draw now: <paste one line>
+  glove    = plain white cartoon glove, three stitch lines on the back
+  bare     = bare cartoon hand, warm neutral skin
+  skeleton = bone hand, ivory bones, dark gaps between bones
+  knight   = steel plate gauntlet, brown leather under the plates
+  foam     = blue foam finger glove with a red cuff and yellow-orange rim bands
+  gems     = silver gauntlet with 3 round gems (green, red, blue) set in a row along the knuckles, rivets on the cuff
+  robot    = white and teal robot hand, round joints, small screws
+  gold     = polished gold hand, like a trophy, darker gold shading
+```
+
+Nộp xong báo Claude: Claude cắt, thu về 256 px, nén ASTC, nối vào hướng dẫn và Shop.
