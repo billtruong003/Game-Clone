@@ -79,8 +79,8 @@ Kéo ngang để ngắm → thả tay để rơi bi → 2 bi cùng cấp chạm 
 | ID | Tính năng | Chi tiết | Mức | Hiện tại |
 |---|---|---|---|---|
 | M1 | **Đường ngắm** | Vạch nét đứt trắng 40% chạy **thẳng từ đáy bi đang cầm xuống điểm bi sẽ chạm đầu tiên** (tính bằng CircleCast bán kính bi). Tại điểm chạm vẽ **vòng tròn bóng mờ** cỡ bi. Cập nhật mỗi frame khi kéo | M | ❌ |
-| M2 | **Vật lý "trôi" chứ không "chồng"** | Bi phải **lăn/trượt khỏi nhau và dàn đều xuống**, không đứng chồng lên đỉnh bi khác. Thông số xuất phát (chỉnh khi mockup chạy thử): ma sát **0.35 → 0.05**; **cho phép bi xoay** (hiện `freezeRotation = true` là nguyên nhân chính khiến bi đứng im trên nhau — mặt vẫn giữ thẳng đứng bằng cách xoay ngược lớp Visual); nảy 0.15 cho bi nhỏ giảm dần còn 0.05 ở bi lớn; khối lượng tỉ lệ diện tích (r²) để bi lớn đẩy được bi nhỏ; thêm lệch ngẫu nhiên ±0.02 khi thả để không bao giờ cân bằng tuyệt đối trên đỉnh | M | ⚠️ |
-| M3 | Cảm giác rơi | Trọng lực 1.4 → ~1.1, giới hạn vận tốc rơi, bi rơi hơi "nhẹ" như thạch. Chạm: squash theo lực va chạm + rung thạch (đã có JellyWobble) | M | ⚠️ nặng như đá |
+| M2 | **Vật lý "trôi" chứ không "chồng"** | Bi phải **lăn/trượt khỏi nhau và dàn đều xuống**, không đứng chồng lên đỉnh bi khác. Thông số xuất phát (chỉnh khi mockup chạy thử): **bỏ khóa xoay** (`freezeRotation = true` là nguyên nhân chính khiến bi đứng im trên nhau) — **mặt xoay theo bi**, không cần giữ thẳng; ma sát **0.35 → 0.05**; nảy 0.15 cho bi nhỏ giảm dần còn 0.05 ở bi lớn; khối lượng tỉ lệ diện tích (r²) để bi lớn đẩy được bi nhỏ; lệch ngẫu nhiên ±0.02 khi thả để không bao giờ cân bằng tuyệt đối trên đỉnh | M | ⚠️ |
+| M3 | Cảm giác rơi | Trọng lực 1.4 → ~1.1, giới hạn vận tốc rơi. **Smear shader giả** khi rơi: thân bi (và mặt) kéo dãn theo hướng vận tốc, đuôi mờ dần, độ dãn tỉ lệ tốc độ, về tròn ngay khi chạm — giống khung "smear" trong hoạt hình 2D, tạo cảm giác có trọng lượng. Đây là **biến dạng chính quả bi**, không phải tia tốc độ/speed line (loại đó đã bị loại). Chạm: squash theo lực va chạm + rung thạch (đã có JellyWobble) | M | ⚠️ nặng như đá, chưa có smear |
 | M4 | Hợp thể | Hút vào nhau (goo) → flash → bi mới bật overshoot → **đẩy nhẹ bi xung quanh** (lực nổ tỉ lệ cấp, bán kính 1.5r). Collider **không** phóng to theo hiệu ứng nảy | M | ⚠️ goo có; chưa đẩy; collider đang to theo |
 | M5 | Combo | Hợp thể liên tiếp trong 1s: cao độ tăng dần + chữ "x2 x3…" bay lên + điểm nhân | S | ❌ |
 | M6 | Bi kế tiếp | Ô "Tiếp" góc phải trên hiện đúng bi kế (có mặt). Bi mới xuất hiện **ở vị trí ngón tay/lần thả trước**, không nhảy về giữa | M | ⚠️ luôn về giữa |
@@ -117,7 +117,8 @@ Popup: Tạm dừng (G3) · Thua: tiêu đề "Hũ đầy rồi!", điểm 140pt
 | # | Tình huống | Kết quả mong đợi |
 |---|---|---|
 | EM1 | Mở game lần đầu | Consent (nếu EEA) → màn chơi + bàn tay hướng dẫn. Bi đầu tiên ở giữa |
-| EM2 | Thả 5 bi cùng 1 chỗ | Bi lăn/trượt sang hai bên, **không đứng thành cột** |
+| EM2 | Thả 5 bi cùng 1 chỗ | Bi lăn/trượt sang hai bên, **không đứng thành cột**; mặt xoay theo bi |
+| EM2b | Thả bi từ trên cao | Bi dãn dài theo hướng rơi (smear), chạm là bẹp rồi nảy về tròn |
 | EM3 | Thả bi lớn lên đống bi nhỏ | Bi lớn chen xuống, đẩy bi nhỏ dạt ra |
 | EM4 | Ngắm | Đường ngắm + vòng bóng luôn chỉ đúng chỗ bi sẽ chạm đầu tiên |
 | EM5 | 3 bi cùng cấp chạm nhau | 2 bi hợp thể, bi thứ 3 ở lại, không lỗi |
@@ -273,7 +274,14 @@ Chế độ: **100 màn** (có sao) · **Vô hạn** (mũi tên mới liên tụ
 
 Lý do: đều là nội dung "giữ chân / thu tiền". Làm khi closed test hoặc số liệu sau ra mắt cho thấy người chơi bỏ game vì thiếu mục tiêu.
 
-## 7. Bước tiếp theo
+## 7. Style cố định & cách làm asset
+
+- **Một style duy nhất cho cả 3 game**, chốt trong mockup trước khi vẽ bất kỳ asset nào: bảng màu (theo từng game), độ dày viền, bán kính bo góc, cách đổ sáng (1 mảng sáng cứng, không gradient mềm), kiểu mặt emoji, font, icon.
+- **Asset vẽ thẳng trong file mockup** (vector), dùng lại đúng các token style ở trên → **export ra PNG/sprite sheet** đưa thẳng vào project (qua `Tools/art` → `SheetSlicer`), không vẽ lại lần hai. Mockup chính là nguồn asset.
+- Mỗi asset trong mockup có tên trùng tên sprite trong game (`block_fill`, `circle_line`, `icon_pause`…) để export/thay thế tự động.
+- Hiệu ứng động (smear, squash, goo, impact frame, vệt mực) mô tả trong mockup bằng khung hình/ghi chú, làm bằng shader/FX trong Unity.
+
+## 8. Bước tiếp theo
 1. Duyệt spec này (thêm/bớt feature, đổi mức M/S).
-2. **Mockup**: vẽ lại toàn bộ màn theo layout mục 2–5 (kể cả trạng thái: hướng dẫn, nguy hiểm, popup, toast, QC đang tải).
+2. **Mockup**: trang đầu là **style sheet** (mục 7), sau đó vẽ toàn bộ màn theo layout mục 2–5 (kể cả trạng thái: hướng dẫn, nguy hiểm, popup, toast, QC đang tải). Asset vẽ trong mockup rồi export thẳng vào game.
 3. **Dev**: làm hết mục M, kiểm bằng toàn bộ user scenario (mỗi scenario = 1 test tay, cái nào tự động được thì viết EditMode test).
