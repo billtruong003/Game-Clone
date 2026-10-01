@@ -11,6 +11,9 @@ namespace CasualGame.ArrowOut
     /// the old one-sprite-per-cell drawing could only do cell by cell, and it never shows seams between cells.
     /// Geometry follows the old tiles: line 0.21 cell wide, head line ending 0.23 cell past the head centre,
     /// chevron arms 0.41 cell at 135°.
+    /// UVs for shaders (theme lab): uv0.x = distance from the tail along the stroke (cells), uv0.y = across the line
+    /// (±1 at the line edge, beyond it in the rim / glow pad); uv1.x = 0 at the tail .. 1 at the head, uv1.y = 1 on the
+    /// chevron. The default UI shader ignores them (white texture), so the normal look is unchanged.
     /// </summary>
     [RequireComponent(typeof(CanvasRenderer))]
     public sealed class ArrowStroke : MaskableGraphic
@@ -36,6 +39,13 @@ namespace CasualGame.ArrowOut
 
         /// <summary>Line width multiplier (grow-in, hint pulse).</summary>
         public float WidthScale { get => widthScale; set { widthScale = value; SetVerticesDirty(); } }
+
+        /// <summary>
+        /// Extra geometry around the line for glow / halo shaders, in cells. 0 = the normal 1-px soft rim. Above 0 the rim
+        /// is that wide and fully opaque: the material draws the line edge itself from uv0.y (|y| = 1).
+        /// </summary>
+        public float GlowPad { get => glowPad; set { glowPad = value; SetVerticesDirty(); } }
+        private float glowPad;
 
         /// <summary>The visible play area (local): past it the stroke fades out over 1.2 cells. Zero size = never fades.</summary>
         public Rect FadeRect { get => fadeRect; set { fadeRect = value; SetVerticesDirty(); } }
@@ -144,6 +154,10 @@ namespace CasualGame.ArrowOut
 
         private readonly List<Vector2> pathPts = new();
         private readonly List<Vector2> pathTan = new();
+        private readonly List<float> pathS = new();
+        private float meshS0;
+        private float Rim => glowPad > 0f ? glowPad * cell : Feather;
+        private float RimAlpha => glowPad > 0f ? 1f : 0f;
 
         protected override void OnPopulateMesh(VertexHelper vh)
         {
@@ -152,6 +166,8 @@ namespace CasualGame.ArrowOut
             float s0 = advance, s1 = advance + bodyLength;
             pathPts.Clear();
             pathTan.Clear();
+            pathS.Clear();
+            meshS0 = s0;
             float acc = 0f;
             foreach (var p in prims)
             {
@@ -162,14 +178,16 @@ namespace CasualGame.ArrowOut
                 int steps = p.arc ? Mathf.Max(2, Mathf.CeilToInt(ArcSteps * (to - from) / p.len)) : 1;
                 for (int k = pathPts.Count == 0 ? 0 : 1; k <= steps; k++)
                 {
-                    var pt = Sample(Mathf.Lerp(from, to, k / (float)steps), out var tan);
+                    var sk = Mathf.Lerp(from, to, k / (float)steps);
+                    var pt = Sample(sk, out var tan);
                     pathPts.Add(pt + shift);
                     pathTan.Add(tan);
+                    pathS.Add(sk);
                 }
             }
             if (pathPts.Count < 2) return;
             var half = cell * Width * 0.5f * widthScale;
-            Strip(vh, pathPts, pathTan, half);
+            Strip(vh, pathPts, pathTan, half, false);
             // chevron: two round-ended arms from the apex, plus round ends where they meet
             var head = pathPts[^1];
             var apex = head + dir * cell * (ApexReach - HeadReach);
@@ -196,18 +214,34 @@ namespace CasualGame.ArrowOut
             return c;
         }
 
-        // A line strip with a soft 1-px rim: four vertices per point (rim, edge, edge, rim).
-        private void Strip(VertexHelper vh, List<Vector2> pts, List<Vector2> tans, float half)
+        private void Vert(VertexHelper vh, Vector2 pos, Color32 col, float along, float across, float t, float head)
+        {
+            var v = UIVertex.simpleVert;
+            v.position = pos;
+            v.color = col;
+            v.uv0 = new Vector4(along, across, 0f, 0f);
+            v.uv1 = new Vector4(t, head, 0f, 0f);
+            vh.AddVert(v);
+        }
+
+        // A line strip with a rim: four vertices per point (rim, edge, edge, rim). The body's points carry their path
+        // position (pathS); the chevron arms (head) measure along from the apex.
+        private void Strip(VertexHelper vh, List<Vector2> pts, List<Vector2> tans, float half, bool head)
         {
             int start = vh.currentVertCount;
+            var rimAcross = (half + Rim) / Mathf.Max(0.001f, half);
             for (int i = 0; i < pts.Count; i++)
             {
                 var n = new Vector2(-tans[i].y, tans[i].x);
                 var p = pts[i];
-                vh.AddVert(p + n * (half + Feather), Col(p, 0f), Vector2.zero);
-                vh.AddVert(p + n * half, Col(p, 1f), Vector2.zero);
-                vh.AddVert(p - n * half, Col(p, 1f), Vector2.zero);
-                vh.AddVert(p - n * (half + Feather), Col(p, 0f), Vector2.zero);
+                float along, t;
+                if (head) { along = bodyLength / cell + (p - pts[0]).magnitude / cell; t = 1f; }
+                else { along = (pathS[i] - meshS0) / cell; t = bodyLength > 0f ? (pathS[i] - meshS0) / bodyLength : 0f; }
+                float h = head ? 1f : 0f;
+                Vert(vh, p + n * (half + Rim), Col(p, RimAlpha), along, rimAcross, t, h);
+                Vert(vh, p + n * half, Col(p, 1f), along, 1f, t, h);
+                Vert(vh, p - n * half, Col(p, 1f), along, -1f, t, h);
+                Vert(vh, p - n * (half + Rim), Col(p, RimAlpha), along, -rimAcross, t, h);
             }
             for (int i = 0; i < pts.Count - 1; i++)
             {
@@ -223,20 +257,22 @@ namespace CasualGame.ArrowOut
             pathTan.Clear();
             pathPts.Add(a); pathTan.Add(t);
             pathPts.Add(b); pathTan.Add(t);
-            Strip(vh, pathPts, pathTan, half);
+            Strip(vh, pathPts, pathTan, half, true);
             Disc(vh, b, half);
         }
 
         private void Disc(VertexHelper vh, Vector2 c, float r)
         {
             int centre = vh.currentVertCount;
-            vh.AddVert(c, Col(c, 1f), Vector2.zero);
+            var along = bodyLength / cell;
+            var rimAcross = (r + Rim) / Mathf.Max(0.001f, r);
+            Vert(vh, c, Col(c, 1f), along, 0f, 1f, 1f);
             for (int i = 0; i <= CapSteps; i++)
             {
                 var ang = i * Mathf.PI * 2f / CapSteps;
                 var d = new Vector2(Mathf.Cos(ang), Mathf.Sin(ang));
-                vh.AddVert(c + d * r, Col(c, 1f), Vector2.zero);
-                vh.AddVert(c + d * (r + Feather), Col(c, 0f), Vector2.zero);
+                Vert(vh, c + d * r, Col(c, 1f), along, 1f, 1f, 1f);
+                Vert(vh, c + d * (r + Rim), Col(c, RimAlpha), along, rimAcross, 1f, 1f);
             }
             for (int i = 0; i < CapSteps; i++)
             {

@@ -1,0 +1,6 @@
+{
+  "name": "CasualGame.Lab",
+  "rootNamespace": "CasualGame.Lab",
+  "references": ["CasualGame.Core", "CasualGame.ArrowOut", "Unity.InputSystem", "Unity.TextMeshPro"],
+  "autoReferenced": true
+}

@@ -1,0 +1,754 @@
+fileFormatVersion: 2
+guid: 09199b0adbac1d94d8c7e81437d5138a
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -500059082344781263
+    second: ball_digits_0
+  - first:
+      213: 6001217967460745113
+    second: ball_digits_1
+  - first:
+      213: 5153614986949201567
+    second: ball_digits_2
+  - first:
+      213: -7015396794265006771
+    second: ball_digits_3
+  - first:
+      213: 9131098467111192107
+    second: ball_digits_4
+  - first:
+      213: 7186061822716278531
+    second: ball_digits_5
+  - first:
+      213: -1879784108491931693
+    second: ball_digits_6
+  - first:
+      213: 1675386544203950322
+    second: ball_digits_7
+  - first:
+      213: -8440831469753264421
+    second: ball_digits_8
+  - first:
+      213: -8580017910913374839
+    second: ball_digits_9
+  - first:
+      213: -1844649096854276895
+    second: ball_digits_10
+  - first:
+      213: -6246958848560871287
+    second: ball_digits_11
+  - first:
+      213: -8409021796932685292
+    second: ball_digits_12
+  - first:
+      213: 1330875660912426629
+    second: ball_digits_13
+  - first:
+      213: 1813721929022551217
+    second: ball_digits_14
+  - first:
+      213: 7025905080348756762
+    second: ball_digits_15
+  - first:
+      213: -1745362490708932968
+    second: ball_digits_16
+  - first:
+      213: 7693351504549807967
+    second: ball_digits_17
+  - first:
+      213: 1220483069223658248
+    second: ball_digits_18
+  - first:
+      213: 8097901313363635267
+    second: ball_digits_19
+  - first:
+      213: 3685790495721768390
+    second: ball_digits_20
+  - first:
+      213: -2019501454751060413
+    second: ball_digits_21
+  - first:
+      213: -6108313014296299277
+    second: ball_digits_22
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: ball_digits_0
+      rect:
+        serializedVersion: 2
+        x: 46
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13aa12ef9ee6f09f0800000000000000
+      internalID: -500059082344781263
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_1
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 34
+        width: 42
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99f703212fb984350800000000000000
+      internalID: 6001217967460745113
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_2
+      rect:
+        serializedVersion: 2
+        x: 298
+        y: 34
+        width: 43
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f9e8c3e8681558740800000000000000
+      internalID: 5153614986949201567
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_3
+      rect:
+        serializedVersion: 2
+        x: 423
+        y: 34
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4d8b67e8cd44ae90800000000000000
+      internalID: -7015396794265006771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_4
+      rect:
+        serializedVersion: 2
+        x: 556
+        y: 34
+        width: 43
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b26c64d5dad28be70800000000000000
+      internalID: 9131098467111192107
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_5
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 34
+        width: 46
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 307fff487250ab360800000000000000
+      internalID: 7186061822716278531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_6
+      rect:
+        serializedVersion: 2
+        x: 811
+        y: 35
+        width: 43
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3dff9e6105aa9e5e0800000000000000
+      internalID: -1879784108491931693
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_7
+      rect:
+        serializedVersion: 2
+        x: 937
+        y: 33
+        width: 47
+        height: 62
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f8eeb47f2b204710800000000000000
+      internalID: 1675386544203950322
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_8
+      rect:
+        serializedVersion: 2
+        x: 1065
+        y: 34
+        width: 46
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bd61b6cef742cda80800000000000000
+      internalID: -8440831469753264421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_9
+      rect:
+        serializedVersion: 2
+        x: 1170
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 985e48d3b27ade880800000000000000
+      internalID: -8580017910913374839
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_10
+      rect:
+        serializedVersion: 2
+        x: 1209
+        y: 34
+        width: 50
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e471c67b6d7666e0800000000000000
+      internalID: -1844649096854276895
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_11
+      rect:
+        serializedVersion: 2
+        x: 1308
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 988cb0966085e49a0800000000000000
+      internalID: -6246958848560871287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_12
+      rect:
+        serializedVersion: 2
+        x: 1344
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4127f458a372d4b80800000000000000
+      internalID: -8409021796932685292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_13
+      rect:
+        serializedVersion: 2
+        x: 1431
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 58ef5e0cc58387210800000000000000
+      internalID: 1330875660912426629
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_14
+      rect:
+        serializedVersion: 2
+        x: 1469
+        y: 35
+        width: 42
+        height: 59
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b4b9b42c72ab2910800000000000000
+      internalID: 1813721929022551217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_15
+      rect:
+        serializedVersion: 2
+        x: 1559
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a1bcccb1277018160800000000000000
+      internalID: 7025905080348756762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_16
+      rect:
+        serializedVersion: 2
+        x: 1596
+        y: 34
+        width: 43
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 896c001ef0a37c7e0800000000000000
+      internalID: -1745362490708932968
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_17
+      rect:
+        serializedVersion: 2
+        x: 1683
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5788e8ae6644ca60800000000000000
+      internalID: 7693351504549807967
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_18
+      rect:
+        serializedVersion: 2
+        x: 1721
+        y: 34
+        width: 52
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 803647392e600f010800000000000000
+      internalID: 1220483069223658248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_19
+      rect:
+        serializedVersion: 2
+        x: 1814
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34c65390756816070800000000000000
+      internalID: 8097901313363635267
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_20
+      rect:
+        serializedVersion: 2
+        x: 1854
+        y: 34
+        width: 43
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6c5c10e7dee862330800000000000000
+      internalID: 3685790495721768390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_21
+      rect:
+        serializedVersion: 2
+        x: 1941
+        y: 34
+        width: 30
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 34ead2e602a49f3e0800000000000000
+      internalID: -2019501454751060413
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: ball_digits_22
+      rect:
+        serializedVersion: 2
+        x: 1980
+        y: 34
+        width: 46
+        height: 60
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3f839fd3da9ea3ba0800000000000000
+      internalID: -6108313014296299277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      ball_digits_0: -500059082344781263
+      ball_digits_1: 6001217967460745113
+      ball_digits_10: -1844649096854276895
+      ball_digits_11: -6246958848560871287
+      ball_digits_12: -8409021796932685292
+      ball_digits_13: 1330875660912426629
+      ball_digits_14: 1813721929022551217
+      ball_digits_15: 7025905080348756762
+      ball_digits_16: -1745362490708932968
+      ball_digits_17: 7693351504549807967
+      ball_digits_18: 1220483069223658248
+      ball_digits_19: 8097901313363635267
+      ball_digits_2: 5153614986949201567
+      ball_digits_20: 3685790495721768390
+      ball_digits_21: -2019501454751060413
+      ball_digits_22: -6108313014296299277
+      ball_digits_3: -7015396794265006771
+      ball_digits_4: 9131098467111192107
+      ball_digits_5: 7186061822716278531
+      ball_digits_6: -1879784108491931693
+      ball_digits_7: 1675386544203950322
+      ball_digits_8: -8440831469753264421
+      ball_digits_9: -8580017910913374839
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
