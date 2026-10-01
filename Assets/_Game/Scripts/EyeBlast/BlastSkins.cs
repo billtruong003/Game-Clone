@@ -1,5 +1,7 @@
+using System.Collections.Generic;
 using CasualGame.Core;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace CasualGame.EyeBlast
 {
@@ -34,6 +36,11 @@ namespace CasualGame.EyeBlast
                 Colors = P("#FF5A5F", "#FF9F1C", "#FFD23F", "#3DDC97", "#4EA8DE", "#9B5DE5", "#F15BB5") });
             c.Add(new SkinDef { Id = "neon", En = "Neon", Vi = "Neon", Tab = 0, Price = SkinPrice.Ads, Cost = 3, Fx = "Skin_Zap",
                 Colors = P("#FF4D6D", "#FF9E00", "#FFFF3F", "#39FF14", "#00BBF9", "#B388FF", "#FF5CCB") });
+            // premium sets: their own block shader (BlockSkin) and colours
+            c.Add(new SkinDef { Id = "skin_retro_bricks", En = "Retro Bricks", Vi = "Gạch cổ điển", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Pixel",
+                Colors = P("#E04040", "#3070E0", "#F0C020", "#30B050", "#A040C0", "#F07020", "#20B0C0") });
+            c.Add(new SkinDef { Id = "skin_gems", En = "Gems", Vi = "Đá quý", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Zap",
+                Colors = P("#E0115F", "#0F52BA", "#50C878", "#FFC87C", "#9966CC", "#7FFFD4", "#E4D00A") });
             // boards: background, frame, empty slot
             c.Add(new SkinDef { Id = "board_classic", En = "Navy", Vi = "Xanh đêm", Tab = 1, Price = SkinPrice.Free, Scene = P("#2B2F55", "#1A1D3A", "#252A4E") });
             c.Add(new SkinDef { Id = "board_paper", En = "Paper", Vi = "Giấy", Tab = 1, Price = SkinPrice.Coins, Cost = 300, Scene = P("#F4EFE8", "#E8E1D5", "#DCD3C4") });
@@ -43,6 +50,28 @@ namespace CasualGame.EyeBlast
 
         /// <summary>The worn board colours: background, frame, empty slot.</summary>
         public static Color[] Board => (Skins.Equipped(1) ?? Skins.CatalogOf(GameId).Default(1)).Scene;
+
+        // premium block sets drawn by the BlockSkin shader (Docs/SHADER_LAB.md): skin id → shader set
+        private static readonly Dictionary<string, int> Looks = new() { ["skin_retro_bricks"] = 0, ["skin_gems"] = 3 };
+        private static readonly Dictionary<int, Material> mats = new();
+
+        /// <summary>
+        /// Draws a block body (a block_fill Image) in a premium set's shader; true when it did, so the caller leaves out
+        /// the separate block_line (the shader draws its own edge).
+        /// </summary>
+        public static bool Dress(Image body, SkinDef skin)
+        {
+            if (skin == null || !Looks.TryGetValue(skin.Id, out var set)) return false;
+            if (!mats.TryGetValue(set, out var m) || m == null)
+            {
+                m = new Material(Shader.Find("CasualGame/Lab/BlockSkin")) { name = "BlockSkin." + set };
+                m.SetFloat("_Set", set);
+                mats[set] = m;
+            }
+            body.sprite = null;
+            body.material = m;
+            return true;
+        }
 
         /// <summary>A light board needs dark text on it.</summary>
         public static bool LightBoard(Color[] board) => board[0].grayscale > 0.6f;
@@ -67,9 +96,9 @@ namespace CasualGame.EyeBlast
                     Block(frame.rectTransform, new Vector2(-87 + i * 58, 0), 52, i == 1 ? colors[4] : i == 2 ? colors[2] : board[2], i == 1 || i == 2 ? Moods[i] : (FaceId?)null);
                 return;
             }
-            Block(area, new Vector2(-104, 0), 92, colors[0], FaceId.Smug);
-            Block(area, new Vector2(0, 0), 92, colors[4], FaceId.Grin);
-            Block(area, new Vector2(104, 0), 92, colors[2], FaceId.Meh);
+            Block(area, new Vector2(-104, 0), 92, colors[0], FaceId.Smug, skin);
+            Block(area, new Vector2(0, 0), 92, colors[4], FaceId.Grin, skin);
+            Block(area, new Vector2(104, 0), 92, colors[2], FaceId.Meh, skin);
         }
 
         public void Preview(RectTransform area, SkinDef pieces, SkinDef scene)
@@ -94,15 +123,15 @@ namespace CasualGame.EyeBlast
                 {
                     var v = grid[r, c];
                     var pos = new Vector2((c - (cols - 1) / 2f) * cell, ((rows - 1) / 2f - r) * cell);
-                    Block(frame.rectTransform, pos, cell - 6, v == 0 ? board[2] : colors[v - 1], v == 0 ? null : Moods[mood++ % Moods.Length]);
+                    Block(frame.rectTransform, pos, cell - 6, v == 0 ? board[2] : colors[v - 1], v == 0 ? null : Moods[mood++ % Moods.Length], pieces);
                 }
         }
 
-        private static void Block(RectTransform parent, Vector2 pos, float size, Color color, FaceId? mood)
+        private static void Block(RectTransform parent, Vector2 pos, float size, Color color, FaceId? mood, SkinDef skin = null)
         {
             var fill = UIKit.Image(parent, "block_fill", new Vector2(0.5f, 0.5f), pos, new Vector2(size, size), color);
             if (mood == null) return;
-            UIKit.Image(fill.transform, "block_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
+            if (!BlastSkins.Dress(fill, skin)) UIKit.Image(fill.transform, "block_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
             Face.AddUI(fill.transform, new Vector2(size * 0.66f, size * 0.66f), new Vector2(0, size * 0.02f)).SetIdle(mood.Value);
         }
     }

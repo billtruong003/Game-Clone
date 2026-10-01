@@ -130,6 +130,7 @@ namespace CasualGame.ArrowOut
             v.Cap = UIKit.Image(layer, "dot", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(Cell * CapSize, Cell * CapSize) * capScale, Palette[a.Color]);
             v.Face = Face.AddUI(v.Cap.transform, new Vector2(Cell * FaceSize, Cell * FaceSize) * capScale, new Vector2(0, Cell * 0.02f));
             v.Face.InkFor(Palette[a.Color]);
+            ArrowSkins.Dress(ArrowSkins.Current, v.Stroke, v.Cap, v.Face, Palette[a.Color], ArrowSkins.Paper[0]);
             views[a.Id] = v;
             PlaceCap(v);
             if (!pop) return;

@@ -302,7 +302,7 @@ namespace CasualGame.EyeBlast
         {
             var rt = UIKit.Place(UIKit.Rect("Block", parent), new Vector2(0.5f, 0.5f), pos, new Vector2(size, size));
             var body = UIKit.AddImage(rt, "block_fill", BlockColors[color]);
-            UIKit.Image(rt, "block_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
+            if (!BlastSkins.Dress(body, Skins.Equipped(0))) UIKit.Image(rt, "block_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
             var face = Face.AddUI(rt, new Vector2(size * 0.66f, size * 0.66f), new Vector2(0, size * 0.04f));
             return new BlockView { Rect = rt, Body = body, Face = face };
         }

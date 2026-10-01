@@ -25,6 +25,7 @@ namespace CasualGame.ArrowOut
         [SerializeField] private TextAsset levelsJson; // wired by the Build Switcher
 
         private Canvas canvas;
+        private Image ground;
         private Camera cam;
         private RectTransform safe;
         private RectTransform screen;
@@ -54,6 +55,10 @@ namespace CasualGame.ArrowOut
             cam = Camera.main;
             cam.clearFlags = CameraClearFlags.SolidColor;
             canvas = UIKit.CreateCameraCanvas("ArrowOutUI", cam);
+            canvas.additionalShaderChannels |= AdditionalCanvasShaderChannels.TexCoord1; // theme shaders read uv1
+            // the theme's ground (chalkboard, blueprint grid, CRT glass…) fills the whole screen behind everything
+            ground = UIKit.AddImage(UIKit.Stretch(UIKit.Rect("Ground", canvas.transform)), (Sprite)null, Color.white);
+            ground.enabled = false;
             safe = UIKit.Stretch(UIKit.Rect("Safe", canvas.transform));
             safe.gameObject.AddComponent<SafeArea>();
             levels = JsonUtility.FromJson<LevelPack>(levelsJson.text).levels;
@@ -200,9 +205,10 @@ namespace CasualGame.ArrowOut
             var sample = new[] { new Pos(0, 3), new Pos(0, 2), new Pos(1, 2), new Pos(1, 1), new Pos(1, 0) };
             var points = new Vector2[sample.Length];
             for (int i = 0; i < sample.Length; i++) points[i] = new Vector2((sample[i].C - 1.5f) * 75, -(sample[i].R - 0.5f) * 75);
-            ArrowBoardView.CreateStroke(doodle, points, 1, 75, ArrowBoardView.Palette[1]);
+            var doodleStroke = ArrowBoardView.CreateStroke(doodle, points, 1, 75, ArrowBoardView.Palette[1]);
             var cap = UIKit.Image(doodle, "dot", new Vector2(0.5f, 0.5f), new Vector2(-1.5f * 75, -0.5f * 75), new Vector2(46, 46), ArrowBoardView.Palette[1]);
-            Face.AddUI(cap.transform, new Vector2(34, 34), new Vector2(0, 1));
+            var doodleFace = Face.AddUI(cap.transform, new Vector2(34, 34), new Vector2(0, 1));
+            ArrowSkins.Dress(ArrowSkins.Current, doodleStroke, cap, doodleFace, ArrowBoardView.Palette[1], ArrowSkins.Paper[0]);
 
             UIKit.Label(s, "BRUH ARROWS", 132, top, new Vector2(0, -520), new Vector2(1000, 180), TextInk);
             UIKit.Label(s, Loc.T("Tap. Yeet. Bruh.", "Chạm. Phóng. Bruh."), 50, top, new Vector2(0, -625), new Vector2(1000, 70), TextMuted);
@@ -425,6 +431,13 @@ namespace CasualGame.ArrowOut
             view = ArrowBoardView.Create(s, new Vector2(0, -40), CellSize);
             view.Tapped += OnTapped;
             view.Show(board, fit: mode == Mode.Level);
+            // shader themes draw every line on when the board appears
+            var look = ArrowSkins.Current;
+            if (look != null)
+            {
+                var line = ArrowSkins.LineMaterial(look);
+                if (line.HasProperty("_Reveal")) Tween.Run(this, 0.6f, k => line.SetFloat("_Reveal", k), Ease.OutQuad, 0f, () => line.SetFloat("_Reveal", 1f));
+            }
 
             // the tip line lives in the free band under the board, never over its last row
             tipText = UIKit.Label(s, "", 38, new Vector2(0.5f, 0f), new Vector2(0, 285), new Vector2(940, 100), TextMuted);
@@ -832,6 +845,9 @@ namespace CasualGame.ArrowOut
             var palette = Skins.Palette ?? Skins.CatalogOf(ArrowSkins.GameId).Default(0).Colors;
             for (int i = 0; i < ArrowBoardView.Palette.Length; i++) ArrowBoardView.Palette[i] = ArrowSkins.OnPaper(palette[Mathf.Min(i, palette.Length - 1)], ArrowSkins.Paper);
             cam.backgroundColor = Background;
+            var look = ArrowSkins.Current;
+            ground.material = ArrowSkins.GroundMaterial(look, ArrowSkins.Paper, 140f);
+            ground.enabled = look != null;
         }
 
         private void OpenShop(System.Action onClose) => shop = ShopScreen.Open(safe, new ArrowShopPainter(), onClose);

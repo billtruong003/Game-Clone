@@ -23,7 +23,7 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `all_skins` | 4.99 | Every skin of the game (future sets too); keeps the ads. |
 | `remove_ads` | 2.99 | Turns off between-round ads. Rewarded ads stay optional. Already in code (`GameConfig.removeAdsProductId`). |
 
-## Meh Merge (16 products + 3 bundles)
+## Meh Merge (18 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
@@ -31,6 +31,8 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `skin_sports` | 1.99 | Sports balls (premium) | — |
 | `skin_eyeballs` | 1.99 | Eyeballs (premium) | — |
 | `skin_planets` | 1.99 | Planets (premium) | — |
+| `skin_monsters` | 1.99 | Monsters: colour + striped horns (premium) | — |
+| `skin_slimes` | 1.99 | Slimes: wobbling jelly (premium) | — |
 | `color_candy` | 0.99 | Candy ball colours | 300 coins |
 | `color_ocean` | 0.99 | Ocean ball colours | 300 coins |
 | `color_forest` | 0.99 | Forest ball colours | 400 coins |
@@ -43,15 +45,13 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `stage_night` | 0.99 | Night stage | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon balls: 3 rewarded videos, no product. One by one: $23.82 → Full Game $6.99.
+Neon balls: 3 rewarded videos, no product. One by one: $27.80 → Full Game $6.99.
 
-## Nah Blocks (14 products + 3 bundles)
+## Nah Blocks (12 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
 | `skin_retro_bricks` | 1.99 | Retro Bricks (premium) | — |
-| `skin_pixel` | 1.99 | Pixel (premium) | — |
-| `skin_toy_studs` | 1.99 | Toy Studs (premium) | — |
 | `skin_gems` | 1.99 | Gems (premium) | — |
 | `color_candy` | 0.99 | Candy blocks | 300 coins |
 | `color_ocean` | 0.99 | Ocean blocks | 300 coins |
@@ -63,15 +63,17 @@ Neon balls: 3 rewarded videos, no product. One by one: $23.82 → Full Game $6.9
 | `board_midnight` | 0.99 | Midnight board | 400 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon blocks: 3 rewarded videos. One by one: $21.84 → Full Game $6.99.
+Neon blocks: 3 rewarded videos. One by one: $17.86 → Full Game $6.99. (Pixel dropped; Toy Bricks only if a pastel version is approved.)
 
-## Bruh Arrows (13 products + 3 bundles)
+## Bruh Arrows (15 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
 | `theme_blueprint` | 1.99 | Blueprint theme (premium) | — |
 | `theme_chalkboard` | 1.99 | Chalkboard theme (premium) | — |
-| `theme_terminal` | 1.99 | Terminal theme (premium) | — |
+| `theme_vector` | 1.99 | Vector CRT theme (premium) | — |
+| `theme_hologram` | 1.99 | Hologram theme (premium) | — |
+| `theme_neon` | 1.99 | Neon theme (premium) | — |
 | `color_candy` | 0.99 | Candy arrows | 300 coins |
 | `color_ocean` | 0.99 | Ocean arrows | 300 coins |
 | `color_forest` | 0.99 | Forest arrows | 400 coins |
@@ -81,7 +83,7 @@ Neon blocks: 3 rewarded videos. One by one: $21.84 → Full Game $6.99.
 | `paper_night` | 0.99 | Night paper | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon arrows: 3 rewarded videos. One by one: $18.86 → Full Game $6.99.
+Neon arrows: 3 rewarded videos. One by one: $22.84 → Full Game $6.99.
 
 ## Store texts (Play Console product name ≤55, description ≤200)
 
@@ -93,14 +95,16 @@ Neon arrows: 3 rewarded videos. One by one: $18.86 → Full Game $6.99.
 | `skin_billiard` | Billiard set | Turn every ball into a pool ball. Still deadpan. | Bộ Bi-a | Biến mọi quả bóng thành bi-a. Vẫn mặt lạnh. |
 | `skin_sports` | Sports set | From marble to beach ball: merge your way through the sports shelf. | Bộ Thể thao | Từ bi ve tới bóng bãi biển: gộp hết cả kệ thể thao. |
 | `skin_eyeballs` | Eyeballs set | The balls are eyes now. They are watching you merge. | Bộ Nhãn cầu | Bóng giờ là con mắt. Tụi nó đang nhìn bạn gộp. |
-| `skin_planets` | Planets set | Merge your way from the Moon to the Sun. | Bộ Hành tinh | Gộp từ Mặt Trăng tới Mặt Trời. |
+| `skin_planets` | Planets set | Merge your way from Pluto to the Sun. | Bộ Hành tinh | Gộp từ Diêm Vương tới Mặt Trời. |
+| `skin_monsters` | Monsters set | Little monsters with striped horns. Still unimpressed. | Bộ Quái vật | Quái vật nhỏ sừng vằn. Vẫn chẳng ấn tượng. |
+| `skin_slimes` | Slimes set | Wobbly jelly slimes that squish when they land. | Bộ Slime | Slime thạch rung rinh, đáp xuống là bẹp. |
 | `skin_retro_bricks` | Retro Bricks set | Bevelled bricks and a black well, straight out of the 80s. | Bộ Gạch cổ điển | Gạch vát cạnh, giếng đen, đúng chất thập niên 80. |
-| `skin_pixel` | Pixel set | 8-bit blocks with 8-bit attitude. | Bộ Pixel | Khối 8-bit, thái độ 8-bit. |
-| `skin_toy_studs` | Toy Studs set | Plastic toy blocks with studs on top. | Bộ Khối đồ chơi | Khối nhựa đồ chơi có núm. |
 | `skin_gems` | Gems set | Cut gems instead of blocks. Still say nah. | Bộ Đá quý | Đá quý cắt giác thay cho khối. Vẫn nói nah. |
 | `theme_blueprint` | Blueprint theme | White lines on engineer blue. | Theme Bản vẽ | Nét trắng trên nền xanh bản vẽ kỹ thuật. |
 | `theme_chalkboard` | Chalkboard theme | Chalk arrows on a school board. | Theme Bảng phấn | Mũi tên phấn trên bảng đen. |
-| `theme_terminal` | Terminal theme | Green-on-black, like it's 1985. | Theme Terminal | Chữ xanh nền đen, như năm 1985. |
+| `theme_vector` | Vector CRT theme | Glowing beams drawn on an old vector monitor. | Theme Màn vector | Tia sáng vẽ trên màn hình vector đời cũ. |
+| `theme_hologram` | Hologram theme | See-through arrows with scanlines and a flicker. | Theme Hologram | Mũi tên trong suốt, có vạch quét và chớp nháy. |
+| `theme_neon` | Neon theme | White-hot neon tubes on a dark wall. | Theme Neon | Ống neon sáng rực trên tường tối. |
 | `color_<name>` | <Name> colours | Unlock the <Name> colour set now instead of saving coins. | Màu <Tên> | Mở bộ màu <Tên> ngay, khỏi gom xu. |
 | `stage_<name>` / `board_<name>` / `paper_<name>` | <Name> stage / board / paper | Unlock it now instead of saving coins. | Sân khấu / Bàn / Giấy <Tên> | Mở ngay, khỏi gom xu. |
 | `face_<name>` | <Name> faces | A new set of faces for every character. | Bộ mặt <Tên> | Bộ mặt mới cho mọi nhân vật. |

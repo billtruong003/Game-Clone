@@ -80,15 +80,17 @@ Shader "CasualGame/Lab/BallSkin"
                 else if (_Set < 0.5)        // billiard: the stripes roll, the face plate stays in front
                 {
                     surf = (_Stripe > 0.5 && abs(s.y) > 0.42) ? _ColB.rgb : _ColA.rgb;
-                    float plate = AAInside(length(p - float2(0, -0.06)) - 0.66);
+                    // the plate turns with the ball (the face on it does too); the stripes roll under it
+                    float2 pl = RotZ(float3(p, 0), -_Spin).xy;
+                    float plate = AAInside(length(pl - float2(0, -0.06)) - 0.66);
                     surf = lerp(surf, _ColB.rgb, plate);
                     // small number at the top of the plate
-                    float2 duv = (p - float2(0, 0.36)) / 0.26 * 0.5 + 0.5;
+                    float2 duv = (pl - float2(0, 0.36)) / 0.26 * 0.5 + 0.5;
                     float cell = clamp(_Number, 1, 16) - 1;
                     float digit = (duv.x >= 0 && duv.x <= 1 && duv.y >= 0 && duv.y <= 1)
                         ? SAMPLE_TEXTURE2D(_Digits, sampler_Digits, float2((cell + duv.x) / 16.0, duv.y)).a : 0;
                     surf = lerp(surf, ink, digit * plate);
-                    float plateRim = plate * (1 - AAInside(length(p - float2(0, -0.06)) - 0.62));
+                    float plateRim = plate * (1 - AAInside(length(pl - float2(0, -0.06)) - 0.62));
                     surf = lerp(surf, ink, plateRim * 0.25);
                 }
                 else if (_Set < 1.5)        // sports

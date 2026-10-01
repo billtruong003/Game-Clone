@@ -438,6 +438,16 @@ namespace CasualGame.EyeMerge
 
             var ball = go.AddComponent<MergeBall>();
             ball.Init(this, tier, face, body, deform.gameObject.AddComponent<JellyWobble>(), r, fill, line, spin, TierColors[tier - 1]);
+            var look = MergeLooks.Current;
+            if (look != null)
+            {
+                ball.UseSkin(look);
+                if (look.FacePlate) // billiard: the face sits on the cream plate, under the number
+                {
+                    face.transform.localPosition = new Vector3(0f, -0.16f * r, 0f);
+                    face.transform.localScale *= 0.8f;
+                }
+            }
             if (simulated) LightStrip(tier);
             return ball;
         }
@@ -639,6 +649,7 @@ namespace CasualGame.EyeMerge
         // M9: the counter counts up and bounces instead of jumping
         private void LateUpdate()
         {
+            if (held != null) MergeBall.LookTarget = held.transform.position; // eyeballs watch the ball you are about to drop
             if (scoreText == null || shownScore == score) return;
             var step = Mathf.Max(1, Mathf.CeilToInt((score - shownScore) * Mathf.Min(1f, Time.deltaTime * 10f)));
             shownScore = Mathf.Min(score, shownScore + step);

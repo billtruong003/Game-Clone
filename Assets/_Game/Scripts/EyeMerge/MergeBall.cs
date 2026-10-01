@@ -24,6 +24,12 @@ namespace CasualGame.EyeMerge
         private float radius;
         private SpriteRenderer fill, line;
         private Transform spin;
+        // premium sets: the fill is a shader quad; it rolls (_Spin) and eyeballs look at the held ball (_Look)
+        private MaterialPropertyBlock skinProps;
+        private bool lookAt;
+
+        /// <summary>Where every eyeball looks (the ball waiting to be dropped), set by the game.</summary>
+        public static Vector2 LookTarget;
 
         public void Init(EyeMergeGame owner, int tier, Face face, Rigidbody2D body, JellyWobble jelly, float r,
             SpriteRenderer fillRenderer, SpriteRenderer lineRenderer, Transform spinRoot, Color color)
@@ -42,7 +48,24 @@ namespace CasualGame.EyeMerge
 
         public void SetBodyVisible(bool visible)
         {
-            fill.enabled = line.enabled = visible;
+            fill.enabled = visible;
+            line.enabled = visible && skinProps == null; // a shader ball draws its own outline
+        }
+
+        /// <summary>Draws this ball with a premium set's shader instead of the circle sprites.</summary>
+        public void UseSkin(MergeLooks.Look look)
+        {
+            skinProps = new MaterialPropertyBlock();
+            MergeLooks.Configure(look, Tier, skinProps.SetFloat, skinProps.SetColor, skinProps.SetTexture);
+            fill.sprite = MergeLooks.UnitQuad;
+            fill.drawMode = SpriteDrawMode.Simple;
+            fill.color = Color.white;
+            fill.sharedMaterial = MergeLooks.Shared(look);
+            fill.transform.localScale = Vector3.one * (2f * radius / MergeLooks.SphereR(look, Tier));
+            fill.SetPropertyBlock(skinProps);
+            line.enabled = false;
+            lookAt = look.Set == 5;
+            if (!look.Face) Face.gameObject.SetActive(false);
         }
 
         public void FadeFace(float alpha) => Face.SetAlpha(alpha);
@@ -51,6 +74,12 @@ namespace CasualGame.EyeMerge
         {
             Deform.rotation = Quaternion.identity;
             spin.rotation = transform.rotation;
+            if (skinProps != null)
+            {
+                skinProps.SetFloat("_Spin", transform.eulerAngles.z * Mathf.Deg2Rad);
+                if (lookAt) skinProps.SetVector("_Look", Vector2.ClampMagnitude((LookTarget - (Vector2)transform.position) / 6f, 1f));
+                fill.SetPropertyBlock(skinProps);
+            }
             if (!Body.simulated || Merging) return;
 
             var fall = -Body.linearVelocity.y;

@@ -36,6 +36,13 @@ namespace CasualGame.EyeMerge
                 Colors = P("#FFD6E0", "#FFEFB5", "#D8F3DC", "#CDE7F0", "#E2D4F0", "#FFD8BE", "#F8E1F4", "#C7F9CC", "#FDE2E4", "#E3F2FD", "#FFD98A") });
             c.Add(new SkinDef { Id = "neon", En = "Neon", Vi = "Neon", Tab = 0, Price = SkinPrice.Ads, Cost = 3, Fx = "Skin_Zap",
                 Colors = P("#FFFF3F", "#39FF14", "#00F5D4", "#00BBF9", "#FF5CCB", "#FF4D6D", "#FEE440", "#B388FF", "#FF9E00", "#72EFDD", "#FFE14D") });
+            // premium sets: drawn by shaders (MergeLooks); Colors feed the HUD strip, the next bubble and the splashes
+            c.Add(new SkinDef { Id = "skin_billiard", En = "Billiard", Vi = "Bi-a", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_billiard") });
+            c.Add(new SkinDef { Id = "skin_sports", En = "Sports", Vi = "Thể thao", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Confetti", FxPieceColor = false, Colors = MergeLooks.TierColors("skin_sports") });
+            c.Add(new SkinDef { Id = "skin_planets", En = "Planets", Vi = "Hành tinh", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Ring", Colors = MergeLooks.TierColors("skin_planets") });
+            c.Add(new SkinDef { Id = "skin_monsters", En = "Monsters", Vi = "Quái vật", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_monsters") });
+            c.Add(new SkinDef { Id = "skin_slimes", En = "Slimes", Vi = "Slime", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_slimes") });
+            c.Add(new SkinDef { Id = "skin_eyeballs", En = "Eyeballs", Vi = "Nhãn cầu", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_eyeballs") });
             // stage: background, floor band, shelf, pillars
             c.Add(new SkinDef { Id = "stage_classic", En = "Classic", Vi = "Cổ điển", Tab = 1, Price = SkinPrice.Free, Scene = P("#2F2552", "#271E47", "#5B4D96", "#4A3D80") });
             c.Add(new SkinDef { Id = "stage_frosted", En = "Frosted", Vi = "Sương giá", Tab = 1, Price = SkinPrice.Coins, Cost = 300, Scene = P("#3A3470", "#2C275C", "#C9D6F2", "#9FB0DA") });
@@ -77,9 +84,10 @@ namespace CasualGame.EyeMerge
                 Pill(b, new Vector2(0, -38), new Vector2(300, 14), stage[2]);
                 foreach (var px in new[] { -157f, 157f })
                     Pill(b, new Vector2(px, 2), new Vector2(84, 14), stage[3]).localEulerAngles = new Vector3(0, 0, 90);
-                Ball(b, new Vector2(-60, -31 + 38), 76, colors[5], FaceId.Smug);
-                Ball(b, new Vector2(10, -31 + 30), 60, colors[3], FaceId.Meh);
-                Ball(b, new Vector2(66, -31 + 23), 46, colors[1], FaceId.Grin);
+                var worn = MergeLooks.Current;
+                Ball(b, new Vector2(-60, -31 + 38), 76, colors[5], FaceId.Smug, worn, 6);
+                Ball(b, new Vector2(10, -31 + 30), 60, colors[3], FaceId.Meh, worn, 4);
+                Ball(b, new Vector2(66, -31 + 23), 46, colors[1], FaceId.Grin, worn, 2);
                 return;
             }
             // mockup card: tiers 1..5 left to right, radius 24..46, one baseline
@@ -87,13 +95,17 @@ namespace CasualGame.EyeMerge
             float[] x = { -178, -114, -40, 46, 144 };
             float[] r = { 24, 28, 34, 40, 46 };
             const float baseline = -50f;
-            for (int i = 0; i < 5; i++) Ball(area, new Vector2(x[i], baseline + r[i]), r[i] * 2f, c[i], Moods[i]);
+            // premium cards show the middle of the set (tiers 5..9), colour sets its first five
+            var look = MergeLooks.Of(skin);
+            var first = look != null ? 5 : 1;
+            for (int i = 0; i < 5; i++) Ball(area, new Vector2(x[i], baseline + r[i]), r[i] * 2f, c[first - 1 + i], Moods[i], look, first + i);
         }
 
         public void Preview(RectTransform area, SkinDef pieces, SkinDef scene)
         {
             var stage = scene?.Scene ?? MergeSkins.Stage;
             var colors = pieces?.Colors ?? Default;
+            var look = MergeLooks.Of(pieces);
             var h = area.rect.height > 0 ? area.rect.height : 556f;
             var bottom = -h / 2f;
             UIKit.Image(area, "round_rect", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(964, h), stage[0]).pixelsPerUnitMultiplier = 0.5f;
@@ -128,7 +140,7 @@ namespace CasualGame.EyeMerge
                     if (cost < bestCost) { bestCost = cost; best = new Vector2(x, y); }
                 }
                 placed.Add((best, r));
-                Ball(area, best, 2f * r, colors[tier - 1], Moods[i % Moods.Length]);
+                Ball(area, best, 2f * r, colors[tier - 1], Moods[i % Moods.Length], look, tier);
             }
         }
 
@@ -149,8 +161,19 @@ namespace CasualGame.EyeMerge
         // the rect is grown so the drawn ball is exactly `size` across and rests on what it touches (no gap)
         private const float DrawnToRect = 128f / 122f;
 
-        private static void Ball(RectTransform parent, Vector2 pos, float size, Color color, FaceId mood)
+        // look: a premium set draws the ball with its shader (tier picks the ball of the set)
+        private static void Ball(RectTransform parent, Vector2 pos, float size, Color color, FaceId mood, MergeLooks.Look look = null, int tier = 1)
         {
+            if (look != null)
+            {
+                var img = MergeLooks.UIBall(parent, look, tier, pos, size);
+                if (!look.Face) return;
+                var f = Face.AddUI(img.transform, new Vector2(size * 0.66f, size * 0.66f), new Vector2(0, look.FacePlate ? -size * 0.08f : size * 0.04f));
+                f.SetIdle(mood);
+                if (look.FacePlate) f.transform.localScale *= 0.8f;
+                f.InkFor(MergeLooks.Dark(look, tier) ? Color.black : Color.white);
+                return;
+            }
             size *= DrawnToRect;
             var fill = UIKit.Image(parent, "circle_fill", new Vector2(0.5f, 0.5f), pos, new Vector2(size, size), color);
             UIKit.Image(fill.transform, "circle_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
