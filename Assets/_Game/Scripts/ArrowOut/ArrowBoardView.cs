@@ -16,13 +16,11 @@ namespace CasualGame.ArrowOut
     public class ArrowBoardView : MonoBehaviour, IPointerClickHandler
     {
         // A15: the four colours differ in brightness too (dark navy, mid purple, mid-light teal, light amber)
-        public static readonly Color[] Palette =
-        {
-            UIKit.Hex("#2E3A59"), UIKit.Hex("#35B09F"), UIKit.Hex("#7B4FAE"), UIKit.Hex("#EDA93C"),
-        };
+        // the worn arrow skin's four colours (ArrowSkins; a theme brings its own), copied in by the game on every screen
+        public static readonly Color[] Palette = new Color[4];
         // error red far from the amber arrows
         public static readonly Color ErrorColor = UIKit.Hex("#D6334A");
-        private static readonly Color GridColor = UIKit.Hex("#D9D2C5");
+        private static Color GridColor => ArrowSkins.Paper[1];
         // flight, in cells per second: a quick start that keeps speeding up reads as a yank, not a conveyor
         private const float StartSpeed = 14f, TopSpeed = 46f, Acceleration = 120f;
         private const float InkTrailTime = 0.45f, InkWidth = 0.3f; // ink width as a fraction of a cell

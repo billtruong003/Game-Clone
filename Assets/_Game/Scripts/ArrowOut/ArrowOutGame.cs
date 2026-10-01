@@ -13,7 +13,9 @@ namespace CasualGame.ArrowOut
     /// </summary>
     public class ArrowOutGame : MonoBehaviour
     {
-        private static readonly Color Background = UIKit.Hex("#F5F1EA");
+        private static Color Background => ArrowSkins.Paper[0];
+        private static Color TextInk => ArrowSkins.Paper[2];
+        private static Color TextMuted => ArrowSkins.Paper[3];
         private const float CellSize = 136f;
         private const int MaxHearts = 3;
         private const int PerPage = 10;
@@ -23,6 +25,7 @@ namespace CasualGame.ArrowOut
         [SerializeField] private TextAsset levelsJson; // wired by the Build Switcher
 
         private Canvas canvas;
+        private Camera cam;
         private RectTransform safe;
         private RectTransform screen;
         private LevelData[] levels;
@@ -48,8 +51,7 @@ namespace CasualGame.ArrowOut
 
         private void Start()
         {
-            var cam = Camera.main;
-            cam.backgroundColor = Background;
+            cam = Camera.main;
             cam.clearFlags = CameraClearFlags.SolidColor;
             canvas = UIKit.CreateCameraCanvas("ArrowOutUI", cam);
             safe = UIKit.Stretch(UIKit.Rect("Safe", canvas.transform));
@@ -70,6 +72,7 @@ namespace CasualGame.ArrowOut
         // G4 / AO12: Home asks to quit, Level select goes Home, a level opens Pause.
         private void OnBack()
         {
+            if (shop != null && shop.IsOpen) { shop.Close(); return; }
             switch (current)
             {
                 case ScreenKind.Home: AskQuit(); break;
@@ -171,6 +174,7 @@ namespace CasualGame.ArrowOut
         {
             SaveRunBest(); // A11: leaving a run keeps its best
             if (screen != null) Destroy(screen.gameObject);
+            ApplySkin();
             Tween.Kill(this);
             GameFx.StopAll();
             screen = UIKit.Stretch(UIKit.Rect(name, safe));
@@ -200,8 +204,8 @@ namespace CasualGame.ArrowOut
             var cap = UIKit.Image(doodle, "dot", new Vector2(0.5f, 0.5f), new Vector2(-1.5f * 75, -0.5f * 75), new Vector2(46, 46), ArrowBoardView.Palette[1]);
             Face.AddUI(cap.transform, new Vector2(34, 34), new Vector2(0, 1));
 
-            UIKit.Label(s, "BRUH ARROWS", 132, top, new Vector2(0, -520), new Vector2(1000, 180));
-            UIKit.Label(s, Loc.T("Tap. Yeet. Bruh.", "Chạm. Phóng. Bruh."), 50, top, new Vector2(0, -625), new Vector2(1000, 70), UIKit.Muted);
+            UIKit.Label(s, "BRUH ARROWS", 132, top, new Vector2(0, -520), new Vector2(1000, 180), TextInk);
+            UIKit.Label(s, Loc.T("Tap. Yeet. Bruh.", "Chạm. Phóng. Bruh."), 50, top, new Vector2(0, -625), new Vector2(1000, 70), TextMuted);
 
             var mid = new Vector2(0.5f, 0.5f);
             var allClear = ArrowProgress.Cleared >= ArrowProgress.LevelCount;
@@ -219,10 +223,16 @@ namespace CasualGame.ArrowOut
             if (ArrowProgress.TutorialSeen && !ArrowProgress.PlayedToday)
                 UIKit.Image(daily.transform, "dot", new Vector2(1f, 1f), new Vector2(-24, -20), new Vector2(52, 52), ArrowBoardView.ErrorColor);
 
+            var shopButton = UIKit.Button(s, "btn_white", Loc.T("Shop", "Cửa hàng"), () => OpenShop(ShowHome), mid, new Vector2(0, allClear ? -440 : -620), new Vector2(720, 150), "icon_coin");
+            shopButton.GetComponent<Image>().color = UIKit.Hex("#F7B4D2");
+            if (Skins.AnyAffordable()) // SH7: enough coins for a skin not owned yet
+                UIKit.Image(shopButton.transform, "dot", new Vector2(1f, 1f), new Vector2(-24, -20), new Vector2(52, 52), ArrowBoardView.ErrorColor);
+            CoinPill(s);
+
             var bottom = new Vector2(0.5f, 0f);
             UIKit.IconButton(s, "round_white", "icon_settings", () => SettingsPopup.Show(safe, null), bottom, new Vector2(-200, 150));
             UIKit.IconButton(s, "round_yellow", "icon_trophy", ShowRecords, bottom, new Vector2(0, 150));
-            var credit = UIKit.Label(s, "Bill The Dev", 34, bottom, new Vector2(0, 50), new Vector2(400, 50), UIKit.Muted);
+            var credit = UIKit.Label(s, "Bill The Dev", 34, bottom, new Vector2(0, 50), new Vector2(400, 50), TextMuted);
             credit.raycastTarget = true;
             credit.gameObject.AddComponent<Button>().onClick.AddListener(Credits.Open);
             if (!Ads.RemoveAdsOwned)
@@ -264,9 +274,9 @@ namespace CasualGame.ArrowOut
             var s = NewScreen("Levels", ScreenKind.Levels);
             var top = new Vector2(0.5f, 1f);
             UIKit.IconButton(s, "round_white", "icon_back", ShowHome, new Vector2(0f, 1f), new Vector2(100, -100), 116);
-            UIKit.Label(s, Loc.T("Levels", "Chọn màn"), 84, top, new Vector2(0, -100), new Vector2(600, 110));
+            UIKit.Label(s, Loc.T("Levels", "Chọn màn"), 84, top, new Vector2(0, -100), new Vector2(600, 110), TextInk);
             UIKit.Image(s, "icon_star", top, new Vector2(-95, -205), new Vector2(60, 60));
-            UIKit.Label(s, $"{ArrowProgress.TotalStars} / {ArrowProgress.LevelCount * 3}", 50, top, new Vector2(40, -205), new Vector2(260, 70));
+            UIKit.Label(s, $"{ArrowProgress.TotalStars} / {ArrowProgress.LevelCount * 3}", 50, top, new Vector2(40, -205), new Vector2(260, 70), TextInk);
 
             int first = page * PerPage + 1, last = Mathf.Min(first + PerPage - 1, ArrowProgress.LevelCount);
             var card = UIKit.Image(s, "panel", new Vector2(0.5f, 0.5f), new Vector2(0, 90), new Vector2(960, 760));
@@ -306,7 +316,7 @@ namespace CasualGame.ArrowOut
             var nextBtn = UIKit.IconButton(s, "round_white", "icon_next", () => ShowLevelSelect(page + 1), bottom, new Vector2(300, 330), 116);
             UIKit.SetInteractable(prev, page > 0);
             UIKit.SetInteractable(nextBtn, page < pages - 1);
-            UIKit.Label(s, $"{page + 1} / {pages}", 60, bottom, new Vector2(0, 330), new Vector2(300, 90));
+            UIKit.Label(s, $"{page + 1} / {pages}", 60, bottom, new Vector2(0, 330), new Vector2(300, 90), TextInk);
             for (int i = 0; i < pages; i++)
                 UIKit.Image(s, "dot", bottom, new Vector2((i - (pages - 1) / 2f) * 44, 220), new Vector2(i == page ? 30 : 20, i == page ? 30 : 20),
                     i == page ? UIKit.Ink : i < page ? UIKit.Hex("#8E91A8") : UIKit.Hex("#D9D2C5"));
@@ -358,6 +368,8 @@ namespace CasualGame.ArrowOut
             mistakes = 0;
             runBest = 0;
             revived = false;
+            runCoins = runCoinsBanked = 0;
+            runCoinsDoubled = false;
             hearts.Clear();
             var top = new Vector2(0.5f, 1f);
             var tl = new Vector2(0f, 1f);
@@ -371,7 +383,7 @@ namespace CasualGame.ArrowOut
             if (mode == Mode.Level)
             {
                 bool boss = level.n % 10 == 0;
-                scoreText = UIKit.Label(s, Loc.F("Level {0}", "Màn {0}", level.n), 88, top, new Vector2(0, -100), new Vector2(460, 120), boss ? ArrowBoardView.ErrorColor : UIKit.Ink);
+                scoreText = UIKit.Label(s, Loc.F("Level {0}", "Màn {0}", level.n), 88, top, new Vector2(0, -100), new Vector2(460, 120), boss ? ArrowBoardView.ErrorColor : TextInk);
                 scoreText.enableAutoSizing = true;
                 scoreText.fontSizeMin = 50;
                 scoreText.fontSizeMax = 88;
@@ -390,7 +402,7 @@ namespace CasualGame.ArrowOut
             }
             else
             {
-                scoreText = UIKit.Label(s, "0", 100, top, new Vector2(0, -95), new Vector2(460, 120));
+                scoreText = UIKit.Label(s, "0", 100, top, new Vector2(0, -95), new Vector2(460, 120), TextInk);
                 var hint = UIKit.IconButton(s, "round_yellow", "icon_hint", UseHint, tl, new Vector2(240, -100), 116);
                 hintButton = hint.transform;
                 var badge = UIKit.Image(hint.transform, "round_white", new Vector2(1f, 1f), new Vector2(-12, -12), new Vector2(56, 56));
@@ -399,7 +411,7 @@ namespace CasualGame.ArrowOut
                 runBest = mode == Mode.Daily ? ArrowProgress.DailyBest(dailyKey) : ArrowProgress.EndlessBest;
                 runStartBest = runBest;
                 stageText = null;
-                bestText = UIKit.Label(s, "", 42, top, new Vector2(0, -290), new Vector2(900, 60), UIKit.Muted);
+                bestText = UIKit.Label(s, "", 42, top, new Vector2(0, -290), new Vector2(900, 60), TextMuted);
             }
 
             for (int i = 0; i < MaxHearts; i++)
@@ -407,15 +419,15 @@ namespace CasualGame.ArrowOut
             // level: "N arrows left" under the hearts; endless/daily: the colour combo sits right of the hearts
             comboDot = UIKit.Image(s, "dot", top, new Vector2(262, -215), new Vector2(36, 36));
             comboText = mode == Mode.Level
-                ? UIKit.Label(s, "", 46, top, new Vector2(0, -290), new Vector2(700, 64))
-                : UIKit.Label(s, "", 48, top, new Vector2(330, -215), new Vector2(120, 64));
+                ? UIKit.Label(s, "", 46, top, new Vector2(0, -290), new Vector2(700, 64), TextInk)
+                : UIKit.Label(s, "", 48, top, new Vector2(330, -215), new Vector2(120, 64), TextInk);
 
             view = ArrowBoardView.Create(s, new Vector2(0, -40), CellSize);
             view.Tapped += OnTapped;
             view.Show(board, fit: mode == Mode.Level);
 
             // the tip line lives in the free band under the board, never over its last row
-            tipText = UIKit.Label(s, "", 38, new Vector2(0.5f, 0f), new Vector2(0, 285), new Vector2(940, 100), UIKit.Muted);
+            tipText = UIKit.Label(s, "", 38, new Vector2(0.5f, 0f), new Vector2(0, 285), new Vector2(940, 100), TextMuted);
 
             if (mode == Mode.Level && !bare)
             {
@@ -585,7 +597,7 @@ namespace CasualGame.ArrowOut
             {
                 comboDot.enabled = false;
                 comboText.text = Loc.F("{0} arrows left", "Còn {0} mũi tên", board.Count);
-                comboText.color = UIKit.Muted;
+                comboText.color = TextMuted;
                 return;
             }
             scoreText.text = run.Score.ToString();
@@ -594,12 +606,12 @@ namespace CasualGame.ArrowOut
             bestText.text = mode == Mode.Daily
                 ? Loc.F("Today {0} · best {1}", "Hôm nay {0} · kỷ lục {1}", UtcLabel(), Mathf.Max(runBest, run.Score))
                 : Loc.F("Best {0} · Stage {1}", "Kỷ lục {0} · Cấp {1}", Mathf.Max(runBest, run.Score), stage);
-            bestText.color = beaten && runBest > 0 ? UIKit.Hex("#E9A23B") : UIKit.Muted;
+            bestText.color = beaten && runBest > 0 ? UIKit.Hex("#E9A23B") : TextMuted;
             var on = run.ComboColor >= 0 && run.Combo >= 2;
             comboDot.enabled = on;
             if (on) comboDot.color = ArrowBoardView.Palette[run.ComboColor];
             comboText.text = on ? $"x{run.Combo}" : "";
-            comboText.color = on ? ArrowBoardView.Palette[run.ComboColor] : UIKit.Muted;
+            comboText.color = on ? ArrowBoardView.Palette[run.ComboColor] : TextMuted;
         }
 
         private string UtcLabel() => Loc.Vietnamese
@@ -697,7 +709,12 @@ namespace CasualGame.ArrowOut
             state = State.Ended;
             ClearRun();
             var stars = mistakes == 0 ? 3 : mistakes <= 2 ? 2 : 1;
+            var firstClear = level.n > ArrowProgress.Cleared;
             ArrowProgress.Complete(level.n, stars);
+            // SH1: 10 coins per level; a replay pays 2, so replaying level 1 cannot farm the shop
+            var coins = firstClear ? 10 : 2;
+            Wallet.Add(coins);
+            var coinsDoubled = false;
             GameAudio.Play("win");
             GameAudio.Haptic(HapticLevel.Strong);
             GameFx.Play("Arrow_LevelStar", view.transform.position, 1.2f);
@@ -742,6 +759,7 @@ namespace CasualGame.ArrowOut
                 p.Text(mistakes > 0 ? Loc.F("{0} mistakes", "Sai {0} lần", mistakes)
                     : freeTaps > 0 ? Loc.T("Cleared!", "Qua màn!")
                     : Loc.T("Perfect, no mistakes!", "Hoàn hảo, không sai lần nào!"), 48, UIKit.Muted);
+                CoinReward.Add(p, coins, coinsDoubled, "arrow_coins", () => coinsDoubled = true, () => p.Close(() => OpenShop(ShowHome)));
                 p.Space(10);
                 // G10: the review prompt only after the card has closed, never over it
                 void Good() { if (stars >= 2) ReviewPrompt.GoodMoment(); }
@@ -760,6 +778,7 @@ namespace CasualGame.ArrowOut
             GameAudio.Haptic(HapticLevel.Strong);
             view.AllFaces(FaceId.Cry);
             SaveRunBest();
+            BankRunCoins();
             Tween.Delay(this, 0.45f, ShowLose);
         }
 
@@ -772,6 +791,7 @@ namespace CasualGame.ArrowOut
             {
                 p.Text(run.Score.ToString(), 130, UIKit.Ink, 150);
                 p.Text(Loc.F("Best {0}", "Kỷ lục {0}", Mathf.Max(runBest, run.Score)), 48, UIKit.Muted);
+                CoinReward.Add(p, runCoins, runCoinsDoubled, "arrow_coins", () => runCoinsDoubled = true, () => p.Close(() => OpenShop(ShowHome)));
             }
             p.Space(10);
             if (!revived) RewardedButton.Add(p, outOfHearts ? Loc.T("+1 heart", "+1 tim") : Loc.T("Revive", "Hồi sinh"), "arrow_revive", Revive);
@@ -801,6 +821,51 @@ namespace CasualGame.ArrowOut
             state = State.Playing;
         }
 
+        // ---------------- skins and coins (shop) ----------------
+
+        private ShopScreen shop;
+        private int runCoins, runCoinsBanked;
+        private bool runCoinsDoubled;
+
+        private void ApplySkin()
+        {
+            var palette = Skins.Palette ?? Skins.CatalogOf(ArrowSkins.GameId).Default(0).Colors;
+            for (int i = 0; i < ArrowBoardView.Palette.Length; i++) ArrowBoardView.Palette[i] = ArrowSkins.OnPaper(palette[Mathf.Min(i, palette.Length - 1)], ArrowSkins.Paper);
+            cam.backgroundColor = Background;
+        }
+
+        private void OpenShop(System.Action onClose) => shop = ShopScreen.Open(safe, new ArrowShopPainter(), onClose);
+
+        // From the pause popup: the run is saved, and rebuilt in the new skin when the shop closes (back to pause).
+        private void OpenShopFromPause()
+        {
+            SaveRun();
+            OpenShop(() => { if (!TryRestore()) ShowHome(); });
+        }
+
+        private void CoinPill(RectTransform s)
+        {
+            var pill = UIKit.Image(s, "btn_white", new Vector2(1f, 1f), new Vector2(-206, -108), new Vector2(324, 108));
+            UIKit.Image(pill.transform, "icon_coin", new Vector2(0f, 0.5f), new Vector2(62, 2), new Vector2(64, 64)).preserveAspect = true;
+            UIKit.Label(pill.transform, Wallet.Format(Wallet.Coins), 52, new Vector2(0.5f, 0.5f), new Vector2(30, 4), new Vector2(220, 90));
+        }
+
+        // Endless / daily: 1 coin per cleared arrow, +30 for the first daily run of the day. A revive keeps going, so
+        // only what was cleared since the last payout is paid.
+        private void BankRunCoins()
+        {
+            if (run == null) { runCoins = 0; return; }
+            var earned = run.Cleared - runCoinsBanked;
+            if (mode == Mode.Daily && !SaveStore.GetBool("arrow.coins." + dailyKey, false))
+            {
+                SaveStore.SetBool("arrow.coins." + dailyKey, true);
+                earned += 30;
+            }
+            runCoinsBanked = run.Cleared;
+            runCoins = Mathf.Max(0, earned);
+            Wallet.Add(runCoins);
+        }
+
         private void OpenPause()
         {
             if (state != State.Playing) return;
@@ -808,6 +873,7 @@ namespace CasualGame.ArrowOut
             SaveRun();
             // AO6: closing the pause only resumes a run that can actually continue
             SettingsPopup.Show(safe, () => { if (state == State.Paused && lives > 0) state = State.Playing; },
+                (Loc.T("Shop", "Cửa hàng"), "btn_yellow", "icon_bag", OpenShopFromPause),
                 (Loc.T("Play again", "Chơi lại"), "btn_green", "icon_restart", () => { if (mode == Mode.Level) StartLevel(level.n); else StartEndless(mode == Mode.Daily); }),
                 (Loc.T("Menu", "Về menu"), "btn_white", "icon_home", ShowHome));
         }

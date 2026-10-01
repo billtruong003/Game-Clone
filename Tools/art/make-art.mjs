@@ -94,13 +94,15 @@ add('shapes', 'round_rect', 96, 96, `<rect x="0" y="0" width="96" height="96" rx
 // ---------- UI ----------
 const pill = (fill) => `<rect x="7" y="7" width="226" height="98" rx="49" fill="${fill}" stroke="${C.ink}" stroke-width="9"/>` +
   `<rect x="36" y="20" width="80" height="16" rx="8" fill="${C.white}" opacity="0.5"/>` + `<rect x="16" y="78" width="208" height="12" rx="6" fill="${C.ink}" opacity="0.12"/>`;
-for (const [n, col] of Object.entries({ green: C.green, blue: C.blue, yellow: C.yellow, gray: C.gray, red: C.red, white: C.paper }))
+for (const [n, col] of Object.entries({ green: C.green, blue: C.blue, yellow: C.yellow, gray: C.gray, red: C.red, white: C.paper, purple: C.purple }))
   add('ui', `btn_${n}`, 240, 112, pill(col), { border: [60, 50, 60, 50] });
 const roundBtn = (fill) => circle(72, 72, 64, fill, C.ink, 9) + ellipse(50, 42, 20, 10, C.white, 'none', 0, `opacity="0.5" ${rot(-30, 50, 42)}`);
 for (const [n, col] of Object.entries({ green: C.green, blue: C.blue, yellow: C.yellow, gray: C.gray, white: C.paper }))
   add('ui', `round_${n}`, 144, 144, roundBtn(col));
 add('ui', 'panel', 240, 240, `<rect x="7" y="7" width="226" height="226" rx="56" fill="${C.paper}" stroke="${C.ink}" stroke-width="12"/>` +
   `<rect x="26" y="26" width="188" height="188" rx="40" fill="none" stroke="${C.ink}" stroke-width="3" opacity="0.12"/>`, { border: [80, 80, 80, 80] });
+// Shop skin card: a paper card with a thinner ink edge than the panel (mockup SkinCard).
+add('ui', 'card', 160, 160, `<rect x="5" y="5" width="150" height="150" rx="44" fill="${C.paper}" stroke="${C.ink}" stroke-width="8"/>`, { border: [56, 56, 56, 56] });
 add('ui', 'ribbon', 360, 120, shape('M10,30 L50,20 L50,100 L10,110 L28,70 Z', '#E08A1E', C.ink, 7) + shape('M350,30 L310,20 L310,100 L350,110 L332,70 Z', '#E08A1E', C.ink, 7) +
   `<rect x="40" y="10" width="280" height="90" rx="16" fill="${C.yellow}" stroke="${C.ink}" stroke-width="8"/>`, { border: [100, 40, 100, 40] });
 add('ui', 'bar_bg', 96, 48, `<rect x="4" y="4" width="88" height="40" rx="20" fill="${C.ink}" opacity="0.25"/>`, { border: [24, 20, 24, 20] });
@@ -147,6 +149,9 @@ I('check', ic('M24,50 L42,68 L74,30', 12));
 I('infinity', ic('M48,48 C36,30 16,34 16,48 C16,62 36,66 48,48 C60,30 80,34 80,48 C80,62 60,66 48,48', 9));
 I('calendar', `<rect x="18" y="24" width="60" height="52" rx="8" fill="none" stroke="${C.ink}" stroke-width="8"/><rect x="18" y="24" width="60" height="16" fill="${C.ink}"/>` +
   ic('M34,16 L34,30', 7) + ic('M62,16 L62,30', 7));
+// coin: a gold coin with a deadpan face (mockup SHOP_Coins), and the shop bag
+I('coin', circle(48, 48, 40, C.yellow, C.ink, 8) + circle(48, 48, 26, 'none', '#E0A800', 5) + circle(38, 43, 4.5, C.ink) + circle(58, 43, 4.5, C.ink) + ic('M39,60 L57,60', 6));
+I('bag', shape('M18,36 L78,36 L72,80 L24,80 Z', C.ink, C.ink, 8) + ic('M36,40 L36,30 Q36,16 48,16 Q60,16 60,30 L60,40', 8));
 I('gift', `<rect x="18" y="40" width="60" height="38" rx="6" fill="${C.ink}"/><rect x="14" y="30" width="68" height="14" rx="5" fill="${C.ink}"/>` +
   `<rect x="44" y="30" width="8" height="48" fill="${C.yellow}"/>` + ic('M48,30 Q34,10 30,26 Q30,32 48,30', 6) + ic('M48,30 Q62,10 66,26 Q66,32 48,30', 6));
 

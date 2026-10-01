@@ -36,6 +36,14 @@ namespace CasualGame.EditorTools
             ("Win_Confetti", "Environment/Confetti/Blast/ConfettiBlastRainbow", true, false),
             ("Sparkle", "Interactive/Sparkle/SparkleSolo/SparkleSoloWhite", true, false),
             ("Fire", "Environment/Fire/Cartoon/Tall/ToonTallFireRed", false, false),
+            // shop skins: each colour set has its own merge / line-clear effect (mockup "Skin VFX & Pricing")
+            ("Skin_Confetti", "Environment/Confetti/Blast/ConfettiBlastRainbow", true, false),
+            ("Skin_Bubbles", "Environment/Bubbles/SoapBubbleBlast", true, false),
+            ("Skin_Leaves", "Environment/Weather/Wind & Leaves/LeafExplosion", true, false),
+            ("Skin_Ring", "Combat/Explosions/NovaSmallExplosion/ExplosionNovaSmallFire", true, true),
+            ("Skin_Zap", "Combat/Explosions/LightningSoftExplosion/LightningSoftExplosionBlue", true, true),
+            ("Skin_Powder", "Environment/Smoke/White/SmokeBurstWhiteSoft", true, true),
+            ("Skin_Pixel", "Combat/Explosions/StarExplosion/StarExplosionGreen", true, true),
         };
 
         // Retired picks, deleted on the next build so no catalog keeps them.
@@ -48,9 +56,9 @@ namespace CasualGame.EditorTools
         // Which effects each game ships (by name prefix).
         private static readonly (string game, string[] prefixes)[] CatalogContents =
         {
-            ("EyeMerge", new[] { "Merge_", "Land_", "Win_", "Sparkle" }),
-            ("EyeBlast", new[] { "Blast_", "Win_", "Sparkle" }),
-            ("ArrowOut", new[] { "Arrow_", "Land_", "Win_", "Sparkle" }),
+            ("EyeMerge", new[] { "Merge_", "Land_", "Win_", "Sparkle", "Skin_" }),
+            ("EyeBlast", new[] { "Blast_", "Win_", "Sparkle", "Skin_", "Merge_Splash" }),
+            ("ArrowOut", new[] { "Arrow_", "Land_", "Win_", "Sparkle", "Skin_" }),
         };
 
         public static string CatalogPath(string game) => $"{BuildSwitcher.LibrariesFolder}/FxCatalog_{game}.asset";

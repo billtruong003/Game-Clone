@@ -7,41 +7,48 @@ using UnityEngine.Purchasing;
 namespace CasualGame.Core
 {
     /// <summary>
-    /// Google Play Billing through Unity IAP 5: one non-consumable ("remove ads"). Owned purchases are read back on
-    /// every start, so reinstalling or a new phone restores the purchase without a button press.
+    /// Google Play Billing through Unity IAP 5: the game's non-consumables (skins, bundles, Remove ads; see
+    /// Store/IAP_PRODUCTS.md). Owned purchases are read back on every start, so reinstalling or a new phone restores
+    /// them without a button press, and a refunded product is taken back.
     /// </summary>
     public class IapStore
     {
-        private readonly string productId;
-        private readonly Action onOwned;
+        private readonly List<string> productIds;
+        private readonly Action<string, bool> setOwned;
         private readonly StoreController store;
-        private Product product;
+        private readonly Dictionary<string, Product> products = new();
         private Action<bool> pendingBuy;
+        private string pendingId;
         private bool connecting;
 
-        public IapStore(string productId, Action onOwned)
+        /// <summary>True once Google Play answered with the products (prices are known).</summary>
+        public bool Ready => products.Count > 0;
+
+        public IapStore(IEnumerable<string> ids, Action<string, bool> setOwned)
         {
-            this.productId = productId;
-            this.onOwned = onOwned;
+            productIds = ids.Distinct().ToList();
+            this.setOwned = setOwned;
             store = UnityIAPServices.StoreController();
-            store.OnProductsFetched += products =>
+            store.OnProductsFetched += fetched =>
             {
-                product = products.FirstOrDefault(p => p.definition.id == productId);
+                foreach (var p in fetched) products[p.definition.id] = p;
                 store.FetchPurchases();
             };
             store.OnPurchasesFetched += orders =>
             {
-                if (orders.ConfirmedOrders.Any(Contains)) onOwned();
-                foreach (var pending in orders.PendingOrders.Where(Contains)) store.ConfirmPurchase(pending);
+                // the full list of what Play says is owned: anything else (refunded, revoked) is not
+                var owned = new HashSet<string>();
+                foreach (var o in orders.ConfirmedOrders) foreach (var id in Ids(o)) owned.Add(id);
+                foreach (var id in productIds) setOwned(id, owned.Contains(id));
+                foreach (var pending in orders.PendingOrders) store.ConfirmPurchase(pending);
             };
             store.OnPurchasePending += order => store.ConfirmPurchase(order);
             // IAP 5 reports both outcomes here: a FailedOrder (acknowledge / validation failed) must not unlock anything
             store.OnPurchaseConfirmed += order =>
             {
-                if (!Contains(order)) return;
-                if (order is not ConfirmedOrder) { Finish(false); return; }
-                onOwned();
-                Finish(true);
+                var ok = order is ConfirmedOrder;
+                if (ok) foreach (var id in Ids(order)) setOwned(id, true);
+                if (pendingId != null && Ids(order).Contains(pendingId)) Finish(ok);
             };
             store.OnPurchaseFailed += _ => Finish(false);
             // paid later (cash, parental approval): nothing is owned yet, it unlocks through OnPurchasesFetched once paid
@@ -59,7 +66,7 @@ namespace CasualGame.Core
         private async void RetryLater()
         {
             await System.Threading.Tasks.Task.Delay(30000);
-            if (product == null) Connect();
+            if (!Ready) Connect();
         }
 
         // Offline or Play Store not signed in at launch: try again later, and whenever the player taps Buy.
@@ -70,42 +77,52 @@ namespace CasualGame.Core
             try
             {
                 await store.Connect();
-                store.FetchProducts(new List<ProductDefinition> { new ProductDefinition(productId, ProductType.NonConsumable) });
+                store.FetchProducts(productIds.Select(id => new ProductDefinition(id, ProductType.NonConsumable)).ToList());
             }
             catch (Exception e)
             {
                 Debug.LogWarning("IAP connect failed: " + e.Message);
                 await System.Threading.Tasks.Task.Delay(30000);
                 connecting = false;
-                if (product == null) Connect();
+                if (!Ready) Connect();
                 return;
             }
             connecting = false;
         }
 
-        public void Buy(Action<bool> onDone)
+        /// <summary>Google Play's localized price ("29.000 ₫"), or null while unknown.</summary>
+        public string Price(string id) =>
+            products.TryGetValue(id, out var p) && p.availableToPurchase ? p.metadata.localizedPriceString : null;
+
+        public void Buy(string id, Action<bool> onDone)
         {
             if (pendingBuy != null) return; // a purchase is already on screen: a second tap must not replace its callback
-            if (product == null || !product.availableToPurchase)
+            if (!products.TryGetValue(id, out var product) || !product.availableToPurchase)
             {
                 Connect();
                 FakeAdProvider.ShowOverlay(Loc.T("The store is not available right now.", "Cửa hàng chưa sẵn sàng."), 1.4f, () => onDone?.Invoke(false));
                 return;
             }
             pendingBuy = onDone;
+            pendingId = id;
             store.PurchaseProduct(product);
         }
 
+        /// <summary>Asks Play again for everything owned; the answer arrives through OnPurchasesFetched.</summary>
         public void Restore(Action<bool> onDone) =>
-            store.RestoreTransactions((ok, _) => onDone?.Invoke(ok && Ads.RemoveAdsOwned));
+            store.RestoreTransactions((ok, _) =>
+            {
+                if (ok) store.FetchPurchases();
+                onDone?.Invoke(ok);
+            });
 
-        private bool Contains(Order order) =>
-            order.CartOrdered.Items().Any(i => i.Product.definition.id == productId);
+        private static IEnumerable<string> Ids(Order order) => order.CartOrdered.Items().Select(i => i.Product.definition.id);
 
         private void Finish(bool ok)
         {
             var done = pendingBuy;
             pendingBuy = null;
+            pendingId = null;
             done?.Invoke(ok);
         }
     }

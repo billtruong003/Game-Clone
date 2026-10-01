@@ -135,6 +135,29 @@ namespace CasualGame.Core
             return t;
         }
 
+        /// <summary>
+        /// A full pill (round ends at any height) from the 9-sliced "bar_fill": the slice keeps its native 48 px height
+        /// and a child scales it, so the ends are never squeezed. Content goes into the returned container, not the scaled fill.
+        /// </summary>
+        public static RectTransform Pill(Transform parent, Vector2 anchor, Vector2 offset, Vector2 size, Color color, out UnityEngine.UI.Image fill)
+        {
+            var rt = Place(Rect("Pill", parent), anchor, offset, size);
+            const float native = 48f;
+            var s = size.y / native;
+            fill = Image(rt, "bar_fill", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(Mathf.Max(size.x, size.y) / s, native), color);
+            fill.rectTransform.localScale = new Vector3(s, s, 1f);
+            return rt;
+        }
+
+        /// <summary>Resizes a <see cref="Pill"/> (e.g. to fit its text).</summary>
+        public static void SetPillWidth(RectTransform pill, float width)
+        {
+            pill.sizeDelta = new Vector2(width, pill.sizeDelta.y);
+            var fill = (RectTransform)pill.GetChild(0);
+            var s = fill.localScale.y;
+            fill.sizeDelta = new Vector2(Mathf.Max(width, pill.sizeDelta.y) / s, fill.sizeDelta.y);
+        }
+
         /// <summary>Pill button (9-sliced) with an optional icon to the left of the label.</summary>
         public static Button Button(Transform parent, string sprite, string label, Action onClick, Vector2 anchor, Vector2 offset,
             Vector2 size, string icon = null, float fontSize = 60f)

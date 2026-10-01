@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace CasualGame.Core
@@ -78,48 +79,102 @@ namespace CasualGame.Core
         }
     }
 
-    /// <summary>In-app purchases: Google Play Billing through Unity IAP on device, a simulated purchase in the editor.</summary>
+    /// <summary>
+    /// In-app purchases (Store/IAP_PRODUCTS.md): Google Play Billing through Unity IAP on device, simulated in the editor.
+    /// Every product is a non-consumable. Ownership is cached in SaveStore and re-checked against Play on every start.
+    /// <see cref="FullGame"/> counts as <see cref="AllSkins"/> + Remove ads.
+    /// </summary>
     public static class Store
     {
+        public const string AllSkins = "all_skins", FullGame = "all_skins_noads";
+        /// <summary>USD prices of IAP_PRODUCTS.md, shown until Google Play's localized prices are known (editor, offline).</summary>
+        public const string UsdAllSkins = "$4.99", UsdFullGame = "$6.99", UsdRemoveAds = "$2.99";
+
         public static event Action PurchasesChanged;
         private static IapStore iap;
+        private static GameConfig config;
 
-        internal static void Init(GameConfig config)
+        public static string RemoveAdsId => config != null && !string.IsNullOrEmpty(config.removeAdsProductId) ? config.removeAdsProductId : "remove_ads";
+
+        /// <summary>Starts the store connection (the boot calls it early so prices are ready by the shop); safe to call twice.</summary>
+        public static void Init(GameConfig cfg)
         {
-            if (Application.isEditor || config == null || string.IsNullOrEmpty(config.removeAdsProductId)) return;
-            iap = new IapStore(config.removeAdsProductId, OnOwned);
+            if (cfg == null || config != null) return;
+            config = cfg;
+            if (Application.isEditor) return;
+            var ids = new List<string> { RemoveAdsId };
+            var catalog = Skins.CatalogOf(cfg.gameId);
+            if (catalog != null) ids.AddRange(catalog.ProductIds());
+            iap = new IapStore(ids, SetOwned);
         }
 
-        public static void BuyRemoveAds(Action<bool> onDone)
+        public static bool Ready => iap != null && iap.Ready;
+
+        public static bool Owns(string id) => SaveStore.GetBool(OwnKey(id), false);
+
+        /// <summary>Google Play's localized price, else the USD price from IAP_PRODUCTS.md.</summary>
+        public static string Price(string id, string usd) => iap?.Price(id) ?? usd;
+
+        public static void Buy(string id, string label, Action<bool> onDone)
         {
             if (iap != null)
             {
-                iap.Buy(onDone);
+                iap.Buy(id, onDone);
                 return;
             }
-            if (!Application.isEditor) // a device build without a product id must never hand out a free purchase
+            if (!Application.isEditor) // a device build without a store must never hand out a free purchase
             {
                 FakeAdProvider.ShowOverlay(Loc.T("The store is not available right now.", "Cửa hàng chưa sẵn sàng."), 1.4f, () => onDone?.Invoke(false));
                 return;
             }
-            FakeAdProvider.ShowOverlay(Loc.T("Buying \"Remove ads\" (simulated)…", "Mua \"Gỡ quảng cáo\" (giả lập)…"), 1.2f, () =>
+            FakeAdProvider.ShowOverlay(Loc.F("Buying \"{0}\" (simulated)…", "Mua \"{0}\" (giả lập)…", label), 1.2f, () =>
             {
-                OnOwned();
+                SetOwned(id, true);
                 onDone?.Invoke(true);
             });
         }
 
+        public static void BuyRemoveAds(Action<bool> onDone) => Buy(RemoveAdsId, Loc.T("Remove ads", "Gỡ quảng cáo"), onDone);
+
         public static void Restore(Action<bool> onDone)
         {
             if (iap != null) iap.Restore(onDone);
-            else onDone?.Invoke(Ads.RemoveAdsOwned);
+            else onDone?.Invoke(true);
         }
 
-        private static void OnOwned()
+#if UNITY_EDITOR
+        /// <summary>Editor cheat (Tools/Casual Game/Shop): own or drop a product of any game, without a store.</summary>
+        public static void EditorSetOwned(string gameId, string id, bool owned)
         {
-            if (Ads.RemoveAdsOwned) return;
-            Ads.RemoveAdsOwned = true;
+            SaveStore.SetBool($"iap.{gameId}.{id}", owned);
+            if (config != null && config.gameId == gameId) Ads.RemoveAdsOwned = Owns(RemoveAdsId) || Owns(FullGame);
+            SaveStore.Save();
             PurchasesChanged?.Invoke();
+            Skins.RaiseChanged();
+        }
+
+        /// <summary>Editor: forget every simulated purchase of this game.</summary>
+        public static void EditorResetPurchases()
+        {
+            var catalog = Skins.CatalogOf(config != null ? config.gameId : null);
+            if (catalog != null) foreach (var id in catalog.ProductIds()) SaveStore.Delete(OwnKey(id));
+            SaveStore.Delete(OwnKey(RemoveAdsId));
+            Ads.RemoveAdsOwned = false;
+            PurchasesChanged?.Invoke();
+            Skins.RaiseChanged();
+        }
+#endif
+
+        private static string OwnKey(string id) => $"iap.{(config != null ? config.gameId : "")}.{id}";
+
+        private static void SetOwned(string id, bool owned)
+        {
+            if (Owns(id) == owned) return;
+            SaveStore.SetBool(OwnKey(id), owned);
+            Ads.RemoveAdsOwned = Owns(RemoveAdsId) || Owns(FullGame);
+            SaveStore.Save();
+            PurchasesChanged?.Invoke();
+            Skins.RaiseChanged();
         }
     }
 

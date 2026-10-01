@@ -14,13 +14,13 @@ namespace CasualGame.EyeBlast
     /// </summary>
     public class EyeBlastGame : MonoBehaviour
     {
-        public static readonly Color[] BlockColors =
-        {
-            Color.clear, UIKit.Hex("#FF5A5F"), UIKit.Hex("#FF9F1C"), UIKit.Hex("#FFD23F"), UIKit.Hex("#3DDC97"),
-            UIKit.Hex("#4EA8DE"), UIKit.Hex("#9B5DE5"), UIKit.Hex("#F15BB5"),
-        };
-        private static readonly Color Background = UIKit.Hex("#2B2F55");
-        private static readonly Color SlotColor = UIKit.Hex("#252A4E");
+        // [0] = empty, then the worn block skin's 7 colours (BlastSkins), copied in at the start of every game
+        public static readonly Color[] BlockColors = new Color[BlastBoard.Colors + 1];
+        private static Color Background => BlastSkins.Board[0];
+        private static Color FrameColor => BlastSkins.Board[1];
+        private static Color SlotColor => BlastSkins.Board[2];
+        private static Color TextColor => BlastSkins.LightBoard(BlastSkins.Board) ? UIKit.Ink : UIKit.Paper;
+        private static Color SubColor => BlastSkins.LightBoard(BlastSkins.Board) ? UIKit.Muted : UIKit.Hex("#B9BCE0");
         private static readonly Color GreyBlock = UIKit.Hex("#6B6F8E");
         private const float Cell = 116f;
         private const float TrayScale = 0.52f;
@@ -30,6 +30,7 @@ namespace CasualGame.EyeBlast
         private const float WorriedFill = 0.7f;
 
         private Canvas canvas;
+        private Camera cam;
         private RectTransform root, boardRect, trayRoot, playRoot;
         private readonly BlastBoard board = new();
         private readonly BlockView[,] blocks = new BlockView[BlastBoard.Size, BlastBoard.Size];
@@ -58,8 +59,7 @@ namespace CasualGame.EyeBlast
 
         private void Start()
         {
-            var cam = Camera.main;
-            cam.backgroundColor = Background;
+            cam = Camera.main;
             canvas = UIKit.CreateCameraCanvas("EyeBlastUI", cam);
             root = UIKit.Stretch(UIKit.Rect("Safe", canvas.transform));
             root.gameObject.AddComponent<SafeArea>();
@@ -89,6 +89,8 @@ namespace CasualGame.EyeBlast
         private class RunData
         {
             public int score, startBest, streak;
+            public int coins, banked;
+            public bool doubled;
             public bool revived, bestToast, lost; // lost = the run ended on the game-over card (revive still possible)
             public int[] grid;
             public PieceData[] tray = new PieceData[3];
@@ -100,7 +102,7 @@ namespace CasualGame.EyeBlast
         private void SaveRun()
         {
             if (!playing && !paused && !lost) return;
-            var d = new RunData { score = score, startBest = startBest, streak = streak, revived = revived, bestToast = bestToastShown, lost = lost, grid = new int[BlastBoard.Size * BlastBoard.Size] };
+            var d = new RunData { score = score, startBest = startBest, streak = streak, revived = revived, bestToast = bestToastShown, lost = lost, coins = coinsEarned, banked = coinsBanked, doubled = coinsDoubled, grid = new int[BlastBoard.Size * BlastBoard.Size] };
             for (int r = 0; r < BlastBoard.Size; r++)
                 for (int c = 0; c < BlastBoard.Size; c++) d.grid[r * BlastBoard.Size + c] = board.Grid[r, c];
             for (int i = 0; i < 3; i++)
@@ -126,6 +128,9 @@ namespace CasualGame.EyeBlast
             streak = d.streak;
             revived = d.revived;
             bestToastShown = d.bestToast;
+            coinsEarned = d.coins;
+            coinsBanked = d.banked;
+            coinsDoubled = d.doubled;
             for (int r = 0; r < BlastBoard.Size; r++)
                 for (int c = 0; c < BlastBoard.Size; c++)
                 {
@@ -169,6 +174,7 @@ namespace CasualGame.EyeBlast
 
         private void OnBack()
         {
+            if (shop != null && shop.IsOpen) { shop.Close(); return; }
             if (playing) OpenPause();
         }
 
@@ -191,16 +197,20 @@ namespace CasualGame.EyeBlast
             dragging = -1;
             revived = worried = bestToastShown = lost = false;
             best = startBest = SaveStore.GetInt("blast.best");
+            if (fresh) BankCoins(); // a run left for a new one keeps its coins (a restore must not bank them twice)
+            coinsEarned = coinsBanked = 0;
+            coinsDoubled = false;
+            ApplySkin();
 
             playRoot = UIKit.Stretch(UIKit.Rect("Play", root));
             var top = new Vector2(0.5f, 1f);
-            scoreText = UIKit.Label(playRoot, "0", 120, top, new Vector2(0, -130), new Vector2(700, 150), UIKit.Paper);
-            bestText = UIKit.Label(playRoot, "", 46, top, new Vector2(30, -225), new Vector2(600, 70), UIKit.Hex("#B9BCE0"));
+            scoreText = UIKit.Label(playRoot, "0", 120, top, new Vector2(0, -130), new Vector2(700, 150), TextColor);
+            bestText = UIKit.Label(playRoot, "", 46, top, new Vector2(30, -225), new Vector2(600, 70), SubColor);
             bestStar = UIKit.Image(playRoot, "icon_star", top, new Vector2(-60, -222), new Vector2(52, 52));
             UIKit.IconButton(playRoot, "round_white", "icon_pause", OpenPause, new Vector2(1f, 1f), new Vector2(-100, -100), 116);
 
             var frameSize = Cell * BlastBoard.Size + 44;
-            var frame = UIKit.Image(playRoot, "frame", new Vector2(0.5f, 0.5f), new Vector2(0, 60), new Vector2(frameSize, frameSize), UIKit.Hex("#1A1D3A"));
+            var frame = UIKit.Image(playRoot, "frame", new Vector2(0.5f, 0.5f), new Vector2(0, 60), new Vector2(frameSize, frameSize), FrameColor);
             FitBoard(frame.rectTransform, frameSize);
             frame.gameObject.AddComponent<Canvas>(); // ~64 blinking faces re-batch only the board (no input here: no raycaster)
             boardRect = UIKit.Place(UIKit.Rect("Board", frame.transform), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(Cell * BlastBoard.Size, Cell * BlastBoard.Size));
@@ -546,6 +556,7 @@ namespace CasualGame.EyeBlast
             if (lines > 0)
             {
                 streak++;
+                coinsEarned += 2 * lines; // SH1: 2 coins per cleared line
                 var cleared = new HashSet<(int, int)>();
                 foreach (var r in rows) for (int c = 0; c < BlastBoard.Size; c++) cleared.Add((r, c));
                 foreach (var c in cols) for (int r = 0; r < BlastBoard.Size; r++) cleared.Add((r, c));
@@ -628,7 +639,9 @@ namespace CasualGame.EyeBlast
             b.Face.React(FaceId.Grin, 5f);
             Tween.Scale(b.Rect, Vector3.one * 1.15f, 0.1f, Ease.OutQuad, delay, () =>
             {
-                GameFx.Play(GameFx.Colored("Blast_BlockPop_{color}", color), b.Rect.position, 0.8f * puff);
+                var skin = Skins.Equipped(0);
+                if (skin == null || skin.Fx == null) GameFx.Play(GameFx.Colored("Blast_BlockPop_{color}", color), b.Rect.position, 0.8f * puff);
+                else GameFx.Play(skin.Fx, b.Rect.position, skin.FxPieceColor ? color : skin.FxTint, 0.8f * puff * skin.FxScale);
                 Tween.Scale(b.Rect, Vector3.zero, 0.18f, Ease.InBack, 0f, () => Destroy(b.Rect.gameObject));
             });
         }
@@ -687,8 +700,8 @@ namespace CasualGame.EyeBlast
             var beaten = score > startBest && startBest > 0;
             bestText.text = beaten ? Loc.T("New best!", "Kỷ lục mới!") : Mathf.Max(best, score).ToString();
             var gold = UIKit.Hex("#FFD23F");
-            bestText.color = beaten ? gold : UIKit.Hex("#B9BCE0");
-            scoreText.color = beaten ? gold : UIKit.Paper;
+            bestText.color = beaten ? gold : SubColor;
+            scoreText.color = beaten ? gold : TextColor;
             // the star sits just left of the centred best value, whatever its length (EB12: 7 digits never overlap)
             bestStar.rectTransform.anchoredPosition = new Vector2(30f - bestText.GetPreferredValues(bestText.text).x / 2f - 36f, -222f);
         }
@@ -774,6 +787,8 @@ namespace CasualGame.EyeBlast
                 yield return new WaitForSeconds(0.075f);
             }
             best = SaveStore.SubmitBest("blast.best", score);
+            BankCoins();
+            SaveRun();
             yield return new WaitForSeconds(0.25f);
             ShowGameOver();
         }
@@ -784,6 +799,8 @@ namespace CasualGame.EyeBlast
             var p = Popup.Open(root, Loc.T("No room left!", "Hết chỗ rồi!"), 1050);
             p.Text(score.ToString(), 140, UIKit.Ink, 160);
             p.Text(newBest ? Loc.T("New best!", "Kỷ lục mới!") : Loc.F("Best {0}", "Kỷ lục {0}", best), 50, newBest ? UIKit.Hex("#E9A23B") : UIKit.Muted);
+            CoinReward.Add(p, coinsBanked, coinsDoubled, "blast_coins", () => { coinsDoubled = true; SaveRun(); },
+                () => p.Close(() => shop = ShopScreen.Open(root, new BlastShopPainter(), ShowGameOver)));
             p.Space(10);
             if (!revived) RewardedButton.Add(p, Loc.T("Revive · clear 3 lines", "Hồi sinh · xoá 3 hàng"), "blast_revive", Revive);
             // review only once the card is gone (G10), and never an interstitial right on top of it
@@ -828,6 +845,35 @@ namespace CasualGame.EyeBlast
             SaveRun(); // the revive is spent: a crash right after must not hand it back
         }
 
+        // ---------------- skins and coins (shop) ----------------
+
+        private ShopScreen shop;
+        private int coinsEarned, coinsBanked;
+        private bool coinsDoubled;
+
+        private void ApplySkin()
+        {
+            var palette = Skins.Palette ?? Skins.CatalogOf(BlastSkins.GameId).Default(0).Colors;
+            BlockColors[0] = Color.clear;
+            for (int i = 1; i < BlockColors.Length; i++) BlockColors[i] = palette[Mathf.Min(i - 1, palette.Length - 1)];
+            cam.backgroundColor = Background;
+        }
+
+        // Coins of this run not in the wallet yet: banked at game over, or when the run is left for a new one.
+        private void BankCoins()
+        {
+            if (coinsEarned <= coinsBanked) return;
+            Wallet.Add(coinsEarned - coinsBanked);
+            coinsBanked = coinsEarned;
+        }
+
+        // From the pause popup: the run is saved, and rebuilt in the new skin when the shop closes (back to pause).
+        private void OpenShopFromPause()
+        {
+            SaveRun();
+            shop = ShopScreen.Open(root, new BlastShopPainter(), () => { if (!TryRestore()) NewGame(); });
+        }
+
         private int ColorOf(BlockView b)
         {
             for (int r = 0; r < BlastBoard.Size; r++)
@@ -844,6 +890,7 @@ namespace CasualGame.EyeBlast
             paused = true;
             SaveRun();
             SettingsPopup.Show(root, () => { paused = false; playing = true; },
+                (Loc.T("Shop", "Cửa hàng"), "btn_yellow", "icon_bag", OpenShopFromPause),
                 (Loc.T("Play again", "Chơi lại"), "btn_green", "icon_restart", NewGame));
         }
 

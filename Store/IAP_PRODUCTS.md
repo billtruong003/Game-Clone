@@ -1,36 +1,87 @@
 # In-app products (Google Play), v1.0
 
 Shared plan for Bruh Arrows, Nah Blocks and Meh Merge. Source of truth for what to create in Play Console
-(Monetize → Products → In-app products) and what the code's product ids must match. Spec: Docs/FEATURE_SPEC.md §1b (SH5).
+(Monetize → Products → In-app products) and what the code's product ids must match. Spec: Docs/FEATURE_SPEC.md §1b (SH5),
+pricing approved 2026-10-01 (mockup page "Skin VFX & Pricing").
 
 Rules (FEATURE_SPEC §1b and Play policy):
 - Every product is **non-consumable** (bought once, kept forever, restored after reinstall). No consumables, no coin packs,
   no random rewards, no subscriptions.
-- Coins are earned by playing only. They buy colour sets; premium sets are real-money only.
-- Each app has its own product list, so the same id (`remove_ads`) is reused in all three apps.
+- Coins are earned by playing only and are never sold. A colour set can be earned with coins for free **or** unlocked at once
+  for $0.99 (skip the grind). Premium sets are real money only. Each game's Neon set unlocks by watching 3 rewarded videos.
+- **Full Game** ($6.99) = every skin of that game, sets added later included, and no ads between rounds. Buying everything one
+  by one costs far more (Meh Merge $23.82, Nah Blocks $21.84, Bruh Arrows $18.86), so the bundle is the obvious deal.
+- Each app has its own product list, so the same id (`remove_ads`, `color_candy`) is reused across the three apps.
 - A product id can never be reused once created, even after deletion: create them exactly as written here.
 - Prices are set in USD and Play converts them to local prices; check the VND price before activating (aim for round numbers).
 
-## Products
+## Bundles and ads (all 3 games)
 
-| Product id | Apps | Price (USD) | What it unlocks |
+| Product id | Price (USD) | What it unlocks |
+|---|---|---|
+| `all_skins_noads` | **6.99** | **Full Game**: every skin of the game (future sets too) + `remove_ads`. Owning it counts as owning everything below. |
+| `all_skins` | 4.99 | Every skin of the game (future sets too); keeps the ads. |
+| `remove_ads` | 2.99 | Turns off between-round ads. Rewarded ads stay optional. Already in code (`GameConfig.removeAdsProductId`). |
+
+## Meh Merge (16 products + 3 bundles)
+
+| Product id | Price | Unlocks | Also by |
 |---|---|---|---|
-| `remove_ads` | all 3 | **2.99** ← TODO confirm (spec gives no price) | Turns off between-round ads. Rewarded ads stay optional. Already in code (`GameConfig.removeAdsProductId`). |
-| `all_skins` | all 3 | 4.99 | Every premium set and every coin colour set of that game, plus sets added later. |
-| `all_skins_noads` | all 3 | 6.99 | `all_skins` + `remove_ads`. Owning it counts as owning both. |
-| `skin_billiard` | Meh Merge | 1.99 | Billiard balls set |
-| `skin_sports` | Meh Merge | 1.99 | Sports balls set |
-| `skin_eyeballs` | Meh Merge | 1.99 | Eyeballs set |
-| `skin_planets` | Meh Merge | 1.99 | Planets set |
-| `skin_retro_bricks` | Nah Blocks | 1.99 | Retro Bricks set |
-| `skin_pixel` | Nah Blocks | 1.99 | Pixel set |
-| `skin_toy_studs` | Nah Blocks | 1.99 | Toy Studs set |
-| `skin_gems` | Nah Blocks | 1.99 | Gems set |
-| `theme_blueprint` | Bruh Arrows | 1.99 | Blueprint theme |
-| `theme_chalkboard` | Bruh Arrows | 1.99 | Chalkboard theme |
-| `theme_terminal` | Bruh Arrows | 1.99 | Terminal theme |
+| `skin_billiard` | 1.99 | Billiard balls (premium) | — |
+| `skin_sports` | 1.99 | Sports balls (premium) | — |
+| `skin_eyeballs` | 1.99 | Eyeballs (premium) | — |
+| `skin_planets` | 1.99 | Planets (premium) | — |
+| `color_candy` | 0.99 | Candy ball colours | 300 coins |
+| `color_ocean` | 0.99 | Ocean ball colours | 300 coins |
+| `color_forest` | 0.99 | Forest ball colours | 400 coins |
+| `color_sunset` | 0.99 | Sunset ball colours | 400 coins |
+| `color_mono` | 0.99 | Mono ball colours | 500 coins |
+| `color_pastel` | 0.99 | Pastel ball colours | 500 coins |
+| `stage_frosted` | 0.99 | Frosted stage | 300 coins |
+| `stage_amber` | 0.99 | Amber stage | 300 coins |
+| `stage_mint` | 0.99 | Mint stage | 400 coins |
+| `stage_night` | 0.99 | Night stage | 500 coins |
+| `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Counts: Meh Merge 7 products, Nah Blocks 7, Bruh Arrows 6.
+Neon balls: 3 rewarded videos, no product. One by one: $23.82 → Full Game $6.99.
+
+## Nah Blocks (14 products + 3 bundles)
+
+| Product id | Price | Unlocks | Also by |
+|---|---|---|---|
+| `skin_retro_bricks` | 1.99 | Retro Bricks (premium) | — |
+| `skin_pixel` | 1.99 | Pixel (premium) | — |
+| `skin_toy_studs` | 1.99 | Toy Studs (premium) | — |
+| `skin_gems` | 1.99 | Gems (premium) | — |
+| `color_candy` | 0.99 | Candy blocks | 300 coins |
+| `color_ocean` | 0.99 | Ocean blocks | 300 coins |
+| `color_retro` | 0.99 | Retro green blocks | 400 coins |
+| `color_mono` | 0.99 | Mono blocks | 400 coins |
+| `color_pastel` | 0.99 | Pastel blocks | 500 coins |
+| `color_jelly` | 0.99 | Jelly blocks | 500 coins |
+| `board_paper` | 0.99 | Paper board | 300 coins |
+| `board_midnight` | 0.99 | Midnight board | 400 coins |
+| `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
+
+Neon blocks: 3 rewarded videos. One by one: $21.84 → Full Game $6.99.
+
+## Bruh Arrows (13 products + 3 bundles)
+
+| Product id | Price | Unlocks | Also by |
+|---|---|---|---|
+| `theme_blueprint` | 1.99 | Blueprint theme (premium) | — |
+| `theme_chalkboard` | 1.99 | Chalkboard theme (premium) | — |
+| `theme_terminal` | 1.99 | Terminal theme (premium) | — |
+| `color_candy` | 0.99 | Candy arrows | 300 coins |
+| `color_ocean` | 0.99 | Ocean arrows | 300 coins |
+| `color_forest` | 0.99 | Forest arrows | 400 coins |
+| `color_mono` | 0.99 | Mono arrows | 400 coins |
+| `paper_grid` | 0.99 | Grid paper | 300 coins |
+| `paper_kraft` | 0.99 | Kraft paper | 400 coins |
+| `paper_night` | 0.99 | Night paper | 500 coins |
+| `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
+
+Neon arrows: 3 rewarded videos. One by one: $18.86 → Full Game $6.99.
 
 ## Store texts (Play Console product name ≤55, description ≤200)
 
@@ -38,7 +89,7 @@ Counts: Meh Merge 7 products, Nah Blocks 7, Bruh Arrows 6.
 |---|---|---|---|---|
 | `remove_ads` | Remove ads | No more ads between rounds. Optional reward videos stay available. | Gỡ quảng cáo | Không còn quảng cáo giữa các ván. Video có thưởng vẫn còn nếu bạn muốn xem. |
 | `all_skins` | All Skins | Unlock every skin in the game, including future sets. | Trọn bộ skin | Mở mọi skin trong game, kể cả các bộ ra sau này. |
-| `all_skins_noads` | All Skins + No Ads | Every skin, future sets included, and no ads between rounds. | Trọn bộ skin + Gỡ QC | Mọi skin, kể cả bộ sau này, và không còn quảng cáo giữa các ván. |
+| `all_skins_noads` | Full Game | Every skin, future sets included, and no ads between rounds. One price, everything. | Trọn bộ game | Mọi skin, kể cả bộ sau này, và không còn quảng cáo giữa các ván. Một lần, có hết. |
 | `skin_billiard` | Billiard set | Turn every ball into a pool ball. Still deadpan. | Bộ Bi-a | Biến mọi quả bóng thành bi-a. Vẫn mặt lạnh. |
 | `skin_sports` | Sports set | From marble to beach ball: merge your way through the sports shelf. | Bộ Thể thao | Từ bi ve tới bóng bãi biển: gộp hết cả kệ thể thao. |
 | `skin_eyeballs` | Eyeballs set | The balls are eyes now. They are watching you merge. | Bộ Nhãn cầu | Bóng giờ là con mắt. Tụi nó đang nhìn bạn gộp. |
@@ -50,6 +101,9 @@ Counts: Meh Merge 7 products, Nah Blocks 7, Bruh Arrows 6.
 | `theme_blueprint` | Blueprint theme | White lines on engineer blue. | Theme Bản vẽ | Nét trắng trên nền xanh bản vẽ kỹ thuật. |
 | `theme_chalkboard` | Chalkboard theme | Chalk arrows on a school board. | Theme Bảng phấn | Mũi tên phấn trên bảng đen. |
 | `theme_terminal` | Terminal theme | Green-on-black, like it's 1985. | Theme Terminal | Chữ xanh nền đen, như năm 1985. |
+| `color_<name>` | <Name> colours | Unlock the <Name> colour set now instead of saving coins. | Màu <Tên> | Mở bộ màu <Tên> ngay, khỏi gom xu. |
+| `stage_<name>` / `board_<name>` / `paper_<name>` | <Name> stage / board / paper | Unlock it now instead of saving coins. | Sân khấu / Bàn / Giấy <Tên> | Mở ngay, khỏi gom xu. |
+| `face_<name>` | <Name> faces | A new set of faces for every character. | Bộ mặt <Tên> | Bộ mặt mới cho mọi nhân vật. |
 
 ## Before the products can be created (Play Console order)
 
@@ -61,8 +115,9 @@ Counts: Meh Merge 7 products, Nah Blocks 7, Bruh Arrows 6.
 
 ## Code work still to do (part of the Shop build, FEATURE_SPEC SH2–SH5)
 
-- `IapStore` handles one product today (`remove_ads`). It needs the full list per game (from `SkinCatalog`), restore on start,
-  and the bundle rules: `all_skins_noads` ⇒ owns `all_skins` + `remove_ads`; `all_skins` ⇒ owns every set present and future.
+- `IapStore` must take the full list per game (from `SkinCatalog`), restore on start, and apply the bundle rules:
+  `all_skins_noads` ⇒ owns `all_skins` + `remove_ads`; `all_skins` ⇒ owns every set present and future; a colour set is
+  owned if bought with coins **or** with its product.
 - Prices shown in the shop must come from Google Play (localized string), never hard-coded.
 - Ownership is cached locally (SaveStore) but always re-checked against Play on start, so a refund removes the item.
 - Build checks (`BuildSwitcher` release check): every catalog product id exists in this file's list for that game.

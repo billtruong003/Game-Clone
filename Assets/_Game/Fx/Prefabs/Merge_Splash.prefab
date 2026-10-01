@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &1269050211136688202
+--- !u!1001 &4306770782626731656
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -114,36 +114,36 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 193062, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7935624357954480883}
+      addedObject: {fileID: 3494913200433411736}
   m_SourcePrefab: {fileID: 100100000, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
---- !u!1 &1269050211136512620 stripped
+--- !u!198 &4306770782606867502 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19884710, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
+  m_PrefabInstance: {fileID: 4306770782626731656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4306770782606881124 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19867628, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
+  m_PrefabInstance: {fileID: 4306770782626731656}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4306770782626620590 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 193062, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
-  m_PrefabInstance: {fileID: 1269050211136688202}
+  m_PrefabInstance: {fileID: 4306770782626731656}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &7935624357954480883
+--- !u!114 &3494913200433411736
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1269050211136512620}
+  m_GameObject: {fileID: 4306770782626620590}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13110c475f1655f4a8e6dcdb7b7fd186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.FxEffect
   tintable:
-  - {fileID: 1269050211150395302}
-  - {fileID: 1269050211150379756}
+  - {fileID: 4306770782606881124}
+  - {fileID: 4306770782606867502}
   baseScale: 1
---- !u!198 &1269050211150379756 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19884710, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
-  m_PrefabInstance: {fileID: 1269050211136688202}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &1269050211150395302 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19867628, guid: 01949c12a89de284792dc4b7b7128404, type: 3}
-  m_PrefabInstance: {fileID: 1269050211136688202}
-  m_PrefabAsset: {fileID: 0}

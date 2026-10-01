@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &7214681830056994345
+--- !u!1001 &4547749550252733647
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -57,10 +57,6 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 19812724, guid: fe394d041df1a0547990f49cf653249f, type: 3}
-      propertyPath: scalingMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 19812724, guid: fe394d041df1a0547990f49cf653249f, type: 3}
       propertyPath: InitialModule.startColor.maxColor.b
       value: 1
       objectReference: {fileID: 0}
@@ -106,36 +102,36 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 153256, guid: fe394d041df1a0547990f49cf653249f, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1697394089361027184}
+      addedObject: {fileID: 2131957529085002478}
   m_SourcePrefab: {fileID: 100100000, guid: fe394d041df1a0547990f49cf653249f, type: 3}
---- !u!1 &7214681830056882305 stripped
+--- !u!1 &4547749550252876391 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 153256, guid: fe394d041df1a0547990f49cf653249f, type: 3}
-  m_PrefabInstance: {fileID: 7214681830056994345}
+  m_PrefabInstance: {fileID: 4547749550252733647}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1697394089361027184
+--- !u!114 &2131957529085002478
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7214681830056882305}
+  m_GameObject: {fileID: 4547749550252876391}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 13110c475f1655f4a8e6dcdb7b7fd186, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.FxEffect
   tintable:
-  - {fileID: 7214681830076571403}
-  - {fileID: 7214681830076544861}
+  - {fileID: 4547749550272499181}
+  - {fileID: 4547749550272538043}
   baseScale: 1
---- !u!198 &7214681830076544861 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 19812724, guid: fe394d041df1a0547990f49cf653249f, type: 3}
-  m_PrefabInstance: {fileID: 7214681830056994345}
-  m_PrefabAsset: {fileID: 0}
---- !u!198 &7214681830076571403 stripped
+--- !u!198 &4547749550272499181 stripped
 ParticleSystem:
   m_CorrespondingSourceObject: {fileID: 19855650, guid: fe394d041df1a0547990f49cf653249f, type: 3}
-  m_PrefabInstance: {fileID: 7214681830056994345}
+  m_PrefabInstance: {fileID: 4547749550252733647}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &4547749550272538043 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 19812724, guid: fe394d041df1a0547990f49cf653249f, type: 3}
+  m_PrefabInstance: {fileID: 4547749550252733647}
   m_PrefabAsset: {fileID: 0}

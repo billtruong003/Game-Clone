@@ -16,13 +16,9 @@ namespace CasualGame.EyeMerge
     public class EyeMergeGame : MonoBehaviour
     {
         public const int Tiers = 11;
-        internal static readonly Color[] TierColors =
-        {
-            UIKit.Hex("#FFD23F"), UIKit.Hex("#FF9F1C"), UIKit.Hex("#3DDC97"), UIKit.Hex("#4EA8DE"), UIKit.Hex("#F15BB5"),
-            UIKit.Hex("#FF5A5F"), UIKit.Hex("#9B5DE5"), UIKit.Hex("#2A9D8F"), UIKit.Hex("#E76F51"), UIKit.Hex("#3A5BD9"), UIKit.Hex("#FFC83D"),
-        };
+        // the worn ball skin's colours (MergeSkins), copied in at the start of every game
+        internal static readonly Color[] TierColors = new Color[Tiers];
         private static readonly int[] SpawnWeights = { 5, 4, 3, 2, 1 };
-        private static readonly Color Background = UIKit.Hex("#2F2552");
         private static readonly Color DangerRed = UIKit.Hex("#FF5A5F");
 
         // Jar interior in world units.
@@ -65,7 +61,6 @@ namespace CasualGame.EyeMerge
         private void Start()
         {
             cam = Camera.main;
-            cam.backgroundColor = Background;
             // Keep the 10.8-unit-wide jar area visible on tall and wide screens alike.
             cam.orthographicSize = Mathf.Max(9.6f, 5.4f / cam.aspect);
             canvas = UIKit.CreateCameraCanvas("EyeMergeUI", cam, 100);
@@ -157,6 +152,7 @@ namespace CasualGame.EyeMerge
 
         private void OnBack()
         {
+            if (shop != null && shop.IsOpen) { shop.Close(); return; }
             if (playing) OpenPause();
         }
 
@@ -181,6 +177,9 @@ namespace CasualGame.EyeMerge
             overTimer = 0f;
             revived = dangerShown = bestToastShown = legendShown = false;
             best = startBest = SaveStore.GetInt("merge.best");
+            ApplySkin();
+            coinsEarned = 0;
+            coinsDoubled = false;
             world = new GameObject("World").transform;
             nextTier = RollTier(); // the HUD's "next" preview reads it
             BuildJar();
@@ -214,6 +213,38 @@ namespace CasualGame.EyeMerge
             tutorialRoot = null;
             SaveStore.SetBool("merge.tutorial", true);
             SaveStore.Save();
+        }
+
+        // ---------------- skins (shop) ----------------
+
+        private void ApplySkin()
+        {
+            var palette = Skins.Palette ?? Skins.CatalogOf(MergeSkins.GameId).Default(0).Colors;
+            for (int i = 0; i < Tiers; i++) TierColors[i] = palette[Mathf.Min(i, palette.Length - 1)];
+            cam.backgroundColor = MergeSkins.Stage[0];
+        }
+
+        // The merge effect of the worn ball skin (default: the jelly splat, plus the big one from tier 9 up).
+        private static void Splash(Vector3 at, int tier, float scale, bool big = false)
+        {
+            var skin = Skins.Equipped(0);
+            var color = TierColors[tier - 1];
+            if (skin == null || skin.Fx == null)
+            {
+                GameFx.Play("Merge_Splash", at, color, scale);
+                if (big) GameFx.Play("Merge_SplashBig", at, color, scale * 1.3f);
+                return;
+            }
+            GameFx.Play(skin.Fx, at, skin.FxPieceColor ? color : skin.FxTint, scale * skin.FxScale * (big ? 1.3f : 1f));
+        }
+
+        private ShopScreen shop;
+
+        // From the pause popup: the run is saved, and rebuilt in the new skin when the shop closes (back to pause).
+        private void OpenShopFromPause()
+        {
+            SaveRun();
+            shop = ShopScreen.Open(hud, new MergeShopPainter(), () => { if (!TryRestore()) NewGame(); });
         }
 
         private void BuildJar()
@@ -270,7 +301,9 @@ namespace CasualGame.EyeMerge
         // (both ends touching), which is where a sliced sprite would otherwise break apart.
         private const float BarNative = 0.48f;
         private const float StageThick = 0.36f, StageOutline = 0.1f;
-        private static readonly Color StageFloor = UIKit.Hex("#271E47"), StageShelf = UIKit.Hex("#5B4D96"), StagePillar = UIKit.Hex("#4A3D80");
+        private static Color StageFloor => MergeSkins.Stage[1];
+        private static Color StageShelf => MergeSkins.Stage[2];
+        private static Color StagePillar => MergeSkins.Stage[3];
 
         // A round-ended bar centred at `centre` (horizontal; rotate it for a pillar) with an ink outline drawn as a
         // slightly bigger pill underneath. Returns the fill.
@@ -431,6 +464,8 @@ namespace CasualGame.EyeMerge
         private float lastHeldX;
         private int dropsSinceSave, maxTier;
         private bool ended;
+        private int coinsEarned;
+        private bool coinsDoubled;
 
         private class PendingMerge { public int tier; public Vector3 pos; }
         private readonly List<PendingMerge> inFlight = new();
@@ -503,8 +538,7 @@ namespace CasualGame.EyeMerge
                 FloatText(Loc.T("MEGA MEH!", "SIÊU MEH!"), mid + Vector3.up * 2.6f, 110, UIKit.Hex("#FFD23F"));
                 GameAudio.Haptic(HapticLevel.Strong);
                 GameAudio.Play("big");
-                GameFx.Play("Merge_SplashBig", mid, TierColors[Tiers - 1], Radius(Tiers) * 1.4f);
-                GameFx.Play("Merge_Splash", mid, TierColors[Tiers - 1], Radius(Tiers) * 1.1f);
+                Splash(mid, Tiers, Radius(Tiers) * 1.1f, true);
                 GameFx.Play("Win_Confetti", mid, 1.6f);
                 yield break;
             }
@@ -528,9 +562,8 @@ namespace CasualGame.EyeMerge
             if (combo >= 2) FloatText("x" + combo, mid + Vector3.up * Radius(next), 90, UIKit.Hex("#FFD23F"));
             GameAudio.Play("merge", 0.8f + next * 0.07f + 0.06f * (combo - 1));
             // a jelly splat in the new ball's colour, a touch wider than the ball so it reads around it
-            GameFx.Play("Merge_Splash", mid, TierColors[next - 1], SplashScale * Radius(next));
+            Splash(mid, next, SplashScale * Radius(next), next >= 9);
             GameAudio.Haptic(next >= 9 || combo >= 3 ? HapticLevel.Strong : HapticLevel.Medium);
-            if (next >= 9) GameFx.Play("Merge_SplashBig", mid, TierColors[next - 1], SplashScale * 1.3f * Radius(next));
             if (next == Tiers && !legendShown) Legend(mid);
             PushNeighbours(ball, next);
             // pop: from the blob's size -> overshoot -> settle. Only the visual scales; the collider stays put (M4).
@@ -783,6 +816,8 @@ namespace CasualGame.EyeMerge
             foreach (var b in balls) { b.Body.simulated = false; b.Face.React(FaceId.Dizzy, -1f); }
             if (held != null) held.gameObject.SetActive(false);
             best = SaveStore.SubmitBest("merge.best", score);
+            coinsEarned = score / 50; // SH1: score / 50
+            Wallet.Add(coinsEarned);
             Tween.Delay(this, 0.6f, ShowGameOver);
         }
 
@@ -800,6 +835,8 @@ namespace CasualGame.EyeMerge
                 UIKit.Image(ball.transform, "circle_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(96, 96));
                 Face.AddUI(ball.transform, new Vector2(62, 62), new Vector2(0, 4)).SetIdle(FaceId.Smug);
             }
+            CoinReward.Add(p, coinsEarned, coinsDoubled, "merge_coins", () => coinsDoubled = true,
+                () => p.Close(() => shop = ShopScreen.Open(hud, new MergeShopPainter(), ShowGameOver)));
             p.Space(10);
             if (!revived) RewardedButton.Add(p, Loc.T("Revive", "Hồi sinh"), "merge_revive", Revive);
             // review only once the card is gone (G10), and never an interstitial right on top of it
@@ -823,7 +860,7 @@ namespace CasualGame.EyeMerge
                 // floor reaches above the cut-off with its full radius and would be deleted
                 if (b.transform.position.y + Mathf.Min(Radius(b.Tier), 1f) > DangerY - 3.2f)
                 {
-                    GameFx.Play("Merge_Splash", b.transform.position, TierColors[b.Tier - 1], SplashScale * Radius(b.Tier));
+                    Splash(b.transform.position, b.Tier, SplashScale * Radius(b.Tier));
                     balls.RemoveAt(i);
                     Destroy(b.gameObject);
                 }
@@ -848,6 +885,7 @@ namespace CasualGame.EyeMerge
                     foreach (var b in balls) if (b != null) b.Body.simulated = true;
                     playing = true;
                 },
+                (Loc.T("Shop", "Cửa hàng"), "btn_yellow", "icon_bag", OpenShopFromPause),
                 (Loc.T("Play again", "Chơi lại"), "btn_green", "icon_restart", NewGame));
         }
     }
