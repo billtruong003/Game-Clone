@@ -145,6 +145,9 @@ namespace CasualGame.Core
                 Store.PurchasesChanged -= Refresh;
             };
 
+#if UNITY_EDITOR
+            AddDevButton();
+#endif
             SelectTab(0);
             page.localScale = Vector3.one * 0.96f;
             Tween.Scale(page, Vector3.one, 0.22f, Ease.OutBack);
@@ -162,6 +165,39 @@ namespace CasualGame.Core
             UnityEngine.Object.Destroy(r.gameObject);
             onClose?.Invoke();
         }
+
+#if UNITY_EDITOR
+        // Editor only (never in a build): a DEV pill left of the coins with the shop cheats, for testing every skin in play.
+        private void AddDevButton()
+        {
+            var dev = UIKit.Button(page, "btn_red", "DEV", null, new Vector2(1f, 1f), new Vector2(-460, -108), new Vector2(150, 80), null, 34);
+            dev.onClick.AddListener(() =>
+            {
+                var gameId = catalog.GameId;
+                var p = Popup.Open(root, "DEV", 900, 800);
+                p.OnBack = () => p.Close();
+                p.Button("btn_green", "Unlock all skins", () => { Store.EditorSetOwned(gameId, Store.FullGame, true); p.Close(); }, null, 600, 130);
+                p.Button("btn_yellow", "+1000 coins", () => { Wallet.EditorAdd(gameId, 1000); p.Close(); }, null, 600, 130);
+                p.Button("btn_white", "Lock all + reset coins", () =>
+                {
+                    Store.EditorSetOwned(gameId, Store.FullGame, false);
+                    Store.EditorSetOwned(gameId, Store.AllSkins, false);
+                    foreach (var s in catalog.Skins)
+                    {
+                        if (s.HasProduct) Store.EditorSetOwned(gameId, s.Id, false);
+                        SaveStore.Delete($"skin.{gameId}.own.{s.Id}");
+                        SaveStore.Delete($"skin.{gameId}.ads.{s.Id}");
+                    }
+                    for (int t = 0; t < catalog.Tabs.Length; t++) SaveStore.Delete($"skin.{gameId}.eq.{t}");
+                    Wallet.EditorAdd(gameId, -999999);
+                    for (int t = 0; t < tried.Length; t++) tried[t] = Skins.Equipped(t);
+                    Skins.RaiseChanged();
+                    p.Close();
+                }, null, 600, 130);
+                p.Fit();
+            });
+        }
+#endif
 
         private void SelectTab(int t)
         {
