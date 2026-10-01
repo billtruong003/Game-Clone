@@ -44,6 +44,65 @@ namespace CasualGame.Tests
             }
         }
 
+        // The bitboard search must answer exactly like the plain grid search it replaced (same order, same budget).
+        [Test]
+        public void BitboardSearchMatchesGridSearch()
+        {
+            var b = new BlastBoard();
+            var rand = new System.Random(11);
+            for (int i = 0; i < 500; i++)
+            {
+                var fill = 0.3 + 0.5 * rand.NextDouble();
+                for (int r = 0; r < BlastBoard.Size; r++)
+                    for (int c = 0; c < BlastBoard.Size; c++)
+                        b.Grid[r, c] = rand.NextDouble() < fill ? 1 : 0;
+                var pieces = new Piece[3];
+                for (int k = 0; k < 3; k++) pieces[k] = BlastBoard.MakePiece(BlastBoard.Shapes[rand.Next(BlastBoard.Shapes.Length)], 1);
+                int budget = 6000;
+                var expected = GridSearch((int[,])b.Grid.Clone(), pieces, new bool[3], ref budget);
+                Assert.AreEqual(expected, b.AllPlaceable(pieces), "board " + i);
+            }
+        }
+
+        private static bool GridSearch(int[,] grid, Piece[] pieces, bool[] used, ref int budget)
+        {
+            const int n = BlastBoard.Size;
+            bool any = false;
+            for (int i = 0; i < pieces.Length; i++)
+            {
+                if (used[i]) continue;
+                any = true;
+                var p = pieces[i];
+                for (int r = 0; r <= n - p.Height; r++)
+                    for (int c = 0; c <= n - p.Width; c++)
+                    {
+                        bool fits = true;
+                        foreach (var (pr, pc) in p.Cells) fits &= grid[r + pr, c + pc] == 0;
+                        if (!fits) continue;
+                        if (--budget < 0) return false;
+                        var next = (int[,])grid.Clone();
+                        foreach (var (pr, pc) in p.Cells) next[r + pr, c + pc] = 1;
+                        var rows = new bool[n];
+                        var cols = new bool[n];
+                        for (int k = 0; k < n; k++)
+                        {
+                            bool row = true, col = true;
+                            for (int j = 0; j < n; j++) { row &= next[k, j] != 0; col &= next[j, k] != 0; }
+                            rows[k] = row;
+                            cols[k] = col;
+                        }
+                        for (int y = 0; y < n; y++)
+                            for (int x = 0; x < n; x++)
+                                if (rows[y] || cols[x]) next[y, x] = 0;
+                        used[i] = true;
+                        var ok = GridSearch(next, pieces, used, ref budget);
+                        used[i] = false;
+                        if (ok) return true;
+                    }
+            }
+            return !any;
+        }
+
         [Test]
         public void FullestLinesPicksTheMostFilled()
         {

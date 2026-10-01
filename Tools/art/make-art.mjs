@@ -67,11 +67,12 @@ const add = (sheet, name, w, h, body, opts = {}) => sprites[sheet].push({ name, 
 
 // Faces are no longer sprites: make-faces.mjs builds the Texture2DArray atlas (Assets/_Game/Art/Faces/faces.png).
 
-// Bodies: white fill (tinted) + untinted line layer.
-add('shapes', 'circle_fill', 256, 256, circle(128, 128, 122, C.white));
+// Bodies: white fill (tinted) + untinted line layer. The fill always ends on the CENTRE of the line's stroke, never on
+// its outer edge: two antialiased edges on the same spot leave a thin ring of the tint showing outside the ink line.
+add('shapes', 'circle_fill', 256, 256, circle(128, 128, 116, C.white)); // = circle_line's stroke centre
 add('shapes', 'circle_line', 256, 256, circle(128, 128, 116, 'none', C.ink, 12) + ellipse(84, 72, 30, 18, C.white, 'none', 0, `opacity="0.55" ${rot(-35, 84, 72)}`));
-add('shapes', 'block_fill', 256, 256, `<rect x="6" y="6" width="244" height="244" rx="52" fill="${C.white}"/>`);
-add('shapes', 'block_line', 256, 256, `<rect x="11" y="11" width="234" height="234" rx="48" fill="none" stroke="${C.ink}" stroke-width="10"/>` +
+add('shapes', 'block_fill', 256, 256, `<rect x="5" y="5" width="246" height="246" rx="53" fill="${C.white}"/>`); // = block_line's stroke centre
+add('shapes', 'block_line', 256, 256, `<rect x="5" y="5" width="246" height="246" rx="53" fill="none" stroke="${C.ink}" stroke-width="2"/>` +
   `<rect x="40" y="26" width="84" height="20" rx="10" fill="${C.white}" opacity="0.55"/>`);
 // Arrow Out tiles (white, tinted per color), authored pointing up / entering from below.
 const SW = 26;
@@ -84,7 +85,7 @@ add('shapes', 'arrow_single', 128, 128, `<path d="M64,108 L64,36" ${aStroke('rou
 add('shapes', 'grid_dot', 32, 32, circle(16, 16, 7, C.white));
 add('shapes', 'dot', 64, 64, circle(32, 32, 28, C.white));
 // Jar (Eye Merge) and board frame (Eye Blast): 9-sliced.
-add('shapes', 'jar_back', 256, 256, `<rect x="8" y="8" width="240" height="240" rx="70" fill="${C.white}"/>`, { border: [90, 90, 90, 90] });
+add('shapes', 'jar_back', 256, 256, `<rect x="14" y="14" width="228" height="228" rx="64" fill="${C.white}"/>`, { border: [90, 90, 90, 90] }); // = jar_line's stroke centre
 add('shapes', 'jar_line', 256, 256, `<rect x="14" y="14" width="228" height="228" rx="64" fill="none" stroke="${C.ink}" stroke-width="16"/>`, { border: [90, 90, 90, 90] });
 add('shapes', 'danger_dash', 64, 16, `<rect x="4" y="2" width="40" height="12" rx="6" fill="${C.white}"/>`);
 add('shapes', 'frame', 192, 192, `<rect x="8" y="8" width="176" height="176" rx="48" fill="${C.white}" stroke="${C.ink}" stroke-width="12"/>`, { border: [64, 64, 64, 64] });

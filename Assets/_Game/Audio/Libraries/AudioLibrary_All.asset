@@ -12,21 +12,73 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a250a42df3ac4847a385a8e9e1e3e15, type: 3}
   m_Name: AudioLibrary_All
   m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.AudioLibrary
-  clips:
-  - {fileID: 8300000, guid: 358d71982cd4a0149853d5a9eff9d99b, type: 3}
-  - {fileID: 8300000, guid: 6f707287b6eda884ca8f2d283a6d817a, type: 3}
-  - {fileID: 8300000, guid: 8c3b52b41cd392a40ad0645d8e5f672c, type: 3}
-  - {fileID: 8300000, guid: d5c1e64a8ac2aeb4583fc09b0af0df1a, type: 3}
-  - {fileID: 8300000, guid: e9d29e601b1f90b4fb122e010287eb1a, type: 3}
-  - {fileID: 8300000, guid: bff1547987a1c8841aae3f3e2ce9db76, type: 3}
-  - {fileID: 8300000, guid: ba424cc907d871a49843954f1f10cb32, type: 3}
-  - {fileID: 8300000, guid: 1c341e9c82c46c44d90947eea2c92039, type: 3}
-  - {fileID: 8300000, guid: 5b2e51f009d1fca4193cdd854dfcac6e, type: 3}
-  - {fileID: 8300000, guid: 9fca07b7fb6739644ac029fe0d0642e9, type: 3}
-  - {fileID: 8300000, guid: 15c8538a32aae73428706c1e74069700, type: 3}
-  - {fileID: 8300000, guid: 9c9cc32cc17022e458ff4199f92225d2, type: 3}
-  - {fileID: 8300000, guid: f014cd6f895a642459c5be4c470b4990, type: 3}
-  - {fileID: 8300000, guid: 8a6763ffc0390744ea25372f9eb2fc47, type: 3}
-  - {fileID: 8300000, guid: 23efac5dbf4ea8447af00d461770da62, type: 3}
-  - {fileID: 8300000, guid: 7941f8edee6adff4d9269e30b938ed13, type: 3}
-  - {fileID: 8300000, guid: 10d3ed04b0cf1cf41b2650b059dda7d9, type: 3}
+  entries:
+  - name: big
+    clip: {fileID: 8300000, guid: 2667a0a008b044e218b63df62e2be749, type: 3}
+    volume: 0.85
+  - name: blocked
+    clip: {fileID: 8300000, guid: dc6614beca09347ec9b258f12d154bdd, type: 3}
+    volume: 0.7
+  - name: clear
+    clip: {fileID: 8300000, guid: 79180f511d89441b9aa23ccae1992fe0, type: 3}
+    volume: 0.8
+  - name: drop
+    clip: {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}
+    volume: 0.8
+  - name: fly
+    clip: {fileID: 8300000, guid: 81652031b64c342cc8dbc59c138d77c5, type: 3}
+    volume: 0.9
+  - name: hint
+    clip: {fileID: 8300000, guid: 7bd6b897eb5ca4b7d88a205c4a51640c, type: 3}
+    volume: 0.7
+  - name: lose
+    clip: {fileID: 8300000, guid: 5fdb13d3756c84fecac96f5a2d124370, type: 3}
+    volume: 0.8
+  - name: merge
+    clip: {fileID: 8300000, guid: a931da70ee74947d5a047de583170ade, type: 3}
+    volume: 0.85
+  - name: music_arrow
+    clip: {fileID: 8300000, guid: 7d60b1de9e6474fc3ae5cdc46963aaac, type: 3}
+    volume: 1
+  - name: music_arrow_intro
+    clip: {fileID: 8300000, guid: 8cb601b5115ef4f0cbd6f1f08ea93773, type: 3}
+    volume: 1
+  - name: music_blast
+    clip: {fileID: 8300000, guid: 4fd4c897893e94a30ba7a39c8a240f15, type: 3}
+    volume: 1
+  - name: music_blast_intro
+    clip: {fileID: 8300000, guid: 0d0ed6a7fa12145059f3e409497c3c87, type: 3}
+    volume: 1
+  - name: music_merge
+    clip: {fileID: 8300000, guid: b5d347d40539a41b29f81c9804a520de, type: 3}
+    volume: 1
+  - name: music_merge_intro
+    clip: {fileID: 8300000, guid: a914874c06b5f4a1fb74f03f12814f76, type: 3}
+    volume: 1
+  - name: pick
+    clip: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
+    volume: 0.7
+  - name: place
+    clip: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
+    volume: 0.8
+  - name: star
+    clip: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
+    volume: 0.75
+  - name: thud
+    clip: {fileID: 8300000, guid: 130a177e727814a2ea78a886ab72213d, type: 3}
+    volume: 0.7
+  - name: tick
+    clip: {fileID: 8300000, guid: 32d4b1811dda14a6cb9e059ee8ad17d2, type: 3}
+    volume: 0.5
+  - name: ui_click
+    clip: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+    volume: 0.55
+  - name: ui_close
+    clip: {fileID: 8300000, guid: b6428d4edb06344ba829da4edd9967c1, type: 3}
+    volume: 0.6
+  - name: ui_open
+    clip: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
+    volume: 0.6
+  - name: win
+    clip: {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
+    volume: 0.85

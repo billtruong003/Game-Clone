@@ -149,54 +149,50 @@ namespace CasualGame.EyeBlast
         public bool AllPlaceable(IList<Piece> pieces)
         {
             int budget = 6000;
-            return Search((int[,])Grid.Clone(), pieces, new bool[pieces.Count], ref budget);
+            ulong occupied = 0;
+            for (int r = 0; r < Size; r++)
+                for (int c = 0; c < Size; c++)
+                    if (Grid[r, c] != 0) occupied |= 1UL << (r * Size + c);
+            return Search(occupied, pieces, 0, ref budget);
         }
 
-        private static bool Search(int[,] grid, IList<Piece> pieces, bool[] used, ref int budget)
+        // The 8×8 board fits one ulong (bit r*8+c). The search runs on copies of that number, so it allocates
+        // nothing even when a crowded board makes it try thousands of placements in one frame.
+        private static bool Search(ulong occupied, IList<Piece> pieces, int used, ref int budget)
         {
             bool any = false;
             for (int i = 0; i < pieces.Count; i++)
             {
-                if (used[i] || pieces[i] == null) continue;
+                if ((used & (1 << i)) != 0 || pieces[i] == null) continue;
                 any = true;
                 var p = pieces[i];
+                ulong shape = 0;
+                foreach (var (pr, pc) in p.Cells) shape |= 1UL << (pr * Size + pc);
                 for (int r = 0; r <= Size - p.Height; r++)
                     for (int c = 0; c <= Size - p.Width; c++)
                     {
-                        if (!Fits(grid, p, r, c)) continue;
+                        var placed = shape << (r * Size + c); // no wrap: c + width stays inside the row
+                        if ((occupied & placed) != 0) continue;
                         if (--budget < 0) return false;
-                        var next = (int[,])grid.Clone();
-                        foreach (var (pr, pc) in p.Cells) next[r + pr, c + pc] = p.Color;
-                        ClearFull(next);
-                        used[i] = true;
-                        var ok = Search(next, pieces, used, ref budget);
-                        used[i] = false;
-                        if (ok) return true;
+                        if (Search(ClearFull(occupied | placed), pieces, used | (1 << i), ref budget)) return true;
                     }
             }
             return !any;
         }
 
-        private static bool Fits(int[,] grid, Piece p, int r0, int c0)
-        {
-            foreach (var (r, c) in p.Cells)
-                if (grid[r0 + r, c0 + c] != 0) return false;
-            return true;
-        }
+        private const ulong Row0 = 0xFFUL, Col0 = 0x0101010101010101UL;
 
-        private static void ClearFull(int[,] grid)
+        private static ulong ClearFull(ulong board)
         {
-            Span<bool> rows = stackalloc bool[Size], cols = stackalloc bool[Size];
+            ulong clear = 0;
             for (int i = 0; i < Size; i++)
             {
-                bool row = true, col = true;
-                for (int j = 0; j < Size; j++) { row &= grid[i, j] != 0; col &= grid[j, i] != 0; }
-                rows[i] = row;
-                cols[i] = col;
+                var row = Row0 << (i * Size);
+                var col = Col0 << i;
+                if ((board & row) == row) clear |= row;
+                if ((board & col) == col) clear |= col;
             }
-            for (int r = 0; r < Size; r++)
-                for (int c = 0; c < Size; c++)
-                    if (rows[r] || cols[c]) grid[r, c] = 0;
+            return board & ~clear;
         }
 
         /// <summary>The <paramref name="count"/> fullest rows/columns (revive clears them).</summary>

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 namespace CasualGame.Core
 {
-    public enum Ease { Linear, InQuad, OutQuad, InCubic, OutCubic, OutBack, InBack, InOutSine, OutElastic }
+    public enum Ease { Linear, InQuad, OutQuad, InCubic, OutCubic, OutBack, InBack, InOutSine, OutElastic, OutBounce }
 
     /// <summary>
     /// Tiny allocation-light tween engine (no third-party dependency). One runner updates every job;
@@ -54,6 +54,11 @@ namespace CasualGame.Core
             r.jobs.Add(job);
         }
 
+        /// <summary>Endless animation (tutorial hands, hint pulses): <paramref name="apply"/> gets the seconds elapsed.
+        /// Runs until the owner is destroyed or killed; a fixed-length tween would freeze mid-move on a slow player.</summary>
+        public static void Loop(UnityEngine.Object owner, Action<float> apply, bool unscaled = false) =>
+            Run(owner, 86400f, k => apply(k * 86400f), Ease.Linear, 0f, null, unscaled);
+
         public static void Delay(UnityEngine.Object owner, float seconds, Action done, bool unscaled = false) =>
             Run(owner, seconds, null, Ease.Linear, 0f, done, unscaled);
 
@@ -95,10 +100,25 @@ namespace CasualGame.Core
             Run(g, duration, k => g.color = UnityEngine.Color.LerpUnclamped(from, to, k), Ease.OutQuad, delay);
         }
 
+        // Rest scale of every transform being punched: a punch that starts while another is still running must
+        // bounce around the same rest size, not the enlarged one (otherwise fast combos make the label grow for good).
+        private static readonly Dictionary<Transform, (Vector3 rest, int running)> punchRest = new();
+
         public static void Punch(Transform t, float amount = 0.18f, float duration = 0.25f)
         {
-            var baseScale = t.localScale;
-            Run(t, duration, k => t.localScale = baseScale * (1f + amount * Mathf.Sin(k * Mathf.PI)), Ease.Linear, 0f, () => t.localScale = baseScale);
+            if (!punchRest.TryGetValue(t, out var p))
+            {
+                if (punchRest.Count > 32) foreach (var dead in new List<Transform>(punchRest.Keys)) if (dead == null) punchRest.Remove(dead);
+                p = (t.localScale, 0);
+            }
+            var rest = p.rest;
+            punchRest[t] = (rest, p.running + 1);
+            Run(t, duration, k => t.localScale = rest * (1f + amount * Mathf.Sin(k * Mathf.PI)), Ease.Linear, 0f, () =>
+            {
+                t.localScale = rest;
+                if (punchRest.TryGetValue(t, out var q) && q.running > 1) punchRest[t] = (q.rest, q.running - 1);
+                else punchRest.Remove(t);
+            });
         }
 
         private void Update()
@@ -112,11 +132,15 @@ namespace CasualGame.Core
                 if (j.delay > 0f) { j.delay -= step; continue; }
                 j.elapsed += step;
                 var k = Mathf.Clamp01(j.elapsed / j.duration);
-                j.apply?.Invoke(Evaluate(j.ease, k));
+                // One broken tween (e.g. it writes to an object destroyed mid-flight) must not stop every other tween:
+                // an exception here would abort the loop and hit again every frame, freezing popups for good.
+                try { j.apply?.Invoke(Evaluate(j.ease, k)); }
+                catch (Exception e) { Debug.LogException(e); Recycle(i); continue; }
                 if (k < 1f) continue;
                 var done = j.done;
                 Recycle(i);
-                done?.Invoke();
+                try { done?.Invoke(); }
+                catch (Exception e) { Debug.LogException(e); }
             }
         }
 
@@ -144,6 +168,15 @@ namespace CasualGame.Core
                 case Ease.OutElastic:
                     if (t <= 0f || t >= 1f) return t;
                     return Mathf.Pow(2f, -10f * t) * Mathf.Sin((t * 10f - 0.75f) * (2f * Mathf.PI / 3f)) + 1f;
+                case Ease.OutBounce:
+                {
+                    const float n = 7.5625f, d = 2.75f;
+                    if (t < 1f / d) return n * t * t;
+                    if (t < 2f / d) { t -= 1.5f / d; return n * t * t + 0.75f; }
+                    if (t < 2.5f / d) { t -= 2.25f / d; return n * t * t + 0.9375f; }
+                    t -= 2.625f / d;
+                    return n * t * t + 0.984375f;
+                }
                 default: return t;
             }
         }

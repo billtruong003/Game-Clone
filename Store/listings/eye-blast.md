@@ -2,11 +2,13 @@
 
 Developer: Bill The Dev · Privacy policy: https://billtruong003.github.io/billthedev-legal/eye-blast.html
 
+**Slogan:** Line 'em up. They say nah.
+
 ## English
 
-**App name** (≤30): `Nah Blocks: Line Puzzle` (23 chars)
+**App name** (≤30): `Nah Blocks: Block Puzzle` (24 chars)
 
-**Short description** (≤80): `Place blocks, clear rows and columns, chase your best. Easy to learn, hard to stop.` (83 chars)
+**Short description** (≤80): `Line 'em up. They say nah. Fill rows and columns, clear them, beat your best.` (77 chars)
 
 **Full description** (≤4000; EN counted at 1333 chars)
 
@@ -35,6 +37,9 @@ WHY YOU'LL LIKE IT
 FAIR AND FREE
 Nah Blocks is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the board is full. A one-time "Remove ads" purchase turns off the ads between games.
 
+SKINS, NO TRICKS
+Earn coins just by playing and spend them on block colours and boards. Premium skin sets (Retro Bricks, Pixel, Toy Studs and Gems) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
+
 No account or login needed. Your best score is saved on your device.
 ```
 
@@ -46,7 +51,7 @@ No account or login needed. Your best score is saved on your device.
 
 **Tên ứng dụng** (≤30): `Nah Blocks: Xếp Khối Xóa Hàng` (29 ký tự)
 
-**Mô tả ngắn** (≤80): `Xếp khối, xóa hàng và cột, phá kỷ lục của chính bạn. Dễ chơi, khó dừng.` (71 ký tự)
+**Mô tả ngắn** (≤80): `Xếp đủ hàng, tụi nó nói nah. Xóa hàng, xóa cột, phá kỷ lục.` (59 ký tự)
 
 **Mô tả đầy đủ** (≤4000; 1240 ký tự)
 
@@ -74,6 +79,9 @@ VÌ SAO BẠN SẼ THÍCH
 
 MIỄN PHÍ, CÔNG BẰNG
 Nah Blocks miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn được hồi sinh một lần khi bàn đầy. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các ván.
+
+SKIN, KHÔNG MÁNH KHÓE
+Chơi là có xu để đổi màu khối và bàn chơi. Bộ skin premium (Retro Bricks, Pixel, Toy Studs, Gems) là mua một lần, tùy chọn, hoặc mua trọn gói All Skins. Không hộp quà ngẫu nhiên, không bán xu bằng tiền thật. Skin chỉ đổi hình, không đổi luật chơi.
 
 Không cần tài khoản hay đăng nhập. Kỷ lục được lưu ngay trên máy của bạn.
 ```
@@ -108,7 +116,7 @@ Vietnamese captions: second set for vi-VN (e.g. "Xóa hàng, nối combo", "Kh�
 | Gambling (real or simulated), loot boxes | No |
 | User interaction / chat, user-generated content | No |
 | Shares location with other users | No |
-| Digital purchases | Yes (one-time "Remove ads") |
+| Digital purchases | Yes (one-time: "Remove ads", premium skin sets, All Skins; no random items, no coin sales) |
 | Unrestricted internet access | No |
 | Ads (Play Console → App content → Ads) | Yes, contains ads |
 

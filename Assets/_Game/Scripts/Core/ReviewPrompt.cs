@@ -13,21 +13,25 @@ namespace CasualGame.Core
         private const int MomentsBeforeFirstAsk = 3;
         private const double DaysBetweenAsks = 30;
 
-        /// <summary>Call on a good moment (level cleared, new best). Asks when enough moments have passed.</summary>
-        public static void GoodMoment()
+        /// <summary>
+        /// Call on a good moment (level cleared, new best), AFTER the result card closed (G10). Asks when enough moments
+        /// have passed. Returns true when the Play dialog was requested, so the caller can skip an interstitial there.
+        /// </summary>
+        public static bool GoodMoment()
         {
             var moments = SaveStore.GetInt("review.moments") + 1;
             SaveStore.SetInt("review.moments", moments);
             SaveStore.Save();
-            if (moments < MomentsBeforeFirstAsk) return;
+            if (moments < MomentsBeforeFirstAsk) return false;
 
             var last = SaveStore.GetString("review.last", "");
             if (DateTime.TryParse(last, null, System.Globalization.DateTimeStyles.RoundtripKind, out var when) &&
-                (DateTime.UtcNow - when).TotalDays < DaysBetweenAsks) return;
+                (DateTime.UtcNow - when).TotalDays < DaysBetweenAsks) return false;
 
             SaveStore.SetString("review.last", DateTime.UtcNow.ToString("o"));
             SaveStore.Save();
             Launch();
+            return true;
         }
 
         private static void Launch()

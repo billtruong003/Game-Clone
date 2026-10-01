@@ -53,22 +53,38 @@ vẽ bằng pipeline của mình (`Tools/art`, faces.mjs, shader). **Ngoại l�
 | SH2 | Danh mục skin | ScriptableObject `SkinCatalog` mỗi game: id, tên EN/VI, loại (tab), giá xu / "xem QC x lần" / "chỉ All Skins", dữ liệu hình (bảng màu, lát mặt, tint kính…) | M | ❌ |
 | SH3 | Màn Shop | Nút **Shop** ở Home (Arrow) / Pause + nút túi ở HUD (Blast, Merge, ngoài ván). Trên: preview lớn đang sống (mặt chớp mắt). Dưới: tab + lưới 2 cột thẻ skin. Thẻ: preview nhỏ + nút giá (xu / QC 1/3 / "Đang dùng" / "Dùng") | M | ❌ |
 | SH4 | Mua & trang bị | Bấm thẻ → preview đổi ngay (thử trước khi mua). Đủ xu → mua + trang bị + confetti. Thiếu xu → nút rung + toast "Chưa đủ xu". Lưu ngay (SaveStore), áp dụng từ ván tiếp theo không cần khởi động lại | M | ❌ |
-| SH5 | All Skins (IAP) | Non-consumable, mỗi game 1 gói **All Skins** (~2,99 $) + gói **All Skins + Gỡ QC** (~4,99 $). Mở hết skin hiện tại và sau này. Khôi phục khi cài lại. Giá hiển thị lấy từ Google Play | M | ❌ |
+| SH5 | Skin trả phí (IAP) | **Hai tầng skin.** Xu chỉ mua *bộ màu* (bóng, khối, mũi tên, hũ, bàn, giấy, bộ mặt). **Bộ premium** là *vật thể khác hẳn* và chỉ mua bằng tiền: mỗi bộ 1,99 $ (non-consumable), hoặc **All Skins** 4,99 $ (mọi bộ premium + mọi bộ màu + bộ sau này), hoặc **All Skins + Gỡ QC** 6,99 $. Khôi phục khi cài lại. Giá lấy từ Google Play | M | ❌ |
 | SH6 | Skin mở bằng QC | 2–3 skin mỗi game mở bằng xem QC có thưởng (đếm 1/3, 2/3…), tiến độ lưu | S | ❌ |
 | SH7 | Chấm đỏ "mới" | Nút Shop có chấm khi đủ xu mua ít nhất 1 skin chưa có | S | ❌ |
 | SH8 | Bàn tay | Một bàn tay duy nhất (`Tools/art/src/hand_glove.png`, sheet `hands`, `UIKit.Hand`) cho hướng dẫn/gợi ý. Không bán skin tay | M | ✅ |
 
-**Danh sách skin v1.0** (mỗi game 8–10, 1 mặc định miễn phí):
+**Danh sách skin v1.0**
+
+Bộ màu (mua bằng xu / xem QC, 1 bộ mặc định miễn phí):
 
 | Game | Tab | Skin |
 |---|---|---|
-| Meh Merge | Bóng | Classic (free), Candy, Ocean, Forest, Sunset, Mono (đen trắng), Neon, Pastel — mỗi bộ = 11 màu theo tier |
-| Meh Merge | Hũ | Glass (free), Frosted (sọc dày hơn), Amber tint, Mint tint, Night (nền tối + kính xanh) |
-| Nah Blocks | Khối | Classic (free), Candy, Ocean, Retro (4 màu gameboy), Mono, Neon, Pastel, Jelly (bo tròn hơn) |
-| Nah Blocks | Bàn | Navy (free), Paper (nền kem), Midnight |
+| Meh Merge | Bóng | Classic (free), Candy, Ocean, Forest, Sunset, Mono, Neon, Pastel — 11 màu theo tier, tier 11 luôn vàng |
+| Meh Merge | Hũ | Glass (free), Frosted, Amber, Mint, Night |
+| Nah Blocks | Khối | Classic (free), Candy, Ocean, Retro green, Mono, Neon, Pastel, Jelly |
+| Nah Blocks | Bàn | Navy (free), Paper, Midnight |
 | Bruh Arrows | Mũi tên | Classic (free), Candy, Ocean, Forest, Mono, Neon |
-| Bruh Arrows | Giấy | Cream (free), Grid (giấy ô ly), Kraft, Night (giấy tối, mực sáng) |
-| Cả 3 | Mặt | Deadpan (free), Sleepy, Grumpy, Derp — mỗi bộ 9 mặt = 1 Texture2DArray riêng vẽ bằng faces.mjs |
+| Bruh Arrows | Theme | Cream (free), Grid, Kraft, Night |
+| Cả 3 | Mặt | Deadpan (free), Sleepy, Grumpy, Derp (`Tools/art/facepacks.mjs`) |
+
+Bộ premium (IAP, vật thể khác hẳn; mặt deadpan vẫn giữ, trừ Eyeballs vì quả bóng chính là con mắt):
+
+| Game | Bộ | Nội dung |
+|---|---|---|
+| Meh Merge | Billiard | bi 1-7, bi sọc 9-11, tier 11 = bi số 8 · nền bàn bi-a |
+| Meh Merge | Sports | bi ve → bóng bàn → golf → tennis → baseball → bóng chuyền → bóng đá → bóng rổ → bowling → bóng bãi biển → quả địa cầu |
+| Meh Merge | Eyeballs | nhãn cầu, màu tròng theo tier; đồng tử co khi sợ, nhắm khi chớp, rơi lệ khi thua |
+| Meh Merge | Planets | Mặt Trăng → Sao Thuỷ → … → Sao Mộc → sao lùn đỏ → Mặt Trời |
+| Nah Blocks | Retro Bricks | gạch vát cạnh kiểu game xếp gạch cổ điển, mặt pixel, giếng đen · hoài niệm |
+| Nah Blocks | Pixel | khối 8-bit |
+| Nah Blocks | Toy Studs | khối nhựa đồ chơi có núm, mặt in trên núm |
+| Nah Blocks | Gems | đá quý cắt giác |
+| Bruh Arrows | Blueprint, Chalkboard, Terminal | chỉ đổi theme (nền, giấy, nét mũi tên), không đổi hình mũi tên |
 
 Luật policy: không random, không bán xu, giá IAP hiện rõ, không có nút "mua" giả dạng nút chơi, trẻ em không bị ép xem
 QC (QC có thưởng luôn là tùy chọn).

@@ -108,7 +108,7 @@ namespace CasualGame.ArrowOut
                 arrows = LevelData.FromBoard(0, 0, 0, board, 0f).arrows,
             };
             SaveStore.SetJson(RunKey, d);
-            SaveStore.Save();
+            SaveStore.SaveSoon(); // every tap: throttled, flushed on background
         }
 
         private static void ClearRun() => SaveStore.Delete(RunKey);
@@ -143,7 +143,7 @@ namespace CasualGame.ArrowOut
             {
                 dailyKey = d.dailyKey;
                 // daily keeps its board; the remaining spawns come from a seed tied to the day and the progress
-                var rand = m == Mode.Daily ? Rng.Seeded(Rng.DailySeed(System.DateTime.UtcNow) * 31 + d.cleared) : Rng.Unity();
+                var rand = m == Mode.Daily ? Rng.Seeded(DailySeedOf(d.dailyKey) * 31 + d.cleared) : Rng.Unity();
                 r = new EndlessRun(rand, b, d.cleared, d.score, d.combo, d.comboColor);
             }
             BuildPlayScreen(m, b, r);
@@ -152,8 +152,17 @@ namespace CasualGame.ArrowOut
             revived = d.revived;
             runBest = Mathf.Max(runBest, d.runBest);
             RefreshHud();
+            // killed during level 1's lesson: the lesson comes back with the board (else it would repeat forever)
+            if (m == Mode.Level && level.n == 1 && !ArrowProgress.TutorialSeen && board.Count > 0) ShowTutorial();
             OpenPause();
             return true;
+        }
+
+        // the daily run keeps drawing from the day it started on, even when resumed after midnight
+        private static int DailySeedOf(string key)
+        {
+            var digits = key != null && key.StartsWith("arrow.daily.") ? key.Substring("arrow.daily.".Length) : null;
+            return int.TryParse(digits, out var seed) ? seed : Rng.DailySeed(System.DateTime.UtcNow);
         }
 
         // ---------------- screens ----------------
@@ -181,21 +190,18 @@ namespace CasualGame.ArrowOut
             var s = NewScreen("Home", ScreenKind.Home);
             var top = new Vector2(0.5f, 1f);
 
-            // Title doodle built from the real tiles, with the face on its tail.
+            // Title doodle drawn like a real arrow, with the face on its tail.
             var doodle = UIKit.Rect("Doodle", s);
             UIKit.Place(doodle, top, new Vector2(0, -330), new Vector2(600, 150));
-            var sample = new Arrow { Cells = new[] { new Pos(0, 3), new Pos(0, 2), new Pos(1, 2), new Pos(1, 1), new Pos(1, 0) }, Dir = 1, Color = 1 };
-            for (int i = 0; i < sample.Cells.Length; i++)
-            {
-                var (tile, angle) = ArrowBoardView.TileFor(sample.Cells, i, sample.Dir);
-                var img = UIKit.Image(doodle, tile, new Vector2(0.5f, 0.5f), new Vector2((sample.Cells[i].C - 1.5f) * 75, -(sample.Cells[i].R - 0.5f) * 75), new Vector2(75, 75), ArrowBoardView.Palette[1]);
-                img.rectTransform.localEulerAngles = new Vector3(0, 0, -angle);
-            }
+            var sample = new[] { new Pos(0, 3), new Pos(0, 2), new Pos(1, 2), new Pos(1, 1), new Pos(1, 0) };
+            var points = new Vector2[sample.Length];
+            for (int i = 0; i < sample.Length; i++) points[i] = new Vector2((sample[i].C - 1.5f) * 75, -(sample[i].R - 0.5f) * 75);
+            ArrowBoardView.CreateStroke(doodle, points, 1, 75, ArrowBoardView.Palette[1]);
             var cap = UIKit.Image(doodle, "dot", new Vector2(0.5f, 0.5f), new Vector2(-1.5f * 75, -0.5f * 75), new Vector2(46, 46), ArrowBoardView.Palette[1]);
             Face.AddUI(cap.transform, new Vector2(34, 34), new Vector2(0, 1));
 
             UIKit.Label(s, "BRUH ARROWS", 132, top, new Vector2(0, -520), new Vector2(1000, 180));
-            UIKit.Label(s, Loc.T("Brain puzzle · clear the arrows", "Trò chơi trí tuệ · gỡ mũi tên"), 50, top, new Vector2(0, -625), new Vector2(1000, 70), UIKit.Muted);
+            UIKit.Label(s, Loc.T("Tap. Yeet. Bruh.", "Chạm. Phóng. Bruh."), 50, top, new Vector2(0, -625), new Vector2(1000, 70), UIKit.Muted);
 
             var mid = new Vector2(0.5f, 0.5f);
             var allClear = ArrowProgress.Cleared >= ArrowProgress.LevelCount;
@@ -206,9 +212,11 @@ namespace CasualGame.ArrowOut
                 UIKit.Button(s, "btn_green", Loc.F("Play · Level {0}", "Chơi · Màn {0}", next), () => StartLevel(next), mid, new Vector2(0, 120), new Vector2(720, 170), "icon_play", 64);
             UIKit.Button(s, "btn_blue", Loc.T("Levels", "Chọn màn"), () => ShowLevelSelect((next - 1) / PerPage), mid, new Vector2(0, -80), new Vector2(720, 150), "icon_levels");
             if (!allClear)
-                UIKit.Button(s, "btn_yellow", Loc.T("Endless", "Vô hạn"), () => StartEndless(false), mid, new Vector2(0, -260), new Vector2(720, 150), "icon_infinity");
-            var daily = UIKit.Button(s, "btn_white", Loc.T("Daily challenge", "Thử thách hôm nay"), () => StartEndless(true), mid, new Vector2(0, allClear ? -260 : -440), new Vector2(720, 150), "icon_calendar");
-            if (!ArrowProgress.PlayedToday) // A10: red dot until today's (UTC) board is played
+                UIKit.Button(s, "btn_yellow", Loc.T("Endless", "Vô hạn"), () => StartMode(false), mid, new Vector2(0, -260), new Vector2(720, 150), "icon_infinity");
+            var daily = UIKit.Button(s, "btn_white", Loc.T("Daily challenge", "Thử thách hôm nay"), () => StartMode(true), mid, new Vector2(0, allClear ? -260 : -440), new Vector2(720, 150), "icon_calendar");
+            // A10: red dot until today's (UTC) board is played — only once the basics are learned, so it can't pull a
+            // brand-new player away from the tutorial
+            if (ArrowProgress.TutorialSeen && !ArrowProgress.PlayedToday)
                 UIKit.Image(daily.transform, "dot", new Vector2(1f, 1f), new Vector2(-24, -20), new Vector2(52, 52), ArrowBoardView.ErrorColor);
 
             var bottom = new Vector2(0.5f, 0f);
@@ -311,7 +319,16 @@ namespace CasualGame.ArrowOut
             level = levels[Mathf.Clamp(n, 1, levels.Length) - 1];
             BuildPlayScreen(Mode.Level, level.ToBoard());
             if (level.n == 1 && !ArrowProgress.TutorialSeen) ShowTutorial();
-            else if (level.n <= 3) Tip(Loc.T("Tap an arrow with a clear path to the edge to send it flying.", "Chạm mũi tên có đường thoáng tới mép bàn để nó bay ra."));
+            else LevelTip();
+        }
+
+        // Endless and Daily cost hearts from the first mistake and have no tutorial: a player who never finished
+        // level 1's lesson is sent there first.
+        private void StartMode(bool daily)
+        {
+            if (ArrowProgress.TutorialSeen) { StartEndless(daily); return; }
+            StartLevel(1);
+            Toast.Show(safe, Loc.T("First, a 10-second lesson", "Học nhanh 10 giây trước nhé"));
         }
 
         private void StartEndless(bool daily)
@@ -363,21 +380,24 @@ namespace CasualGame.ArrowOut
                 {
                     UIKit.IconButton(s, "round_white", "icon_restart", () => StartLevel(level.n), tr, new Vector2(-240, -100), 116);
                     var hint = UIKit.IconButton(s, "round_yellow", "icon_hint", UseHint, tl, new Vector2(240, -100), 116);
+                    hintButton = hint.transform;
                     var badge = UIKit.Image(hint.transform, "round_white", new Vector2(1f, 1f), new Vector2(-12, -12), new Vector2(56, 56));
                     hintBadge = UIKit.Label(badge.transform, "", 34);
                     UIKit.Stretch(hintBadge.rectTransform);
                 }
-                else hintBadge = null;
+                else { hintBadge = null; hintButton = null; }
                 bestText = null;
             }
             else
             {
                 scoreText = UIKit.Label(s, "0", 100, top, new Vector2(0, -95), new Vector2(460, 120));
                 var hint = UIKit.IconButton(s, "round_yellow", "icon_hint", UseHint, tl, new Vector2(240, -100), 116);
+                hintButton = hint.transform;
                 var badge = UIKit.Image(hint.transform, "round_white", new Vector2(1f, 1f), new Vector2(-12, -12), new Vector2(56, 56));
                 hintBadge = UIKit.Label(badge.transform, "", 34);
                 UIKit.Stretch(hintBadge.rectTransform);
                 runBest = mode == Mode.Daily ? ArrowProgress.DailyBest(dailyKey) : ArrowProgress.EndlessBest;
+                runStartBest = runBest;
                 stageText = null;
                 bestText = UIKit.Label(s, "", 42, top, new Vector2(0, -290), new Vector2(900, 60), UIKit.Muted);
             }
@@ -392,7 +412,7 @@ namespace CasualGame.ArrowOut
 
             view = ArrowBoardView.Create(s, new Vector2(0, -40), CellSize);
             view.Tapped += OnTapped;
-            view.Show(board);
+            view.Show(board, fit: mode == Mode.Level);
 
             // the tip line lives in the free band under the board, never over its last row
             tipText = UIKit.Label(s, "", 38, new Vector2(0.5f, 0f), new Vector2(0, 285), new Vector2(940, 100), UIKit.Muted);
@@ -405,8 +425,53 @@ namespace CasualGame.ArrowOut
                 UIKit.SetInteractable(prev, level.n > 1);
                 UIKit.SetInteractable(next, level.n < ArrowProgress.Unlocked && level.n < ArrowProgress.LevelCount);
             }
+            missStreak = 0;
+            freeTaps = 0;
+            nudged = false;
+            bestToastShown = false;
             RefreshHud();
             state = State.Playing;
+        }
+
+        // ---------------- first-time explanations (FTUE) ----------------
+
+        private Transform hintButton;
+        private int missStreak, freeTaps, runStartBest;
+        private bool bestToastShown;
+        private bool nudged;
+
+        // The bulb bounces until it is pressed, so the player's eye finds it.
+        private void PulseHint()
+        {
+            if (hintButton == null) return;
+            var t = hintButton;
+            Tween.Kill(t);
+            Tween.Loop(t, sec => t.localScale = Vector3.one * (1f + 0.12f * Mathf.Abs(Mathf.Sin(sec * 4f))));
+        }
+
+        private void StopHintPulse()
+        {
+            if (hintButton == null) return;
+            Tween.Kill(hintButton);
+            hintButton.localScale = Vector3.one;
+        }
+
+        /// <summary>One tip per level start: hints are introduced on level 2, hearts the first time they start to count.</summary>
+        private void LevelTip()
+        {
+            if (level.n == 2 && !SaveStore.GetBool("arrow.tip.hint", false))
+            {
+                SaveStore.SetBool("arrow.tip.hint", true);
+                Tip(Loc.T("Stuck? The bulb shows an arrow that can go. You get 3.", "Bí? Bóng đèn chỉ ra mũi tên đi được. Bạn có 3 lượt."));
+                PulseHint();
+            }
+            else if (level.n == FreeMistakesUpTo + 1 && !SaveStore.GetBool("arrow.tip.hearts", false))
+            {
+                SaveStore.SetBool("arrow.tip.hearts", true);
+                Tip(Loc.T("From now on a blocked tap costs a heart. 0 hearts = try again.", "Từ giờ chạm sai mất 1 tim. Hết tim là chơi lại."));
+                foreach (var h in hearts) Tween.Punch(h.transform, 0.3f, 0.4f);
+            }
+            else if (level.n <= 3) Tip(Loc.T("Tap an arrow with a clear path to the edge to send it flying.", "Chạm mũi tên có đường thoáng tới mép bàn để nó bay ra."));
         }
 
         private void OnTapped(Arrow a)
@@ -426,10 +491,18 @@ namespace CasualGame.ArrowOut
                 var free = mode == Mode.Level && level.n <= FreeMistakesUpTo;
                 view.Lunge(a, board.Arrows[blocker], !free);
                 GameAudio.Play("blocked");
-                GameAudio.Haptic();
+                GameAudio.Haptic(HapticLevel.Medium);
                 run?.Miss();
+                // two misses in a row: point at the bulb once per board (it is there for exactly this)
+                if (++missStreak >= 2 && !nudged && hintButton != null)
+                {
+                    nudged = true;
+                    PulseHint();
+                    if (!free) Tip(Loc.T("Stuck? Try the bulb.", "Bí? Thử bóng đèn gợi ý."));
+                }
                 if (free)
                 {
+                    freeTaps++;
                     Tip(Loc.T("Blocked! Clear the arrow in its way first.", "Bị chặn! Gỡ mũi tên đang cản đường trước."));
                     RefreshHud();
                     return;
@@ -442,6 +515,7 @@ namespace CasualGame.ArrowOut
                 return;
             }
 
+            missStreak = 0;
             if (view.Hinted == a) view.ClearHint();
             if (mode == Mode.Level)
             {
@@ -458,14 +532,30 @@ namespace CasualGame.ArrowOut
             GameAudio.Play("fly", 1f + (res.Combo - 1) * 0.08f);
             if (res.Combo >= 3) GameFx.Play("Sparkle", view.WorldPos(a.Head), 1f + 0.1f * Mathf.Min(res.Combo, 8));
             foreach (var spawned in res.Spawned) view.AddArrow(spawned, true, 0.2f);
+            // a new arrow can land in the hinted arrow's path: a hint that now points at a blocked arrow would cost a
+            // heart if followed, so it goes away (the next Hint press picks a free arrow again)
+            if (view.Hinted != null && board.Arrows.ContainsKey(view.Hinted.Id) && board.FirstBlocker(view.Hinted) != -1) view.ClearHint();
             if (res.StageUp)
             {
                 GameAudio.Play("big");
                 Tip(Loc.F("Stage {0}! Longer arrows, more colours.", "Lên cấp {0}! Mũi tên dài hơn, nhiều màu hơn.", EndlessRun.DifficultyAt(run.Cleared).Stage + 1));
             }
-            if (run.Cleared % HeartEvery == 0 && lives < MaxHearts) lives++;
+            var heartBack = run.Cleared % HeartEvery == 0 && lives < MaxHearts;
+            if (heartBack) lives++;
             SaveRunBest();
             RefreshHud();
+            if (heartBack) // a heart earned back is a moment: it pops in with a chime
+            {
+                Tween.Punch(hearts[lives - 1].transform, 0.5f, 0.4f);
+                GameAudio.Play("star", 1.1f);
+            }
+            if (res.Combo >= 2) Tween.Punch(comboText.transform, 0.35f, 0.25f);
+            if (!bestToastShown && runStartBest > 0 && run.Score > runStartBest)
+            {
+                bestToastShown = true;
+                Toast.Show(safe, Loc.T("New best!", "Kỷ lục mới!"));
+                GameAudio.Play("star", 1.25f);
+            }
             if (run.Over) Lose();
         }
 
@@ -512,7 +602,9 @@ namespace CasualGame.ArrowOut
             comboText.color = on ? ArrowBoardView.Palette[run.ComboColor] : UIKit.Muted;
         }
 
-        private string UtcLabel() => System.DateTime.UtcNow.ToString("MMM d", System.Globalization.CultureInfo.InvariantCulture);
+        private string UtcLabel() => Loc.Vietnamese
+            ? System.DateTime.UtcNow.ToString("d/M", System.Globalization.CultureInfo.InvariantCulture)
+            : System.DateTime.UtcNow.ToString("MMM d", System.Globalization.CultureInfo.InvariantCulture);
 
         private void Tip(string message)
         {
@@ -527,7 +619,9 @@ namespace CasualGame.ArrowOut
         private void UseHint()
         {
             if (state != State.Playing || board.Count == 0) return;
-            if (view.Hinted != null && board.Arrows.ContainsKey(view.Hinted.Id)) return; // A4: already showing, costs nothing
+            StopHintPulse();
+            // A4: a hint already showing (and still valid) costs nothing
+            if (view.Hinted != null && board.Arrows.ContainsKey(view.Hinted.Id) && board.FirstBlocker(view.Hinted) == -1) return;
             if (ArrowProgress.Hints <= 0)
             {
                 AskHintAd();
@@ -578,10 +672,12 @@ namespace CasualGame.ArrowOut
             var target = BestFreeArrow();
             // fingertip on the middle of the arrow's body, the hand coming from the emptier side
             var mid = (view.CellPos(target.Cells[0]) + view.CellPos(target.Cells[^1])) * 0.5f;
-            bool fromLeft = mid.x < 0f;
+            bool fromLeft = mid.x < view.PlayCentre.x;
             tutorialHand = UIKit.Hand(view.transform, new Vector2(0.5f, 0.5f), mid + new Vector2(fromLeft ? -8f : 8f, -10f), mirror: fromLeft);
+            tutorialHand.localScale /= view.Zoom; // the hand keeps its size on a zoomed-in board
             var home = tutorialHand.anchoredPosition;
-            Tween.Run(tutorialHand, 30f, k => tutorialHand.anchoredPosition = home + new Vector2(0, Mathf.Abs(Mathf.Sin(k * 60f)) * 30f), Ease.Linear);
+            var hand = tutorialHand;
+            Tween.Loop(hand, s => hand.anchoredPosition = home + new Vector2(0, Mathf.Abs(Mathf.Sin(s * 2f)) * 30f));
             view.Hint(target);
             Tip(Loc.T("Tap an arrow to slide it out.\nClear them all to win.", "Chạm mũi tên để nó trượt ra.\nGỡ hết để thắng."));
         }
@@ -603,8 +699,17 @@ namespace CasualGame.ArrowOut
             var stars = mistakes == 0 ? 3 : mistakes <= 2 ? 2 : 1;
             ArrowProgress.Complete(level.n, stars);
             GameAudio.Play("win");
+            GameAudio.Haptic(HapticLevel.Strong);
             GameFx.Play("Arrow_LevelStar", view.transform.position, 1.2f);
-            GameFx.Play("Win_Confetti", view.transform.position + Vector3.down * 3f, 1f);
+            // confetti fills the screen: a big centre burst plus one from each lower corner
+            GameFx.Play("Win_Confetti", view.transform.position + Vector3.down * 3f, 2.4f);
+            var cam = Camera.main;
+            if (cam != null)
+                foreach (var x in new[] { 0.08f, 0.92f })
+                {
+                    var corner = cam.ViewportToWorldPoint(new Vector3(x, 0.12f, -cam.transform.position.z));
+                    Tween.Delay(this, 0.12f, () => GameFx.Play("Win_Confetti", corner, 1.8f));
+                }
             Tween.Delay(this, 0.5f, () =>
             {
                 var last = level.n >= ArrowProgress.LevelCount;
@@ -633,7 +738,10 @@ namespace CasualGame.ArrowOut
                     p.Fit();
                     return;
                 }
-                p.Text(mistakes == 0 ? Loc.T("Perfect, no mistakes!", "Hoàn hảo, không sai lần nào!") : Loc.F("{0} mistakes", "Sai {0} lần", mistakes), 48, UIKit.Muted);
+                // levels 1–5 don't count blocked taps as mistakes, but calling it "perfect" after several would be a lie
+                p.Text(mistakes > 0 ? Loc.F("{0} mistakes", "Sai {0} lần", mistakes)
+                    : freeTaps > 0 ? Loc.T("Cleared!", "Qua màn!")
+                    : Loc.T("Perfect, no mistakes!", "Hoàn hảo, không sai lần nào!"), 48, UIKit.Muted);
                 p.Space(10);
                 // G10: the review prompt only after the card has closed, never over it
                 void Good() { if (stars >= 2) ReviewPrompt.GoodMoment(); }
@@ -649,6 +757,7 @@ namespace CasualGame.ArrowOut
             state = State.Ended;
             ClearRun();
             GameAudio.Play("lose");
+            GameAudio.Haptic(HapticLevel.Strong);
             view.AllFaces(FaceId.Cry);
             SaveRunBest();
             Tween.Delay(this, 0.45f, ShowLose);

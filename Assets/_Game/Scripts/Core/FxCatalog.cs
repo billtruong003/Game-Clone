@@ -14,10 +14,25 @@ namespace CasualGame.Core
 
         public IReadOnlyList<FxEffect> Effects => effects;
 
-        public FxEffect Find(string effectName) => effects.Find(e => e != null && e.name == effectName);
+        [System.NonSerialized] private Dictionary<string, FxEffect> byName;
+
+        // every GameFx.Play looks an effect up: a dictionary instead of a list scan with a lambda
+        public FxEffect Find(string effectName)
+        {
+            if (byName == null)
+            {
+                byName = new Dictionary<string, FxEffect>(effects.Count);
+                foreach (var e in effects) if (e != null && !byName.ContainsKey(e.name)) byName[e.name] = e; // first one wins, as before
+            }
+            return byName.TryGetValue(effectName, out var fx) ? fx : null;
+        }
 
 #if UNITY_EDITOR
-        public void EditorSet(List<FxEffect> list) => effects = list;
+        public void EditorSet(List<FxEffect> list)
+        {
+            effects = list;
+            byName = null;
+        }
 #endif
     }
 }

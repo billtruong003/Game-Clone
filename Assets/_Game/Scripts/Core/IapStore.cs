@@ -35,14 +35,31 @@ namespace CasualGame.Core
                 foreach (var pending in orders.PendingOrders.Where(Contains)) store.ConfirmPurchase(pending);
             };
             store.OnPurchasePending += order => store.ConfirmPurchase(order);
+            // IAP 5 reports both outcomes here: a FailedOrder (acknowledge / validation failed) must not unlock anything
             store.OnPurchaseConfirmed += order =>
             {
                 if (!Contains(order)) return;
+                if (order is not ConfirmedOrder) { Finish(false); return; }
                 onOwned();
                 Finish(true);
             };
             store.OnPurchaseFailed += _ => Finish(false);
+            // paid later (cash, parental approval): nothing is owned yet, it unlocks through OnPurchasesFetched once paid
+            store.OnPurchaseDeferred += _ =>
+                FakeAdProvider.ShowOverlay(Loc.T("Payment pending. It unlocks as soon as it goes through.", "Đang chờ thanh toán. Xong là mở ngay."), 1.8f, () => Finish(false));
+            store.OnProductsFetchFailed += failed =>
+            {
+                Debug.LogWarning("IAP products fetch failed: " + failed.FailureReason);
+                RetryLater();
+            };
+            store.OnPurchasesFetchFailed += failed => Debug.LogWarning("IAP purchases fetch failed: " + failed.message);
             Connect();
+        }
+
+        private async void RetryLater()
+        {
+            await System.Threading.Tasks.Task.Delay(30000);
+            if (product == null) Connect();
         }
 
         // Offline or Play Store not signed in at launch: try again later, and whenever the player taps Buy.
@@ -68,6 +85,7 @@ namespace CasualGame.Core
 
         public void Buy(Action<bool> onDone)
         {
+            if (pendingBuy != null) return; // a purchase is already on screen: a second tap must not replace its callback
             if (product == null || !product.availableToPurchase)
             {
                 Connect();

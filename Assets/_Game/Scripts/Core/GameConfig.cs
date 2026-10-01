@@ -24,6 +24,14 @@ namespace CasualGame.Core
         public string removeAdsProductId = "remove_ads";
         public string privacyPolicyUrl;
 
+        [Header("Launch splash (G1)")]
+        public Sprite logo;
+        public Color splashColor = new Color(0.17f, 0.18f, 0.33f);
+        [Tooltip("The game's characters on a transparent ground (the adaptive icon foreground), shown on the loading screen")]
+        public Texture2D splashArt;
+        [Tooltip("Music the loading screen starts, so it is already playing when the game fades in")]
+        public string music;
+
         public bool HasAdUnits => !string.IsNullOrEmpty(interstitialAdUnit) || !string.IsNullOrEmpty(rewardedAdUnit);
 
         public string StoreUrl => "https://play.google.com/store/apps/details?id=" + applicationId;

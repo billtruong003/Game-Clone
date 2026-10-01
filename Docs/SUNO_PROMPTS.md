@@ -1,5 +1,8 @@
 # Prompt Suno — nhạc nền & âm thanh
 
+> **Không dùng nữa (2026-09-30).** Không dùng Suno. Nhạc nền và SFX lấy từ 2 pack đã import: `Assets/Casual Game Sounds U6` (SFX) và `Assets/Scenes/Season Cycle Casual Gaming Music Pack` (nhạc). Tên clip trong game (bảng SFX bên dưới, `music_arrow` / `music_blast` / `music_merge`) vẫn giữ nguyên.
+
+
 Game đang dùng 17 SFX của Kenney (CC0) trong `Assets/_Game/Audio/Sfx`. Chúng đủ dùng cho bản prototype.
 File này dành cho lúc bạn muốn thay bằng âm thanh riêng.
 
@@ -22,23 +25,29 @@ Mẹo chung cho Suno:
 
 ## Nhạc nền (3 bài)
 
-### `music_arrow` — Arrow Out (game trí tuệ, cần tập trung)
+Chất chung của 3 game: **deadpan** (mặt tỉnh bơ, hài kiểu "ờ, rồi sao"). Nhạc nên thư giãn, hơi lệch nhịp một chút cho
+vui, không dễ thương kiểu kawaii, không hào hứng kiểu arcade. Tránh tiếng chuông lấp lánh dày (dễ thành "AI jingle").
+
+### `music_arrow` — Bruh Arrows (trí tuệ, cần tập trung)
 ```
-calm lo-fi puzzle music, soft felt piano and warm rhodes, gentle brushed drums, mellow sub bass,
-slow 78 bpm, cozy and focused, minimal melody, no big drops, seamless loop, study music, instrumental
+dry lo-fi puzzle music, soft felt piano and muted rhodes, lazy brushed drums, warm upright bass,
+76 bpm, calm, slightly wonky and deadpan, sparse melody with small pauses, no drops, seamless loop, instrumental
 ```
 
-### `music_blast` — Eye Blast (vui, nảy)
+### `music_blast` — Nah Blocks (vui, gọn gàng)
 ```
-upbeat cute casual game music, bouncy marimba and pizzicato strings, light claps, playful bass,
-120 bpm, cheerful and bright, simple catchy hook, seamless loop for mobile puzzle game, instrumental
+laid-back quirky puzzle groove, muted marimba and plucked nylon guitar, soft finger snaps, round synth bass,
+104 bpm, cheerful but unimpressed, simple 4-bar hook, tidy and satisfying, seamless loop, instrumental
 ```
 
-### `music_merge` — Eye Merge (thư giãn, dễ thương)
+### `music_merge` — Meh Merge (thư giãn, lười biếng)
 ```
-relaxing kawaii game music, music box and ukulele, soft glockenspiel sparkles, light shaker,
-96 bpm, dreamy and happy, gentle groove, seamless loop, cozy mobile game, instrumental
+sleepy bossa lo-fi, soft electric piano, gentle ukulele strums, light shaker and rim clicks, warm bass,
+90 bpm, relaxed and a little lazy, deadpan humor, soft bounce, seamless loop, instrumental
 ```
+
+Tên file đặt đúng như trên (`music_arrow.mp3`, `music_blast.mp3`, `music_merge.mp3`) và bỏ vào `Assets/_Game/Audio/Music/`.
+Game đã gọi sẵn 3 tên này; nhạc tự tạm dừng khi Pause.
 
 ---
 
@@ -50,7 +59,7 @@ relaxing kawaii game music, music box and ukulele, soft glockenspiel sparkles, l
 | `ui_open` / `ui_close` | Mở / đóng popup | `short airy whoosh up` / `short airy whoosh down` |
 | `drop` | Thả viên (Merge) | `soft plop of a rubber ball dropping, cute, short` |
 | `merge` | Hai viên hợp thể (game đổi cao độ theo cấp) | `bubbly pop with a tiny sparkle tail, cute, very short` |
-| `big` | Mắt Thần / lên cấp | `magical chime fanfare, short, bright glockenspiel arpeggio up` |
+| `big` | Bóng tier 11 ("LEGENDARY MEH!") / lên cấp | `magical chime fanfare, short, bright glockenspiel arpeggio up` |
 | `pick` / `place` | Nhặt / đặt khối (Blast) | `soft plastic pick up click` / `satisfying soft block thud` |
 | `clear` | Xóa hàng (Blast) | `glassy sparkle sweep, satisfying line clear, short` |
 | `fly` | Mũi tên bay ra (Arrow) | `quick soft whoosh with a light pluck, airy, short` |

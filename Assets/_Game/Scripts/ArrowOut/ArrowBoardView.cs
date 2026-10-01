@@ -9,9 +9,9 @@ using UnityEngine.UI;
 namespace CasualGame.ArrowOut
 {
     /// <summary>
-    /// Draws a <see cref="Board"/> with the white arrow tiles (tinted per color) and turns taps into arrow picks.
-    /// Snakes are rebuilt from 5 tiles: head / body / corner / tail / single, authored pointing up.
-    /// Every arrow wears a deadpan face on its round tail, so it gets yanked out backwards when it flies (panic).
+    /// Draws a <see cref="Board"/> with one continuous stroke per arrow (<see cref="ArrowStroke"/>, tinted per colour)
+    /// and turns taps into arrow picks. Every arrow wears a deadpan face on its round tail, so it gets yanked out
+    /// backwards when it flies (panic).
     /// </summary>
     public class ArrowBoardView : MonoBehaviour, IPointerClickHandler
     {
@@ -23,17 +23,25 @@ namespace CasualGame.ArrowOut
         // error red far from the amber arrows
         public static readonly Color ErrorColor = UIKit.Hex("#D6334A");
         private static readonly Color GridColor = UIKit.Hex("#D9D2C5");
-        private const float StepSeconds = 0.028f;
+        // flight, in cells per second: a quick start that keeps speeding up reads as a yank, not a conveyor
+        private const float StartSpeed = 14f, TopSpeed = 46f, Acceleration = 120f;
         private const float InkTrailTime = 0.45f, InkWidth = 0.3f; // ink width as a fraction of a cell
         private const float CapSize = 0.6f, FaceSize = 0.44f; // fractions of a cell
         private static Material inkMaterial;
 
+        // zoom-to-fit cap: past this a tiny level's arrows look bloated next to the HUD
+        private const float MaxZoom = 1.4f;
+
         public event Action<Arrow> Tapped;
         public float Cell { get; private set; }
+        /// <summary>How much the board is scaled up to fit a small level (1 = whole 7×9 grid).</summary>
+        public float Zoom { get; private set; } = 1f;
+        private Rect playArea;
+        private Vector2? home;
 
         private class View
         {
-            public List<Image> Tiles;
+            public ArrowStroke Stroke;
             public Image Cap;
             public Face Face;
         }
@@ -50,21 +58,39 @@ namespace CasualGame.ArrowOut
         public static ArrowBoardView Create(Transform parent, Vector2 offset, float cell)
         {
             var rt = UIKit.Place(UIKit.Rect("Board", parent), new Vector2(0.5f, 0.5f), offset, new Vector2(Board.Cols * cell, Board.Rows * cell));
+            // own canvas: ~20 blinking faces, hint pulses and slides re-batch only the board, not the HUD around it
+            rt.gameObject.AddComponent<Canvas>();
+            rt.gameObject.AddComponent<UnityEngine.UI.GraphicRaycaster>();
             UIKit.AddImage(rt, (Sprite)null, new Color(1, 1, 1, 0)).raycastTarget = true; // catches taps between arrows
             var view = rt.gameObject.AddComponent<ArrowBoardView>();
             view.Cell = cell;
             return view;
         }
 
-        public void Show(Board b)
+        /// <summary>
+        /// Draws the board. With <paramref name="fit"/> (levels: nothing spawns later) the view zooms in on the cells
+        /// the puzzle uses, up to <see cref="MaxZoom"/>, so a small level fills the play area instead of sitting in a
+        /// corner of the 7×9 grid; arrows then fade and puff where that area ends.
+        /// </summary>
+        public void Show(Board b, bool fit = false)
         {
             board = b;
             views.Clear();
             hintDots.Clear();
             hinted = null;
             foreach (Transform child in transform) Destroy(child.gameObject);
-            for (int r = 0; r < Board.Rows; r++)
-                for (int c = 0; c < Board.Cols; c++)
+            int r0 = 0, r1 = Board.Rows - 1, c0 = 0, c1 = Board.Cols - 1;
+            if (fit) ContentBounds(b, out r0, out r1, out c0, out c1);
+            var lo = CellPos(new Pos(r1, c0)) - Vector2.one * Cell * 0.5f;
+            var hi = CellPos(new Pos(r0, c1)) + Vector2.one * Cell * 0.5f;
+            playArea = Rect.MinMaxRect(lo.x, lo.y, hi.x, hi.y);
+            Zoom = Mathf.Clamp(Mathf.Min(Board.Cols * Cell / playArea.width, Board.Rows * Cell / playArea.height), 1f, MaxZoom);
+            var rt = (RectTransform)transform;
+            if (home == null) home = rt.anchoredPosition;
+            rt.localScale = Vector3.one * Zoom;
+            rt.anchoredPosition = home.Value - playArea.center * Zoom;
+            for (int r = r0; r <= r1; r++)
+                for (int c = c0; c <= c1; c++)
                     if (b.Mask == null || b.Mask[r, c])
                         UIKit.Image(transform, "grid_dot", new Vector2(0.5f, 0.5f), CellPos(new Pos(r, c)), new Vector2(32, 32), GridColor);
             hintLayer = UIKit.Stretch(UIKit.Rect("Hint", transform));
@@ -73,98 +99,91 @@ namespace CasualGame.ArrowOut
             foreach (var a in b.Arrows.Values) AddArrow(a, true, 0.02f * i++);
         }
 
+        // the cells the puzzle uses: its mask when it has a shape, else the arrows' bounding box
+        private static void ContentBounds(Board b, out int r0, out int r1, out int c0, out int c1)
+        {
+            r0 = c0 = int.MaxValue;
+            r1 = c1 = int.MinValue;
+            for (int r = 0; r < Board.Rows; r++)
+                for (int c = 0; c < Board.Cols; c++)
+                    if (b.Mask != null ? b.Mask[r, c] : b.Grid[r, c] != -1)
+                    {
+                        r0 = Mathf.Min(r0, r); r1 = Mathf.Max(r1, r);
+                        c0 = Mathf.Min(c0, c); c1 = Mathf.Max(c1, c);
+                    }
+            if (r0 > r1) { r0 = c0 = 0; r1 = Board.Rows - 1; c1 = Board.Cols - 1; }
+        }
+
+        /// <summary>Centre of the visible play area, in board-local units.</summary>
+        public Vector2 PlayCentre => playArea.center;
+
         public Vector2 CellPos(Pos p) => new((p.C - (Board.Cols - 1) / 2f) * Cell, -(p.R - (Board.Rows - 1) / 2f) * Cell);
 
         public Vector3 WorldPos(Pos p) => transform.TransformPoint(CellPos(p));
 
         public void AddArrow(Arrow a, bool pop, float delay = 0f)
         {
-            var v = new View { Tiles = new List<Image>(a.Cells.Length) };
-            for (int i = 0; i < a.Cells.Length; i++)
-            {
-                // +3 px overlap hides the bilinear seam where two tiles meet.
-                var img = UIKit.Image(layer, null, new Vector2(0.5f, 0.5f), CellPos(a.Cells[i]), new Vector2(Cell + 3, Cell + 3), Palette[a.Color]);
-                v.Tiles.Add(img);
-            }
-            // a one-cell arrow shares its cell with the chevron: a smaller cap, pushed further back
+            var cells = new Vector2[a.Cells.Length];
+            for (int i = 0; i < cells.Length; i++) cells[i] = CellPos(a.Cells[i]);
+            var v = new View { Stroke = CreateStroke(layer, cells, a.Dir, Cell, Palette[a.Color], RunOut(a)) };
+            v.Stroke.FadeRect = playArea;
+            // a one-cell arrow shares its cell with the chevron: a smaller cap
             var capScale = a.Cells.Length == 1 ? 0.8f : 1f;
             v.Cap = UIKit.Image(layer, "dot", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(Cell * CapSize, Cell * CapSize) * capScale, Palette[a.Color]);
             v.Face = Face.AddUI(v.Cap.transform, new Vector2(Cell * FaceSize, Cell * FaceSize) * capScale, new Vector2(0, Cell * 0.02f));
+            v.Face.InkFor(Palette[a.Color]);
             views[a.Id] = v;
-            ApplyTiles(a.Cells, a.Dir, v);
+            PlaceCap(v);
             if (!pop) return;
-            foreach (var img in v.Tiles) PopIn(img.transform, delay);
-            PopIn(v.Cap.transform, delay);
+            var stroke = v.Stroke;
+            stroke.WidthScale = 0f;
+            Tween.Run(stroke, 0.22f, k => stroke.WidthScale = k, Ease.OutBack, delay);
+            v.Cap.transform.localScale = Vector3.zero;
+            Tween.Scale(v.Cap.transform, Vector3.one, 0.22f, Ease.OutBack, delay);
         }
 
-        private static void PopIn(Transform t, float delay)
+        // track past the head: far enough for the whole body to leave the board and fade
+        private float RunOut(Arrow a) => (Mathf.Max(Board.Rows, Board.Cols) + a.Cells.Length + 3) * Cell;
+
+        /// <summary>One arrow as a continuous stroke; cell centres head first, in the parent's local space.</summary>
+        public static ArrowStroke CreateStroke(Transform parent, Vector2[] headFirst, int dir, float cell, Color color, float runOut = 0f)
         {
-            t.localScale = Vector3.zero;
-            Tween.Scale(t, Vector3.one, 0.22f, Ease.OutBack, delay);
+            var rt = UIKit.Stretch(UIKit.Rect("Arrow", parent));
+            var stroke = rt.gameObject.AddComponent<ArrowStroke>();
+            stroke.raycastTarget = false;
+            stroke.color = color;
+            stroke.SetPath(headFirst, dir, cell, runOut);
+            return stroke;
         }
 
-        private void ApplyTiles(Pos[] cells, int dir, View v)
+        // The face rides the round tail end, and fades with it past the board edge.
+        private static void PlaceCap(View v)
         {
-            for (int i = 0; i < cells.Length; i++)
-            {
-                var (tile, angle) = TileFor(cells, i, dir);
-                v.Tiles[i].sprite = ArtLibrary.Instance.Get(tile);
-                v.Tiles[i].rectTransform.localEulerAngles = new Vector3(0, 0, -angle);
-            }
-            PlaceCap(cells, dir, v);
-        }
-
-        // The face sits on the round end: the tail cell's centre, or the back of a one-cell arrow.
-        private void PlaceCap(Pos[] cells, int dir, View v)
-        {
-            var tail = v.Tiles[^1].rectTransform.anchoredPosition;
-            if (cells.Length == 1) tail -= new Vector2(Board.DX[dir], -Board.DY[dir]) * Cell * 0.38f;
+            var tail = v.Stroke.TailPoint;
             v.Cap.rectTransform.anchoredPosition = tail;
-            v.Cap.enabled = v.Tiles[^1].enabled;
-            v.Face.gameObject.SetActive(v.Cap.enabled);
-        }
-
-        private static int DirBetween(Pos p, Pos q)
-        {
-            int dr = q.R - p.R, dc = q.C - p.C;
-            return dr == -1 ? 0 : dc == 1 ? 1 : dr == 1 ? 2 : 3;
-        }
-
-        /// <summary>Which tile draws cell i of a snake, and its clockwise rotation.</summary>
-        public static (string tile, float angle) TileFor(Pos[] cells, int i, int dir)
-        {
-            if (cells.Length == 1) return ("arrow_single", dir * 90);
-            if (i == 0) return ("arrow_head", dir * 90);
-            var a = DirBetween(cells[i], cells[i - 1]);
-            if (i == cells.Length - 1) return ("arrow_tail", a * 90);
-            var b = DirBetween(cells[i], cells[i + 1]);
-            if ((a + 2) % 4 == b) return ("arrow_body", a % 2 == 0 ? 0 : 90);
-            for (int k = 0; k < 4; k++)
-            {
-                int x = (2 + k) % 4, y = (1 + k) % 4;
-                if ((a == x && b == y) || (a == y && b == x)) return ("arrow_corner", k * 90);
-            }
-            return ("arrow_body", 0);
+            var c = v.Cap.color;
+            c.a = v.Stroke.FadeAt(tail);
+            v.Cap.color = c;
+            v.Face.gameObject.SetActive(c.a > 0.5f);
         }
 
         // Stops any running tween on the arrow and puts it back at full size where it belongs (A3: tapping an arrow
         // that is still growing in used to freeze it small).
-        private void Settle(Arrow a, View v)
+        private static void Settle(Arrow a, View v)
         {
-            for (int i = 0; i < v.Tiles.Count; i++)
-            {
-                Tween.Kill(v.Tiles[i].transform);
-                v.Tiles[i].transform.localScale = Vector3.one;
-                v.Tiles[i].rectTransform.anchoredPosition = CellPos(a.Cells[i]);
-                v.Tiles[i].color = Palette[a.Color];
-            }
+            Tween.Kill(v.Stroke);
+            Tween.Kill(v.Stroke.transform);
+            v.Stroke.WidthScale = 1f;
+            v.Stroke.Shift = Vector2.zero;
+            v.Stroke.Advance = 0f;
+            v.Stroke.color = Palette[a.Color];
             Tween.Kill(v.Cap.transform);
             v.Cap.transform.localScale = Vector3.one;
             v.Cap.color = Palette[a.Color];
-            PlaceCap(a.Cells, a.Dir, v);
+            PlaceCap(v);
         }
 
-        /// <summary>Slides the arrow out along its own body and fades pieces that leave the board.</summary>
+        /// <summary>Slides the arrow out along its own body, speeding up, and fades it past the board edge.</summary>
         public void AnimateExit(Arrow a)
         {
             if (!views.TryGetValue(a.Id, out var v)) return;
@@ -172,45 +191,44 @@ namespace CasualGame.ArrowOut
             views.Remove(a.Id);
             Settle(a, v);
             v.Face.React(FaceId.Panic, -1f);
-            StartCoroutine(Slide(a, v));
+            StartCoroutine(Slide(v));
         }
 
-        private IEnumerator Slide(Arrow a, View v)
+        private IEnumerator Slide(View v)
         {
-            var wait = new WaitForSeconds(StepSeconds);
-            int steps = Mathf.Max(Board.Rows, Board.Cols) + a.Cells.Length;
-            var ink = CreateInkTrail(a, v.Tiles[^1].transform.position);
+            var stroke = v.Stroke;
+            var ink = CreateInkTrail(stroke.color, stroke.transform.TransformPoint(stroke.TailPoint));
+            float speed = StartSpeed * Cell, max = stroke.BodyLength + (Mathf.Max(Board.Rows, Board.Cols) + 3) * Cell;
             bool puffed = false;
-            for (int step = 1; step <= steps; step++)
+            while (stroke.Advance < max)
             {
-                var cells = Board.Slide(a, step);
-                for (int i = 0; i < cells.Length; i++)
-                {
-                    v.Tiles[i].rectTransform.anchoredPosition = CellPos(cells[i]);
-                    v.Tiles[i].enabled = Board.Inside(cells[i].R, cells[i].C);
-                }
-                ApplyTiles(cells, a.Dir, v);
+                yield return null;
+                speed = Mathf.Min(speed + Acceleration * Cell * Time.deltaTime, TopSpeed * Cell);
+                stroke.Advance = Mathf.Min(stroke.Advance + speed * Time.deltaTime, max);
+                PlaceCap(v);
                 // the ink is laid by the TAIL, so it never covers the arrow's own body
-                ink.transform.position = v.Tiles[^1].transform.position;
-                if (!puffed && !Board.Inside(cells[0].R, cells[0].C))
+                ink.transform.position = stroke.transform.TransformPoint(stroke.TailPoint);
+                var head = stroke.HeadPoint;
+                if (!puffed && OutsideBoard(head))
                 {
                     puffed = true;
-                    var edge = (WorldPos(Board.Slide(a, step - 1)[0]) + WorldPos(cells[0])) * 0.5f;
-                    GameFx.Play("Land_Poof", edge, WorldCell() * 0.35f);
+                    GameFx.Play("Land_Poof", stroke.transform.TransformPoint(head), WorldCell() * 0.35f);
                 }
-                yield return wait;
+                if (stroke.Advance > stroke.BodyLength && stroke.FadeAt(stroke.TailPoint) <= 0f) break;
             }
-            foreach (var img in v.Tiles) Destroy(img.gameObject);
+            Destroy(stroke.gameObject);
             Destroy(v.Cap.gameObject);
             ink.emitting = false;
             inks.Remove(ink.gameObject);
             Destroy(ink.gameObject, InkTrailTime + 0.1f);
         }
 
+        private bool OutsideBoard(Vector2 p) => !playArea.Contains(p);
+
         private float WorldCell() => (WorldPos(new Pos(0, 1)) - WorldPos(new Pos(0, 0))).magnitude;
 
         // Ink brush stroke (InkBrush shader): bristles along the stroke, dries out from the tail end.
-        private TrailRenderer CreateInkTrail(Arrow a, Vector3 start)
+        private TrailRenderer CreateInkTrail(Color color, Vector3 start)
         {
             if (inkMaterial == null)
             {
@@ -229,8 +247,8 @@ namespace CasualGame.ArrowOut
             trail.minVertexDistance = 0.04f;
             trail.numCornerVertices = 3;
             trail.numCapVertices = 2;
-            trail.startColor = trail.endColor = Palette[a.Color];
-            var canvas = GetComponentInParent<Canvas>();
+            trail.startColor = trail.endColor = color;
+            var canvas = GetComponentInParent<Canvas>()?.rootCanvas; // the board has its own nested canvas; sorting comes from the root
             if (canvas != null)
             {
                 trail.sortingLayerID = canvas.sortingLayerID;
@@ -258,21 +276,16 @@ namespace CasualGame.ArrowOut
             int gap = 0;
             for (int r = a.Head.R + Board.DY[a.Dir], c = a.Head.C + Board.DX[a.Dir]; Board.Inside(r, c) && board.Grid[r, c] != blocker.Id; r += Board.DY[a.Dir], c += Board.DX[a.Dir]) gap++;
             var push = new Vector2(Board.DX[a.Dir], -Board.DY[a.Dir]) * Cell * (gap + 0.3f);
-            var homes = new Vector2[v.Tiles.Count];
-            for (int i = 0; i < homes.Length; i++) homes[i] = CellPos(a.Cells[i]);
-            var capHome = v.Cap.rectTransform.anchoredPosition;
             var tint = costsHeart ? ErrorColor : Palette[a.Color];
-            Tween.Run(v.Tiles[0].transform, 0.34f, k =>
+            var stroke = v.Stroke;
+            Tween.Run(stroke.transform, 0.34f, k =>
             {
                 // out fast, back with a little spring
                 var t = k < 0.35f ? Tween.Evaluate(Ease.OutQuad, k / 0.35f) : 1f - Tween.Evaluate(Ease.OutBack, (k - 0.35f) / 0.65f);
-                for (int i = 0; i < homes.Length; i++)
-                {
-                    v.Tiles[i].rectTransform.anchoredPosition = homes[i] + push * t;
-                    v.Tiles[i].color = Color.Lerp(Palette[a.Color], tint, Mathf.Sin(k * Mathf.PI));
-                }
-                v.Cap.rectTransform.anchoredPosition = capHome + push * t;
-                v.Cap.color = v.Tiles[0].color;
+                stroke.Shift = push * t;
+                stroke.color = Color.Lerp(Palette[a.Color], tint, Mathf.Sin(k * Mathf.PI));
+                PlaceCap(v);
+                v.Cap.color = stroke.color;
             }, Ease.Linear, 0f, () => { if (views.ContainsKey(a.Id)) Settle(a, v); });
 
             if (!views.TryGetValue(blocker.Id, out var b)) return;
@@ -280,9 +293,9 @@ namespace CasualGame.ArrowOut
             Tween.Run(b.Cap.transform, 0.3f, k =>
             {
                 var flash = k < 0.12f ? 0f : Mathf.Sin((k - 0.12f) / 0.88f * Mathf.PI);
-                foreach (var img in b.Tiles) img.color = Color.Lerp(Palette[blocker.Color], Color.white, flash * 0.85f);
-                b.Cap.color = b.Tiles[0].color;
-            }, Ease.Linear, 0.1f, () => { foreach (var img in b.Tiles) img.color = Palette[blocker.Color]; b.Cap.color = Palette[blocker.Color]; });
+                b.Stroke.color = Color.Lerp(Palette[blocker.Color], Color.white, flash * 0.85f);
+                b.Cap.color = b.Stroke.color;
+            }, Ease.Linear, 0.1f, () => { b.Stroke.color = Palette[blocker.Color]; b.Cap.color = Palette[blocker.Color]; });
         }
 
         /// <summary>A4: dotted flight path from the head to the edge, in the arrow's colour, and a gentle pulse.</summary>
@@ -294,17 +307,14 @@ namespace CasualGame.ArrowOut
             v.Face.React(FaceId.Smug, -1f);
             for (int r = a.Head.R + Board.DY[a.Dir], c = a.Head.C + Board.DX[a.Dir]; ; r += Board.DY[a.Dir], c += Board.DX[a.Dir])
             {
-                var inside = Board.Inside(r, c);
+                var inside = Board.Inside(r, c) && playArea.Contains(CellPos(new Pos(r, c)));
                 var dot = UIKit.Image(hintLayer, "dot", new Vector2(0.5f, 0.5f), CellPos(new Pos(r, c)), new Vector2(Cell * 0.16f, Cell * 0.16f), Palette[a.Color]);
                 dot.color = new Color(dot.color.r, dot.color.g, dot.color.b, inside ? 0.9f : 0.45f);
                 hintDots.Add(dot);
                 if (!inside) break;
             }
-            foreach (var img in v.Tiles)
-            {
-                var t = img.transform;
-                Tween.Run(t, 30f, k => t.localScale = Vector3.one * (1f + 0.08f * Mathf.Abs(Mathf.Sin(k * 30f * Mathf.PI * 1.2f))), Ease.Linear, 0f, () => t.localScale = Vector3.one);
-            }
+            var stroke = v.Stroke;
+            Tween.Loop(stroke, s => stroke.WidthScale = 1f + 0.3f * Mathf.Abs(Mathf.Sin(s * Mathf.PI * 1.2f)));
         }
 
         public void ClearHint()
@@ -312,11 +322,8 @@ namespace CasualGame.ArrowOut
             foreach (var d in hintDots) if (d != null) Destroy(d.gameObject);
             hintDots.Clear();
             if (hinted == null || !views.TryGetValue(hinted.Id, out var v)) { hinted = null; return; }
-            foreach (var img in v.Tiles)
-            {
-                Tween.Kill(img.transform);
-                img.transform.localScale = Vector3.one;
-            }
+            Tween.Kill(v.Stroke);
+            v.Stroke.WidthScale = 1f;
             v.Face.ClearReaction();
             hinted = null;
         }
@@ -326,7 +333,10 @@ namespace CasualGame.ArrowOut
             if (!views.TryGetValue(a.Id, out var v)) return;
             views.Remove(a.Id);
             if (hinted == a) ClearHint();
-            foreach (var img in v.Tiles) { Tween.Kill(img.transform); Tween.Scale(img.transform, Vector3.zero, 0.2f, Ease.InBack, 0f, () => Destroy(img.gameObject)); }
+            var stroke = v.Stroke;
+            Tween.Kill(stroke);
+            Tween.Kill(stroke.transform);
+            Tween.Run(stroke, 0.2f, k => stroke.WidthScale = 1f - k, Ease.InBack, 0f, () => Destroy(stroke.gameObject));
             Tween.Kill(v.Cap.transform);
             Tween.Scale(v.Cap.transform, Vector3.zero, 0.2f, Ease.InBack, 0f, () => Destroy(v.Cap.gameObject));
         }

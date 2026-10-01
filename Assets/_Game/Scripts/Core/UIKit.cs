@@ -149,6 +149,10 @@ namespace CasualGame.Core
 
             var text = Label(rt, label, fontSize);
             Stretch(text.rectTransform);
+            // G11: a long label (Vietnamese, "Revive · clear 3 lines") shrinks to fit instead of spilling out
+            text.enableAutoSizing = true;
+            text.fontSizeMax = fontSize;
+            text.fontSizeMin = fontSize * 0.6f;
             text.rectTransform.offsetMin = new Vector2(icon != null ? 90 : 20, 14);
             text.rectTransform.offsetMax = new Vector2(-20, 0);
             if (icon != null)

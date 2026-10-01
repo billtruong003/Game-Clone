@@ -35,7 +35,7 @@ namespace CasualGame.Sandbox
         private float hitStop = 0.04f;
 
         [Header("3. Burst (effect prefab names, played at the midpoint; {color} = color family of the new tier)")]
-        [SerializeField] private string[] burstEffects = { "Merge_Fusion_{color}" };
+        [SerializeField] private string[] burstEffects = { "Merge_Splash" };
         [SerializeField, Tooltip("Effect scale relative to the new ball (spec: splat = 1.6× its diameter).")]
         private float burstScale = 1.6f;
         [SerializeField] private bool cameraKick;

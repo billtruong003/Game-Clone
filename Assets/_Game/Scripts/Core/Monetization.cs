@@ -97,6 +97,11 @@ namespace CasualGame.Core
                 iap.Buy(onDone);
                 return;
             }
+            if (!Application.isEditor) // a device build without a product id must never hand out a free purchase
+            {
+                FakeAdProvider.ShowOverlay(Loc.T("The store is not available right now.", "Cửa hàng chưa sẵn sàng."), 1.4f, () => onDone?.Invoke(false));
+                return;
+            }
             FakeAdProvider.ShowOverlay(Loc.T("Buying \"Remove ads\" (simulated)…", "Mua \"Gỡ quảng cáo\" (giả lập)…"), 1.2f, () =>
             {
                 OnOwned();

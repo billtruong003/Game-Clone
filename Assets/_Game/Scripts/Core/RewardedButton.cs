@@ -31,15 +31,25 @@ namespace CasualGame.Core
                 Ads.ShowRewarded(placement, ok =>
                 {
                     rb.busy = false;
-                    if (ok) popup.Close(onEarned);
-                    else if (popup.Root != null) Toast.Show(popup.Root, Ads.NoVideoText);
+                    if (!ok) { if (popup.Root != null) Toast.Show(popup.Root, Ads.NoVideoText); return; }
+                    // the popup may already be gone (Back pressed while the ad played): the reward is still owed
+                    if (popup.Root != null) popup.Close(onEarned);
+                    else onEarned?.Invoke();
                 });
             });
             rb.Refresh(true);
             return b;
         }
 
-        private void Update() => Refresh(false);
+        // readiness is a JNI call on device: twice a second is plenty for a label
+        private float nextCheck;
+
+        private void Update()
+        {
+            if (Time.unscaledTime < nextCheck) return;
+            nextCheck = Time.unscaledTime + 0.5f;
+            Refresh(false);
+        }
 
         private void Refresh(bool force)
         {

@@ -17,6 +17,7 @@ namespace CasualGame.Core
         private InterstitialAd interstitial;
         private RewardedAd rewarded;
         private int interstitialRetry, rewardedRetry;
+        private bool rewardedLoading;
 
         public static bool Ready { get; private set; }
 
@@ -47,6 +48,7 @@ namespace CasualGame.Core
                 {
                     if (formError != null) Debug.LogWarning("UMP form: " + formError.Message);
                     if (ConsentInformation.CanRequestAds()) StartAds();
+                    else RetryTimer.After(30f, RequestConsent); // form failed to load: without this no ad would ever load this session
                 }));
             }));
         }
@@ -80,7 +82,7 @@ namespace CasualGame.Core
         {
             if (rewarded == null || !rewarded.CanShowAd())
             {
-                if (rewarded == null) LoadRewarded();
+                if (rewarded == null && Ready && !rewardedLoading) LoadRewarded(); // never request before consent allows it
                 onDone?.Invoke(false);
                 return;
             }
@@ -105,9 +107,11 @@ namespace CasualGame.Core
 
         private void LoadRewarded()
         {
-            if (string.IsNullOrEmpty(rewardedId)) return;
+            if (string.IsNullOrEmpty(rewardedId) || rewardedLoading) return;
+            rewardedLoading = true;
             RewardedAd.Load(rewardedId, new AdRequest(), (ad, error) => Main(() =>
             {
+                rewardedLoading = false;
                 if (error != null || ad == null) { Retry(ref rewardedRetry, LoadRewarded); return; }
                 rewardedRetry = 0;
                 rewarded = ad;

@@ -130,6 +130,11 @@ namespace CasualGame.Core
         {
             var inGame = actions.Length > 0;
             var popup = Popup.Open(parent, inGame ? Loc.T("Paused", "Tạm dừng") : Loc.T("Settings", "Cài đặt"), 1400);
+            if (inGame) // G13: the music rests while paused, whichever way the popup closes
+            {
+                GameAudio.PauseMusic(true);
+                popup.Root.gameObject.AddComponent<OnDestroyed>().Action = () => GameAudio.PauseMusic(false);
+            }
             popup.OnBack = () => popup.Close(onClose);
             if (inGame) popup.Button("btn_green", Loc.T("Resume", "Tiếp tục"), () => popup.Close(onClose), "icon_play");
             foreach (var a in actions)

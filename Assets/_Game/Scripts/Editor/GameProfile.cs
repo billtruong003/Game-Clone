@@ -17,6 +17,10 @@ namespace CasualGame.EditorTools
         [Tooltip("Play package name, e.g. com.billthedev.arrowout. Permanent after the first upload.")] public string applicationId;
         [Tooltip("Scripting define set while this game is active, e.g. CG_ARROWOUT")] public string defineSymbol;
         public Texture2D icon;
+        [Tooltip("Adaptive icon layers (Android 8+ launchers mask to their own shape): full-bleed background, foreground inside the middle 66 %")]
+        public Texture2D adaptiveBackground, adaptiveForeground;
+        [Tooltip("Title logo shown on the launch splash (G1), over the splash colour")] public Sprite logo;
+        public Color splashColor = new Color(0.17f, 0.18f, 0.33f);
 
         [Header("Version")]
         [Tooltip("User-facing version name")] public string version = "0.1.0";

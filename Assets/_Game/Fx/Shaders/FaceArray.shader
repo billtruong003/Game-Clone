@@ -1,6 +1,8 @@
 // Character faces: one Texture2DArray holds every expression (Assets/_Game/Art/Faces/faces.png, 3×3 flipbook).
 // The slice comes from TEXCOORD1.x, written per quad by FaceGraphic (UI) or baked into FaceQuad's shared meshes (world),
 // so every face on screen shares this one material and batches together. Vertex colour × _Color tints / fades.
+// TEXCOORD1.y = 1 redraws the ink in cream, for faces sitting on a dark body (a navy arrow tail): the tears and
+// sweat keep their colour because only dark pixels are swapped.
 Shader "CasualGame/FaceArray"
 {
     Properties
@@ -45,6 +47,7 @@ Shader "CasualGame/FaceArray"
                 float4 positionCS : SV_POSITION;
                 half4 color : COLOR;
                 float3 uv : TEXCOORD0;
+                half lightInk : TEXCOORD1;
             };
 
             Varyings vert(Attributes v)
@@ -53,12 +56,15 @@ Shader "CasualGame/FaceArray"
                 o.positionCS = TransformObjectToHClip(v.positionOS.xyz);
                 o.color = v.color * _Color;
                 o.uv = float3(v.uv, v.uv1.x);
+                o.lightInk = v.uv1.y;
                 return o;
             }
 
             half4 frag(Varyings i) : SV_Target
             {
                 half4 c = SAMPLE_TEXTURE2D_ARRAY(_Faces, sampler_Faces, i.uv.xy, i.uv.z);
+                half ink = saturate((0.45h - dot(c.rgb, half3(0.2126h, 0.7152h, 0.0722h))) / 0.3h);
+                c.rgb = lerp(c.rgb, half3(1.0h, 0.973h, 0.925h), ink * i.lightInk);
                 return c * i.color;
             }
             ENDHLSL

@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Game/Scenes/Boot.unity
+    guid: ca2dd45d27d8ff14aa8333c38aa81e09
+  - enabled: 1
     path: Assets/_Game/Scenes/EyeMerge.unity
     guid: 4f4fff50ffc8b554dbdd1a64719ecd82
   m_configObjects:

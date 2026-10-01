@@ -32,7 +32,7 @@ namespace CasualGame.Sandbox
 
         [Header("Multi-line extras (Run(3))")]
         [SerializeField, Tooltip("Two-frame silhouette freeze before the blocks pop (ImpactFrame).")] private bool impactFrame = true;
-        [SerializeField, Tooltip("Played once at the center of the cleared rows. Empty = none.")] private string multiLineEffect = "Blast_MultiLine";
+        [SerializeField, Tooltip("Played once at the center of the cleared rows. Empty = none.")] private string multiLineEffect = "";
         [SerializeField] private float multiLineEffectScale = 1.4f;
         [SerializeField] private bool cameraKick = true;
         [SerializeField] private float kickAmount = 0.14f, kickTime = 0.18f;

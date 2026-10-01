@@ -46,3 +46,16 @@ ExportedObj/
 .DS_Store
 Thumbs.db
 .utmp/
+
+# brand renders (sources: Tools/art/make-brand.mjs; installed copies live in Assets/_Game/Art/Brand and Store/graphics)
+/Tools/art/brand/
+
+# Paid audio packs (Asset Store EULA: no redistribution). Import them from the Asset Store into the same paths.
+/Assets/Casual Game Sounds U6/
+/Assets/Casual Game Sounds U6.meta
+/Assets/Scenes/Season Cycle Casual Gaming Music Pack/
+/Assets/Scenes/Season Cycle Casual Gaming Music Pack.meta
+
+# Unity crash-recovery scenes
+/Assets/_Recovery/
+/Assets/_Recovery.meta

@@ -191,6 +191,10 @@ namespace CasualGame.EditorTools
             c.bannerAdUnit = release ? p.bannerAdUnit : TestBanner;
             c.removeAdsProductId = p.removeAdsProductId;
             c.privacyPolicyUrl = p.privacyPolicyUrl;
+            c.logo = p.logo;
+            c.splashColor = p.splashColor;
+            c.splashArt = p.adaptiveForeground; // the characters on a transparent ground, for the loading screen
+            c.music = p.audioClips?.FirstOrDefault(n => n.StartsWith("music_") && !n.EndsWith("_intro")) ?? "";
             EditorUtility.SetDirty(c);
             return c;
         }
@@ -207,6 +211,21 @@ namespace CasualGame.EditorTools
         private static readonly Regex PackageName = new Regex(@"^[a-z][a-z0-9_]*(\.[a-z][a-z0-9_]*){2,}$");
 
         /// <summary>Everything that would make a build of this profile wrong or rejected by Play. Errors block a build.</summary>
+        // Legacy icon = the full-bleed square; adaptive = background + foreground layers the launcher shapes itself.
+        private static void ApplyAndroidIcons(GameProfile p)
+        {
+            var target = NamedBuildTarget.Android;
+            var legacy = PlayerSettings.GetPlatformIcons(target, UnityEditor.Android.AndroidPlatformIconKind.Legacy);
+            foreach (var icon in legacy) icon.SetTextures(p.icon);
+            PlayerSettings.SetPlatformIcons(target, UnityEditor.Android.AndroidPlatformIconKind.Legacy, legacy);
+            var adaptive = PlayerSettings.GetPlatformIcons(target, UnityEditor.Android.AndroidPlatformIconKind.Adaptive);
+            var hasLayers = p.adaptiveBackground != null && p.adaptiveForeground != null;
+            foreach (var icon in adaptive)
+                if (hasLayers) icon.SetTextures(p.adaptiveBackground, p.adaptiveForeground);
+                else icon.SetTextures(null, null);
+            PlayerSettings.SetPlatformIcons(target, UnityEditor.Android.AndroidPlatformIconKind.Adaptive, adaptive);
+        }
+
         public static List<Issue> Validate(GameProfile p, bool release)
         {
             var list = new List<Issue>();
@@ -224,12 +243,14 @@ namespace CasualGame.EditorTools
             if (p.scenes == null || p.scenes.Length == 0) Err("No scenes");
             else foreach (var s in p.scenes) if (!File.Exists(ScenesFolder + s + ".unity")) Err($"Scene '{s}' does not exist");
             if (p.icon == null) ReleaseErr("No app icon");
+            if (p.adaptiveBackground == null || p.adaptiveForeground == null) Warn("No adaptive icon layers: Android 8+ launchers will shrink the square icon");
             if (p.versionCode <= p.LastReleasedCode()) Err($"versionCode {p.versionCode} was already released (last {p.LastReleasedCode()})");
 
             if (string.IsNullOrEmpty(p.adMobAppId) || string.IsNullOrEmpty(p.interstitialAdUnit) || string.IsNullOrEmpty(p.rewardedAdUnit))
                 ReleaseErr("AdMob app id / ad unit ids missing (test builds use Google's test ids)");
             else if (p.adMobAppId.StartsWith("ca-app-pub-3940256099942544")) ReleaseErr("AdMob app id is Google's test id");
             if (string.IsNullOrEmpty(p.privacyPolicyUrl)) ReleaseErr("Privacy policy URL missing (required by Play and for ads)");
+            if (string.IsNullOrEmpty(p.removeAdsProductId)) ReleaseErr("Remove-ads product id missing (the purchase button would not work)");
             if (release)
             {
                 if (string.IsNullOrEmpty(studio.keystorePath) || !File.Exists(studio.keystorePath)) Err("Upload keystore not set in Studio settings");
@@ -247,8 +268,9 @@ namespace CasualGame.EditorTools
             foreach (var o in Profiles()) WriteConfig(o, release && o == p);
             WireScenes();
 
-            EditorBuildSettings.scenes = p.scenes
-                .Select(s => ScenesFolder + s + ".unity")
+            // the shared Boot scene (credits, splash, real loading) is always first, then the game's own scenes
+            BootSceneBuilder.Wire(p);
+            EditorBuildSettings.scenes = new[] { BootSceneBuilder.ScenePath }.Concat(p.scenes.Select(s => ScenesFolder + s + ".unity"))
                 .Where(File.Exists)
                 .Select(path => new EditorBuildSettingsScene(path, true))
                 .ToArray();
@@ -260,6 +282,7 @@ namespace CasualGame.EditorTools
             PlayerSettings.bundleVersion = p.version;
             PlayerSettings.Android.bundleVersionCode = p.versionCode;
             PlayerSettings.SetIcons(NamedBuildTarget.Unknown, p.icon != null ? new[] { p.icon } : Array.Empty<Texture2D>(), IconKind.Any);
+            ApplyAndroidIcons(p);
 
             // Play requirements: 64-bit (IL2CPP + ARM64), current target API
             PlayerSettings.SetScriptingBackend(NamedBuildTarget.Android, ScriptingImplementation.IL2CPP);

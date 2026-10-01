@@ -41,7 +41,7 @@ namespace CasualGame.EyeMerge
         private Canvas canvas;
         private RectTransform hud;
         private Transform world;
-        private SpriteRenderer dangerLine, jarLine, dangerBar, dangerBarBg, ghostFill, ghostLine;
+        private SpriteRenderer dangerLine, dangerBar, dangerBarBg, ghostFill, ghostLine;
         private readonly List<SpriteRenderer> aimDots = new();
         private MergeBall held;
         private int nextTier;
@@ -52,14 +52,15 @@ namespace CasualGame.EyeMerge
         private readonly List<MergeBall> balls = new();
         private readonly List<(MergeBall a, MergeBall b)> merges = new();
         private int score, shownScore, best, startBest, combo;
-        private float lastDrop = -10f, overTimer, lastMerge = -10f, nextBestSave;
+        private float lastDrop = -10f, overTimer, lastMerge = -10f;
         private bool playing, revived, aiming, dangerShown, bestToastShown, legendShown;
         private PhysicsMaterial2D material;
-        private GlassJar glass;
+        private readonly List<SpriteRenderer> stageLines = new(); // shelf + pillar outlines, flash red in danger
 
         // Merge feel (goo melt -> white flash -> new ball pops out of the blob)
         private const float MeltTime = 0.14f, FlashTime = 0.035f, PopTime = 0.1f, SettleTime = 0.18f;
-        private const float GooBlend = 1.1f, JarCorner = 0.7f;
+        private const float GooBlend = 1.1f;
+        private const float SplashScale = 1.8f; // Merge_Splash size per unit of ball radius: rings just past the ball
 
         private void Start()
         {
@@ -68,7 +69,7 @@ namespace CasualGame.EyeMerge
             // Keep the 10.8-unit-wide jar area visible on tall and wide screens alike.
             cam.orthographicSize = Mathf.Max(9.6f, 5.4f / cam.aspect);
             canvas = UIKit.CreateCameraCanvas("EyeMergeUI", cam, 100);
-            canvas.sortingLayerName = "Glass"; // HUD and popups above the jar glass (which is on the Glass layer)
+            canvas.sortingLayerName = "Glass"; // HUD and popups above the whole play field (top sorting layer)
             hud = UIKit.Stretch(UIKit.Rect("Safe", canvas.transform));
             hud.gameObject.AddComponent<SafeArea>();
             // Balls must slide off each other and spread, never stack in a column: low friction, a little bounce.
@@ -101,7 +102,8 @@ namespace CasualGame.EyeMerge
         {
             public int score, startBest, nextTier, heldTier;
             public float heldX;
-            public bool revived, legend;
+            public bool revived, legend, bestToast;
+            public int maxTier;
             public List<BallData> balls = new();
         }
 
@@ -111,11 +113,13 @@ namespace CasualGame.EyeMerge
         private void SaveRun()
         {
             if (ended) return; // game over: nothing to resume
-            var d = new RunData { score = score, startBest = startBest, nextTier = nextTier, heldTier = held != null ? held.Tier : nextTier, heldX = lastHeldX, revived = revived, legend = legendShown };
+            var d = new RunData { score = score, startBest = startBest, nextTier = nextTier, heldTier = held != null ? held.Tier : nextTier, heldX = lastHeldX, revived = revived, legend = legendShown, bestToast = bestToastShown, maxTier = maxTier };
             foreach (var b in balls)
                 if (b != null) d.balls.Add(new BallData { t = b.Tier, x = b.transform.position.x, y = b.transform.position.y, rot = b.transform.eulerAngles.z });
+            foreach (var m in inFlight) // a pair mid-merge is saved as the ball it is about to become
+                if (m.tier < Tiers) d.balls.Add(new BallData { t = m.tier + 1, x = m.pos.x, y = m.pos.y });
             SaveStore.SetJson(RunKey, d);
-            SaveStore.Save();
+            SaveStore.SaveSoon();
         }
 
         private bool TryRestore()
@@ -123,12 +127,14 @@ namespace CasualGame.EyeMerge
             if (!SaveStore.Has(RunKey)) return false;
             var d = SaveStore.GetJson<RunData>(RunKey);
             if (d.balls == null || d.heldTier < 1) { SaveStore.Delete(RunKey); return false; }
+            d.heldTier = Mathf.Clamp(d.heldTier, 1, SpawnWeights.Length); // a damaged save must not index past the colours
             NewGame(false);
             score = shownScore = d.score;
             startBest = d.startBest;
             best = Mathf.Max(best, score);
             revived = d.revived;
             legendShown = d.legend;
+            bestToastShown = d.bestToast; // the "New best!" toast already showed in this run
             foreach (var bd in d.balls)
             {
                 if (bd.t < 1 || bd.t > Tiers) continue;
@@ -138,11 +144,13 @@ namespace CasualGame.EyeMerge
                 b.Landed = true;
                 balls.Add(b);
             }
+            for (int t = 1; t <= Mathf.Clamp(d.maxTier, 0, Tiers); t++) LightStrip(t, true); // tiers reached earlier stay lit
             lastHeldX = d.heldX;
             nextTier = d.heldTier;
             SpawnHeld();
             nextTier = Mathf.Clamp(d.nextTier, 1, SpawnWeights.Length);
             RefreshHud();
+            if (!SaveStore.GetBool("merge.tutorial", false)) ShowTutorial(); // killed before the first drop
             OpenPause();
             return true;
         }
@@ -164,9 +172,12 @@ namespace CasualGame.EyeMerge
             foreach (Transform child in hud) Destroy(child.gameObject);
             balls.Clear();
             merges.Clear();
+            inFlight.Clear();
+            dropsSinceSave = 0;
+            aiming = false;
             aimDots.Clear();
             held = null;
-            score = shownScore = combo = 0;
+            score = shownScore = combo = maxTier = 0;
             overTimer = 0f;
             revived = dangerShown = bestToastShown = legendShown = false;
             best = startBest = SaveStore.GetInt("merge.best");
@@ -193,7 +204,7 @@ namespace CasualGame.EyeMerge
             UIKit.Stretch(t.rectTransform, 20);
             var hand = UIKit.Hand(tutorialRoot, new Vector2(0.5f, 1f), new Vector2(12, -448));
             var home = hand.anchoredPosition;
-            Tween.Run(hand, 60f, k => hand.anchoredPosition = home + new Vector2(Mathf.Sin(k * 60f * 2.2f) * 180f, 0f), Ease.Linear);
+            Tween.Loop(hand, s => hand.anchoredPosition = home + new Vector2(Mathf.Sin(s * 2.2f) * 180f, 0f));
         }
 
         private void HideTutorial()
@@ -207,17 +218,27 @@ namespace CasualGame.EyeMerge
 
         private void BuildJar()
         {
-            var jarSize = new Vector2(JarRight - JarLeft + 0.36f, JarTop - JarBottom + 0.36f);
-            var center = new Vector3(0f, (JarTop + JarBottom) / 2f, 0f);
-            Sprite(world, "jar_back", center, jarSize, UIKit.Hex("#3F3470"), 0, SpriteDrawMode.Sliced);
-            jarLine = Sprite(world, "jar_line", center, jarSize, Color.white, 1, SpriteDrawMode.Sliced);
-            jarLine.sortingLayerName = "Glass"; // outline over the glass
-            glass = GlassJar.Create(world, new Rect(JarLeft, JarBottom, JarRight - JarLeft, JarTop - JarBottom), JarCorner, "Glass", 0);
-            dangerLine = Sprite(world, "danger_dash", new Vector3(0, DangerY, 0), new Vector2(JarRight - JarLeft - 0.2f, 0.16f), DangerRed, 25, SpriteDrawMode.Tiled);
+            // Open stage (mockup JAR_D): no jar drawn over the balls. A darker floor band, a shelf the pile sits on and
+            // two pillars marking the walls; everything stays behind the balls, the danger dashes too.
+            stageLines.Clear();
+            // floor band: sliced at native scale so its top edge stays crisp (a scaled-up pill would blur it); the round
+            // corners sit far off screen
+            Sprite(world, "bar_fill", new Vector3(0f, JarBottom - 10f, 0f), new Vector2(40f, 20f), StageFloor, -3, SpriteDrawMode.Sliced);
+            StagePill(new Vector2(0f, JarBottom - StageThick / 2f), JarRight - JarLeft + 0.72f, StageThick, StageShelf, -1);
+            var pillarTop = DangerY + 0.2f;
+            foreach (var x in new[] { JarLeft - StageThick / 2f, JarRight + StageThick / 2f })
+            {
+                var pillar = StagePill(new Vector2(x, (pillarTop + JarBottom) / 2f), pillarTop - JarBottom, StageThick, StagePillar, -1);
+                pillar.transform.rotation = Quaternion.Euler(0, 0, 90f);
+                stageLines[^1].transform.rotation = pillar.transform.rotation;
+            }
+            dangerLine = Sprite(world, "danger_dash", new Vector3(0, DangerY, 0), new Vector2(JarRight - JarLeft - 0.2f, 0.16f), DangerRed, 0, SpriteDrawMode.Tiled);
 
             // M8: 2 s countdown bar just above the danger line, visible only while a ball is over it
-            dangerBarBg = Sprite(world, "round_rect", new Vector3(0, DangerY + 0.32f, 0), new Vector2(4.8f, 0.26f), new Color(0f, 0f, 0f, 0.35f), 26, SpriteDrawMode.Sliced);
-            dangerBar = Sprite(world, "round_rect", new Vector3(-2.4f, DangerY + 0.32f, 0), new Vector2(0.01f, 0.2f), DangerRed, 27, SpriteDrawMode.Sliced);
+            dangerBarBg = Sprite(world, "bar_fill", new Vector3(0, DangerY + 0.32f, 0), Vector2.one, new Color(0f, 0f, 0f, 0.35f), 26, SpriteDrawMode.Sliced);
+            dangerBar = Sprite(world, "bar_fill", new Vector3(0, DangerY + 0.32f, 0), Vector2.one, DangerRed, 27, SpriteDrawMode.Sliced);
+            SetPill(dangerBarBg, 4.8f, 0.28f, -2.4f);
+            SetPill(dangerBar, 0f, 0.2f, -2.36f);
             dangerBarBg.enabled = dangerBar.enabled = false;
 
             // M1: aim line (dots) from the held ball down to where it will first touch, and a ghost circle there
@@ -242,6 +263,35 @@ namespace CasualGame.EyeMerge
             Wall(new Vector2(JarLeft - 0.5f, 0), new Vector2(1f, 30f));
             Wall(new Vector2(JarRight + 0.5f, 0), new Vector2(1f, 30f));
             Wall(new Vector2(0, JarBottom - 0.5f), new Vector2(20f, 1f));
+        }
+
+        // A bar drawn from the 9-sliced "bar_fill" (48 px tall, 24 px round ends). The slice keeps its native height and
+        // the transform scales it down, so the round ends never get squeezed; the width never goes below one full pill
+        // (both ends touching), which is where a sliced sprite would otherwise break apart.
+        private const float BarNative = 0.48f;
+        private const float StageThick = 0.36f, StageOutline = 0.1f;
+        private static readonly Color StageFloor = UIKit.Hex("#271E47"), StageShelf = UIKit.Hex("#5B4D96"), StagePillar = UIKit.Hex("#4A3D80");
+
+        // A round-ended bar centred at `centre` (horizontal; rotate it for a pillar) with an ink outline drawn as a
+        // slightly bigger pill underneath. Returns the fill.
+        private SpriteRenderer StagePill(Vector2 centre, float length, float thick, Color fill, int order)
+        {
+            var line = Sprite(world, "bar_fill", centre, Vector2.one, UIKit.Ink, order - 1, SpriteDrawMode.Sliced);
+            SetPill(line, length + 2f * StageOutline, thick + 2f * StageOutline, centre.x - length / 2f - StageOutline);
+            stageLines.Add(line);
+            var sr = Sprite(world, "bar_fill", centre, Vector2.one, fill, order, SpriteDrawMode.Sliced);
+            SetPill(sr, length, thick, centre.x - length / 2f);
+            return sr;
+        }
+
+        private static void SetPill(SpriteRenderer sr, float width, float height, float left)
+        {
+            var s = height / BarNative;
+            var w = Mathf.Max(width, height);
+            sr.transform.localScale = new Vector3(s, s, 1f);
+            sr.size = new Vector2(w / s, BarNative);
+            var p = sr.transform.position;
+            sr.transform.position = new Vector3(left + w / 2f, p.y, p.z);
         }
 
         internal static SpriteRenderer Sprite(Transform parent, string name, Vector3 pos, Vector2 size, Color color, int order, SpriteDrawMode mode)
@@ -271,16 +321,25 @@ namespace CasualGame.EyeMerge
             UIKit.Image(nextFill.transform, "circle_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(92, 92));
             nextFace = Face.AddUI(nextFill.transform, new Vector2(60, 60), new Vector2(0, 4));
 
+            // the tier chart grows like the balls do (44 → 84 px), so "bigger = later" reads at a glance
             strip = new Image[Tiers];
+            const float gap = 14f;
+            float width = 0f;
+            for (int t = 1; t <= Tiers; t++) width += StripSize(t) + (t > 1 ? gap : 0f);
+            var x = -width / 2f;
             for (int t = 1; t <= Tiers; t++)
             {
-                var img = UIKit.Image(hud, "circle_fill", new Vector2(0.5f, 0f), new Vector2((t - 6) * 88, 70), new Vector2(72, 72), TierColors[t - 1]);
-                UIKit.Image(img.transform, "circle_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(72, 72));
+                var size = StripSize(t);
+                var img = UIKit.Image(hud, "circle_fill", new Vector2(0.5f, 0f), new Vector2(x + size / 2f, 74), new Vector2(size, size), TierColors[t - 1]);
+                UIKit.Image(img.transform, "circle_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
+                x += size + gap;
                 img.color = new Color(img.color.r, img.color.g, img.color.b, 0.25f);
                 strip[t - 1] = img;
             }
             RefreshHud();
         }
+
+        private static float StripSize(int tier) => 44f + 4f * (tier - 1);
 
         private void RefreshHud()
         {
@@ -293,12 +352,16 @@ namespace CasualGame.EyeMerge
             nextFill.transform.localScale = Vector3.one * s;
         }
 
+        // a brand-new player's first drops only use the three smallest balls: merges come fast while the rule sinks in
+        private const int GentleDrops = 15;
+
         private int RollTier()
         {
+            var count = SaveStore.GetInt("merge.drops.total") < GentleDrops ? 3 : SpawnWeights.Length;
             int total = 0;
-            foreach (var w in SpawnWeights) total += w;
+            for (int i = 0; i < count; i++) total += SpawnWeights[i];
             var x = Random.Range(0, total);
-            for (int i = 0; i < SpawnWeights.Length; i++)
+            for (int i = 0; i < count; i++)
                 if ((x -= SpawnWeights[i]) < 0) return i + 1;
             return 1;
         }
@@ -354,7 +417,7 @@ namespace CasualGame.EyeMerge
 
         private void SpawnHeld()
         {
-            if (held != null) return;
+            if (held != null || ended) return; // lost inside the drop cooldown: no new ball behind the game-over card
             var x = lastHeldX;
             held = CreateBall(nextTier, new Vector2(Mathf.Clamp(x, JarLeft + Radius(nextTier), JarRight - Radius(nextTier)), HoldY), false);
             held.Face.React(FaceId.Smug, 0.8f);
@@ -366,8 +429,11 @@ namespace CasualGame.EyeMerge
         }
 
         private float lastHeldX;
-        private int dropsSinceSave;
+        private int dropsSinceSave, maxTier;
         private bool ended;
+
+        private class PendingMerge { public int tier; public Vector3 pos; }
+        private readonly List<PendingMerge> inFlight = new();
 
         internal void RequestMerge(MergeBall a, MergeBall b)
         {
@@ -402,6 +468,9 @@ namespace CasualGame.EyeMerge
             b.Face.React(FaceId.Shock, 1f);
             var goo = GooMerge.Create(world, 10);
             Vector3 pa = a.transform.position, pb = b.transform.position, mid = (pa + pb) / 2f;
+            // a save taken while this pair melts must still contain the result (the pair already left `balls`)
+            var pending = new PendingMerge { tier = tier, pos = mid };
+            inFlight.Add(pending);
             float grow = tier < Tiers ? Radius(tier + 1) / r : 1.25f;
             for (float t = 0f; t < MeltTime; t += Time.deltaTime)
             {
@@ -428,17 +497,27 @@ namespace CasualGame.EyeMerge
 
             if (tier == Tiers)
             {
-                AddScore(100 * combo, mid);
+                inFlight.Remove(pending);
+                // the hardest thing in the game: two legends melt into nothing — make it worth it
+                AddScore(1000 * combo, mid);
+                FloatText(Loc.T("MEGA MEH!", "SIÊU MEH!"), mid + Vector3.up * 2.6f, 110, UIKit.Hex("#FFD23F"));
+                GameAudio.Haptic(HapticLevel.Strong);
                 GameAudio.Play("big");
-                GameFx.Play("Merge_BigFusion", mid, 1.6f);
-                GameFx.Play("Win_Confetti", mid, 1f);
+                GameFx.Play("Merge_SplashBig", mid, TierColors[Tiers - 1], Radius(Tiers) * 1.4f);
+                GameFx.Play("Merge_Splash", mid, TierColors[Tiers - 1], Radius(Tiers) * 1.1f);
+                GameFx.Play("Win_Confetti", mid, 1.6f);
                 yield break;
             }
             var next = tier + 1;
             var ball = CreateBall(next, mid, true);
+            // Paused or lost while the pair was melting: every other ball is frozen (not simulated, no collider), so
+            // a live ball here would fall straight through the pile. It joins the frozen state and wakes with the rest.
+            ball.Body.simulated = playing;
             ball.Born = Time.time;
             ball.Landed = true;
             balls.Add(ball);
+            inFlight.Remove(pending);
+            if (ended) { ball.Face.React(FaceId.Dizzy, -1f); yield break; }
             ball.Face.React(FaceId.Grin, 1.2f);
             if (!SaveStore.GetBool("merge.tip.merge", false)) // first merge ever explains the rule once
             {
@@ -448,8 +527,10 @@ namespace CasualGame.EyeMerge
             AddScore(next * (next + 1) / 2 * combo, mid);
             if (combo >= 2) FloatText("x" + combo, mid + Vector3.up * Radius(next), 90, UIKit.Hex("#FFD23F"));
             GameAudio.Play("merge", 0.8f + next * 0.07f + 0.06f * (combo - 1));
-            GameFx.Play(GameFx.Colored("Merge_Fusion_{color}", TierColors[next - 1]), mid, Radius(next) * 1.6f);
-            if (next >= 9) { GameFx.Play("Merge_BigFusion", mid, Radius(next)); GameAudio.Haptic(); }
+            // a jelly splat in the new ball's colour, a touch wider than the ball so it reads around it
+            GameFx.Play("Merge_Splash", mid, TierColors[next - 1], SplashScale * Radius(next));
+            GameAudio.Haptic(next >= 9 || combo >= 3 ? HapticLevel.Strong : HapticLevel.Medium);
+            if (next >= 9) GameFx.Play("Merge_SplashBig", mid, TierColors[next - 1], SplashScale * 1.3f * Radius(next));
             if (next == Tiers && !legendShown) Legend(mid);
             PushNeighbours(ball, next);
             // pop: from the blob's size -> overshoot -> settle. Only the visual scales; the collider stays put (M4).
@@ -479,10 +560,9 @@ namespace CasualGame.EyeMerge
             }
         }
 
-        /// <summary>A ball hit something: the glass glints when it is a wall; the first landing after a drop puffs smoke.</summary>
+        /// <summary>A ball hit something: the first landing after a drop puffs smoke.</summary>
         internal void OnBallHit(MergeBall ball, Collision2D c, float speed)
         {
-            if (c.collider.name == "Wall" && speed > 2.5f && glass != null) glass.Glint(speed / 10f);
             if (speed > 7f) ball.Face.React(FaceId.Dizzy, 0.45f);
             if (ball.Landed) return;
             ball.Landed = true;
@@ -493,12 +573,15 @@ namespace CasualGame.EyeMerge
             GameFx.Play("Land_Poof", contact + Vector2.right * r * 0.6f, r * 0.45f);
         }
 
-        private void LightStrip(int tier)
+        private void LightStrip(int tier, bool quiet = false)
         {
+            maxTier = Mathf.Max(maxTier, tier);
             var dot = strip[tier - 1];
             if (dot.color.a >= 1f) return;
             dot.color = TierColors[tier - 1];
             Tween.Punch(dot.transform, 0.5f, 0.4f);
+            // M10: a tier seen for the first time this run gets a rising chime (the small spawn tiers stay silent)
+            if (!quiet && tier >= 4) GameAudio.Play("merge", 1.2f + 0.05f * tier, 0.7f);
         }
 
         private void AddScore(int n, Vector3 at)
@@ -510,7 +593,7 @@ namespace CasualGame.EyeMerge
                 // G6: the best is kept the moment it is beaten, not only at game over
                 best = score;
                 SaveStore.SetInt("merge.best", best);
-                if (Time.unscaledTime >= nextBestSave) { SaveStore.Save(); nextBestSave = Time.unscaledTime + 3f; }
+                SaveStore.SaveSoon();
                 if (!bestToastShown && startBest > 0)
                 {
                     bestToastShown = true;
@@ -533,7 +616,7 @@ namespace CasualGame.EyeMerge
         private void FloatText(string text, Vector3 worldPos, float size, Color color)
         {
             var t = UIKit.Label(hud, text, size, color);
-            t.rectTransform.sizeDelta = new Vector2(400, size * 1.4f);
+            t.rectTransform.sizeDelta = new Vector2(900, size * 1.4f);
             t.outlineWidth = 0.25f;
             t.outlineColor = UIKit.Ink;
             RectTransformUtility.ScreenPointToLocalPointInRectangle(hud, cam.WorldToScreenPoint(worldPos), cam, out var local);
@@ -551,7 +634,7 @@ namespace CasualGame.EyeMerge
         {
             legendShown = true;
             GameAudio.Play("big");
-            GameAudio.Haptic();
+            GameAudio.Haptic(HapticLevel.Strong);
             GameFx.Play("Win_Confetti", at + Vector3.up * 3f, 1.4f);
             var t = UIKit.Label(hud, Loc.T("LEGENDARY MEH!", "MEH HUYỀN THOẠI!"), 130, UIKit.Hex("#FFD23F"));
             t.rectTransform.sizeDelta = new Vector2(1000, 180);
@@ -601,6 +684,11 @@ namespace CasualGame.EyeMerge
             if (danger != dangerShown)
             {
                 dangerShown = danger;
+                if (danger && !SaveStore.GetBool("merge.tip.danger", false)) // the first time ever: what the red line means
+                {
+                    SaveStore.SetBool("merge.tip.danger", true);
+                    Toast.Show(hud, Loc.T("Over the line for 2 s = game over!", "Quá vạch đỏ 2 giây là thua!"));
+                }
                 foreach (var b in balls)
                 {
                     if (danger) b.Face.React(b.transform.position.y + Radius(b.Tier) > DangerY - 1f ? FaceId.Panic : FaceId.Shock, -1f);
@@ -610,14 +698,14 @@ namespace CasualGame.EyeMerge
             overTimer = danger ? overTimer + Time.deltaTime : 0f;
             var pulse = danger ? 0.55f + 0.45f * Mathf.Sin(Time.time * 18f) : 0.45f;
             dangerLine.color = new Color(DangerRed.r, DangerRed.g, DangerRed.b, pulse);
-            jarLine.color = danger ? Color.Lerp(Color.white, DangerRed, 0.5f + 0.5f * Mathf.Sin(Time.time * 12f)) : Color.white;
+            var edge = danger ? Color.Lerp(UIKit.Ink, DangerRed, 0.5f + 0.5f * Mathf.Sin(Time.time * 12f)) : UIKit.Ink;
+            foreach (var line in stageLines) line.color = edge;
             dangerBar.enabled = dangerBarBg.enabled = danger;
             if (danger)
             {
                 var k = Mathf.Clamp01(overTimer / LoseAfter);
-                dangerBar.size = new Vector2(Mathf.Max(0.01f, 4.8f * k), 0.2f);
-                dangerBar.transform.position = new Vector3(-2.4f + 2.4f * k, DangerY + 0.32f, 0f);
-                if (Mathf.Repeat(overTimer, 0.5f) < Time.deltaTime) GameAudio.Play("thud", 0.7f, 0.6f); // heartbeat
+                SetPill(dangerBar, 4.72f * k, 0.2f, -2.36f);
+                if (Mathf.Repeat(overTimer, 0.5f) < Time.deltaTime) { GameAudio.Play("thud", 0.7f, 0.6f); GameAudio.Haptic(HapticLevel.Light); } // heartbeat (M8)
             }
             if (overTimer > LoseAfter) GameOver();
         }
@@ -671,7 +759,10 @@ namespace CasualGame.EyeMerge
             LightStrip(held.Tier);
             balls.Add(held);
             GameAudio.Play("drop");
+            GameAudio.Haptic(HapticLevel.Light);
             HideTutorial();
+            var dropped = SaveStore.GetInt("merge.drops.total");
+            if (dropped < GentleDrops) SaveStore.SetInt("merge.drops.total", dropped + 1);
             held = null;
             dropsSinceSave++;
             HideAim();
@@ -687,12 +778,11 @@ namespace CasualGame.EyeMerge
             aiming = false;
             HideAim();
             GameAudio.Play("lose");
+            GameAudio.Haptic(HapticLevel.Strong);
             dangerBar.enabled = dangerBarBg.enabled = false;
             foreach (var b in balls) { b.Body.simulated = false; b.Face.React(FaceId.Dizzy, -1f); }
             if (held != null) held.gameObject.SetActive(false);
             best = SaveStore.SubmitBest("merge.best", score);
-            var newBest = score > startBest && score > 0;
-            if (newBest) ReviewPrompt.GoodMoment();
             Tween.Delay(this, 0.6f, ShowGameOver);
         }
 
@@ -702,9 +792,22 @@ namespace CasualGame.EyeMerge
             var p = Popup.Open(hud, Loc.T("The jar is full!", "Hũ đầy rồi!"), 1050);
             p.Text(score.ToString(), 140, UIKit.Ink, 160);
             p.Text(newBest ? Loc.T("New best!", "Kỷ lục mới!") : Loc.F("Best {0}", "Kỷ lục {0}", best), 50, newBest ? UIKit.Hex("#E9A23B") : UIKit.Muted);
+            if (maxTier > 0) // spec 3.3: the biggest ball of the run
+            {
+                var row = p.Row(110);
+                UIKit.Label(row, Loc.T("Biggest ball", "Bóng to nhất"), 46, new Vector2(0.5f, 0.5f), new Vector2(-70, 0), new Vector2(420, 70), UIKit.Muted);
+                var ball = UIKit.Image(row, "circle_fill", new Vector2(0.5f, 0.5f), new Vector2(200, 0), new Vector2(96, 96), TierColors[maxTier - 1]);
+                UIKit.Image(ball.transform, "circle_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(96, 96));
+                Face.AddUI(ball.transform, new Vector2(62, 62), new Vector2(0, 4)).SetIdle(FaceId.Smug);
+            }
             p.Space(10);
             if (!revived) RewardedButton.Add(p, Loc.T("Revive", "Hồi sinh"), "merge_revive", Revive);
-            p.Button("btn_green", Loc.T("Play again", "Chơi lại"), () => p.Close(() => Ads.OnBreak("merge_gameover", NewGame)), "icon_restart");
+            // review only once the card is gone (G10), and never an interstitial right on top of it
+            p.Button("btn_green", Loc.T("Play again", "Chơi lại"), () => p.Close(() =>
+            {
+                if (newBest && ReviewPrompt.GoodMoment()) NewGame();
+                else Ads.OnBreak("merge_gameover", NewGame);
+            }), "icon_restart");
             p.Fit();
         }
 
@@ -716,9 +819,11 @@ namespace CasualGame.EyeMerge
             for (int i = balls.Count - 1; i >= 0; i--)
             {
                 var b = balls[i];
-                if (b.transform.position.y + Radius(b.Tier) > DangerY - 3.2f)
+                // "near the top" by the ball's upper part, capped at 1 unit: a tier-11 ball (r 3.5) resting on the
+                // floor reaches above the cut-off with its full radius and would be deleted
+                if (b.transform.position.y + Mathf.Min(Radius(b.Tier), 1f) > DangerY - 3.2f)
                 {
-                    GameFx.Play(GameFx.Colored("Merge_Fusion_{color}", TierColors[b.Tier - 1]), b.transform.position, Radius(b.Tier));
+                    GameFx.Play("Merge_Splash", b.transform.position, TierColors[b.Tier - 1], SplashScale * Radius(b.Tier));
                     balls.RemoveAt(i);
                     Destroy(b.gameObject);
                 }

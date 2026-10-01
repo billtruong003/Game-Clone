@@ -35,10 +35,34 @@ namespace CasualGame.Core
         {
             var best = Mathf.Max(GetInt(key), value);
             SetInt(key, best);
-            Save();
+            SaveSoon();
             return best;
         }
 
-        public static void Save() => PlayerPrefs.Save();
+        public static void Save()
+        {
+            PlayerPrefs.Save();
+            pending = false;
+            lastSave = Time.unscaledTime;
+        }
+
+        // PlayerPrefs.Save() writes the whole file to disk. Per-move state (run in progress, a best beaten on every
+        // move) goes through here instead: at most one write every few seconds, and whatever is still pending is
+        // written when the app goes to the background or quits (AppEvents), which is when Android may kill it.
+        private const float SaveInterval = 5f;
+        private static bool pending;
+        private static float lastSave = -SaveInterval;
+
+        public static void SaveSoon()
+        {
+            if (Time.unscaledTime - lastSave >= SaveInterval) Save();
+            else pending = true;
+        }
+
+        /// <summary>Called every frame by AppEvents: writes a pending save once the interval has passed.</summary>
+        internal static void FlushIfDue()
+        {
+            if (pending && Time.unscaledTime - lastSave >= SaveInterval) Save();
+        }
     }
 }

@@ -16,7 +16,11 @@ MonoBehaviour:
   productName: Meh Merge
   applicationId: com.billthedev.mehmerge
   defineSymbol: CG_EYEMERGE
-  icon: {fileID: 2800000, guid: 9e51e4bb503674341920a008b387cc37, type: 3}
+  icon: {fileID: 2800000, guid: 479492220023c10489edbf616cadd73e, type: 3}
+  adaptiveBackground: {fileID: 2800000, guid: 7551537b683d769478f48408de614af3, type: 3}
+  adaptiveForeground: {fileID: 2800000, guid: 2bc0894164686574690cfa37a8368f19, type: 3}
+  logo: {fileID: 21300000, guid: d8aa8260ccb1897448baa6d488ca4dea, type: 3}
+  splashColor: {r: 0.184, g: 0.145, b: 0.322, a: 1}
   version: 0.1.0
   versionCode: 1
   scenes:

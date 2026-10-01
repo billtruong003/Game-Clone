@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using CasualGame.Core;
@@ -30,14 +31,31 @@ namespace CasualGame.EditorTools
             BuildSwitcher.RebuildGameLibraries();
         }
 
-        /// <summary>Library of clips under Assets/_Game/Audio whose name is listed (null or empty = all).</summary>
+        public const string AudioMapPath = "Assets/_Game/Audio/AudioMap.asset";
+
+        /// <summary>
+        /// Library of the listed sound names (null or empty = all). Each name comes from the AudioMap (licensed pack
+        /// clips) or else from a clip with that file name under Assets/_Game/Audio. A listed name also brings its
+        /// "_intro" entry, which plays once before the loop.
+        /// </summary>
         public static AudioLibrary BuildAudioLibrary(string path, string[] clipNames)
         {
-            var clips = AssetDatabase.FindAssets("t:AudioClip", new[] { "Assets/_Game/Audio" })
-                .Select(g => AssetDatabase.LoadAssetAtPath<AudioClip>(AssetDatabase.GUIDToAssetPath(g)))
-                .Where(c => c != null && (clipNames == null || clipNames.Length == 0 || clipNames.Contains(c.name)))
-                .OrderBy(c => c.name)
-                .ToList();
+            var byName = new Dictionary<string, AudioLibrary.Entry>();
+            foreach (var g in AssetDatabase.FindAssets("t:AudioClip", new[] { "Assets/_Game/Audio" }))
+            {
+                var c = AssetDatabase.LoadAssetAtPath<AudioClip>(AssetDatabase.GUIDToAssetPath(g));
+                if (c != null) byName[c.name] = new AudioLibrary.Entry { name = c.name, clip = c, volume = 1f };
+            }
+            var map = AssetDatabase.LoadAssetAtPath<AudioMap>(AudioMapPath);
+            if (map != null)
+                foreach (var e in map.entries)
+                    if (e.clip != null && !string.IsNullOrEmpty(e.name)) // a missing pack leaves the fallback in place
+                        byName[e.name] = new AudioLibrary.Entry { name = e.name, clip = e.clip, volume = e.volume };
+
+            bool Wanted(string n) => clipNames == null || clipNames.Length == 0 || clipNames.Contains(n) ||
+                                     (n.EndsWith("_intro") && clipNames.Contains(n.Substring(0, n.Length - "_intro".Length)));
+            var entries = byName.Values.Where(e => Wanted(e.name)).OrderBy(e => e.name).ToList();
+
             var lib = AssetDatabase.LoadAssetAtPath<AudioLibrary>(path);
             if (lib == null)
             {
@@ -45,7 +63,7 @@ namespace CasualGame.EditorTools
                 lib = ScriptableObject.CreateInstance<AudioLibrary>();
                 AssetDatabase.CreateAsset(lib, path);
             }
-            lib.EditorSet(clips);
+            lib.EditorSet(entries);
             EditorUtility.SetDirty(lib);
             AssetDatabase.SaveAssetIfDirty(lib);
             return lib;

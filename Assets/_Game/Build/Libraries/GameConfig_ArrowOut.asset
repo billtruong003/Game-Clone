@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: GameConfig_ArrowOut
   m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.GameConfig
   gameId: ArrowOut
-  productName: Arrow Out
-  applicationId: com.casualgame.arrowout
+  productName: Bruh Arrows
+  applicationId: com.billthedev.bruharrows
   version: 0.1.0
   versionCode: 1
   interstitialAdUnit: ca-app-pub-3940256099942544/1033173712
@@ -22,3 +22,7 @@ MonoBehaviour:
   bannerAdUnit: ca-app-pub-3940256099942544/6300978111
   removeAdsProductId: remove_ads
   privacyPolicyUrl: https://billtruong003.github.io/billthedev-legal/arrow-out.html
+  logo: {fileID: 21300000, guid: 47e0649bfed4a1d47bf4952f955495ce, type: 3}
+  splashColor: {r: 0.957, g: 0.937, b: 0.91, a: 1}
+  splashArt: {fileID: 2800000, guid: bdedc4190013edc43af1a2142b43da28, type: 3}
+  music: music_arrow

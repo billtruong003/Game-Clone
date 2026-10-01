@@ -38,7 +38,7 @@ crash logs or precise location (sources 1 and 2).
 |---|---|---|---|---|---|---|
 | Location → **Approximate location** | Yes | Yes | No | Required | Advertising or marketing, Analytics, App functionality, Fraud prevention/security & compliance | Google (IP address used to estimate general location); Unity Ads (approximate location) |
 | Personal info → **User IDs** | Yes | Yes | No | Required | App functionality | Unity Ads lists "Personal identifiers" for App functionality (source 2). TODO verify: the games set no user ID of their own; Unity's row likely covers its installation/session IDs. Kept declared because Unity's official answer is Yes. |
-| Financial info → **Purchase history** | Yes | Yes | No | Required | Advertising or marketing, Analytics | Unity Ads (source 2). TODO verify: Unity's docs say in-app purchase information is only collected when certain Ads SDK features are enabled; the games do not send purchase events to Unity Ads. Declared conservatively because the games have an IAP ("Remove ads"). Remove only if confirmed. |
+| Financial info → **Purchase history** | Yes | Yes | No | Required | App functionality, Advertising or marketing, Analytics | Unity Ads (source 2), plus the games' own purchase check: the app receives Google Play purchase confirmations ("Remove ads", premium skin sets, All Skins bundles) to unlock and restore them. Declared conservatively. |
 | App activity → **App interactions** | Yes | Yes | No | Required | Advertising or marketing, Analytics, Fraud prevention/security & compliance | Google (app launches, taps, video views); Unity Ads (page views and taps **inside the ad only**, not gameplay) |
 | App info and performance → **Diagnostics** | Yes | Yes | No | Required | Advertising or marketing, Analytics, App functionality, Fraud prevention/security & compliance | Google (app launch time, hang rate, energy usage); Unity Ads (app diagnostics: App functionality, Analytics) |
 | Device or other IDs → **Device or other IDs** | Yes | Yes | No | Required (see note) | Advertising or marketing, Analytics, App functionality, Fraud prevention/security & compliance | Google (Android advertising ID, app set ID); Unity Ads (device identifiers incl. advertising ID, installation ID) |
@@ -54,10 +54,11 @@ Notes on the table:
 - **Personalization** purpose is not ticked: the games do not personalize content. Ad personalization is covered by "Advertising or marketing".
 - **Device information** (model, OS version, language, screen, carrier) has no separate Play data type; neither vendor lists it
   as its own item. It is covered by the policy text and Diagnostics/Device IDs.
-- **Google Play Billing / Unity IAP:** the payment itself is handled by Google Play, which Play's guidance exempts. TODO verify:
-  Unity IAP (com.unity.purchasing 5.4.3) does not send transaction/receipt data to Unity servers in our configuration
-  (Unity Services/Analytics are disabled in ProjectSettings/UnityConnectSettings.asset). Purchase history is already declared above
-  because of Unity Ads, so the only change would be adding App functionality as a purpose.
+- **Google Play Billing / Unity IAP:** the payment itself is handled by Google Play, which Play's guidance exempts. Products from
+  v1.0: `remove_ads`, one non-consumable per premium skin set, `all_skins`, `all_skins_noads` (see Store/IAP_PRODUCTS.md). All
+  non-consumable, no consumables, no coin packs. App functionality was added to Purchase history for unlocking/restoring them.
+  TODO verify: Unity IAP (com.unity.purchasing 5.4.3) sends no receipt data to Unity servers (Unity Services/Analytics disabled in
+  ProjectSettings/UnityConnectSettings.asset).
 - **Google Play In-App Review:** nothing to declare; the developer receives no data from it.
 - **Mediated networks:** declared for Google AdMob + Unity Ads only (the only adapter in `Assets/Plugins/Android/mainTemplate.gradle`).
   Any extra network added later needs its own data-safety disclosure reviewed and the privacy policy updated.

@@ -20,12 +20,17 @@ namespace CasualGame.Core
             var go = new GameObject("GooMerge");
             go.transform.SetParent(parent, false);
             var goo = go.AddComponent<GooMerge>();
-            var mesh = new Mesh { name = "GooQuad" };
-            mesh.SetVertices(new[] { new Vector3(-0.5f, -0.5f), new Vector3(0.5f, -0.5f), new Vector3(-0.5f, 0.5f), new Vector3(0.5f, 0.5f) });
-            mesh.SetTriangles(new[] { 0, 2, 1, 2, 3, 1 }, 0);
-            go.AddComponent<MeshFilter>().sharedMesh = mesh;
+            // one quad and one shader lookup for every merge; each blob keeps its own material (merges overlap)
+            if (quad == null)
+            {
+                quad = new Mesh { name = "GooQuad" };
+                quad.SetVertices(new[] { new Vector3(-0.5f, -0.5f), new Vector3(0.5f, -0.5f), new Vector3(-0.5f, 0.5f), new Vector3(0.5f, 0.5f) });
+                quad.SetTriangles(new[] { 0, 2, 1, 2, 3, 1 }, 0);
+            }
+            if (shader == null) shader = Shader.Find("CasualGame/GooMerge");
+            go.AddComponent<MeshFilter>().sharedMesh = quad;
             var r = go.AddComponent<MeshRenderer>();
-            goo.material = new Material(Shader.Find("CasualGame/GooMerge"));
+            goo.material = new Material(shader);
             r.sharedMaterial = goo.material;
             r.sortingOrder = sortingOrder;
             return goo;
@@ -47,11 +52,12 @@ namespace CasualGame.Core
             transform.localScale = new Vector3(max.x - min.x, max.y - min.y, 1f);
         }
 
+        private static Mesh quad;
+        private static Shader shader;
+
         private void OnDestroy()
         {
             if (material != null) Destroy(material);
-            var mf = GetComponent<MeshFilter>();
-            if (mf != null && mf.sharedMesh != null) Destroy(mf.sharedMesh);
         }
     }
 }

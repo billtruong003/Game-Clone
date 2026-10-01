@@ -1,5 +1,8 @@
 # Việc cho ChatGPT (v2): icon, logo, feature graphic, khung screenshot
 
+> **Không dùng nữa (2026-09-30).** Icon, logo, feature graphic và splash giờ vẽ bằng code theo đúng style game: `Tools/art/make-brand.mjs` (xuất ra `Tools/art/brand/out`, `--install` chép vào `Assets/_Game/Art/Brand` và `Store/graphics`). Ảnh screenshot cho store cũng sẽ ghép bằng code từ ảnh chụp thật.
+
+
 > **Cũ.** Bản đang dùng: **Docs/CHATGPT_PROMPT.md** (chỉ icon là vẽ mới; screenshot + feature graphic là edit ảnh chụp thật). Bàn tay: đã chốt `Tools/art/src/hand_glove.png`, bỏ bộ skin tay.
 
 ChatGPT làm art cho trang Google Play **và bàn tay trong game** (mục cuối). Mọi asset trong game khác (nhân vật, skin, UI, FX) Claude vẽ

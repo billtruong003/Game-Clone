@@ -13,11 +13,8 @@ MonoBehaviour:
   m_Name: FxCatalog_EyeMerge
   m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.FxCatalog
   effects:
-  - {fileID: 529180719840939231, guid: 08cb5f18ca614bd4bab9996ba8cda8f2, type: 3}
-  - {fileID: 3740381433044806938, guid: 5bbb9c7f03b9c3441a4518a26fc94f39, type: 3}
-  - {fileID: 4702356915838722910, guid: cb6b06e3c980932459375a9ac12c54d1, type: 3}
-  - {fileID: 337457484324686967, guid: fe232bd5a960857438bf1c7a088c8eb2, type: 3}
-  - {fileID: 3105824612617306657, guid: de8839e1792ee1e479cf120bfe471f6d, type: 3}
-  - {fileID: 2086860857237334220, guid: c84a435cc49fdf145a796fb9048f39fc, type: 3}
-  - {fileID: 6369883843506824058, guid: da80d9936a02c524fa477360ea9fefdc, type: 3}
-  - {fileID: 1940043223343036009, guid: bd94efd819c6ec24ba3ddb700623467a, type: 3}
+  - {fileID: 7847613550400182556, guid: 08cb5f18ca614bd4bab9996ba8cda8f2, type: 3}
+  - {fileID: 7935624357954480883, guid: 30d96e78c62ea2a4db995d866447e1f9, type: 3}
+  - {fileID: 7944390324205346789, guid: e75d497e9557701418e760117af2a761, type: 3}
+  - {fileID: 3732100977613876292, guid: da80d9936a02c524fa477360ea9fefdc, type: 3}
+  - {fileID: 7087828205158279234, guid: bd94efd819c6ec24ba3ddb700623467a, type: 3}

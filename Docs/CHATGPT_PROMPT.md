@@ -1,5 +1,8 @@
 # Prompt batch cho ChatGPT
 
+> **Không dùng nữa (2026-09-30).** Icon, logo, feature graphic và splash giờ vẽ bằng code theo đúng style game: `Tools/art/make-brand.mjs` (xuất ra `Tools/art/brand/out`, `--install` chép vào `Assets/_Game/Art/Brand` và `Store/graphics`). Ảnh screenshot cho store cũng sẽ ghép bằng code từ ảnh chụp thật.
+
+
 Luật: **chỉ icon ứng dụng là vẽ mới.** Mọi ảnh khác là **chỉnh sửa (edit) ảnh chụp thật trong game**: giữ nguyên nội
 dung game, chỉ thêm chữ. Không bling (sparkle, glow, confetti, tia sáng): hiệu ứng là việc của particle system.
 

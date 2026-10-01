@@ -2,11 +2,13 @@
 
 Developer: Bill The Dev · Package: see GameProfile in Build Switcher · Privacy policy: https://billtruong003.github.io/billthedev-legal/arrow-out.html
 
+**Slogan:** Tap. Yeet. Bruh.
+
 ## English
 
-**App name** (≤30): `Bruh Arrows: Calm Brain Puzzle` (30 chars)
+**App name** (≤30): `Bruh Arrows: Arrow Puzzle` (25 chars)
 
-**Short description** (≤80): `Tap arrows with a clear path and watch them fly out. A calm, clever puzzle.` (75 chars)
+**Short description** (≤80): `Tap. Yeet. Bruh. Tap an arrow with a clear path and watch it fly out.` (69 chars)
 
 **Full description** (≤4000; EN counted at 1614 chars)
 
@@ -39,6 +41,9 @@ RELAXED BY DESIGN
 FAIR AND FREE
 Bruh Arrows is free to play and supported by ads. Watching a video ad is always optional and gives you a hint or an extra heart. A one-time "Remove ads" purchase turns off the ads between levels.
 
+SKINS, NO TRICKS
+Earn coins just by playing and spend them on arrow colours and paper themes. Premium skin sets (Blueprint, Chalkboard and Terminal themes) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
+
 No account or login needed. Your progress is saved on your device.
 ```
 
@@ -50,7 +55,7 @@ No account or login needed. Your progress is saved on your device.
 
 **Tên ứng dụng** (≤30): `Bruh Arrows: Gỡ Mũi Tên` (23 ký tự)
 
-**Mô tả ngắn** (≤80): `Chạm mũi tên có đường thoáng để nó bay ra. Trò chơi trí tuệ nhẹ nhàng.` (70 ký tự)
+**Mô tả ngắn** (≤80): `Chạm. Phóng. Bruh. Chạm mũi tên có đường thoáng để nó bay ra.` (61 ký tự)
 
 **Mô tả đầy đủ** (≤4000; 1485 ký tự)
 
@@ -82,6 +87,9 @@ THƯ GIÃN
 
 MIỄN PHÍ, CÔNG BẰNG
 Bruh Arrows miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn nhận gợi ý hoặc thêm tim. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các màn.
+
+SKIN, KHÔNG MÁNH KHÓE
+Chơi là có xu để đổi màu mũi tên và giấy nền. Bộ skin premium (theme Blueprint, Chalkboard, Terminal) là mua một lần, tùy chọn, hoặc mua trọn gói All Skins. Không hộp quà ngẫu nhiên, không bán xu bằng tiền thật. Skin chỉ đổi hình, không đổi luật chơi.
 
 Không cần tài khoản hay đăng nhập. Tiến trình được lưu ngay trên máy của bạn.
 ```
@@ -116,7 +124,7 @@ Vietnamese captions: make a second set (e.g. "Chạm. Trượt. Bay ra!", "100 m
 | Gambling (real or simulated), loot boxes | No |
 | User interaction / chat, user-generated content | No |
 | Shares user location with other users | No |
-| Digital purchases | Yes (one-time "Remove ads") |
+| Digital purchases | Yes (one-time: "Remove ads", premium skin sets, All Skins; no random items, no coin sales) |
 | Unrestricted internet access / web browser | No (only the privacy policy link opens the system browser) — TODO verify how IARC treats this; normally "No" |
 | Ads | Declared separately in Play Console → App content → Ads: **Yes, contains ads** |
 

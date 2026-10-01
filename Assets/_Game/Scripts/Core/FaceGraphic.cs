@@ -8,6 +8,19 @@ namespace CasualGame.Core
     public sealed class FaceGraphic : MaskableGraphic
     {
         private int slice;
+        private bool lightInk;
+
+        /// <summary>Cream ink instead of navy, for a face on a dark body (see FaceArray.shader).</summary>
+        public bool LightInk
+        {
+            get => lightInk;
+            set
+            {
+                if (lightInk == value) return;
+                lightInk = value;
+                SetVerticesDirty();
+            }
+        }
 
         public int Slice
         {
@@ -34,7 +47,7 @@ namespace CasualGame.Core
             vh.Clear();
             var r = GetPixelAdjustedRect();
             var c = (Color32)color;
-            var s = new Vector4(slice, 0, 0, 0);
+            var s = new Vector4(slice, lightInk ? 1f : 0f, 0, 0);
             vh.AddVert(new Vector3(r.xMin, r.yMin), c, new Vector4(0, 0), s, Vector3.back, Vector4.zero);
             vh.AddVert(new Vector3(r.xMin, r.yMax), c, new Vector4(0, 1), s, Vector3.back, Vector4.zero);
             vh.AddVert(new Vector3(r.xMax, r.yMax), c, new Vector4(1, 1), s, Vector3.back, Vector4.zero);

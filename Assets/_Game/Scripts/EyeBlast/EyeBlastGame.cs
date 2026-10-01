@@ -46,7 +46,7 @@ namespace CasualGame.EyeBlast
         private TextMeshProUGUI tutorialText;
         private int score, shownScore, best, startBest, streak;
         private int dragging = -1;
-        private bool playing, paused, revived, worried, bestToastShown;
+        private bool playing, paused, revived, worried, bestToastShown, lost;
 
         /// <summary>One block on screen: tinted body + outline + face.</summary>
         private class BlockView
@@ -89,7 +89,7 @@ namespace CasualGame.EyeBlast
         private class RunData
         {
             public int score, startBest, streak;
-            public bool revived;
+            public bool revived, bestToast, lost; // lost = the run ended on the game-over card (revive still possible)
             public int[] grid;
             public PieceData[] tray = new PieceData[3];
         }
@@ -99,8 +99,8 @@ namespace CasualGame.EyeBlast
 
         private void SaveRun()
         {
-            if (!playing && !paused) return; // lost: nothing to resume
-            var d = new RunData { score = score, startBest = startBest, streak = streak, revived = revived, grid = new int[BlastBoard.Size * BlastBoard.Size] };
+            if (!playing && !paused && !lost) return;
+            var d = new RunData { score = score, startBest = startBest, streak = streak, revived = revived, bestToast = bestToastShown, lost = lost, grid = new int[BlastBoard.Size * BlastBoard.Size] };
             for (int r = 0; r < BlastBoard.Size; r++)
                 for (int c = 0; c < BlastBoard.Size; c++) d.grid[r * BlastBoard.Size + c] = board.Grid[r, c];
             for (int i = 0; i < 3; i++)
@@ -111,7 +111,7 @@ namespace CasualGame.EyeBlast
                 for (int k = 0; k < p.Cells.Length; k++) { d.tray[i].cells[k * 2] = p.Cells[k].r; d.tray[i].cells[k * 2 + 1] = p.Cells[k].c; }
             }
             SaveStore.SetJson(RunKey, d);
-            SaveStore.Save();
+            SaveStore.SaveSoon(); // every placement: throttled, flushed on background
         }
 
         private bool TryRestore()
@@ -125,6 +125,7 @@ namespace CasualGame.EyeBlast
             best = Mathf.Max(best, score);
             streak = d.streak;
             revived = d.revived;
+            bestToastShown = d.bestToast;
             for (int r = 0; r < BlastBoard.Size; r++)
                 for (int c = 0; c < BlastBoard.Size; c++)
                 {
@@ -148,6 +149,20 @@ namespace CasualGame.EyeBlast
             RefreshTrayFits();
             worried = false;
             RefreshWorry();
+            if (d.lost)
+            {
+                // killed on the game-over card (e.g. during the revive ad): back to that card, revive still available
+                playing = false;
+                lost = true;
+                foreach (var b in blocks)
+                {
+                    if (b == null) continue;
+                    b.Body.color = Color.Lerp(b.Body.color, GreyBlock, 0.75f);
+                    b.Face.React(FaceId.Cry, -1f);
+                }
+                ShowGameOver();
+                return true;
+            }
             OpenPause();
             return true;
         }
@@ -174,7 +189,7 @@ namespace CasualGame.EyeBlast
             previewing.Clear();
             score = shownScore = streak = 0;
             dragging = -1;
-            revived = worried = bestToastShown = false;
+            revived = worried = bestToastShown = lost = false;
             best = startBest = SaveStore.GetInt("blast.best");
 
             playRoot = UIKit.Stretch(UIKit.Rect("Play", root));
@@ -186,6 +201,8 @@ namespace CasualGame.EyeBlast
 
             var frameSize = Cell * BlastBoard.Size + 44;
             var frame = UIKit.Image(playRoot, "frame", new Vector2(0.5f, 0.5f), new Vector2(0, 60), new Vector2(frameSize, frameSize), UIKit.Hex("#1A1D3A"));
+            FitBoard(frame.rectTransform, frameSize);
+            frame.gameObject.AddComponent<Canvas>(); // ~64 blinking faces re-batch only the board (no input here: no raycaster)
             boardRect = UIKit.Place(UIKit.Rect("Board", frame.transform), new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(Cell * BlastBoard.Size, Cell * BlastBoard.Size));
             for (int r = 0; r < BlastBoard.Size; r++)
                 for (int c = 0; c < BlastBoard.Size; c++)
@@ -223,8 +240,49 @@ namespace CasualGame.EyeBlast
             RefreshScore();
             playing = true;
             if (!fresh) return;
-            Deal();
-            if (!SaveStore.GetBool("blast.tutorial", false)) ShowTutorial();
+            if (TutorialDone) { Deal(); return; }
+            TutorialBoard();
+            ShowTutorial();
+        }
+
+        // The layout is drawn for a 1080 × 1920 safe area. On a shorter one (16:10 tablets, big camera cut-outs) the
+        // board would slide under the tray, so it shrinks just enough to keep 24 px between them (spec 4.3).
+        private float boardScale = 1f;
+
+        private void FitBoard(RectTransform frame, float frameSize)
+        {
+            Canvas.ForceUpdateCanvases();
+            var safeH = root.rect.height > 1f ? root.rect.height : 1920f;
+            float bottom = TrayY + 180f + 24f, top = safeH - 290f;
+            boardScale = Mathf.Clamp((top - bottom) / frameSize, 0.6f, 1f);
+            var half = frameSize * boardScale / 2f;
+            var center = Mathf.Clamp(safeH / 2f + 60f, bottom + half, Mathf.Max(bottom + half, top - half));
+            frame.anchoredPosition = new Vector2(0f, center - safeH / 2f);
+            frame.localScale = Vector3.one * boardScale;
+        }
+
+        private static bool TutorialDone => SaveStore.GetBool("blast.tutorial", false);
+
+        // B13: the very first board is set up so the first move clears a line: the bottom row is full except a
+        // 2-cell gap, and the middle piece of the tray is exactly that gap.
+        private void TutorialBoard()
+        {
+            const int row = BlastBoard.Size - 1;
+            for (int c = 0; c < BlastBoard.Size; c++)
+            {
+                if (c == 3 || c == 4) continue;
+                var color = 1 + c % (BlockColors.Length - 1);
+                board.Grid[row, c] = color;
+                blocks[row, c] = MakeBlock(boardRect, color, CellPos(row, c), Cell - 6);
+            }
+            var shapes = new[] { new[] { (0, 0), (0, 1), (1, 0), (1, 1) }, new[] { (0, 0), (0, 1) }, new[] { (0, 0), (1, 0), (2, 0), (2, 1) } };
+            var colors = new[] { 5, 3, 2 };
+            for (int i = 0; i < 3; i++)
+            {
+                tray[i] = BlastBoard.MakePiece(shapes[i], Mathf.Clamp(colors[i], 1, BlockColors.Length - 1));
+                trayViews[i] = BuildPieceView(tray[i], i);
+            }
+            RefreshTrayFits();
         }
 
         private static Vector2 CellPos(int r, int c) =>
@@ -303,11 +361,12 @@ namespace CasualGame.EyeBlast
         {
             if (!playing || tray[i] == null || dragging != -1) return;
             dragging = i;
-            HideTutorial();
+            HideTutorialHand();
+            dragTarget = trayViews[i] != null ? (Vector2)playRoot.InverseTransformPoint(trayViews[i].position) : Vector2.zero;
             Tween.Kill(trayViews[i]);
             trayViews[i].SetParent(playRoot, true);
             trayViews[i].SetAsLastSibling();
-            Tween.Scale(trayViews[i], Vector3.one, 0.12f, Ease.OutQuad);
+            Tween.Scale(trayViews[i], Vector3.one * boardScale, 0.12f, Ease.OutQuad);
             SetPieceFaces(i, FaceId.Shock); // lifted into the air: not happy about it
             GameAudio.Play("pick");
         }
@@ -334,7 +393,8 @@ namespace CasualGame.EyeBlast
             if (!playing || dragging != i || tray[i] == null) return;
             var p = tray[i];
             RectTransformUtility.ScreenPointToLocalPointInRectangle(playRoot, e.position, e.pressEventCamera, out var local);
-            var target = local + new Vector2(0, DragLift + p.Height * Cell / 2f) - playRoot.rect.size * (trayViews[i].anchorMin - new Vector2(0.5f, 0.5f));
+            var target = local + new Vector2(0, (DragLift + p.Height * Cell / 2f) * boardScale) - playRoot.rect.size * (trayViews[i].anchorMin - new Vector2(0.5f, 0.5f));
+            dragTarget = target;
             trayViews[i].anchoredPosition = Vector2.Lerp(trayViews[i].anchoredPosition, target, 0.6f);
             var ok = PointerToBoard(e, p, out var r0, out var c0);
 
@@ -422,16 +482,37 @@ namespace CasualGame.EyeBlast
             Tween.Anchored(trayViews[i], new Vector2(TrayX[i], 0), invalid ? 0.28f : 0.18f, invalid ? Ease.OutBack : Ease.OutCubic);
             Tween.Scale(trayViews[i], Vector3.one * TrayScaleAt(i), 0.18f, Ease.OutQuad);
             SetPieceFaces(i, null);
+            if (!TutorialDone && playing) ShowTutorial();
             if (!invalid) return;
             SetPieceFaces(i, FaceId.Meh, 0.8f);
             GameAudio.Play("blocked");
-            GameAudio.Haptic();
+            GameAudio.Haptic(HapticLevel.Light);
         }
 
         // B15: a piece being dragged always goes home when play stops (pause, game over)
         private void CancelDrag()
         {
             if (dragging != -1) ReturnToTray(dragging, false);
+            DragZone.ReleaseFinger();
+        }
+
+        // EB4 safety net: if the finger-up never arrives (a call, the notification shade), the zone would keep the
+        // finger lock forever and no piece could be picked up again. A few frames with nothing pressed releases it.
+        private int idleFrames;
+
+        private Vector2 dragTarget;
+
+        private void Update()
+        {
+            // the lifted piece keeps catching up with a finger that stopped moving (drag events only fire on motion)
+            if (dragging != -1 && trayViews[dragging] != null && trayViews[dragging].parent == playRoot)
+                trayViews[dragging].anchoredPosition = Vector2.Lerp(trayViews[dragging].anchoredPosition, dragTarget, 1f - Mathf.Exp(-30f * Time.deltaTime));
+            if (!DragZone.Locked) { idleFrames = 0; return; }
+            var pointer = UnityEngine.InputSystem.Pointer.current;
+            idleFrames = pointer != null && pointer.press.isPressed ? 0 : idleFrames + 1;
+            if (idleFrames < 4) return;
+            idleFrames = 0;
+            CancelDrag();
         }
 
         private bool AnyFits()
@@ -444,6 +525,7 @@ namespace CasualGame.EyeBlast
 
         private void Place(Piece p, int r0, int c0)
         {
+            FinishTutorial();
             board.Place(p, r0, c0);
             foreach (var (r, c) in p.Cells)
             {
@@ -451,9 +533,11 @@ namespace CasualGame.EyeBlast
                 b.Rect.localScale = Vector3.one * 0.7f;
                 Tween.Scale(b.Rect, Vector3.one, 0.2f, Ease.OutBack);
                 b.Face.React(FaceId.Grin, 0.6f);
+                if (worried) Tween.Delay(b.Rect, 0.6f, () => RestoreMood(b)); // a crowded board worries newcomers too
                 blocks[r0 + r, c0 + c] = b;
             }
             GameAudio.Play("place");
+            GameAudio.Haptic(HapticLevel.Light);
             PlaceDust(p, r0, c0);
             var gained = p.Cells.Length;
 
@@ -475,18 +559,24 @@ namespace CasualGame.EyeBlast
                 var perfect = board.Empty();
                 gained += Mathf.RoundToInt(BlastBoard.LineScore(lines) * (1f + 0.5f * (streak - 1)));
                 if (perfect) gained += 300;
-                GameAudio.Play("clear", 1f + 0.08f * Mathf.Min(lines, 4));
-                GameAudio.Haptic();
+                // pitch climbs with the combo streak, not only the line count (G13)
+                GameAudio.Play("clear", 1f + 0.06f * Mathf.Min(lines, 4) + 0.05f * Mathf.Min(streak - 1, 6));
+                GameAudio.Haptic(lines >= 3 || streak >= 3 ? HapticLevel.Strong : HapticLevel.Medium);
                 var praise = lines >= 4 ? Loc.T("Unbelievable!", "Không thể tin nổi!") : lines == 3 ? Loc.T("Excellent!", "Xuất sắc!") : lines == 2 ? Loc.T("Great!", "Tuyệt!") : null;
                 var combo = streak > 1 ? Loc.F("Combo x{0}", "Combo x{0}", streak) + "\n" : "";
                 if (praise != null) Praise(praise); // the word sits above the board; the gain rises from the drop
+                if (!SaveStore.GetBool("blast.tip.lines", false)) // the first clear explains the whole rule once
+                {
+                    SaveStore.SetBool("blast.tip.lines", true);
+                    Toast.Show(root, Loc.T("Full rows AND columns clear!", "Đầy hàng NGANG hay DỌC đều ăn!"));
+                }
                 FloatText(combo + "+" + gained, boardRect.TransformPoint(CellPos(r0, c0)), 60);
                 // started after the text exists, so the impact frame hides it too
                 if (lines >= 2) StartCoroutine(BigClear(views, perfect));
                 else
                 {
-                    foreach (var (b, delay) in views) AnimateClear(b, delay);
-                    if (perfect) GameFx.Play("Combo_Nova", boardRect.position, 1.2f);
+                    foreach (var (b, delay) in views) AnimateClear(b, delay, perfect ? 1.5f : 1f);
+                    if (perfect) GameFx.Play("Win_Confetti", boardRect.position, 1.6f);
                 }
             }
             else streak = 0;
@@ -496,7 +586,7 @@ namespace CasualGame.EyeBlast
             {
                 best = score;
                 SaveStore.SetInt("blast.best", best); // G6: kept the moment it is beaten
-                SaveStore.Save();
+                SaveStore.SaveSoon();
                 if (!bestToastShown && startBest > 0)
                 {
                     bestToastShown = true;
@@ -530,18 +620,20 @@ namespace CasualGame.EyeBlast
             return b;
         }
 
-        private void AnimateClear(BlockView b, float delay)
+        // Every cleared block bursts into a sparkle of its own colour, so the effect covers the whole line
+        // (one burst in the middle of the board read as a tiny bomb). puff > 1 for bigger clears.
+        private void AnimateClear(BlockView b, float delay, float puff = 1f)
         {
             var color = b.Body.color;
             b.Face.React(FaceId.Grin, 5f);
             Tween.Scale(b.Rect, Vector3.one * 1.15f, 0.1f, Ease.OutQuad, delay, () =>
             {
-                GameFx.Play(GameFx.Colored("Blast_BlockPop_{color}", color), b.Rect.position, 0.8f);
+                GameFx.Play(GameFx.Colored("Blast_BlockPop_{color}", color), b.Rect.position, 0.8f * puff);
                 Tween.Scale(b.Rect, Vector3.zero, 0.18f, Ease.InBack, 0f, () => Destroy(b.Rect.gameObject));
             });
         }
 
-        // 2+ lines: a two-frame impact frame (blocks as silhouettes), then a big flash, a shake and the pops.
+        // 2+ lines: a two-frame impact frame (blocks as silhouettes), then a shake and bigger dust pops.
         private IEnumerator BigClear(List<(BlockView b, float delay)> views, bool perfect)
         {
             var subjects = new HashSet<Graphic>();
@@ -551,10 +643,9 @@ namespace CasualGame.EyeBlast
                 if (tray[i] != null && trayViews[i] != null) subjects.UnionWith(trayViews[i].GetComponentsInChildren<Graphic>());
             if (impact == null) impact = gameObject.AddComponent<ImpactFrame>();
             yield return impact.RunUI(Camera.main, canvas, subjects);
-            GameFx.Play("Blast_MultiLine", boardRect.position, 1.3f);
-            if (perfect) GameFx.Play("Combo_Nova", boardRect.position, 1.4f);
+            if (perfect) GameFx.Play("Win_Confetti", boardRect.position, 1.8f);
             Shake(0.25f);
-            foreach (var (b, delay) in views) AnimateClear(b, delay);
+            foreach (var (b, delay) in views) AnimateClear(b, delay, perfect ? 1.6f : 1.3f);
         }
 
         // soft dust puff under the piece that was just placed
@@ -616,23 +707,36 @@ namespace CasualGame.EyeBlast
 
         private void ShowTutorial()
         {
-            tutorialHand = UIKit.Hand(playRoot, new Vector2(0.5f, 0f), new Vector2(20, TrayY + 10));
-            var from = tutorialHand.anchoredPosition;
-            var to = from + new Vector2(0, 700);
-            Tween.Run(tutorialHand, 60f, k =>
+            HideTutorialHand();
+            // the hand carries the middle piece from its slot into the gap (the finger sits under the lifted piece)
+            Vector2 Local(Transform t, Vector2 p) => playRoot.InverseTransformPoint(t.TransformPoint(p));
+            const int row = BlastBoard.Size - 1;
+            var gap = Local(boardRect, (CellPos(row, 3) + CellPos(row, 4)) / 2f);
+            var from = Local(trayRoot, new Vector2(TrayX[1], 0)) + new Vector2(10, -20);
+            var to = gap - new Vector2(-10, (DragLift + Cell / 2f) * boardScale);
+            tutorialHand = UIKit.Hand(playRoot, new Vector2(0.5f, 0.5f), from);
+            var hand = tutorialHand;
+            Tween.Loop(hand, sec =>
             {
-                var t = Mathf.Repeat(k * 60f / 1.6f, 1f);
-                tutorialHand.anchoredPosition = Vector2.Lerp(from, to, Tween.Evaluate(Ease.InOutSine, Mathf.Clamp01(t * 1.3f)));
-            }, Ease.Linear);
-            tutorialText = UIKit.Label(playRoot, Loc.T("Drag a block onto the board", "Kéo một khối lên bàn"), 44, new Vector2(0.5f, 0f), new Vector2(0, TrayY + 168), new Vector2(900, 70), UIKit.Paper);
+                var t = Mathf.Repeat(sec / 1.8f, 1f);
+                hand.anchoredPosition = Vector2.Lerp(from, to, Tween.Evaluate(Ease.InOutSine, Mathf.Clamp01(t * 1.35f)));
+            });
+            tutorialText = UIKit.Label(playRoot, Loc.T("Drag the piece into the gap", "Kéo khối vào chỗ trống"), 44, new Vector2(0.5f, 0f), new Vector2(0, TrayY + 168), new Vector2(900, 70), UIKit.Paper);
         }
 
-        private void HideTutorial()
+        private void HideTutorialHand()
         {
-            if (tutorialHand == null) return;
-            Destroy(tutorialHand.gameObject);
+            if (tutorialHand != null) Destroy(tutorialHand.gameObject);
             tutorialHand = null;
             if (tutorialText != null) Destroy(tutorialText.gameObject);
+            tutorialText = null;
+        }
+
+        // the lesson is over only once a piece actually lands (a tap or a failed drop brings the hand back)
+        private void FinishTutorial()
+        {
+            HideTutorialHand();
+            if (TutorialDone) return;
             SaveStore.SetBool("blast.tutorial", true);
             SaveStore.Save();
         }
@@ -643,9 +747,13 @@ namespace CasualGame.EyeBlast
         private IEnumerator LoseSequence()
         {
             playing = false;
-            SaveStore.Delete(RunKey);
             CancelDrag();
+            // keep the run with a "lost" flag instead of deleting it: if Android kills the app during the revive ad,
+            // the player comes back to this card with the revive still there. "Play again" is what deletes it.
+            lost = true;
+            SaveRun();
             GameAudio.Play("lose");
+            GameAudio.Haptic(HapticLevel.Strong);
             for (int i = 0; i < 3; i++)
             {
                 if (trayViews[i] == null) continue;
@@ -666,7 +774,6 @@ namespace CasualGame.EyeBlast
                 yield return new WaitForSeconds(0.075f);
             }
             best = SaveStore.SubmitBest("blast.best", score);
-            if (score > startBest && score > 0) ReviewPrompt.GoodMoment();
             yield return new WaitForSeconds(0.25f);
             ShowGameOver();
         }
@@ -678,8 +785,13 @@ namespace CasualGame.EyeBlast
             p.Text(score.ToString(), 140, UIKit.Ink, 160);
             p.Text(newBest ? Loc.T("New best!", "Kỷ lục mới!") : Loc.F("Best {0}", "Kỷ lục {0}", best), 50, newBest ? UIKit.Hex("#E9A23B") : UIKit.Muted);
             p.Space(10);
-            if (!revived) RewardedButton.Add(p, Loc.T("Revive", "Hồi sinh"), "blast_revive", Revive);
-            p.Button("btn_green", Loc.T("Play again", "Chơi lại"), () => p.Close(() => Ads.OnBreak("blast_gameover", NewGame)), "icon_restart");
+            if (!revived) RewardedButton.Add(p, Loc.T("Revive · clear 3 lines", "Hồi sinh · xoá 3 hàng"), "blast_revive", Revive);
+            // review only once the card is gone (G10), and never an interstitial right on top of it
+            p.Button("btn_green", Loc.T("Play again", "Chơi lại"), () => p.Close(() =>
+            {
+                if (newBest && ReviewPrompt.GoodMoment()) NewGame();
+                else Ads.OnBreak("blast_gameover", NewGame);
+            }), "icon_restart");
             p.Fit();
         }
 
@@ -687,6 +799,14 @@ namespace CasualGame.EyeBlast
         private void Revive()
         {
             revived = true;
+            lost = false;
+            // blocks are still grey from the lose sequence: give them their colours back before any pops read them
+            foreach (var b in blocks)
+            {
+                if (b == null) continue;
+                b.Body.color = BlockColors[ColorOf(b)];
+                b.Face.ClearReaction();
+            }
             var cells = new HashSet<(int, int)>();
             foreach (var (isRow, index) in board.FullestLines(3))
                 for (int j = 0; j < BlastBoard.Size; j++) cells.Add(isRow ? (index, j) : (j, index));
@@ -694,12 +814,6 @@ namespace CasualGame.EyeBlast
             {
                 var b = TakeCell(r, c);
                 if (b != null) AnimateClear(b, (r + c) * 0.02f);
-            }
-            foreach (var b in blocks)
-            {
-                if (b == null) continue;
-                b.Body.color = BlockColors[ColorOf(b)];
-                b.Face.ClearReaction();
             }
             for (int i = 0; i < 3; i++)
             {
@@ -711,6 +825,7 @@ namespace CasualGame.EyeBlast
             RefreshWorry();
             Deal();
             playing = true;
+            SaveRun(); // the revive is spent: a crash right after must not hand it back
         }
 
         private int ColorOf(BlockView b)
@@ -737,6 +852,9 @@ namespace CasualGame.EyeBlast
         {
             private static int owner = int.MinValue;
             public System.Action Pressed, Began, Released;
+
+            public static bool Locked => owner != int.MinValue;
+            public static void ReleaseFinger() => owner = int.MinValue;
             public System.Action<PointerEventData> Moved, Ended;
             private bool dragged;
 

@@ -26,6 +26,7 @@ namespace CasualGame.Core
 
         private void Update()
         {
+            SaveStore.FlushIfDue();
             var kb = Keyboard.current;
             if (kb == null || !kb.escapeKey.wasPressedThisFrame) return;
             if (Popup.HandleBack()) return;

@@ -21,13 +21,16 @@ namespace CasualGame.Core
 
         /// <summary>Squash along the hit direction. <paramref name="contactNormal"/> points from the contact into the ball
         /// (up for a floor hit); <paramref name="radius"/> = distance from the pivot to the contact (keeps that side in place).</summary>
+        // The rest pose is taken once, when the visual is built. Re-reading it at impact time would bake in whatever
+        // another animation is doing right then (a merge pop at 115 %), leaving the ball bigger than its collider for good.
+        private void Awake()
+        {
+            restScale = transform.localScale;
+            restPos = transform.localPosition;
+        }
+
         public void Impact(float strength01, Vector2 contactNormal, float radius)
         {
-            if (!active)
-            {
-                restScale = transform.localScale;
-                restPos = transform.localPosition;
-            }
             amp = Mathf.Clamp01(strength01) * maxSquash;
             t = 0f;
             vertical = Mathf.Abs(contactNormal.y) >= Mathf.Abs(contactNormal.x);

@@ -49,6 +49,13 @@ namespace CasualGame.Core
             return face;
         }
 
+        /// <summary>Cream ink on a dark body (navy arrow, dark skin) so the face stays readable; navy ink otherwise.</summary>
+        public void InkFor(Color body)
+        {
+            var lum = 0.2126f * body.r + 0.7152f * body.g + 0.0722f * body.b; // colours are authored in sRGB
+            if (graphic != null) graphic.LightInk = lum < 0.36f;
+        }
+
         /// <summary>Picks a random idle mood and desyncs the blink clock from its neighbours.</summary>
         public void Restart()
         {
