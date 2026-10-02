@@ -297,6 +297,11 @@ namespace CasualGame.EditorTools
             // R8 shrinks the Java side (ads / billing SDKs); keep rules for JNI-called classes live in Assets/Plugins/Android/proguard-user.txt
             PlayerSettings.Android.minifyRelease = true;
             PlayerSettings.Android.minifyDebug = false;
+            // release AABs carry the native symbol tables inside the bundle, so Play's crash and ANR reports show
+            // function names (and Play stops warning about missing debug symbols); test APKs skip them for speed
+            UnityEditor.Android.UserBuildSettings.DebugSymbols.level =
+                release ? Unity.Android.Types.DebugSymbolLevel.SymbolTable : Unity.Android.Types.DebugSymbolLevel.None;
+            UnityEditor.Android.UserBuildSettings.DebugSymbols.format = Unity.Android.Types.DebugSymbolFormat.IncludeInBundle;
             // no Unity splash (2.7 MB of logo textures); each game shows its own splash screen
             PlayerSettings.SplashScreen.show = false;
             PlayerSettings.SplashScreen.showUnityLogo = false;
