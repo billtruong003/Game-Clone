@@ -23,11 +23,10 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `all_skins` | 4.99 | Every skin of the game (future sets too); keeps the ads. |
 | `remove_ads` | 2.99 | Turns off between-round ads. Rewarded ads stay optional. Already in code (`GameConfig.removeAdsProductId`). |
 
-## Meh Merge (15 products + 3 bundles)
+## Meh Merge (14 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
-| `skin_billiard` | 1.99 | Billiard balls (premium) | — |
 | `skin_sports` | 1.99 | Sports balls (premium) | — |
 | `skin_eyeballs` | 1.99 | Eyeballs (premium) | — |
 | `color_candy` | 0.99 | Candy ball colours | 300 coins |
@@ -42,7 +41,7 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `stage_night` | 0.99 | Night stage | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon balls: 3 rewarded videos, no product. One by one: $21.83 → Full Game $6.99. (More interactive premium sets to come.)
+Neon balls: 3 rewarded videos, no product. One by one: $19.84 → Full Game $6.99. (More interactive premium sets to come.)
 
 ## Nah Blocks (15 products + 3 bundles)
 
@@ -95,7 +94,6 @@ Neon arrows: 3 rewarded videos. One by one: $25.81 → Full Game $6.99.
 | `remove_ads` | Remove ads | No more ads between rounds. Optional reward videos stay available. | Gỡ quảng cáo | Không còn quảng cáo giữa các ván. Video có thưởng vẫn còn nếu bạn muốn xem. |
 | `all_skins` | All Skins | Unlock every skin in the game, including future sets. | Trọn bộ skin | Mở mọi skin trong game, kể cả các bộ ra sau này. |
 | `all_skins_noads` | Full Game | Every skin, future sets included, and no ads between rounds. One price, everything. | Trọn bộ game | Mọi skin, kể cả bộ sau này, và không còn quảng cáo giữa các ván. Một lần, có hết. |
-| `skin_billiard` | Billiard set | Turn every ball into a pool ball. Still deadpan. | Bộ Bi-a | Biến mọi quả bóng thành bi-a. Vẫn mặt lạnh. |
 | `skin_sports` | Sports set | From marble to beach ball: merge your way through the sports shelf. | Bộ Thể thao | Từ bi ve tới bóng bãi biển: gộp hết cả kệ thể thao. |
 | `skin_eyeballs` | Eyeballs set | The balls are eyes now. They are watching you merge. | Bộ Nhãn cầu | Bóng giờ là con mắt. Tụi nó đang nhìn bạn gộp. |
 | `skin_retro_bricks` | Retro Bricks set | Bevelled bricks and a black well, straight out of the 80s. | Bộ Gạch cổ điển | Gạch vát cạnh, giếng đen, đúng chất thập niên 80. |

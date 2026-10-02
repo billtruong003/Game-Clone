@@ -37,7 +37,7 @@ FAIR AND FREE
 Meh Merge is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the jar is full. A one-time "Remove ads" purchase turns off the ads between games.
 
 SKINS, NO TRICKS
-Earn coins just by playing and spend them on ball colours and stages. Premium skin sets (Billiard, Sports and Eyeballs) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
+Earn coins just by playing and spend them on ball colours and stages. Premium skin sets (Sports and Eyeballs) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
 
 No account or login needed. Your best score is saved on your device.
 ```
@@ -82,7 +82,7 @@ MIỄN PHÍ, CÔNG BẰNG
 Meh Merge miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn được hồi sinh một lần khi hũ đầy. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các ván.
 
 SKIN, KHÔNG MÁNH KHÓE
-Chơi là có xu để đổi màu bóng và sân khấu. Bộ skin premium (Billiard, Sports, Eyeballs) là mua một lần, tùy chọn, hoặc mua trọn gói All Skins. Không hộp quà ngẫu nhiên, không bán xu bằng tiền thật. Skin chỉ đổi hình, không đổi luật chơi.
+Chơi là có xu để đổi màu bóng và sân khấu. Bộ skin premium (Sports, Eyeballs) là mua một lần, tùy chọn, hoặc mua trọn gói All Skins. Không hộp quà ngẫu nhiên, không bán xu bằng tiền thật. Skin chỉ đổi hình, không đổi luật chơi.
 
 Không cần tài khoản hay đăng nhập. Kỷ lục được lưu ngay trên máy của bạn.
 ```

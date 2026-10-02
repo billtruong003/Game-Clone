@@ -6,7 +6,7 @@ namespace CasualGame.EyeMerge
 {
     /// <summary>
     /// Meh Merge's skins (mockup "Skin VFX &amp; Pricing", Store/IAP_PRODUCTS.md): ball colour sets (11 tiers each) and
-    /// stage colours. Each ball set has its own merge effect. Premium sets (Billiard, Sports, Eyeballs, Planets) and face
+    /// stage colours. Each ball set has its own merge effect. Premium sets (Sports, Eyeballs) and face
     /// packs come with their art.
     /// </summary>
     public static class MergeSkins
@@ -38,7 +38,6 @@ namespace CasualGame.EyeMerge
             c.Add(new SkinDef { Id = "neon", En = "Neon", Vi = "Neon", Tab = 0, Price = SkinPrice.Ads, Cost = 3, Fx = "Skin_Zap",
                 Colors = P("#FFFF3F", "#39FF14", "#00F5D4", "#00BBF9", "#FF5CCB", "#FF4D6D", "#FEE440", "#B388FF", "#FF9E00", "#72EFDD", "#FFE14D") });
             // premium sets: drawn by shaders (MergeLooks); Colors feed the HUD strip, the next bubble and the splashes
-            c.Add(new SkinDef { Id = "skin_billiard", En = "Billiard", Vi = "Bi-a", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_billiard") });
             c.Add(new SkinDef { Id = "skin_sports", En = "Sports", Vi = "Thể thao", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Confetti", FxPieceColor = false, Colors = MergeLooks.TierColors("skin_sports") });
             c.Add(new SkinDef { Id = "skin_eyeballs", En = "Eyeballs", Vi = "Nhãn cầu", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_eyeballs") });
             // stage: background, floor band, shelf, pillars

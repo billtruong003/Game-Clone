@@ -59,7 +59,7 @@ little content.
 ## 5. Store listing (metadata policy)
 
 - Titles ≤ 30 chars, no emoji/caps: `Meh Merge: Drop & Merge`, `Nah Blocks: Block Puzzle`, `Bruh Arrows: Arrow Puzzle`. OK.
-- Descriptions now list the premium sets that exist: Merge Billiard / Sports / Eyeballs; Blocks Retro Bricks / Toy
+- Descriptions now list the premium sets that exist: Merge Sports / Eyeballs; Blocks Retro Bricks / Toy
   Bricks / Gems; Arrows Blueprint / Chalkboard / Vector CRT / Hologram / Neon. Update them whenever the shop changes.
 - No prices or promos in screenshots or the feature graphic ("free", "50% off"), no rankings, no other apps' names.
 - Category: Games → Puzzle. Contact email = the one in the privacy policy.

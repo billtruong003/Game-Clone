@@ -165,6 +165,8 @@ namespace CasualGame.Core
             var rt = Place(Rect("Button", parent), anchor, offset, size);
             var bg = AddImage(rt, sprite);
             bg.raycastTarget = true;
+            // the btn_* art is a 112 px pill: scale its slice to the button's height so the ends stay full half-circles
+            if (bg.type == UnityEngine.UI.Image.Type.Sliced && bg.sprite != null) bg.pixelsPerUnitMultiplier = bg.sprite.rect.height / size.y;
             var btn = rt.gameObject.AddComponent<Button>();
             btn.transition = Selectable.Transition.None;
             btn.onClick.AddListener(() => { GameAudio.Play("ui_click"); onClick?.Invoke(); });

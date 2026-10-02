@@ -238,9 +238,6 @@ namespace CasualGame.ArrowOut
             var bottom = new Vector2(0.5f, 0f);
             UIKit.IconButton(s, "round_white", "icon_settings", () => SettingsPopup.Show(safe, null), bottom, new Vector2(-200, 150));
             UIKit.IconButton(s, "round_yellow", "icon_trophy", ShowRecords, bottom, new Vector2(0, 150));
-            var credit = UIKit.Label(s, "Bill The Dev", 34, bottom, new Vector2(0, 50), new Vector2(400, 50), TextMuted);
-            credit.raycastTarget = true;
-            credit.gameObject.AddComponent<Button>().onClick.AddListener(Credits.Open);
             if (!Ads.RemoveAdsOwned)
                 UIKit.IconButton(s, "round_white", "icon_noads", () => Store.BuyRemoveAds(ok => { if (ok) ShowHome(); }), bottom, new Vector2(200, 150));
         }

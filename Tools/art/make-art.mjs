@@ -95,7 +95,7 @@ add('shapes', 'round_rect', 96, 96, `<rect x="0" y="0" width="96" height="96" rx
 const pill = (fill) => `<rect x="7" y="7" width="226" height="98" rx="49" fill="${fill}" stroke="${C.ink}" stroke-width="9"/>` +
   `<rect x="36" y="20" width="80" height="16" rx="8" fill="${C.white}" opacity="0.5"/>` + `<rect x="16" y="78" width="208" height="12" rx="6" fill="${C.ink}" opacity="0.12"/>`;
 for (const [n, col] of Object.entries({ green: C.green, blue: C.blue, yellow: C.yellow, gray: C.gray, red: C.red, white: C.paper, purple: C.purple }))
-  add('ui', `btn_${n}`, 240, 112, pill(col), { border: [60, 50, 60, 50] });
+  add('ui', `btn_${n}`, 240, 112, pill(col), { border: [60, 56, 60, 56] }); // vertical slice = 7 + rx 49: the side is straight only from there, a smaller slice leaves a kink on tall buttons
 const roundBtn = (fill) => circle(72, 72, 64, fill, C.ink, 9) + ellipse(50, 42, 20, 10, C.white, 'none', 0, `opacity="0.5" ${rot(-30, 50, 42)}`);
 for (const [n, col] of Object.entries({ green: C.green, blue: C.blue, yellow: C.yellow, gray: C.gray, white: C.paper }))
   add('ui', `round_${n}`, 144, 144, roundBtn(col));
@@ -105,8 +105,8 @@ add('ui', 'panel', 240, 240, `<rect x="7" y="7" width="226" height="226" rx="56"
 add('ui', 'card', 160, 160, `<rect x="5" y="5" width="150" height="150" rx="44" fill="${C.paper}" stroke="${C.ink}" stroke-width="8"/>`, { border: [56, 56, 56, 56] });
 add('ui', 'ribbon', 360, 120, shape('M10,30 L50,20 L50,100 L10,110 L28,70 Z', '#E08A1E', C.ink, 7) + shape('M350,30 L310,20 L310,100 L350,110 L332,70 Z', '#E08A1E', C.ink, 7) +
   `<rect x="40" y="10" width="280" height="90" rx="16" fill="${C.yellow}" stroke="${C.ink}" stroke-width="8"/>`, { border: [100, 40, 100, 40] });
-add('ui', 'bar_bg', 96, 48, `<rect x="4" y="4" width="88" height="40" rx="20" fill="${C.ink}" opacity="0.25"/>`, { border: [24, 20, 24, 20] });
-add('ui', 'bar_fill', 96, 48, `<rect x="4" y="4" width="88" height="40" rx="20" fill="${C.white}"/>`, { border: [24, 20, 24, 20] });
+add('ui', 'bar_bg', 96, 48, `<rect x="4" y="4" width="88" height="40" rx="20" fill="${C.ink}" opacity="0.25"/>`, { border: [24, 24, 24, 24] }); // 4 + rx 20
+add('ui', 'bar_fill', 96, 48, `<rect x="4" y="4" width="88" height="40" rx="20" fill="${C.white}"/>`, { border: [24, 24, 24, 24] }); // 4 + rx 20
 const tile = (fill, dash = false) => `<rect x="7" y="7" width="146" height="146" rx="34" fill="${fill}" stroke="${C.ink}" stroke-width="8" ${dash ? 'stroke-dasharray="14 10"' : ''}/>` +
   `<rect x="22" y="18" width="52" height="12" rx="6" fill="${C.white}" opacity="0.45"/>`;
 add('ui', 'tile_open', 160, 160, tile(C.paper));
