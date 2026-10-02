@@ -8,9 +8,9 @@ Developer: Bill The Dev · Privacy policy: https://billtruong003.github.io/billt
 
 **App name** (≤30): `Meh Merge: Drop & Merge` (23 chars)
 
-**Short description** (≤80): `Two mehs make a bigger meh. Drop, merge and don't let the pile overflow.` (72 chars)
+**Short description** (≤80): `Drop balls in a jar. Two the same make a bigger one. Don't let it fill up!` (74 chars)
 
-**Full description** (≤4000; EN counted at 1317 chars)
+**Full description** (≤4000; EN counted at 1830 chars)
 
 ```
 Meh Merge is a relaxing drop-and-merge puzzle starring a pile of round, deadpan faces that could not care less.
@@ -37,7 +37,7 @@ FAIR AND FREE
 Meh Merge is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the jar is full. A one-time "Remove ads" purchase turns off the ads between games.
 
 SKINS, NO TRICKS
-Earn coins just by playing and spend them on ball colours and stages. Premium skin sets (Sports and Eyeballs) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
+Earn coins just by playing and spend them on ball colours and stages. Premium skins are optional one-time purchases: Eyeballs that watch your drop, Hamster Balls that run and tumble, Hungry balls that open wide for their twin, Compass balls that point to their match, Snow Globes that snow when bumped, and more. Or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins never change the rules or the score. The Compass skin also points to a ball you can merge with.
 
 No account or login needed. Your best score is saved on your device.
 ```

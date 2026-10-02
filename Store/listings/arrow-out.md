@@ -8,9 +8,9 @@ Developer: Bill The Dev · Package: see GameProfile in Build Switcher · Privacy
 
 **App name** (≤30): `Bruh Arrows: Arrow Puzzle` (25 chars)
 
-**Short description** (≤80): `Tap. Yeet. Bruh. Tap an arrow with a clear path and watch it fly out.` (69 chars)
+**Short description** (≤80): `Tap an arrow to make it fly away. Find the right order and clear the board!` (75 chars)
 
-**Full description** (≤4000; EN counted at 1614 chars)
+**Full description** (≤4000; EN counted at 2097 chars)
 
 ```
 Bruh Arrows is a calm brain puzzle about order and timing.
@@ -41,7 +41,7 @@ FAIR AND FREE
 Bruh Arrows is free to play and supported by ads. Watching a video ad is always optional and gives you a hint or an extra heart. A one-time "Remove ads" purchase turns off the ads between levels.
 
 SKINS, NO TRICKS
-Earn coins just by playing and spend them on arrow colours and paper themes. Premium skin sets (Blueprint, Chalkboard, Vector CRT, Hologram and Neon themes) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
+Earn coins just by playing and spend them on arrow colours and paper themes. Premium themes are optional one-time purchases: Train, Tape, Ants and Zipper, where every arrow comes alive (trains roll out, tape peels off, ants march away, zippers unzip), plus Blueprint, Chalkboard, Vector CRT, Hologram and Neon. Or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins never change the rules or the score. Some live themes, like Train, also show which arrows are free to go.
 
 No account or login needed. Your progress is saved on your device.
 ```

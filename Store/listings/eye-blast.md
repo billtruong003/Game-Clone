@@ -8,9 +8,9 @@ Developer: Bill The Dev · Privacy policy: https://billtruong003.github.io/billt
 
 **App name** (≤30): `Nah Blocks: Block Puzzle` (24 chars)
 
-**Short description** (≤80): `Line 'em up. They say nah. Fill rows and columns, clear them, beat your best.` (77 chars)
+**Short description** (≤80): `Drag blocks onto the board. Fill a line to clear it. Beat your own score!` (73 chars)
 
-**Full description** (≤4000; EN counted at 1333 chars)
+**Full description** (≤4000; EN counted at 1775 chars)
 
 ```
 Nah Blocks is a block puzzle with a lot of personality. Every block has its own little face, and they react to everything you do.
@@ -37,7 +37,7 @@ FAIR AND FREE
 Nah Blocks is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the board is full. A one-time "Remove ads" purchase turns off the ads between games.
 
 SKINS, NO TRICKS
-Earn coins just by playing and spend them on block colours and boards. Premium skin sets (Retro Bricks, Toy Bricks and Gems) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
+Earn coins just by playing and spend them on block colours and boards. Premium skins are optional one-time purchases: Watchers whose eyes follow your piece, a Night City that lights up as rows fill, Chrome that reflects your piece, an Aquarium that sloshes as you drag, plus Retro Bricks, Toy Bricks and Gems. Or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins never change the rules or the score.
 
 No account or login needed. Your best score is saved on your device.
 ```

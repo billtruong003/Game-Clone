@@ -100,6 +100,19 @@ little content.
   declared in the privacy policy and Data safety.
 - app-ads.txt is not published: AdMob shows a warning and some buyers skip the inventory. Not a policy violation.
 
+## 8b. Build audit (1.0.0 (3), 2026-10-02)
+
+- targetSdk 36, minSdk 25, arm64-v8a + armeabi-v7a. Every arm64 native lib has 16 KB LOAD alignment (Play's 16 KB
+  page size rule): checked libunity, libil2cpp, libmain, libgame, lib_burst_generated, libc++_shared, swappy, coherence.
+- Permissions come from the SDKs only: INTERNET, ACCESS_NETWORK_STATE, AD_ID + ADSERVICES (AdMob), BILLING (Unity
+  IAP), VIBRATE, WAKE_LOCK + FOREGROUND_SERVICE (WorkManager, pulled in by the Play services SDKs). No foreground
+  service *type* is declared, so the Play Console foreground service form should not apply; if it asks anyway, answer
+  that the app does not run foreground services itself (the permission comes from a library).
+- AD_ID is declared: in App content → Advertising ID answer "Yes, used for advertising".
+- In code: the DEV shop cheat is `#if UNITY_EDITOR` only; the review prompt asks without a pre-question, once per
+  30 days; UMP consent + Privacy options entry; interstitials at least 90 s apart and never in the first 2 runs;
+  rewarded ads always opt-in with the reward named; purchases restore on start; privacy policy link in settings.
+
 ## 9. Assets and licences
 
 - Sound effects in the repo: Kenney (CC0). Music and extra SFX: Unity Asset Store packs ("Casual Game Sounds",
