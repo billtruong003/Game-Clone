@@ -1,0 +1,6 @@
+node_modules/
+out/
+# Asset Store music (licence: use in products only, never redistribute) and recorded frames
+public/music/
+public/frames/
+public/shots/
