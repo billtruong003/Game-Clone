@@ -122,8 +122,9 @@ namespace CasualGame.Core
             viewport.anchorMin = Vector2.zero;
             viewport.anchorMax = Vector2.one;
             viewport.offsetMin = new Vector2(0, GridBottom);
-            viewport.offsetMax = new Vector2(0, -GridTop + 30);
-            viewport.gameObject.AddComponent<RectMask2D>();
+            viewport.offsetMax = new Vector2(0, -GridTop + 18); // a gap under the tabs (they end at 908)
+            // cards fade in and out at the edges instead of being sliced in half by the tab bar
+            viewport.gameObject.AddComponent<RectMask2D>().softness = new Vector2Int(0, 36);
             UIKit.AddImage(viewport, (Sprite)null, new Color(0, 0, 0, 0)).raycastTarget = true; // drag anywhere
             content = UIKit.Rect("Content", viewport);
             content.anchorMin = new Vector2(0f, 1f);

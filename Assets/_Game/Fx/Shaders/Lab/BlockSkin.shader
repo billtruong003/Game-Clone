@@ -30,6 +30,7 @@ Shader "CasualGame/Lab/BlockSkin"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             
             #include "ArrowLabCommon.hlsl"
 
@@ -38,7 +39,7 @@ Shader "CasualGame/Lab/BlockSkin"
             CBUFFER_END
             float RoundBox(float2 p, float2 b, float r) { float2 q = abs(p) - b + r; return length(max(q, 0.0)) + min(max(q.x, q.y), 0.0) - r; }
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 half3 base = i.color.rgb;
                 half3 ink = half3(0.118, 0.133, 0.251);
@@ -102,6 +103,9 @@ Shader "CasualGame/Lab/BlockSkin"
                 a *= i.color.a;
                 return half4(c * a, a);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

@@ -302,8 +302,16 @@ namespace CasualGame.EyeBlast
         {
             var rt = UIKit.Place(UIKit.Rect("Block", parent), new Vector2(0.5f, 0.5f), pos, new Vector2(size, size));
             var body = UIKit.AddImage(rt, "block_fill", BlockColors[color]);
-            if (!BlastSkins.Dress(body, Skins.Equipped(0))) UIKit.Image(rt, "block_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
+            var skin = Skins.Equipped(0);
+            if (!BlastSkins.Dress(body, skin)) UIKit.Image(rt, "block_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
+            if (body.TryGetComponent<BlockLive>(out var live))
+            {
+                // board blocks know their row (Night City lights it as it fills); tray / dragged blocks are "in the piece"
+                live.InPiece = parent != boardRect;
+                live.Row = live.InPiece ? -1 : Mathf.Clamp(Mathf.RoundToInt((BlastBoard.Size - 1) / 2f - pos.y / Cell), 0, BlastBoard.Size - 1);
+            }
             var face = Face.AddUI(rt, new Vector2(size * 0.66f, size * 0.66f), new Vector2(0, size * 0.04f));
+            if (BlastSkins.HidesFace(skin)) face.GetComponent<FaceGraphic>().enabled = false; // the skin draws its own eyes / windows / fish
             return new BlockView { Rect = rt, Body = body, Face = face };
         }
 
@@ -512,8 +520,43 @@ namespace CasualGame.EyeBlast
 
         private Vector2 dragTarget;
 
+        private Vector3 lastPiece;
+
+        // What the interactive block skins react to this frame (BlockLive): the dragged piece, each row's fill.
+        private void UpdateLiveSkin()
+        {
+            if (boardRect == null) return;
+            BlastLive.Cell = Cell * boardRect.lossyScale.x;
+            BlastLive.BoardCenter = boardRect.position;
+            var cam = Camera.main;
+            if (cam != null)
+            {
+                var half = Cell * BlastBoard.Size / 2f;
+                var lo = cam.WorldToScreenPoint(boardRect.TransformPoint(new Vector3(0f, -half, 0f))).y;
+                var hi = cam.WorldToScreenPoint(boardRect.TransformPoint(new Vector3(0f, half, 0f))).y;
+                BlastLive.BoardBottom = lo / Screen.height;
+                BlastLive.BoardHeight = (hi - lo) / Screen.height;
+            }
+            var piece = dragging != -1 && trayViews[dragging] != null ? trayViews[dragging] : null;
+            BlastLive.Dragging = piece != null;
+            if (piece != null)
+            {
+                var dt = Mathf.Max(Time.deltaTime, 1e-4f);
+                BlastLive.PieceVelocity = Vector2.Lerp(BlastLive.PieceVelocity, (Vector2)(piece.position - lastPiece) / dt / Mathf.Max(BlastLive.Cell, 1e-4f), 0.3f);
+                BlastLive.Piece = lastPiece = piece.position;
+                if (tray[dragging] != null) BlastLive.PieceColor = BlockColors[tray[dragging].Color];
+            }
+            for (int r = 0; r < BlastBoard.Size; r++)
+            {
+                var n = 0;
+                for (int c = 0; c < BlastBoard.Size; c++) if (blocks[r, c] != null) n++;
+                BlastLive.RowFill[r] = n / (float)BlastBoard.Size;
+            }
+        }
+
         private void Update()
         {
+            UpdateLiveSkin();
             // the lifted piece keeps catching up with a finger that stopped moving (drag events only fire on motion)
             if (dragging != -1 && trayViews[dragging] != null && trayViews[dragging].parent == playRoot)
                 trayViews[dragging].anchoredPosition = Vector2.Lerp(trayViews[dragging].anchoredPosition, dragTarget, 1f - Mathf.Exp(-30f * Time.deltaTime));
@@ -537,6 +580,8 @@ namespace CasualGame.EyeBlast
         {
             FinishTutorial();
             board.Place(p, r0, c0);
+            BlastLive.PlaceTime = Time.time;
+            BlastLive.PlaceAt = boardRect.TransformPoint((CellPos(r0, c0) + CellPos(r0 + p.Height - 1, c0 + p.Width - 1)) / 2f);
             foreach (var (r, c) in p.Cells)
             {
                 var b = MakeBlock(boardRect, p.Color, CellPos(r0 + r, c0 + c), Cell - 6);
@@ -637,6 +682,7 @@ namespace CasualGame.EyeBlast
         {
             var color = b.Body.color;
             b.Face.React(FaceId.Grin, 5f);
+            if (b.Body.TryGetComponent<BlockLive>(out var live)) live.Clear(delay);
             Tween.Scale(b.Rect, Vector3.one * 1.15f, 0.1f, Ease.OutQuad, delay, () =>
             {
                 var skin = Skins.Equipped(0);

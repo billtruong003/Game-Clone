@@ -23,12 +23,16 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `all_skins` | 4.99 | Every skin of the game (future sets too); keeps the ads. |
 | `remove_ads` | 2.99 | Turns off between-round ads. Rewarded ads stay optional. Already in code (`GameConfig.removeAdsProductId`). |
 
-## Meh Merge (14 products + 3 bundles)
+## Meh Merge (18 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
 | `skin_sports` | 1.99 | Sports balls (premium) | — |
 | `skin_eyeballs` | 1.99 | Eyeballs (premium) | — |
+| `skin_hungry` | 1.99 | Hungry: balls open wide for their twin (premium, interactive) | — |
+| `skin_hamster` | 1.99 | Hamster Ball (premium, interactive) | — |
+| `skin_compass` | 1.99 | Compass: needles point to the twin (premium, interactive) | — |
+| `skin_snow_globe` | 1.99 | Snow Globe (premium, interactive) | — |
 | `color_candy` | 0.99 | Candy ball colours | 300 coins |
 | `color_ocean` | 0.99 | Ocean ball colours | 300 coins |
 | `color_forest` | 0.99 | Forest ball colours | 400 coins |
@@ -41,15 +45,19 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `stage_night` | 0.99 | Night stage | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon balls: 3 rewarded videos, no product. One by one: $19.84 → Full Game $6.99. (More interactive premium sets to come.)
+Neon balls: 3 rewarded videos, no product. One by one: $27.80 → Full Game $6.99.
 
-## Nah Blocks (15 products + 3 bundles)
+## Nah Blocks (19 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
 | `skin_retro_bricks` | 1.99 | Retro Bricks (premium) | — |
 | `skin_toy_bricks` | 1.99 | Toy Bricks, pastel plastic (premium) | — |
 | `skin_gems` | 1.99 | Gems (premium) | — |
+| `skin_watchers` | 1.99 | Watchers: eyes follow the dragged piece (premium, interactive) | — |
+| `skin_night_city` | 1.99 | Night City: windows light up as rows fill (premium, interactive) | — |
+| `skin_chrome` | 1.99 | Chrome (premium, interactive) | — |
+| `skin_aquarium` | 1.99 | Aquarium (premium, interactive) | — |
 | `color_candy` | 0.99 | Candy blocks | 300 coins |
 | `color_ocean` | 0.99 | Ocean blocks | 300 coins |
 | `color_retro` | 0.99 | Retro green blocks | 400 coins |
@@ -62,9 +70,9 @@ Neon balls: 3 rewarded videos, no product. One by one: $19.84 → Full Game $6.9
 | `board_felt` | 0.99 | Felt board | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon blocks: 3 rewarded videos. One by one: $21.83 → Full Game $6.99.
+Neon blocks: 3 rewarded videos. One by one: $29.79 → Full Game $6.99.
 
-## Bruh Arrows (18 products + 3 bundles)
+## Bruh Arrows (22 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
@@ -73,6 +81,10 @@ Neon blocks: 3 rewarded videos. One by one: $21.83 → Full Game $6.99.
 | `theme_vector` | 1.99 | Vector CRT theme (premium) | — |
 | `theme_hologram` | 1.99 | Hologram theme (premium) | — |
 | `theme_neon` | 1.99 | Neon theme (premium) | — |
+| `theme_train` | 1.99 | Train theme: lamps show a clear track (premium, interactive) | — |
+| `theme_tape` | 1.99 | Tape theme: peel the arrows off (premium, interactive) | — |
+| `theme_ants` | 1.99 | Ants theme (premium, interactive) | — |
+| `theme_zipper` | 1.99 | Zipper theme: unzip the arrows (premium, interactive) | — |
 | `color_candy` | 0.99 | Candy arrows | 300 coins |
 | `color_ocean` | 0.99 | Ocean arrows | 300 coins |
 | `color_forest` | 0.99 | Forest arrows | 400 coins |
@@ -85,7 +97,7 @@ Neon blocks: 3 rewarded videos. One by one: $21.83 → Full Game $6.99.
 | `paper_linen` | 0.99 | Linen paper | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon arrows: 3 rewarded videos. One by one: $25.81 → Full Game $6.99.
+Neon arrows: 3 rewarded videos. One by one: $33.77 → Full Game $6.99.
 
 ## Store texts (Play Console product name ≤55, description ≤200)
 
@@ -96,14 +108,26 @@ Neon arrows: 3 rewarded videos. One by one: $25.81 → Full Game $6.99.
 | `all_skins_noads` | Full Game | Every skin, future sets included, and no ads between rounds. One price, everything. | Trọn bộ game | Mọi skin, kể cả bộ sau này, và không còn quảng cáo giữa các ván. Một lần, có hết. |
 | `skin_sports` | Sports set | From marble to beach ball: merge your way through the sports shelf. | Bộ Thể thao | Từ bi ve tới bóng bãi biển: gộp hết cả kệ thể thao. |
 | `skin_eyeballs` | Eyeballs set | The balls are eyes now. They are watching you merge. | Bộ Nhãn cầu | Bóng giờ là con mắt. Tụi nó đang nhìn bạn gộp. |
+| `skin_hungry` | Hungry set | Drop a ball and its twins open wide. The others sulk. | Bộ Háu ăn | Thả một quả, mấy quả cùng loại há miệng chờ. Số còn lại dỗi. |
+| `skin_hamster` | Hamster Ball set | A hamster in every ball. It runs when the ball rolls and naps when it rests. | Bộ Bóng hamster | Mỗi quả một con hamster: bóng lăn thì chạy, bóng nằm thì ngủ. |
+| `skin_compass` | Compass set | Every needle points to the nearest twin. A hint you can see. | Bộ La bàn | Kim nào cũng chỉ về quả cùng loại gần nhất. Gợi ý ngay trước mắt. |
+| `skin_snow_globe` | Snow Globe set | Tiny winter scenes in glass. Every drop shakes the snow up. | Bộ Quả cầu tuyết | Cảnh mùa đông trong quả cầu kính. Thả bóng là tuyết bay. |
 | `skin_retro_bricks` | Retro Bricks set | Bevelled bricks and a black well, straight out of the 80s. | Bộ Gạch cổ điển | Gạch vát cạnh, giếng đen, đúng chất thập niên 80. |
 | `skin_toy_bricks` | Toy Bricks set | Pastel plastic bricks with studs on top. | Bộ Khối đồ chơi | Khối nhựa pastel có núm. |
 | `skin_gems` | Gems set | Cut gems instead of blocks. Still say nah. | Bộ Đá quý | Đá quý cắt giác thay cho khối. Vẫn nói nah. |
+| `skin_watchers` | Watchers set | Every block watches your piece. Get close and they panic. | Bộ Mắt dõi theo | Khối nào cũng nhìn theo miếng bạn kéo. Lại gần là hoảng. |
+| `skin_night_city` | Night City set | Every block is a window onto one city. Full rows light up. | Bộ Phố đêm | Mỗi khối là một ô cửa nhìn ra cùng một thành phố. Hàng đầy là đèn sáng. |
+| `skin_chrome` | Chrome set | Polished metal blocks that reflect your piece. | Bộ Kim loại | Khối kim loại bóng loáng, phản chiếu miếng bạn kéo. |
+| `skin_aquarium` | Aquarium set | A fish tank in every block. Drag it and the water sloshes. | Bộ Bể cá | Mỗi khối một bể cá. Kéo đi là nước sóng sánh. |
 | `theme_blueprint` | Blueprint theme | White lines on engineer blue. | Theme Bản vẽ | Nét trắng trên nền xanh bản vẽ kỹ thuật. |
 | `theme_chalkboard` | Chalkboard theme | Chalk arrows on a school board. | Theme Bảng phấn | Mũi tên phấn trên bảng đen. |
 | `theme_vector` | Vector CRT theme | Glowing beams drawn on an old vector monitor. | Theme Màn vector | Tia sáng vẽ trên màn hình vector đời cũ. |
 | `theme_hologram` | Hologram theme | See-through arrows with scanlines and a flicker. | Theme Hologram | Mũi tên trong suốt, có vạch quét và chớp nháy. |
 | `theme_neon` | Neon theme | White-hot neon tubes on a dark wall. | Theme Neon | Ống neon sáng rực trên tường tối. |
+| `theme_train` | Train theme | Every arrow is a little train. A green lamp means the track is clear. | Theme Tàu hoả | Mỗi mũi tên là một đoàn tàu. Đèn xanh là đường thoáng. |
+| `theme_tape` | Tape theme | Arrows made of tape. Tap and peel them off the paper. | Theme Băng keo | Mũi tên bằng băng keo. Chạm là bóc khỏi giấy. |
+| `theme_ants` | Ants theme | Columns of ants. Blocked ones bunch up and fidget. | Theme Đàn kiến | Mũi tên là hàng kiến. Bị chặn thì dồn cục, cựa quậy. |
+| `theme_zipper` | Zipper theme | Every arrow is a zip. Tap and unzip it. | Theme Khoá kéo | Mỗi mũi tên là một khoá kéo. Chạm là kéo mở. |
 | `color_<name>` | <Name> colours | Unlock the <Name> colour set now instead of saving coins. | Màu <Tên> | Mở bộ màu <Tên> ngay, khỏi gom xu. |
 | `stage_<name>` / `board_<name>` / `paper_<name>` | <Name> stage / board / paper | Unlock it now instead of saving coins. | Sân khấu / Bàn / Giấy <Tên> | Mở ngay, khỏi gom xu. |
 | `face_<name>` | <Name> faces | A new set of faces for every character. | Bộ mặt <Tên> | Bộ mặt mới cho mọi nhân vật. |

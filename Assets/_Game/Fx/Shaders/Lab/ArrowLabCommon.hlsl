@@ -61,4 +61,21 @@ float AAInside(float d)
 // Screen position in pixels.
 float2 ScreenPx(float4 screen) { return screen.xy / max(screen.w, 1e-5) * _ScreenParams.xy; }
 
+// UI masks (RectMask2D, scroll lists): Unity sets _ClipRect / softness and enables UNITY_UI_CLIP_RECT on masked
+// graphics. Pixels outside the rect fade out over the softness, like the built-in UI shader.
+float4 _ClipRect;
+float _UIMaskSoftnessX, _UIMaskSoftnessY;
+
+float UIClip(float2 local)
+{
+#ifdef UNITY_UI_CLIP_RECT
+    float2 soft = max(float2(_UIMaskSoftnessX, _UIMaskSoftnessY), 1.0);
+    float2 d = min(local - _ClipRect.xy, _ClipRect.zw - local);
+    float2 m = saturate(d / soft);
+    return m.x * m.y;
+#else
+    return 1.0;
+#endif
+}
+
 #endif

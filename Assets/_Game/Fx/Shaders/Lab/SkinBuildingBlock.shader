@@ -47,6 +47,7 @@ Shader "CasualGame/Lab/SkinBuildingBlock"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "SkinCommon.hlsl"
 
             TEXTURE2D(_FarTex); SAMPLER(sampler_FarTex);
@@ -58,7 +59,7 @@ Shader "CasualGame/Lab/SkinBuildingBlock"
                 float4 _Parallax;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float2 p = i.uv0 * 2.0 - 1.0;
                 float body = RoundBox(p, float2(0.95, 0.95), 0.08);
@@ -104,6 +105,8 @@ Shader "CasualGame/Lab/SkinBuildingBlock"
                 return Out(c, AAInside(body), i.color);
             }
 
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

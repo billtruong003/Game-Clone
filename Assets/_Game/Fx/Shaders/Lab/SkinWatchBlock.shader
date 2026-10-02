@@ -39,6 +39,7 @@ Shader "CasualGame/Lab/SkinWatchBlock"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "SkinCommon.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
@@ -47,7 +48,7 @@ Shader "CasualGame/Lab/SkinWatchBlock"
                 float4 _Look;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float2 p = i.uv0 * 2.0 - 1.0;
                 half3 base = i.color.rgb;
@@ -78,6 +79,8 @@ Shader "CasualGame/Lab/SkinWatchBlock"
                 return Out(c, AAInside(body), i.color);
             }
 
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

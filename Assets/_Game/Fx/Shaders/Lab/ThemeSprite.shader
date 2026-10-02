@@ -35,6 +35,7 @@ Shader "CasualGame/Lab/ThemeSprite"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             
             #include "ArrowLabCommon.hlsl"
 
@@ -86,13 +87,16 @@ Shader "CasualGame/Lab/ThemeSprite"
                 a *= i.color.a; \
                 return half4(col * a, a);
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 half3 tint = i.color.rgb;
                 if (_Circle > 0.5 && _Ring > 0.001 && length(i.uv0 * 2.0 - 1.0) / _CircleR < 1.0 - _Ring * 0.5)
                     return half4(_Inner.rgb, 1) * i.color.a;
                 STYLE_BODY(SpriteMask)
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

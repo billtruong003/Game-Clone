@@ -40,6 +40,7 @@ Shader "CasualGame/Lab/BallSkin"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             
             #include "ArrowLabCommon.hlsl"
 
@@ -58,7 +59,7 @@ Shader "CasualGame/Lab/BallSkin"
             float Noise3(float3 p) { return ValueNoise(p.xy * 1.7 + p.z * 3.1) * 0.5 + ValueNoise(p.yz * 2.3 - p.x * 1.3) * 0.5; }
             float Fbm3(float3 p) { float s = 0, a = 0.5; [unroll] for (int k = 0; k < 4; k++) { s += a * Noise3(p); p *= 2.07; a *= 0.5; } return s; }
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 half3 ink = half3(0.118, 0.133, 0.251);
                 float2 p = (i.uv0 * 2.0 - 1.0) / _R;
@@ -205,6 +206,9 @@ Shader "CasualGame/Lab/BallSkin"
                 a *= i.color.a;
                 return half4(c * a, a);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

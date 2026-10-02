@@ -14,10 +14,14 @@ namespace CasualGame.EyeMerge
     /// </summary>
     public static class MergeLooks
     {
+        /// <summary>Interactive sets (Assets/_Game/Skins/Merge): what each ball reacts to, driven by MergeBall.</summary>
+        public enum LiveKind { None, Hungry, Hamster, Compass, Snow }
+
         public sealed class Look
         {
             public string Shader = "BallSkin";
             public int Set;
+            public LiveKind Live;
             public bool Face = true;        // eyeballs: the ball is the eye, no face
             public bool FacePlate;          // billiard: the face sits on the cream plate, dark ink
         }
@@ -30,6 +34,11 @@ namespace CasualGame.EyeMerge
             ["skin_monsters"] = new Look { Set = 3 },
             ["skin_slimes"] = new Look { Shader = "SlimeSkin", Set = 4 },
             ["skin_eyeballs"] = new Look { Set = 5, Face = false },
+            // interactive: each draws its own character, so no game face
+            ["skin_hungry"] = new Look { Shader = "SkinHungryBall", Set = -1, Live = LiveKind.Hungry, Face = false },
+            ["skin_hamster"] = new Look { Shader = "SkinHamsterBall", Set = -1, Live = LiveKind.Hamster, Face = false },
+            ["skin_compass"] = new Look { Shader = "SkinCompassBall", Set = -1, Live = LiveKind.Compass, Face = false },
+            ["skin_snow_globe"] = new Look { Shader = "SkinSnowGlobe", Set = -1, Live = LiveKind.Snow, Face = false },
         };
 
         public static Look Of(SkinDef skin) => skin != null && Looks.TryGetValue(skin.Id, out var l) ? l : null;
@@ -52,6 +61,8 @@ namespace CasualGame.EyeMerge
             (0, "#D9C7B0", "#9C8670"), (0, "#D8D8DC", "#8E8E96"), (0, "#B7A89A", "#6E6258"), (0, "#E0663A", "#8A2E16"), (2, "#F2D79A", "#D9A85A"),
             (1, "#2E6FD9", "#3FAE5A"), (2, "#3A5BD9", "#7FA0FF"), (2, "#8FE3E8", "#C8F7F7"), (3, "#E8C98A", "#C9A060"), (2, "#E0A060", "#F5E2C0"), (4, "#FFB84D", "#FFE38A"),
         };
+        /// <summary>Tier colours of the interactive sets (the ball body / shell / case / sky takes it).</summary>
+        public static readonly Color[] Rainbow = P("#FF6B6B", "#FFA94D", "#FFD43B", "#69DB7C", "#38D9A9", "#4DABF7", "#748FFC", "#B197FC", "#F783AC", "#E8590C", "#2B8A3E");
         public static readonly Color[] Monsters = P("#F15BB5", "#4EA8DE", "#3DDC97", "#FFD23F", "#9B5DE5", "#FF9F1C", "#F15BB5", "#4EA8DE", "#3DDC97", "#FFD23F", "#9B5DE5");
         public static readonly Color[] Slimes = P("#7CE38B", "#6FC3F7", "#FF8FB1", "#C3A3FF", "#FFD166", "#FF9F6B", "#7CE38B", "#6FC3F7", "#FF8FB1", "#C3A3FF", "#FFD166");
         private static readonly (string outer, string inner)[] Irises =
@@ -68,6 +79,7 @@ namespace CasualGame.EyeMerge
             "skin_monsters" => Monsters,
             "skin_slimes" => Slimes,
             "skin_eyeballs" => EyeColors(),
+            "skin_hungry" or "skin_hamster" or "skin_compass" or "skin_snow_globe" => Rainbow,
             _ => null,
         };
 
@@ -110,6 +122,12 @@ namespace CasualGame.EyeMerge
         /// <summary>Writes a tier's values through the given setters (a property block or a material).</summary>
         public static void Configure(Look look, int tier, Action<string, float> f, Action<string, Color> c, Action<string, Texture> t)
         {
+            if (look.Live != LiveKind.None)
+            {
+                f("_R", 0.94f);
+                if (look.Live == LiveKind.Snow) f("_Scene", tier % 3);
+                return;
+            }
             f("_Set", look.Set);
             f("_R", SphereR(look, tier));
             switch (look.Set)
@@ -156,7 +174,7 @@ namespace CasualGame.EyeMerge
         public static Material Shared(Look look)
         {
             if (shared.TryGetValue(look.Shader, out var m) && m != null) return m;
-            m = new Material(Shader.Find("CasualGame/Lab/" + look.Shader)) { name = look.Shader };
+            m = look.Live != LiveKind.None ? LiveSkinMaterials.Create(look.Shader) : new Material(Shader.Find("CasualGame/Lab/" + look.Shader)) { name = look.Shader };
             shared[look.Shader] = m;
             return m;
         }
@@ -165,8 +183,8 @@ namespace CasualGame.EyeMerge
         public static Image UIBall(Transform parent, Look look, int tier, Vector2 pos, float ballSize)
         {
             var size = ballSize / SphereR(look, tier);
-            var img = UIKit.Image(parent, null, new Vector2(0.5f, 0.5f), pos, new Vector2(size, size), Color.white);
-            var m = new Material(Shader.Find("CasualGame/Lab/" + look.Shader));
+            var img = UIKit.Image(parent, null, new Vector2(0.5f, 0.5f), pos, new Vector2(size, size), look.Live != LiveKind.None ? Rainbow[tier - 1] : Color.white);
+            var m = look.Live != LiveKind.None ? LiveSkinMaterials.Create(look.Shader) : new Material(Shader.Find("CasualGame/Lab/" + look.Shader));
             Configure(look, tier, m.SetFloat, m.SetColor, m.SetTexture);
             img.material = m;
             img.gameObject.AddComponent<OnDestroyed>().Action = () => UnityEngine.Object.Destroy(m);

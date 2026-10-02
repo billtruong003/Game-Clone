@@ -33,6 +33,7 @@ Shader "CasualGame/Lab/ThemeFace"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #pragma require 2darray
             #include "ArrowLabCommon.hlsl"
 
@@ -78,7 +79,7 @@ Shader "CasualGame/Lab/ThemeFace"
                 a *= i.color.a; \
                 return half4(col * a, a);
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 gSlice = i.uv1.x;
                 half4 raw = SAMPLE_TEXTURE2D_ARRAY(_Faces, sampler_Faces, i.uv0, gSlice);
@@ -86,6 +87,9 @@ Shader "CasualGame/Lab/ThemeFace"
                 half3 tint = lerp(raw.rgb, _Ink.rgb, inkness);
                 STYLE_BODY(FaceMask)
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

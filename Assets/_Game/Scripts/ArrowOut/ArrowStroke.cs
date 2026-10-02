@@ -53,6 +53,9 @@ namespace CasualGame.ArrowOut
         /// <summary>Path length still on the track behind the head; the arrow is gone once Advance passes it.</summary>
         public float BodyLength => bodyLength;
 
+        /// <summary>The board cell size the path was laid out with (canvas units).</summary>
+        public float CellSize => cell;
+
         /// <summary>
         /// The arrow's cells, head first (as in Arrow.Cells), as local positions, its direction (Board 0 up, 1 right,
         /// 2 down, 3 left) and the cell size. The track continues straight past the head for <paramref name="runOut"/>.

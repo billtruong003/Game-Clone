@@ -33,6 +33,7 @@ Shader "CasualGame/Lab/SlimeSkin"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             
             #include "ArrowLabCommon.hlsl"
 
@@ -41,7 +42,7 @@ Shader "CasualGame/Lab/SlimeSkin"
                 float _Seed, _Wobble, _Squash, _R;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 half3 ink = half3(0.118, 0.133, 0.251);
                 float2 p = (i.uv0 * 2.0 - 1.0) / _R;
@@ -87,6 +88,9 @@ Shader "CasualGame/Lab/SlimeSkin"
                 float a = body * lerp(0.9, 1.0, 1 - edgeDist) * i.color.a;     // a hint see-through in the middle
                 return half4(c * a, a);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

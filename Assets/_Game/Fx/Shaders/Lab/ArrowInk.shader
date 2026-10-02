@@ -33,13 +33,14 @@ Shader "CasualGame/Lab/ArrowInk"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "ArrowLabCommon.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
                 float _Reveal, _Bleed, _Pool, _Dry, _Wash;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float along = i.uv0.x, across = abs(i.uv0.y), t = i.uv1.x;
                 // the line is drawn from tail to head: everything past the brush front is not there yet
@@ -64,6 +65,9 @@ Shader "CasualGame/Lab/ArrowInk"
                 float a = saturate(core + wash + bead * core) * reveal * i.color.a;
                 return half4(ink * a, a);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

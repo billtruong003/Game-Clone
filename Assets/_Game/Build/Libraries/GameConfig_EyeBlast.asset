@@ -15,8 +15,8 @@ MonoBehaviour:
   gameId: EyeBlast
   productName: Nah Blocks
   applicationId: com.billthedev.nahblocks
-  version: 0.1.0
-  versionCode: 1
+  version: 1.0.0
+  versionCode: 3
   interstitialAdUnit: ca-app-pub-3940256099942544/1033173712
   rewardedAdUnit: ca-app-pub-3940256099942544/5224354917
   bannerAdUnit: ca-app-pub-3940256099942544/6300978111

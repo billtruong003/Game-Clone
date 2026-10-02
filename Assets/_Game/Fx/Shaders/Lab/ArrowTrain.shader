@@ -44,6 +44,7 @@ Shader "CasualGame/Lab/ArrowTrain"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "SkinCommon.hlsl"
 
             TEXTURE2D(_TrainTex); SAMPLER(sampler_TrainTex);
@@ -54,7 +55,7 @@ Shader "CasualGame/Lab/ArrowTrain"
 
             #define HALF_LINE 0.104
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 if (i.uv1.y > 0.5) return 0;                                  // no chevron: the engine shows the way
                 float X = i.uv0.x, Y = i.uv0.y * HALF_LINE;
@@ -114,6 +115,8 @@ Shader "CasualGame/Lab/ArrowTrain"
                 return half4(c * a * i.color.a, a * i.color.a);
             }
 
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

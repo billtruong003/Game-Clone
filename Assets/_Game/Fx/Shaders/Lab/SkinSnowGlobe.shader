@@ -41,6 +41,7 @@ Shader "CasualGame/Lab/SkinSnowGlobe"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "SkinCommon.hlsl"
 
             TEXTURE2D(_SceneTex); SAMPLER(sampler_SceneTex);
@@ -49,7 +50,7 @@ Shader "CasualGame/Lab/SkinSnowGlobe"
                 half4 _SnowColor;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float2 p = (i.uv0 * 2.0 - 1.0) / _R;
                 float r = length(p);
@@ -81,6 +82,8 @@ Shader "CasualGame/Lab/SkinSnowGlobe"
                 return Out(c, AAInside(r - 1.0), i.color);
             }
 
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

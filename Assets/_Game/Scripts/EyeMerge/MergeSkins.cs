@@ -6,7 +6,7 @@ namespace CasualGame.EyeMerge
 {
     /// <summary>
     /// Meh Merge's skins (mockup "Skin VFX &amp; Pricing", Store/IAP_PRODUCTS.md): ball colour sets (11 tiers each) and
-    /// stage colours. Each ball set has its own merge effect. Premium sets (Sports, Eyeballs) and face
+    /// stage colours. Each ball set has its own merge effect. Premium sets (Sports, Eyeballs, Hungry, Hamster Ball, Compass, Snow Globe) and face
     /// packs come with their art.
     /// </summary>
     public static class MergeSkins
@@ -40,6 +40,11 @@ namespace CasualGame.EyeMerge
             // premium sets: drawn by shaders (MergeLooks); Colors feed the HUD strip, the next bubble and the splashes
             c.Add(new SkinDef { Id = "skin_sports", En = "Sports", Vi = "Thể thao", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Confetti", FxPieceColor = false, Colors = MergeLooks.TierColors("skin_sports") });
             c.Add(new SkinDef { Id = "skin_eyeballs", En = "Eyeballs", Vi = "Nhãn cầu", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_eyeballs") });
+            // interactive sets: every ball reacts to the held ball, the roll, the hits (MergeBall.Live)
+            c.Add(new SkinDef { Id = "skin_hungry", En = "Hungry", Vi = "Háu ăn", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Confetti", FxPieceColor = false, Colors = MergeLooks.TierColors("skin_hungry") });
+            c.Add(new SkinDef { Id = "skin_hamster", En = "Hamster Ball", Vi = "Bóng hamster", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Confetti", FxPieceColor = false, Colors = MergeLooks.TierColors("skin_hamster") });
+            c.Add(new SkinDef { Id = "skin_compass", En = "Compass", Vi = "La bàn", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_compass") });
+            c.Add(new SkinDef { Id = "skin_snow_globe", En = "Snow Globe", Vi = "Quả cầu tuyết", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Bubbles", FxPieceColor = false, Colors = MergeLooks.TierColors("skin_snow_globe") });
             // stage: background, floor band, shelf, pillars
             c.Add(new SkinDef { Id = "stage_classic", En = "Classic", Vi = "Cổ điển", Tab = 1, Price = SkinPrice.Free, Scene = P("#2F2552", "#271E47", "#5B4D96", "#4A3D80") });
             c.Add(new SkinDef { Id = "stage_frosted", En = "Frosted", Vi = "Sương giá", Tab = 1, Price = SkinPrice.Coins, Cost = 300, Scene = P("#3A3470", "#2C275C", "#C9D6F2", "#9FB0DA") });

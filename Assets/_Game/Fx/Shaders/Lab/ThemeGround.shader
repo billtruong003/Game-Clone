@@ -32,6 +32,7 @@ Shader "CasualGame/Lab/ThemeGround"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "ArrowLabCommon.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
@@ -39,7 +40,7 @@ Shader "CasualGame/Lab/ThemeGround"
                 half4 _Base, _Ink;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float2 px = ScreenPx(i.screen);
                 float2 uv = i.screen.xy / max(i.screen.w, 1e-5);
@@ -82,6 +83,9 @@ Shader "CasualGame/Lab/ThemeGround"
                 }
                 return half4(c, 1);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

@@ -148,11 +148,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a53d352e8ce0d34da8793611a080daf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.GameContext
-  gameId: EyeMerge
-  art: {fileID: 11400000, guid: 342f539181254874896848f3f5ad52a3, type: 2}
-  audio: {fileID: 11400000, guid: 43c5805b8279bf947bc6a9d682a1a055, type: 2}
-  fx: {fileID: 11400000, guid: 9947d66ee11bd4a49a5dee389c07e8c9, type: 2}
-  config: {fileID: 11400000, guid: 18e1186925d85d248b1937bf8d93c5a3, type: 2}
+  gameId: ArrowOut
+  art: {fileID: 11400000, guid: 3ae8577ed14636749b2fe03d150dc309, type: 2}
+  audio: {fileID: 11400000, guid: 66818ca5c4bdd03448cd703ee0a7a643, type: 2}
+  fx: {fileID: 11400000, guid: a05fadda76ae0584d868594f521c4b66, type: 2}
+  config: {fileID: 11400000, guid: 0e14e74bd67f8324cabe38356027d7c5, type: 2}
   bootScene: 1
 --- !u!4 &267971810
 Transform:
@@ -290,13 +290,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b223d42165b57bf48b72c07b1066262a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.BootLoader
-  nextScene: EyeMerge
-  config: {fileID: 11400000, guid: 18e1186925d85d248b1937bf8d93c5a3, type: 2}
-  audioLibrary: {fileID: 11400000, guid: 43c5805b8279bf947bc6a9d682a1a055, type: 2}
+  nextScene: ArrowOut
+  config: {fileID: 11400000, guid: 0e14e74bd67f8324cabe38356027d7c5, type: 2}
+  audioLibrary: {fileID: 11400000, guid: 66818ca5c4bdd03448cd703ee0a7a643, type: 2}
   foxHead: {fileID: 21300000, guid: cdfb51ee2a4de36488ca63b9601dc624, type: 3}
   foxShades: {fileID: 21300000, guid: e8cefe06d947efe47b8ef9d6252c8762, type: 3}
   foxShadesMask: {fileID: 21300000, guid: f8703cd35289ca94f9e044bcd71d5413, type: 3}
-  unityLogo: {fileID: 0}
 --- !u!4 &1912085007
 Transform:
   m_ObjectHideFlags: 0

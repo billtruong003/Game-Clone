@@ -40,6 +40,7 @@ Shader "CasualGame/Lab/ArrowTape"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "SkinCommon.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
@@ -49,7 +50,7 @@ Shader "CasualGame/Lab/ArrowTape"
 
             #define HALF_LINE 0.104
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float X = i.uv0.x, Y = i.uv0.y * HALF_LINE;
                 half3 col = i.color.rgb;
@@ -81,6 +82,8 @@ Shader "CasualGame/Lab/ArrowTape"
                 return half4(c * i.color.a, a * i.color.a);
             }
 
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

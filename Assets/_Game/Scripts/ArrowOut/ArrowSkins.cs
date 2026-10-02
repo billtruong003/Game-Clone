@@ -46,6 +46,15 @@ namespace CasualGame.ArrowOut
                 Scene = P("#0B1220", "#1A6B8A", "#E6FBFF", "#8FC7D8"), Colors = P("#3DFFB0", "#5CE1FF", "#FF9D3C", "#C38BFF") });
             c.Add(new SkinDef { Id = "theme_neon", En = "Neon", Vi = "Neon", Tab = 1, Price = SkinPrice.Premium, Dark = true,
                 Scene = P("#0B0B12", "#2A1E4A", "#FFF8EC", "#A9AED0"), Colors = P("#00E5FF", "#FF2BD6", "#39FF14", "#FFB300") });
+            // interactive themes: every arrow is an object that shows whether it can go (Docs/SHADER_LAB.md)
+            c.Add(new SkinDef { Id = "theme_train", En = "Train", Vi = "Tàu hoả", Tab = 1, Price = SkinPrice.Premium, Scene = P("#F5F1EA", "#D9D2C5", "#1E2240", "#6B7090"),
+                Colors = P("#E5484D", "#2E7DD7", "#F2A93B", "#3BA676") });
+            c.Add(new SkinDef { Id = "theme_tape", En = "Tape", Vi = "Băng keo", Tab = 1, Price = SkinPrice.Premium, Scene = P("#F5F1EA", "#D9D2C5", "#1E2240", "#6B7090"),
+                Colors = P("#FF6B8B", "#4DABF7", "#FFC94D", "#4CC38A") });
+            c.Add(new SkinDef { Id = "theme_ants", En = "Ants", Vi = "Đàn kiến", Tab = 1, Price = SkinPrice.Premium, Scene = P("#F5F1EA", "#D9D2C5", "#1E2240", "#6B7090"),
+                Colors = P("#E5484D", "#2E7DD7", "#F2A93B", "#3BA676") });
+            c.Add(new SkinDef { Id = "theme_zipper", En = "Zipper", Vi = "Khoá kéo", Tab = 1, Price = SkinPrice.Premium, Scene = P("#F5F1EA", "#D9D2C5", "#1E2240", "#6B7090"),
+                Colors = P("#D9485F", "#3C6FD8", "#E9A23B", "#2F9E6E") });
             Skins.Register(c);
         }
 
@@ -59,8 +68,12 @@ namespace CasualGame.ArrowOut
         // ---------------- shader themes (Docs/SHADER_LAB.md) ----------------
 
         /// <summary>How a premium theme draws: its line shader, ground, glow room, and the style of tail caps and faces.</summary>
+        /// <summary>Interactive themes: each arrow is an object (ArrowLive drives it).</summary>
+        public enum LiveKind { None, Train, Tape, Ants, Zipper }
+
         public sealed class Look
         {
+            public LiveKind Live;
             public string Line;      // CasualGame/Lab/<Line>
             public int Ground;       // ThemeGround mode
             public float GlowPad;    // cells of halo around the line
@@ -76,6 +89,10 @@ namespace CasualGame.ArrowOut
             ["theme_vector"] = new Look { Line = "ArrowVector", Ground = 3, GlowPad = 0.45f, Style = 2, Ring = true },
             ["theme_hologram"] = new Look { Line = "ArrowHolo", Ground = 4, GlowPad = 0.45f, Style = 3, Ring = true },
             ["theme_neon"] = new Look { Line = "ArrowNeon", Ground = 4, GlowPad = 0.55f, Style = 2, Ring = true },
+            ["theme_train"] = new Look { Live = LiveKind.Train, Line = "ArrowTrain", GlowPad = 0.22f, Trail = -1 },
+            ["theme_tape"] = new Look { Live = LiveKind.Tape, Line = "ArrowTape", GlowPad = 0.12f, Trail = -1 },
+            ["theme_ants"] = new Look { Live = LiveKind.Ants, Line = "ArrowAnts", GlowPad = 0.18f, Trail = -1 },
+            ["theme_zipper"] = new Look { Live = LiveKind.Zipper, Line = "ArrowZipper", GlowPad = 0.16f, Trail = -1 },
         };
 
         public static Look LookOf(SkinDef paper) => paper != null && Looks.TryGetValue(paper.Id, out var l) ? l : null;
@@ -119,7 +136,7 @@ namespace CasualGame.ArrowOut
         /// <summary>The ground behind the board: a ThemeGround material for the look, null for a flat paper.</summary>
         public static Material GroundMaterial(Look look, Color[] scene, float cell)
         {
-            if (look == null) return null;
+            if (look == null || look.Live != LiveKind.None) return null; // interactive themes sit on plain paper
             var m = Mat("ground." + look.Line, "ThemeGround");
             m.SetFloat("_Mode", look.Ground);
             m.SetColor("_Base", scene[0]);
@@ -135,6 +152,7 @@ namespace CasualGame.ArrowOut
         public static void Dress(Look look, ArrowStroke stroke, Image cap, Face face, Color color, Color ground)
         {
             if (look == null) return;
+            if (look.Live != LiveKind.None) { DressLive(look, stroke, cap, face, color); return; }
             stroke.material = LineMaterial(look);
             stroke.GlowPad = look.GlowPad;
             if (look.Style < 0) return;
@@ -159,6 +177,55 @@ namespace CasualGame.ArrowOut
             faceMat.SetFloat("_Mode", look.Style);
             faceMat.SetColor("_Ink", ink);
             face.GetComponent<FaceGraphic>().material = faceMat;
+        }
+
+        /// <summary>
+        /// An interactive theme: the arrow gets its own copy of the theme's material (its state is its own) and an
+        /// ArrowLive. Train: the face rides the engine; Ants: no cap, no face; Tape: the cap is a tape roll; Zipper:
+        /// the cap is the slider's pull tab.
+        /// </summary>
+        private static void DressLive(Look look, ArrowStroke stroke, Image cap, Face face, Color color)
+        {
+            var m = LiveSkinMaterials.Create(look.Line);
+            if (m == null) return;
+            stroke.material = m;
+            stroke.GlowPad = look.GlowPad;
+            m.SetFloat("_Len", stroke.BodyLength / Mathf.Max(stroke.CellSize, 1f));
+            var live = stroke.gameObject.AddComponent<ArrowLive>();
+            live.Kind = look.Live;
+            live.Mat = m;
+            var graphic = face.GetComponent<FaceGraphic>();
+            switch (look.Live)
+            {
+                case LiveKind.Train:
+                    cap.enabled = false;
+                    face.transform.localScale = Vector3.one * 0.75f;
+                    break;
+                case LiveKind.Ants:
+                    cap.enabled = false;
+                    graphic.enabled = false;
+                    break;
+                case LiveKind.Tape:
+                    cap.enabled = false;
+                    var roll = UIKit.Place(UIKit.Rect("Roll", cap.transform), new Vector2(0.5f, 0.5f), Vector2.zero, cap.rectTransform.sizeDelta * 1.17f);
+                    for (int k = 0; k < 2; k++)
+                    {
+                        var img = UIKit.Stretch(UIKit.Rect(k == 0 ? "Tape" : "Core", roll)).gameObject.AddComponent<RawImage>();
+                        img.texture = LiveSkinMaterials.TapeRoll;
+                        img.uvRect = new Rect(k * 0.5f, 0f, 0.5f, 1f);
+                        img.color = k == 0 ? color : Color.white;
+                        img.raycastTarget = false;
+                    }
+                    face.transform.SetAsLastSibling();
+                    face.transform.localScale = Vector3.one * 0.8f;
+                    face.InkFor(Color.white); // the cardboard core is light
+                    live.Roll = roll;
+                    break;
+                default:
+                    cap.color = Color.Lerp(color, UIKit.Hex("#B8BCC8"), 0.55f);
+                    face.InkFor(cap.color);
+                    break;
+            }
         }
     }
 

@@ -25,6 +25,7 @@ Shader "CasualGame/FaceArray"
             #pragma vertex vert
             #pragma fragment frag
             #pragma require 2darray
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "Packages/com.unity.render-pipelines.universal/ShaderLibrary/Core.hlsl"
 
             TEXTURE2D_ARRAY(_Faces);
@@ -32,6 +33,9 @@ Shader "CasualGame/FaceArray"
             // the worn shop face pack, set globally (FacePacks.Apply); _FacePackOn = 0 keeps the default faces
             TEXTURE2D_ARRAY(_FacePack);
             float _FacePackOn;
+            // UI masks: Unity sets these on masked faces (scroll lists)
+            float4 _ClipRect;
+            float _UIMaskSoftnessX, _UIMaskSoftnessY;
 
             CBUFFER_START(UnityPerMaterial)
                 half4 _Color;
@@ -53,6 +57,7 @@ Shader "CasualGame/FaceArray"
                 half4 color : COLOR;
                 float3 uv : TEXCOORD0;
                 half lightInk : TEXCOORD1;
+                float2 local : TEXCOORD2;
             };
 
             Varyings vert(Attributes v)
@@ -62,6 +67,7 @@ Shader "CasualGame/FaceArray"
                 o.color = v.color * _Color;
                 o.uv = float3(v.uv, v.uv1.x);
                 o.lightInk = v.uv1.y;
+                o.local = v.positionOS.xy;
                 return o;
             }
 
@@ -72,7 +78,13 @@ Shader "CasualGame/FaceArray"
                     : SAMPLE_TEXTURE2D_ARRAY(_Faces, sampler_Faces, i.uv.xy, i.uv.z);
                 half ink = saturate((0.45h - dot(c.rgb, half3(0.2126h, 0.7152h, 0.0722h))) / 0.3h);
                 c.rgb = lerp(c.rgb, half3(1.0h, 0.973h, 0.925h), ink * i.lightInk);
-                return c * i.color;
+                c *= i.color;
+            #ifdef UNITY_UI_CLIP_RECT
+                float2 soft = max(float2(_UIMaskSoftnessX, _UIMaskSoftnessY), 1.0);
+                float2 m = saturate(min(i.local - _ClipRect.xy, _ClipRect.zw - i.local) / soft);
+                c.a *= m.x * m.y;
+            #endif
+                return c;
             }
             ENDHLSL
         }

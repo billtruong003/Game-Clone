@@ -32,6 +32,7 @@ Shader "CasualGame/Lab/ArrowVector"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             
             #include "ArrowLabCommon.hlsl"
 
@@ -39,7 +40,7 @@ Shader "CasualGame/Lab/ArrowVector"
                 float _Reveal, _Beam, _Glow, _TailClip;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float across = abs(i.uv0.y), t = i.uv1.x;
                 float reveal = saturate((_Reveal + 0.02 - t) * 50.0);
@@ -57,6 +58,9 @@ Shader "CasualGame/Lab/ArrowVector"
                 half3 c = lerp(i.color.rgb, half3(1, 1, 1), core * 0.6 + spot * 0.4);
                 return half4(c * e, saturate(e) * 0.75);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

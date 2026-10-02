@@ -8,7 +8,7 @@ namespace CasualGame.EyeBlast
     /// <summary>
     /// Nah Blocks' skins (mockup "Skin VFX &amp; Pricing", Store/IAP_PRODUCTS.md): block colour sets (7 colours each)
     /// and boards. Each block set has its own line-clear effect, played once per cleared block. Premium sets (Retro
-    /// Bricks, Pixel, Toy Studs, Gems) and face packs come with their art.
+    /// Bricks, Toy Bricks, Gems, and the interactive Watchers, Night City, Chrome, Aquarium) and face packs come with their art.
     /// </summary>
     public static class BlastSkins
     {
@@ -44,6 +44,15 @@ namespace CasualGame.EyeBlast
                 Colors = P("#FFB3C7", "#A0C4FF", "#FFE29A", "#B9F2C9", "#D7C4FF", "#FFC9A3", "#BDEFF0") });
             c.Add(new SkinDef { Id = "skin_gems", En = "Gems", Vi = "Đá quý", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Zap",
                 Colors = P("#E0115F", "#0F52BA", "#50C878", "#FFC87C", "#9966CC", "#7FFFD4", "#E4D00A") });
+            // interactive premium sets (Docs/SHADER_LAB.md): each block reacts to the dragged piece, its row, the line clears
+            c.Add(new SkinDef { Id = "skin_watchers", En = "Watchers", Vi = "Mắt dõi theo", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Confetti", FxPieceColor = false,
+                Colors = P("#FF6B6B", "#4DABF7", "#FFD43B", "#69DB7C", "#B197FC", "#FFA94D", "#38D9A9") });
+            c.Add(new SkinDef { Id = "skin_night_city", En = "Night City", Vi = "Phố đêm", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Zap",
+                Colors = P("#C0504D", "#4F81BD", "#D9A441", "#5E9C5A", "#8064A2", "#D97B3A", "#3FA3A3") });
+            c.Add(new SkinDef { Id = "skin_chrome", En = "Chrome", Vi = "Kim loại", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Zap",
+                Colors = P("#FF8A8A", "#8AC4FF", "#FFE08A", "#9AF0A8", "#CDB4FF", "#FFC48A", "#8FF0E0") });
+            c.Add(new SkinDef { Id = "skin_aquarium", En = "Aquarium", Vi = "Bể cá", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Bubbles", FxPieceColor = false,
+                Colors = P("#FF8FA3", "#5CC8FF", "#FFE066", "#7AE582", "#C77DFF", "#FFB570", "#64DFDF") });
             // boards: background, frame, empty slot
             c.Add(new SkinDef { Id = "board_classic", En = "Navy", Vi = "Xanh đêm", Tab = 1, Price = SkinPrice.Free, Scene = P("#2B2F55", "#1A1D3A", "#252A4E") });
             c.Add(new SkinDef { Id = "board_paper", En = "Paper", Vi = "Giấy", Tab = 1, Price = SkinPrice.Coins, Cost = 300, Scene = P("#F4EFE8", "#E8E1D5", "#DCD3C4") });
@@ -59,6 +68,19 @@ namespace CasualGame.EyeBlast
         // premium block sets drawn by the BlockSkin shader (Docs/SHADER_LAB.md): skin id → shader set
         private static readonly Dictionary<string, int> Looks = new() { ["skin_retro_bricks"] = 0, ["skin_toy_bricks"] = 2, ["skin_gems"] = 3 };
         private static readonly Dictionary<int, Material> mats = new();
+        // interactive sets: one material copy per block, driven by BlockLive (templates in Assets/_Game/Skins/Blocks)
+        private static readonly Dictionary<string, (string shader, BlockLiveKind kind)> Live = new()
+        {
+            ["skin_watchers"] = ("SkinWatchBlock", BlockLiveKind.Watch),
+            ["skin_night_city"] = ("SkinBuildingBlock", BlockLiveKind.City),
+            ["skin_chrome"] = ("SkinChromeBlock", BlockLiveKind.Chrome),
+            ["skin_aquarium"] = ("SkinAquariumBlock", BlockLiveKind.Aquarium),
+        };
+
+        /// <summary>Interactive sets draw their own character (eyes, windows, fish): the game's face is hidden.</summary>
+        public static bool HidesFace(SkinDef skin) => skin != null && Live.ContainsKey(skin.Id);
+
+        private static int seed;
 
         /// <summary>
         /// Draws a block body (a block_fill Image) in a premium set's shader; true when it did, so the caller leaves out
@@ -66,6 +88,19 @@ namespace CasualGame.EyeBlast
         /// </summary>
         public static bool Dress(Image body, SkinDef skin)
         {
+            if (skin != null && Live.TryGetValue(skin.Id, out var live))
+            {
+                var lm = LiveSkinMaterials.Create(live.shader);
+                if (lm == null) return false;
+                var s = seed++ % 997;
+                lm.SetFloat("_Seed", s);
+                body.sprite = null;
+                body.material = lm;
+                var driver = body.gameObject.AddComponent<BlockLive>();
+                driver.Kind = live.kind;
+                driver.Mat = lm;
+                return true;
+            }
             if (skin == null || !Looks.TryGetValue(skin.Id, out var set)) return false;
             if (!mats.TryGetValue(set, out var m) || m == null)
             {
@@ -137,6 +172,7 @@ namespace CasualGame.EyeBlast
             var fill = UIKit.Image(parent, "block_fill", new Vector2(0.5f, 0.5f), pos, new Vector2(size, size), color);
             if (mood == null) return;
             if (!BlastSkins.Dress(fill, skin)) UIKit.Image(fill.transform, "block_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(size, size));
+            if (BlastSkins.HidesFace(skin)) return;
             Face.AddUI(fill.transform, new Vector2(size * 0.66f, size * 0.66f), new Vector2(0, size * 0.02f)).SetIdle(mood.Value);
         }
     }

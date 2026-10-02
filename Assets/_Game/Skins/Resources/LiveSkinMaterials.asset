@@ -1,0 +1,28 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bda18bf406b53c4baab230731bc2ac8, type: 3}
+  m_Name: LiveSkinMaterials
+  m_EditorClassIdentifier: CasualGame.Core::CasualGame.Core.LiveSkinMaterials
+  templates:
+  - {fileID: 2100000, guid: b05e96ab6ccd08a46bd54f2977cdc2a7, type: 2}
+  - {fileID: 2100000, guid: 1718345620200b9449cf0c2105e0b6d2, type: 2}
+  - {fileID: 2100000, guid: 229a6785185ac9040a24facfd16d5b1a, type: 2}
+  - {fileID: 2100000, guid: 424f1a3a835815f49ba1928a9310cfd0, type: 2}
+  - {fileID: 2100000, guid: b5c79d3b520c2f04183b0e2b80426c53, type: 2}
+  - {fileID: 2100000, guid: 80871dbef7fdbde4daa6e20e85e98de1, type: 2}
+  - {fileID: 2100000, guid: 9c1ab9b2acdffdc419afb369433ce367, type: 2}
+  - {fileID: 2100000, guid: ca4264578a1e33e42ad8d85af86bc0b9, type: 2}
+  - {fileID: 2100000, guid: ae1b37323c7f7354ab5cb3d05056e6a8, type: 2}
+  - {fileID: 2100000, guid: a26666ff2dcde214c9bb16fd6220cc92, type: 2}
+  - {fileID: 2100000, guid: f3399ea822419bc45aea196536f6c52c, type: 2}
+  - {fileID: 2100000, guid: fad56cca1fd8cbb40ac6f205858bacbb, type: 2}
+  tapeRoll: {fileID: 2800000, guid: f534e0f09f4eabf4dace93652e5420fe, type: 3}

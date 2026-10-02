@@ -35,13 +35,14 @@ Shader "CasualGame/Lab/ArrowHolo"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "ArrowLabCommon.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
                 float _Reveal, _ScanDensity, _BandSpacing, _BandSpeed, _Glow, _Flicker, _TailClip;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float across = abs(i.uv0.y), t = i.uv1.x;
                 float reveal = saturate((_Reveal + 0.02 - t) * 50.0);   // drawn up to the brush front (the head at t = 1 included)
@@ -58,6 +59,9 @@ Shader "CasualGame/Lab/ArrowHolo"
                 // additive-ish: colour adds light, alpha only darkens a little
                 return half4(c * energy, energy * 0.55);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

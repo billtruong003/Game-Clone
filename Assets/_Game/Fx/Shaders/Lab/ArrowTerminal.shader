@@ -32,13 +32,14 @@ Shader "CasualGame/Lab/ArrowTerminal"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "ArrowLabCommon.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
                 float _Reveal, _Blocks, _Scan, _Glow;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float along = i.uv0.x, across = abs(i.uv0.y), t = i.uv1.x;
                 float reveal = step(t, _Reveal + 1e-3);                       // terminal: types on in blocks
@@ -53,6 +54,9 @@ Shader "CasualGame/Lab/ArrowTerminal"
                 float e = (lit * flickerRow * scan + glow + cursor * 0.4) * reveal * i.color.a;
                 return half4(i.color.rgb * e, saturate(e) * 0.8);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

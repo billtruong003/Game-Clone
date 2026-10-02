@@ -37,6 +37,7 @@ Shader "CasualGame/Lab/ProceduralEye"
             HLSLPROGRAM
             #pragma vertex ArrowVert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             #include "ArrowLabCommon.hlsl"
 
             CBUFFER_START(UnityPerMaterial)
@@ -45,7 +46,7 @@ Shader "CasualGame/Lab/ProceduralEye"
                 float4 _Look;
             CBUFFER_END
 
-            half4 frag(ArrowVaryings i) : SV_Target
+            half4 fragBody(ArrowVaryings i)
             {
                 float2 p = i.uv0 * 2.0 - 1.0;                                  // -1..1 over the Image
                 float r = length(p);
@@ -69,6 +70,9 @@ Shader "CasualGame/Lab/ProceduralEye"
                 float a = ball * i.color.a;
                 return half4(c * a, a);
             }
+
+            // inside a UI mask (scroll list, card), nothing draws outside it
+            half4 frag(ArrowVaryings i) : SV_Target { return fragBody(i) * UIClip(i.local); }
             ENDHLSL
         }
     }

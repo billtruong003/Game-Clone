@@ -42,6 +42,8 @@ namespace CasualGame.ArrowOut
             public ArrowStroke Stroke;
             public Image Cap;
             public Face Face;
+            public ArrowLive Live;      // interactive theme, else null
+            public Vector2 Dir;         // the head's direction, board-local
         }
 
         private Board board;
@@ -131,6 +133,13 @@ namespace CasualGame.ArrowOut
             v.Face = Face.AddUI(v.Cap.transform, new Vector2(Cell * FaceSize, Cell * FaceSize) * capScale, new Vector2(0, Cell * 0.02f));
             v.Face.InkFor(Palette[a.Color]);
             ArrowSkins.Dress(ArrowSkins.Current, v.Stroke, v.Cap, v.Face, Palette[a.Color], ArrowSkins.Paper[0]);
+            v.Dir = new Vector2(Board.DX[a.Dir], -Board.DY[a.Dir]);
+            if (v.Stroke.TryGetComponent<ArrowLive>(out var live))
+            {
+                v.Live = live;
+                var b = board;
+                live.IsFree = () => b.Arrows.ContainsKey(a.Id) && b.IsFree(a);
+            }
             views[a.Id] = v;
             PlaceCap(v);
             if (!pop) return;
@@ -155,9 +164,43 @@ namespace CasualGame.ArrowOut
             return stroke;
         }
 
-        // The face rides the round tail end, and fades with it past the board edge.
+        // Interactive themes keep their caps moving (zipper wiggle, a jammed slider, the tape front).
+        private void Update()
+        {
+            foreach (var v in views.Values) if (v.Live != null) PlaceCap(v);
+        }
+
+        // The face rides the round tail end, and fades with it past the board edge. Interactive themes: the train's
+        // face rides the engine; the tape roll and the zipper's pull tab ride the peel / unzip front.
         private static void PlaceCap(View v)
         {
+            if (v.Live != null && v.Live.Kind != ArrowSkins.LiveKind.Ants)
+            {
+                var cell = Mathf.Max(v.Stroke.CellSize, 1f);
+                var len = v.Stroke.BodyLength / cell;
+                var bump = v.Live.BumpAmount;
+                switch (v.Live.Kind)
+                {
+                    case ArrowSkins.LiveKind.Train:
+                        v.Cap.rectTransform.anchoredPosition = v.Stroke.HeadPoint - v.Dir * cell * 0.3f;
+                        break;
+                    case ArrowSkins.LiveKind.Tape:
+                        var peel = v.Live.Leaving ? v.Live.Progress : 0.3f * bump;
+                        var along = Mathf.Max(0f, peel * (len + 0.5f) - 0.12f) * cell;
+                        v.Cap.rectTransform.anchoredPosition = v.Stroke.PointAt(along);
+                        v.Cap.rectTransform.localScale = Vector3.one * (1f + 0.25f * peel);
+                        if (v.Live.Roll != null) v.Live.Roll.localEulerAngles = new Vector3(0, 0, -along / (cell * 0.33f) * Mathf.Rad2Deg);
+                        break;
+                    default:
+                        var unzip = v.Live.Leaving ? v.Live.Progress : 0f;
+                        v.Cap.rectTransform.anchoredPosition = v.Stroke.PointAt(Mathf.Max(0f, unzip * (len + 0.2f) - 0.1f) * cell)
+                                                               + UnityEngine.Random.insideUnitCircle * 4f * bump;
+                        v.Cap.rectTransform.localEulerAngles = new Vector3(0, 0, Mathf.Sin(Time.time * 9f) * 8f * (v.Live.Leaving ? 0f : 1f));
+                        break;
+                }
+                v.Face.gameObject.SetActive(true);
+                return;
+            }
             var tail = v.Stroke.TailPoint;
             v.Cap.rectTransform.anchoredPosition = tail;
             var c = v.Cap.color;
@@ -190,13 +233,31 @@ namespace CasualGame.ArrowOut
             views.Remove(a.Id);
             Settle(a, v);
             v.Face.React(FaceId.Panic, -1f);
-            StartCoroutine(Slide(v));
+            if (v.Live != null) v.Live.Leaving = true;
+            if (v.Live != null && v.Live.Kind is ArrowSkins.LiveKind.Tape or ArrowSkins.LiveKind.Zipper) StartCoroutine(Unroll(v));
+            else StartCoroutine(Slide(v));
+        }
+
+        // Tape peels off from the tail, the zipper unzips from the tail: the arrow leaves in place instead of sliding.
+        private IEnumerator Unroll(View v)
+        {
+            var time = v.Live.Kind == ArrowSkins.LiveKind.Tape ? 0.6f : 0.75f;
+            for (float t = 0f; t < time; t += Time.deltaTime)
+            {
+                v.Live.Progress = Mathf.Clamp01(t / time);
+                PlaceCap(v);
+                yield return null;
+            }
+            GameFx.Play("Land_Poof", v.Stroke.transform.TransformPoint(v.Stroke.HeadPoint), WorldCell() * 0.35f);
+            Destroy(v.Stroke.gameObject);
+            Destroy(v.Cap.gameObject);
         }
 
         private IEnumerator Slide(View v)
         {
             var stroke = v.Stroke;
             var ink = CreateInkTrail(stroke.color, stroke.transform.TransformPoint(stroke.TailPoint));
+            if (v.Live != null) ink.emitting = false; // the train smokes, the ants march: no ink line behind them
             float speed = StartSpeed * Cell, max = stroke.BodyLength + (Mathf.Max(Board.Rows, Board.Cols) + 3) * Cell;
             bool puffed = false;
             while (stroke.Advance < max)
@@ -277,10 +338,13 @@ namespace CasualGame.ArrowOut
             if (!views.TryGetValue(a.Id, out var v)) return;
             Settle(a, v);
             v.Face.React(FaceId.Shock, 0.9f);
+            v.Live?.Bump();
             // distance to the blocker's first cell along the head's path (in cells, minus a small gap)
             int gap = 0;
             for (int r = a.Head.R + Board.DY[a.Dir], c = a.Head.C + Board.DX[a.Dir]; Board.Inside(r, c) && board.Grid[r, c] != blocker.Id; r += Board.DY[a.Dir], c += Board.DX[a.Dir]) gap++;
             var push = new Vector2(Board.DX[a.Dir], -Board.DY[a.Dir]) * Cell * (gap + 0.3f);
+            // tape and zipper stay stuck to the paper: they half-peel / jam in place instead of lunging
+            if (v.Live != null && v.Live.Kind is ArrowSkins.LiveKind.Tape or ArrowSkins.LiveKind.Zipper) push = Vector2.zero;
             var tint = costsHeart ? ErrorColor : Palette[a.Color];
             var stroke = v.Stroke;
             Tween.Run(stroke.transform, 0.34f, k =>

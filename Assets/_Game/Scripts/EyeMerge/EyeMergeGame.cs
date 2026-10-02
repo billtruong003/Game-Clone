@@ -650,6 +650,7 @@ namespace CasualGame.EyeMerge
         private void LateUpdate()
         {
             if (held != null) MergeBall.LookTarget = held.transform.position; // eyeballs watch the ball you are about to drop
+            MergeBall.Held = held; // interactive sets react to it (hungry mouths, compass needles)
             if (scoreText == null || shownScore == score) return;
             var step = Mathf.Max(1, Mathf.CeilToInt((score - shownScore) * Mathf.Min(1f, Time.deltaTime * 10f)));
             shownScore = Mathf.Min(score, shownScore + step);
