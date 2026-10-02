@@ -1,5 +1,7 @@
 import React from 'react';
 import { AbsoluteFill, Composition, Still } from 'remotion';
+import { ArrowsVideo, BlocksVideo, FPS, LENGTH, MergeVideo } from './Preview';
+import { ArrowsThumb, BlocksThumb, MergeThumb } from './Thumbnail';
 import { StoreShot, StoreShotProps, ShotStyle } from './StoreShot';
 import { Avatar, Banner } from './Channel';
 
@@ -25,6 +27,12 @@ export const Root: React.FC = () => (
     {(['band', 'phone', 'panorama'] as ShotStyle[]).map((s) => (
       <Still key={s} id={`board-${s}`} component={Board} width={3400} height={2000} defaultProps={{ style: s }} />
     ))}
+    <Composition id="video-merge" component={MergeVideo} width={1080} height={1920} fps={FPS} durationInFrames={LENGTH} />
+    <Composition id="video-blocks" component={BlocksVideo} width={1080} height={1920} fps={FPS} durationInFrames={LENGTH} />
+    <Composition id="video-arrows" component={ArrowsVideo} width={1080} height={1920} fps={FPS} durationInFrames={LENGTH} />
+    <Still id="thumb-merge" component={MergeThumb} width={1080} height={1920} />
+    <Still id="thumb-blocks" component={BlocksThumb} width={1080} height={1920} />
+    <Still id="thumb-arrows" component={ArrowsThumb} width={1080} height={1920} />
     <Still id="avatar-dark" component={Avatar} width={800} height={800} defaultProps={{ variant: 'dark' as const }} />
     <Still id="avatar-amber" component={Avatar} width={800} height={800} defaultProps={{ variant: 'amber' as const }} />
     <Still id="banner-clean" component={Banner} width={2560} height={1440} defaultProps={{ variant: 'clean' as const, showSafe: true }} />

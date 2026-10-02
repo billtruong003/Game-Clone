@@ -47,5 +47,32 @@ namespace CasualGame.EditorTools
             EditorApplication.isPaused = true;
             for (int i = 0; i < frames; i++) EditorApplication.Step();
         }
+
+        private static string clip;
+        private static int clipFrame;
+
+        /// <summary>Starts a video clip: frames go to frames/&lt;name&gt;/00000.jpg … (any old frames of that clip are deleted).</summary>
+        public static void BeginClip(string name)
+        {
+            clip = name;
+            clipFrame = 0;
+            var dir = Root + "frames/" + name;
+            if (Directory.Exists(dir)) Directory.Delete(dir, true);
+        }
+
+        /// <summary>
+        /// Records n frames of the current clip at 1080 x 1920. Each frame also waits 1/30 s of real time, so effects that
+        /// run on unscaled / realtime clocks (impact frames, clear bursts) play at the same speed as the game clock.
+        /// </summary>
+        public static int Record(int frames)
+        {
+            for (int i = 0; i < frames; i++)
+            {
+                Step(1);
+                System.Threading.Thread.Sleep(33);
+                Shot($"frames/{clip}/{clipFrame++:00000}.jpg");
+            }
+            return clipFrame;
+        }
     }
 }
