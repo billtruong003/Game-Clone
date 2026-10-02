@@ -22,7 +22,7 @@ MonoBehaviour:
   logo: {fileID: 21300000, guid: 17874fbc8f148374c96edcaee085835a, type: 3}
   splashColor: {r: 0.169, g: 0.184, b: 0.333, a: 1}
   version: 1.0.0
-  versionCode: 3
+  versionCode: 4
   scenes:
   - EyeBlast
   artSheets:
@@ -91,3 +91,11 @@ MonoBehaviour:
     sizeMB: 57.6
     output: Builds/EyeBlast/EyeBlast-1.0.0-2.aab
     commit: 9368c66
+  - date: 2026-10-02 13:43
+    kind: release
+    version: 1.0.0
+    versionCode: 3
+    result: Succeeded
+    sizeMB: 58
+    output: Builds/EyeBlast/EyeBlast-1.0.0-3.aab
+    commit: dee2a26

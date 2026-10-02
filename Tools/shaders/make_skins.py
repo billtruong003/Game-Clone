@@ -412,6 +412,7 @@ emit("SkinBuildingBlock",
       ("_SkyBottom", "Sky at the horizon", C, "(0.25, 0.2, 0.45, 1)"),
       ("_LightColor", "Window light", C, "(1, 0.84, 0.45, 1)"),
       ("_MoonColor", "Moon", C, "(1, 0.96, 0.82, 1)"),
+      ("_MoonSize", "Moon size (screen)", "Range(0, 0.1)", "0.028"),
       ("_CityScale", "City size (bigger = smaller buildings)", "Range(0.5, 4)", "1.5"),
       ("_Horizon", "Street level (0 bottom .. 1 top of screen)", "Range(0, 1)", "0.27"),
       ("_Depth", "Parallax strength", "Range(0, 0.4)", "0.12"),
@@ -435,8 +436,8 @@ emit("SkinBuildingBlock",
                 float star = step(0.992, Hash21(floor(sp * 160.0))) * (0.6 + 0.4 * sin(_Time.y * 3.0 + Hash21(floor(sp * 160.0)) * 40.0));
                 c += star * 0.8;
                 float2 moon = float2(_ScreenParams.x / _ScreenParams.y * 0.66, _Horizon + 0.36) - par * 0.15;
-                Paint(c, _MoonColor.rgb, AAInside(Circle(sp - moon, 0.06)));
-                c += _MoonColor.rgb * exp(-max(length(sp - moon) - 0.06, 0.0) * 18.0) * 0.25;
+                Paint(c, _MoonColor.rgb, AAInside(Circle(sp - moon, _MoonSize)));
+                c += _MoonColor.rgb * exp(-max(length(sp - moon) - _MoonSize, 0.0) * 18.0) * 0.25;
                 // far skyline (4:1 texture)
                 float2 fuv = (s - float2(0, _Horizon + 0.04)) * _CityScale * float2(0.7, 2.8) - par * 0.4;
                 if (fuv.y < 1)
