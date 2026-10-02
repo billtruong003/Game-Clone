@@ -1,4 +1,4 @@
-// Character faces (the expression flipbook, slice in uv1.x like FaceArray) styled like their theme: 0 ink bleed, 1 chalk, 2 neon glow, 3 hologram, 4 pixel, 5 terminal. The ink takes _Ink; tears / sweat keep their colour.
+// Character faces (the expression flipbook, slice in uv1.x like FaceArray) styled like their theme: 0 ink bleed, 1 chalk (bold, solid strokes so the expression reads on a pastel cap), 2 neon glow, 3 hologram, 4 pixel, 5 terminal. The ink takes _Ink; tears / sweat keep their colour.
 // Theme lab (Docs/SHADER_LAB.md). UI shader: works on a uGUI Graphic, masks included. Output is premultiplied alpha.
 Shader "CasualGame/Lab/ThemeFace"
 {
@@ -57,7 +57,9 @@ Shader "CasualGame/Lab/ThemeFace"
                     col *= 0.85 + 0.15 * Fbm(px * 0.05); } \
                 else if (_Mode < 1.5) { \
                     float g = ValueNoise(px / 1.6) * 0.6 + ValueNoise(px / 0.6) * 0.4; \
-                    a = m * step(0.28, g); col = lerp(col, half3(1, 1, 1), 0.15); } \
+                    float bold = m; \
+                    [unroll] for (int k = 0; k < 4; k++) { float ang = k * 1.5708; bold = max(bold, SAMPLE(i.uv0 + float2(cos(ang), sin(ang)) * 0.012)); } \
+                    a = smoothstep(0.25, 0.6, bold) * lerp(0.82, 1.0, step(0.3, g)); } \
                 else if (_Mode < 2.5) { \
                     float halo = 0; \
                     [unroll] for (int k = 0; k < 8; k++) { float ang = k * 0.7854; halo += SAMPLE(i.uv0 + float2(cos(ang), sin(ang)) * _GlowR); } \

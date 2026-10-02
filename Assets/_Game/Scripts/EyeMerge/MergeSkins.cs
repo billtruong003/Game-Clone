@@ -40,9 +40,6 @@ namespace CasualGame.EyeMerge
             // premium sets: drawn by shaders (MergeLooks); Colors feed the HUD strip, the next bubble and the splashes
             c.Add(new SkinDef { Id = "skin_billiard", En = "Billiard", Vi = "Bi-a", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_billiard") });
             c.Add(new SkinDef { Id = "skin_sports", En = "Sports", Vi = "Thể thao", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Confetti", FxPieceColor = false, Colors = MergeLooks.TierColors("skin_sports") });
-            c.Add(new SkinDef { Id = "skin_planets", En = "Planets", Vi = "Hành tinh", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Ring", Colors = MergeLooks.TierColors("skin_planets") });
-            c.Add(new SkinDef { Id = "skin_monsters", En = "Monsters", Vi = "Quái vật", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_monsters") });
-            c.Add(new SkinDef { Id = "skin_slimes", En = "Slimes", Vi = "Slime", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_slimes") });
             c.Add(new SkinDef { Id = "skin_eyeballs", En = "Eyeballs", Vi = "Nhãn cầu", Tab = 0, Price = SkinPrice.Premium, Colors = MergeLooks.TierColors("skin_eyeballs") });
             // stage: background, floor band, shelf, pillars
             c.Add(new SkinDef { Id = "stage_classic", En = "Classic", Vi = "Cổ điển", Tab = 1, Price = SkinPrice.Free, Scene = P("#2F2552", "#271E47", "#5B4D96", "#4A3D80") });

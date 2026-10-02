@@ -23,16 +23,13 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `all_skins` | 4.99 | Every skin of the game (future sets too); keeps the ads. |
 | `remove_ads` | 2.99 | Turns off between-round ads. Rewarded ads stay optional. Already in code (`GameConfig.removeAdsProductId`). |
 
-## Meh Merge (18 products + 3 bundles)
+## Meh Merge (15 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
 | `skin_billiard` | 1.99 | Billiard balls (premium) | — |
 | `skin_sports` | 1.99 | Sports balls (premium) | — |
 | `skin_eyeballs` | 1.99 | Eyeballs (premium) | — |
-| `skin_planets` | 1.99 | Planets (premium) | — |
-| `skin_monsters` | 1.99 | Monsters: colour + striped horns (premium) | — |
-| `skin_slimes` | 1.99 | Slimes: wobbling jelly (premium) | — |
 | `color_candy` | 0.99 | Candy ball colours | 300 coins |
 | `color_ocean` | 0.99 | Ocean ball colours | 300 coins |
 | `color_forest` | 0.99 | Forest ball colours | 400 coins |
@@ -45,13 +42,14 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `stage_night` | 0.99 | Night stage | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon balls: 3 rewarded videos, no product. One by one: $27.80 → Full Game $6.99.
+Neon balls: 3 rewarded videos, no product. One by one: $21.83 → Full Game $6.99. (More interactive premium sets to come.)
 
-## Nah Blocks (12 products + 3 bundles)
+## Nah Blocks (13 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
 | `skin_retro_bricks` | 1.99 | Retro Bricks (premium) | — |
+| `skin_toy_bricks` | 1.99 | Toy Bricks, pastel plastic (premium) | — |
 | `skin_gems` | 1.99 | Gems (premium) | — |
 | `color_candy` | 0.99 | Candy blocks | 300 coins |
 | `color_ocean` | 0.99 | Ocean blocks | 300 coins |
@@ -63,7 +61,7 @@ Neon balls: 3 rewarded videos, no product. One by one: $27.80 → Full Game $6.9
 | `board_midnight` | 0.99 | Midnight board | 400 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon blocks: 3 rewarded videos. One by one: $17.86 → Full Game $6.99. (Pixel dropped; Toy Bricks only if a pastel version is approved.)
+Neon blocks: 3 rewarded videos. One by one: $19.85 → Full Game $6.99. (Pixel dropped.)
 
 ## Bruh Arrows (15 products + 3 bundles)
 
@@ -95,10 +93,8 @@ Neon arrows: 3 rewarded videos. One by one: $22.84 → Full Game $6.99.
 | `skin_billiard` | Billiard set | Turn every ball into a pool ball. Still deadpan. | Bộ Bi-a | Biến mọi quả bóng thành bi-a. Vẫn mặt lạnh. |
 | `skin_sports` | Sports set | From marble to beach ball: merge your way through the sports shelf. | Bộ Thể thao | Từ bi ve tới bóng bãi biển: gộp hết cả kệ thể thao. |
 | `skin_eyeballs` | Eyeballs set | The balls are eyes now. They are watching you merge. | Bộ Nhãn cầu | Bóng giờ là con mắt. Tụi nó đang nhìn bạn gộp. |
-| `skin_planets` | Planets set | Merge your way from Pluto to the Sun. | Bộ Hành tinh | Gộp từ Diêm Vương tới Mặt Trời. |
-| `skin_monsters` | Monsters set | Little monsters with striped horns. Still unimpressed. | Bộ Quái vật | Quái vật nhỏ sừng vằn. Vẫn chẳng ấn tượng. |
-| `skin_slimes` | Slimes set | Wobbly jelly slimes that squish when they land. | Bộ Slime | Slime thạch rung rinh, đáp xuống là bẹp. |
 | `skin_retro_bricks` | Retro Bricks set | Bevelled bricks and a black well, straight out of the 80s. | Bộ Gạch cổ điển | Gạch vát cạnh, giếng đen, đúng chất thập niên 80. |
+| `skin_toy_bricks` | Toy Bricks set | Pastel plastic bricks with studs on top. | Bộ Khối đồ chơi | Khối nhựa pastel có núm. |
 | `skin_gems` | Gems set | Cut gems instead of blocks. Still say nah. | Bộ Đá quý | Đá quý cắt giác thay cho khối. Vẫn nói nah. |
 | `theme_blueprint` | Blueprint theme | White lines on engineer blue. | Theme Bản vẽ | Nét trắng trên nền xanh bản vẽ kỹ thuật. |
 | `theme_chalkboard` | Chalkboard theme | Chalk arrows on a school board. | Theme Bảng phấn | Mũi tên phấn trên bảng đen. |

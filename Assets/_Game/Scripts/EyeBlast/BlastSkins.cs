@@ -40,6 +40,8 @@ namespace CasualGame.EyeBlast
             // premium sets: their own block shader (BlockSkin) and colours
             c.Add(new SkinDef { Id = "skin_retro_bricks", En = "Retro Bricks", Vi = "Gạch cổ điển", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Pixel",
                 Colors = P("#E04040", "#3070E0", "#F0C020", "#30B050", "#A040C0", "#F07020", "#20B0C0") });
+            c.Add(new SkinDef { Id = "skin_toy_bricks", En = "Toy Bricks", Vi = "Khối đồ chơi", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Confetti", FxPieceColor = false,
+                Colors = P("#FFB3C7", "#A0C4FF", "#FFE29A", "#B9F2C9", "#D7C4FF", "#FFC9A3", "#BDEFF0") });
             c.Add(new SkinDef { Id = "skin_gems", En = "Gems", Vi = "Đá quý", Tab = 0, Price = SkinPrice.Premium, Fx = "Skin_Zap",
                 Colors = P("#E0115F", "#0F52BA", "#50C878", "#FFC87C", "#9966CC", "#7FFFD4", "#E4D00A") });
             // boards: background, frame, empty slot
@@ -53,7 +55,7 @@ namespace CasualGame.EyeBlast
         public static Color[] Board => (Skins.Equipped(1) ?? Skins.CatalogOf(GameId).Default(1)).Scene;
 
         // premium block sets drawn by the BlockSkin shader (Docs/SHADER_LAB.md): skin id → shader set
-        private static readonly Dictionary<string, int> Looks = new() { ["skin_retro_bricks"] = 0, ["skin_gems"] = 3 };
+        private static readonly Dictionary<string, int> Looks = new() { ["skin_retro_bricks"] = 0, ["skin_toy_bricks"] = 2, ["skin_gems"] = 3 };
         private static readonly Dictionary<int, Material> mats = new();
 
         /// <summary>
