@@ -23,7 +23,7 @@ Rules (FEATURE_SPEC §1b and Play policy):
 | `all_skins` | 4.99 | Every skin of the game (future sets too); keeps the ads. |
 | `remove_ads` | 2.99 | Turns off between-round ads. Rewarded ads stay optional. Already in code (`GameConfig.removeAdsProductId`). |
 
-## Meh Merge (18 products + 3 bundles)
+## Meh Merge (19 products + 3 bundles = 22 in Play)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
@@ -47,7 +47,7 @@ Rules (FEATURE_SPEC §1b and Play policy):
 
 Neon balls: 3 rewarded videos, no product. One by one: $27.80 → Full Game $6.99.
 
-## Nah Blocks (19 products + 3 bundles)
+## Nah Blocks (20 products + 3 bundles = 23 in Play)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
@@ -72,7 +72,7 @@ Neon balls: 3 rewarded videos, no product. One by one: $27.80 → Full Game $6.9
 
 Neon blocks: 3 rewarded videos. One by one: $29.79 → Full Game $6.99.
 
-## Bruh Arrows (22 products + 3 bundles)
+## Bruh Arrows (22 products + 3 bundles = 25 in Play)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
@@ -98,6 +98,28 @@ Neon blocks: 3 rewarded videos. One by one: $29.79 → Full Game $6.99.
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
 Neon arrows: 3 rewarded videos. One by one: $33.77 → Full Game $6.99.
+
+## Status in Play Console (2026-10-03)
+
+All 70 products are **created and active** (Monetize → Products → One-time products): Meh Merge 22, Nah Blocks 23,
+Bruh Arrows 25. Each has one purchase option `buy` (type Buy, backwards compatible), priced in USD for every country and
+region, with Play's automatic local conversion (US $0.99 = VN 26,000 ₫). The ids were taken from the skin catalogs in code
+(`*Skins.cs` + `FacePacks.cs`), and they match this file.
+
+Names and descriptions used in Play (English):
+
+| Kind | Name | Description |
+|---|---|---|
+| `color_*` | `<Name> ball / block / arrow colours` | Unlock the <Name> … colours in <Game> right away. |
+| `skin_*` | `<Name> skin` | Unlock the <Name> premium skin in <Game>. |
+| `theme_*` | `<Name> theme` | Unlock the <Name> premium theme in <Game>. |
+| `stage_*` / `board_*` / `paper_*` | `<Name> stage / board / paper` | Unlock the <Name> … in <Game> right away. |
+| `face_*` | `<Name> face pack` | Unlock the <Name> face pack in <Game> right away. |
+| `remove_ads` | Remove ads | Turns off the ads between rounds in <Game>. Optional reward videos stay available. |
+| `all_skins` | All skins | Unlock every skin in <Game>, including sets added later. |
+| `all_skins_noads` | Full Game | Every skin in <Game>, including sets added later, plus no ads between rounds. |
+
+The richer texts below are not applied yet. Names and descriptions can be edited at any time (only the ids are permanent).
 
 ## Store texts (Play Console product name ≤55, description ≤200)
 
@@ -134,10 +156,10 @@ Neon arrows: 3 rewarded videos. One by one: $33.77 → Full Game $6.99.
 
 ## Before the products can be created (Play Console order)
 
-1. Payments profile / merchant account linked to the developer account (needed for any paid product).
-2. Upload one build that contains the billing permission (Unity IAP adds `com.android.vending.BILLING`) to any testing track.
+1. ✅ Payments profile / merchant account linked to the developer account (needed for any paid product).
+2. ✅ Upload one build that contains the billing permission (Unity IAP adds `com.android.vending.BILLING`) to any testing track.
    Play does not allow creating in-app products until such a build exists.
-3. Create the products above (non-consumable = "one-time product"), set prices, activate.
+3. ✅ Create the products above (non-consumable = "one-time product"), set prices, activate (done 2026-10-03).
 4. Add license testers (Setup → License testing) so test purchases are free and can be refunded.
 
 ## Code work still to do (part of the Shop build, FEATURE_SPEC SH2–SH5)
