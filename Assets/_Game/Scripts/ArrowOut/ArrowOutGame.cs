@@ -724,8 +724,8 @@ namespace CasualGame.ArrowOut
             var stars = mistakes == 0 ? 3 : mistakes <= 2 ? 2 : 1;
             var firstClear = level.n > ArrowProgress.Cleared;
             ArrowProgress.Complete(level.n, stars);
-            // SH1: 10 coins per level; a replay pays 2, so replaying level 1 cannot farm the shop
-            var coins = firstClear ? 10 : 2;
+            // SH1: 20 coins per level (raised from 10 to match the other games' pace); a replay pays 2, so replaying level 1 cannot farm the shop
+            var coins = firstClear ? 20 : 2;
             Wallet.Add(coins);
             var coinsDoubled = false;
             GameAudio.Play("win");

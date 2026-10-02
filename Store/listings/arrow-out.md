@@ -36,13 +36,12 @@ RELAXED BY DESIGN
 • Clean, soft visuals and gentle sounds.
 • Sound, music and vibration can each be turned off.
 • Short sessions that fit a coffee break, or a long run when you have time.
-• Available in English and Vietnamese.
 
 FAIR AND FREE
 Bruh Arrows is free to play and supported by ads. Watching a video ad is always optional and gives you a hint or an extra heart. A one-time "Remove ads" purchase turns off the ads between levels.
 
 SKINS, NO TRICKS
-Earn coins just by playing and spend them on arrow colours and paper themes. Premium skin sets (Blueprint, Chalkboard and Terminal themes) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
+Earn coins just by playing and spend them on arrow colours and paper themes. Premium skin sets (Blueprint, Chalkboard, Vector CRT, Hologram and Neon themes) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
 
 No account or login needed. Your progress is saved on your device.
 ```
@@ -52,6 +51,8 @@ No account or login needed. Your progress is saved on your device.
 **Tags** (pick up to 5 in Play Console): Puzzle, Logic, Brain games, Relaxing, Offline — TODO verify tag names against the current Play Console tag list; "Offline" only if we confirm the game runs fully without network (it does in code; ads just don't load).
 
 ## Tiếng Việt
+
+> **Không đăng (2026-10-02):** Việt Nam bị loại khỏi danh sách quốc gia (tài khoản cá nhân không có giấy phép G1). Chỉ đăng listing en-US; phần dưới giữ để tham khảo.
 
 **Tên ứng dụng** (≤30): `Bruh Arrows: Gỡ Mũi Tên` (23 ký tự)
 
@@ -89,7 +90,7 @@ MIỄN PHÍ, CÔNG BẰNG
 Bruh Arrows miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn nhận gợi ý hoặc thêm tim. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các màn.
 
 SKIN, KHÔNG MÁNH KHÓE
-Chơi là có xu để đổi màu mũi tên và giấy nền. Bộ skin premium (theme Blueprint, Chalkboard, Terminal) là mua một lần, tùy chọn, hoặc mua trọn gói All Skins. Không hộp quà ngẫu nhiên, không bán xu bằng tiền thật. Skin chỉ đổi hình, không đổi luật chơi.
+Chơi là có xu để đổi màu mũi tên và giấy nền. Bộ skin premium (theme Blueprint, Chalkboard, Vector CRT, Hologram, Neon) là mua một lần, tùy chọn, hoặc mua trọn gói All Skins. Không hộp quà ngẫu nhiên, không bán xu bằng tiền thật. Skin chỉ đổi hình, không đổi luật chơi.
 
 Không cần tài khoản hay đăng nhập. Tiến trình được lưu ngay trên máy của bạn.
 ```

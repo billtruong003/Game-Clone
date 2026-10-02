@@ -49,7 +49,7 @@ vẽ bằng pipeline của mình (`Tools/art`, faces.mjs, shader). **Ngoại l�
 
 | ID | Tính năng | Chi tiết | Mức | Hiện tại |
 |---|---|---|---|---|
-| SH1 | Xu | Mỗi game ví riêng. Kiếm: Merge = điểm/50 khi hết ván; Blast = 2 xu/hàng xóa; Arrow = 10 xu/màn, 30 xu/Hôm nay, 1 xu/mũi tên ở Vô hạn. Bảng kết quả: "+N xu", nút **x2 xu (QC)** | M | ❌ |
+| SH1 | Xu | Mỗi game ví riêng. Kiếm: Merge = điểm/50 khi hết ván; Blast = 2 xu/hàng xóa; Arrow = 20 xu/màn, 30 xu/Hôm nay, 1 xu/mũi tên ở Vô hạn. Bảng kết quả: "+N xu", nút **x2 xu (QC)** | M | ❌ |
 | SH2 | Danh mục skin | ScriptableObject `SkinCatalog` mỗi game: id, tên EN/VI, loại (tab), giá xu / "xem QC x lần" / "chỉ All Skins", dữ liệu hình (bảng màu, lát mặt, tint kính…) | M | ❌ |
 | SH3 | Màn Shop | Nút **Shop** ở Home (Arrow) / Pause + nút túi ở HUD (Blast, Merge, ngoài ván). Trên: preview lớn đang sống (mặt chớp mắt). Dưới: tab + lưới 2 cột thẻ skin. Thẻ: preview nhỏ + nút giá (xu / QC 1/3 / "Đang dùng" / "Dùng") | M | ❌ |
 | SH4 | Mua & trang bị | Bấm thẻ → preview đổi ngay (thử trước khi mua). Đủ xu → mua + trang bị + confetti. Thiếu xu → nút rung + toast "Chưa đủ xu". Lưu ngay (SaveStore), áp dụng từ ván tiếp theo không cần khởi động lại | M | ❌ |

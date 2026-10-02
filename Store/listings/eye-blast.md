@@ -32,13 +32,12 @@ WHY YOU'LL LIKE IT
 • No timer. Play at your own pace.
 • Chase your best score and beat it.
 • Sound, music and vibration can each be turned off.
-• Available in English and Vietnamese.
 
 FAIR AND FREE
 Nah Blocks is free to play and supported by ads. Watching a video ad is always optional and lets you revive once when the board is full. A one-time "Remove ads" purchase turns off the ads between games.
 
 SKINS, NO TRICKS
-Earn coins just by playing and spend them on block colours and boards. Premium skin sets (Retro Bricks, Pixel, Toy Studs and Gems) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
+Earn coins just by playing and spend them on block colours and boards. Premium skin sets (Retro Bricks, Toy Bricks and Gems) are optional one-time purchases, or get them all with All Skins. No random boxes, and coins are never sold for real money. Skins only change the look, never the rules.
 
 No account or login needed. Your best score is saved on your device.
 ```
@@ -48,6 +47,8 @@ No account or login needed. Your best score is saved on your device.
 **Tags:** Puzzle, Block puzzle, Casual, Relaxing, Offline — TODO verify tag names against the current Play Console list.
 
 ## Tiếng Việt
+
+> **Không đăng (2026-10-02):** Việt Nam bị loại khỏi danh sách quốc gia (tài khoản cá nhân không có giấy phép G1). Chỉ đăng listing en-US; phần dưới giữ để tham khảo.
 
 **Tên ứng dụng** (≤30): `Nah Blocks: Xếp Khối Xóa Hàng` (29 ký tự)
 
@@ -81,7 +82,7 @@ MIỄN PHÍ, CÔNG BẰNG
 Nah Blocks miễn phí và có quảng cáo. Xem video quảng cáo luôn là tùy chọn, đổi lại bạn được hồi sinh một lần khi bàn đầy. Mua "Gỡ quảng cáo" một lần để tắt quảng cáo giữa các ván.
 
 SKIN, KHÔNG MÁNH KHÓE
-Chơi là có xu để đổi màu khối và bàn chơi. Bộ skin premium (Retro Bricks, Pixel, Toy Studs, Gems) là mua một lần, tùy chọn, hoặc mua trọn gói All Skins. Không hộp quà ngẫu nhiên, không bán xu bằng tiền thật. Skin chỉ đổi hình, không đổi luật chơi.
+Chơi là có xu để đổi màu khối và bàn chơi. Bộ skin premium (Retro Bricks, Toy Bricks, Gems) là mua một lần, tùy chọn, hoặc mua trọn gói All Skins. Không hộp quà ngẫu nhiên, không bán xu bằng tiền thật. Skin chỉ đổi hình, không đổi luật chơi.
 
 Không cần tài khoản hay đăng nhập. Kỷ lục được lưu ngay trên máy của bạn.
 ```
