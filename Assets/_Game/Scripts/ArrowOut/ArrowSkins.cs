@@ -26,12 +26,15 @@ namespace CasualGame.ArrowOut
             c.Add(new SkinDef { Id = "color_ocean", En = "Ocean", Vi = "Đại dương", Tab = 0, Price = SkinPrice.Coins, Cost = 300, Colors = P("#1F5FA8", "#1FA3B8", "#5E7CE2", "#2EC4B6") });
             c.Add(new SkinDef { Id = "color_forest", En = "Forest", Vi = "Rừng xanh", Tab = 0, Price = SkinPrice.Coins, Cost = 400, Colors = P("#3E6B45", "#6A994E", "#BC4749", "#C98B2E") });
             c.Add(new SkinDef { Id = "color_mono", En = "Mono", Vi = "Đơn sắc", Tab = 0, Price = SkinPrice.Coins, Cost = 400, Colors = P("#343A40", "#6C757D", "#495057", "#868E96") });
+            c.Add(new SkinDef { Id = "color_sunset", En = "Sunset", Vi = "Hoàng hôn", Tab = 0, Price = SkinPrice.Coins, Cost = 500, Colors = P("#E4572E", "#F28C28", "#C2185B", "#7B4FAE") });
+            c.Add(new SkinDef { Id = "color_pastel", En = "Pastel", Vi = "Pastel", Tab = 0, Price = SkinPrice.Coins, Cost = 500, Colors = P("#6F9BDB", "#E07FAA", "#5DB894", "#E6A24A") });
             c.Add(new SkinDef { Id = "neon", En = "Neon", Vi = "Neon", Tab = 0, Price = SkinPrice.Ads, Cost = 3, Colors = P("#3A86FF", "#FF4D9A", "#9B5DE5", "#FB8500") });
             // papers: background, grid dots, text, muted text
             c.Add(new SkinDef { Id = "paper_cream", En = "Cream", Vi = "Kem", Tab = 1, Price = SkinPrice.Free, Scene = P("#F5F1EA", "#D9D2C5", "#1E2240", "#6B7090") });
             c.Add(new SkinDef { Id = "paper_grid", En = "Grid", Vi = "Ô li", Tab = 1, Price = SkinPrice.Coins, Cost = 300, Scene = P("#FFFFFF", "#C9D7E3", "#1E2240", "#6B7090") });
             c.Add(new SkinDef { Id = "paper_kraft", En = "Kraft", Vi = "Giấy kraft", Tab = 1, Price = SkinPrice.Coins, Cost = 400, Scene = P("#E6D2AE", "#B89A6C", "#1E2240", "#5E5040") });
             c.Add(new SkinDef { Id = "paper_night", En = "Night", Vi = "Đêm", Tab = 1, Price = SkinPrice.Coins, Cost = 500, Dark = true, Scene = P("#1D2140", "#3A4072", "#FFF8EC", "#A9AED0") });
+            c.Add(new SkinDef { Id = "paper_linen", En = "Linen", Vi = "Vải lanh", Tab = 1, Price = SkinPrice.Coins, Cost = 500, Scene = P("#EEE8DF", "#CBBFAE", "#1E2240", "#6B7090") });
             // premium themes: their own paper and arrow colours
             c.Add(new SkinDef { Id = "theme_blueprint", En = "Blueprint", Vi = "Bản vẽ", Tab = 1, Price = SkinPrice.Premium, Dark = true,
                 Scene = P("#1F4E8C", "#4A76B5", "#FFFFFF", "#BFD7FF"), Colors = P("#FFFFFF", "#BFD7FF", "#FFE08A", "#7FD1FF") });

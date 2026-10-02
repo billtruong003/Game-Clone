@@ -48,6 +48,8 @@ namespace CasualGame.EyeBlast
             c.Add(new SkinDef { Id = "board_classic", En = "Navy", Vi = "Xanh đêm", Tab = 1, Price = SkinPrice.Free, Scene = P("#2B2F55", "#1A1D3A", "#252A4E") });
             c.Add(new SkinDef { Id = "board_paper", En = "Paper", Vi = "Giấy", Tab = 1, Price = SkinPrice.Coins, Cost = 300, Scene = P("#F4EFE8", "#E8E1D5", "#DCD3C4") });
             c.Add(new SkinDef { Id = "board_midnight", En = "Midnight", Vi = "Nửa đêm", Tab = 1, Price = SkinPrice.Coins, Cost = 400, Scene = P("#0F1026", "#07081A", "#161838") });
+            c.Add(new SkinDef { Id = "board_wood", En = "Wood", Vi = "Gỗ", Tab = 1, Price = SkinPrice.Coins, Cost = 400, Scene = P("#8B5E3C", "#5E3B22", "#74492B") });
+            c.Add(new SkinDef { Id = "board_felt", En = "Felt", Vi = "Nỉ bi-a", Tab = 1, Price = SkinPrice.Coins, Cost = 500, Scene = P("#1F6B4A", "#124431", "#185A3E") });
             Skins.Register(c);
         }
 

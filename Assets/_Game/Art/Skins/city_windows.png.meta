@@ -1,0 +1,7540 @@
+fileFormatVersion: 2
+guid: 85e7a57a03c7ddc459379835ab92f894
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7259846524328037702
+    second: city_windows_0
+  - first:
+      213: -7494716049564900712
+    second: city_windows_1
+  - first:
+      213: 5679922025316074896
+    second: city_windows_2
+  - first:
+      213: 3548021775109400395
+    second: city_windows_3
+  - first:
+      213: 7082595321186872844
+    second: city_windows_4
+  - first:
+      213: -8714841056167019106
+    second: city_windows_5
+  - first:
+      213: -2762963636446681692
+    second: city_windows_6
+  - first:
+      213: -1412407664151278186
+    second: city_windows_7
+  - first:
+      213: 6204086806672413532
+    second: city_windows_8
+  - first:
+      213: -8586788876867945777
+    second: city_windows_9
+  - first:
+      213: -5535920040618284712
+    second: city_windows_10
+  - first:
+      213: 7887300935736308018
+    second: city_windows_11
+  - first:
+      213: 13261406528632423
+    second: city_windows_12
+  - first:
+      213: 8908041610425420337
+    second: city_windows_13
+  - first:
+      213: -2530470009689471423
+    second: city_windows_14
+  - first:
+      213: 6452932169505650580
+    second: city_windows_15
+  - first:
+      213: 5383577934502917795
+    second: city_windows_16
+  - first:
+      213: 3156429290804135507
+    second: city_windows_17
+  - first:
+      213: -8364397074169250299
+    second: city_windows_18
+  - first:
+      213: -7413313124019473760
+    second: city_windows_19
+  - first:
+      213: 2107632664783002940
+    second: city_windows_20
+  - first:
+      213: 3067743607673226122
+    second: city_windows_21
+  - first:
+      213: -5588194441707184183
+    second: city_windows_22
+  - first:
+      213: -4875945109369219394
+    second: city_windows_23
+  - first:
+      213: 8909254038730087085
+    second: city_windows_24
+  - first:
+      213: 9076025709711436046
+    second: city_windows_25
+  - first:
+      213: 5270220442312349306
+    second: city_windows_26
+  - first:
+      213: 534563198485629470
+    second: city_windows_27
+  - first:
+      213: 4060524964404098083
+    second: city_windows_28
+  - first:
+      213: 1826558186553905491
+    second: city_windows_29
+  - first:
+      213: 4318142080893566484
+    second: city_windows_30
+  - first:
+      213: 4950212856867658536
+    second: city_windows_31
+  - first:
+      213: -1940168294735058372
+    second: city_windows_32
+  - first:
+      213: -1632945181685154519
+    second: city_windows_33
+  - first:
+      213: -639494864138535886
+    second: city_windows_34
+  - first:
+      213: -8825564228233951092
+    second: city_windows_35
+  - first:
+      213: -4606262535330544359
+    second: city_windows_36
+  - first:
+      213: 7395584986598902800
+    second: city_windows_37
+  - first:
+      213: 3328251546627643763
+    second: city_windows_38
+  - first:
+      213: 6285391533961481174
+    second: city_windows_39
+  - first:
+      213: -5343668340664147722
+    second: city_windows_40
+  - first:
+      213: -8982044449959268665
+    second: city_windows_41
+  - first:
+      213: 4176166505553081079
+    second: city_windows_42
+  - first:
+      213: 7478812556858581996
+    second: city_windows_43
+  - first:
+      213: -368445136057976365
+    second: city_windows_44
+  - first:
+      213: -7300876221058594201
+    second: city_windows_45
+  - first:
+      213: 5645904747320869271
+    second: city_windows_46
+  - first:
+      213: -4523595809890146619
+    second: city_windows_47
+  - first:
+      213: 8544713511351391364
+    second: city_windows_48
+  - first:
+      213: -2342235908747019298
+    second: city_windows_49
+  - first:
+      213: 2277200081909310780
+    second: city_windows_50
+  - first:
+      213: 2533964837937468155
+    second: city_windows_51
+  - first:
+      213: 8135823924180200811
+    second: city_windows_52
+  - first:
+      213: -2354713422416646415
+    second: city_windows_53
+  - first:
+      213: 8461320725478140637
+    second: city_windows_54
+  - first:
+      213: 4067247752462835791
+    second: city_windows_55
+  - first:
+      213: -1401857508157747690
+    second: city_windows_56
+  - first:
+      213: 7724015407668088969
+    second: city_windows_57
+  - first:
+      213: -7812589628881447929
+    second: city_windows_58
+  - first:
+      213: 7509890149130675865
+    second: city_windows_59
+  - first:
+      213: -8269254004347068652
+    second: city_windows_60
+  - first:
+      213: 5820800860812195713
+    second: city_windows_61
+  - first:
+      213: -5612587659051230186
+    second: city_windows_62
+  - first:
+      213: 4034177351322988647
+    second: city_windows_63
+  - first:
+      213: 5215357416580671993
+    second: city_windows_64
+  - first:
+      213: 4830504370426698784
+    second: city_windows_65
+  - first:
+      213: 5460039995222231657
+    second: city_windows_66
+  - first:
+      213: -187802896173948354
+    second: city_windows_67
+  - first:
+      213: 5692956938896831658
+    second: city_windows_68
+  - first:
+      213: -340598829847052608
+    second: city_windows_69
+  - first:
+      213: 919941304191655258
+    second: city_windows_70
+  - first:
+      213: -219634073286708883
+    second: city_windows_71
+  - first:
+      213: 3662206849527600114
+    second: city_windows_72
+  - first:
+      213: 8943811995456850766
+    second: city_windows_73
+  - first:
+      213: -2302722514367814922
+    second: city_windows_74
+  - first:
+      213: -4924982938678162324
+    second: city_windows_75
+  - first:
+      213: -8575401918684584029
+    second: city_windows_76
+  - first:
+      213: -1326776658473263529
+    second: city_windows_77
+  - first:
+      213: -8153279736717666335
+    second: city_windows_78
+  - first:
+      213: 3604665915473337283
+    second: city_windows_79
+  - first:
+      213: -1335460471125055168
+    second: city_windows_80
+  - first:
+      213: 2605472058770435997
+    second: city_windows_81
+  - first:
+      213: 4740398065138621023
+    second: city_windows_82
+  - first:
+      213: -8369506771087793004
+    second: city_windows_83
+  - first:
+      213: 3191596560910787982
+    second: city_windows_84
+  - first:
+      213: 8126010119824416642
+    second: city_windows_85
+  - first:
+      213: 2752041408026868526
+    second: city_windows_86
+  - first:
+      213: 7328424229253033733
+    second: city_windows_87
+  - first:
+      213: 3150425670888892973
+    second: city_windows_88
+  - first:
+      213: 4920632759967735020
+    second: city_windows_89
+  - first:
+      213: 2037245829251449808
+    second: city_windows_90
+  - first:
+      213: 2048250197957860704
+    second: city_windows_91
+  - first:
+      213: 7811147070579948433
+    second: city_windows_92
+  - first:
+      213: 11505407084795126
+    second: city_windows_93
+  - first:
+      213: 8817462618225333282
+    second: city_windows_94
+  - first:
+      213: 4689154831626360906
+    second: city_windows_95
+  - first:
+      213: -6236690761586732250
+    second: city_windows_96
+  - first:
+      213: 7454301205594701660
+    second: city_windows_97
+  - first:
+      213: -2714401749160966363
+    second: city_windows_98
+  - first:
+      213: -176674499958510162
+    second: city_windows_99
+  - first:
+      213: -4439868801607843663
+    second: city_windows_100
+  - first:
+      213: -4503128844915117204
+    second: city_windows_101
+  - first:
+      213: 4682412671724046153
+    second: city_windows_102
+  - first:
+      213: 1406656646866553020
+    second: city_windows_103
+  - first:
+      213: -522790210449813468
+    second: city_windows_104
+  - first:
+      213: 47773481359611935
+    second: city_windows_105
+  - first:
+      213: -4853153196734569416
+    second: city_windows_106
+  - first:
+      213: 4071870816119748153
+    second: city_windows_107
+  - first:
+      213: 1879540157667993649
+    second: city_windows_108
+  - first:
+      213: -4650914310601127874
+    second: city_windows_109
+  - first:
+      213: -247953564743292554
+    second: city_windows_110
+  - first:
+      213: 8084705680838019277
+    second: city_windows_111
+  - first:
+      213: -2215867218020244507
+    second: city_windows_112
+  - first:
+      213: 4591136283955860752
+    second: city_windows_113
+  - first:
+      213: 5054198082444297821
+    second: city_windows_114
+  - first:
+      213: 2942938305385207
+    second: city_windows_115
+  - first:
+      213: 9041375547949568150
+    second: city_windows_116
+  - first:
+      213: 2042341738793478258
+    second: city_windows_117
+  - first:
+      213: -6535197117781088790
+    second: city_windows_118
+  - first:
+      213: -877802026826557430
+    second: city_windows_119
+  - first:
+      213: -6177931157333013719
+    second: city_windows_120
+  - first:
+      213: 7557076483027026245
+    second: city_windows_121
+  - first:
+      213: 653289827262205301
+    second: city_windows_122
+  - first:
+      213: 2215119245246497242
+    second: city_windows_123
+  - first:
+      213: -8511679182981729507
+    second: city_windows_124
+  - first:
+      213: -3494252663529775537
+    second: city_windows_125
+  - first:
+      213: 1694240393932997649
+    second: city_windows_126
+  - first:
+      213: -2511383962731891209
+    second: city_windows_127
+  - first:
+      213: -8168548118273723116
+    second: city_windows_128
+  - first:
+      213: -3344355334597679730
+    second: city_windows_129
+  - first:
+      213: -2436483367100667704
+    second: city_windows_130
+  - first:
+      213: -4784987735141318776
+    second: city_windows_131
+  - first:
+      213: 5289266108718678044
+    second: city_windows_132
+  - first:
+      213: -1285244605124469740
+    second: city_windows_133
+  - first:
+      213: -9032320932414571833
+    second: city_windows_134
+  - first:
+      213: 6616715857819080388
+    second: city_windows_135
+  - first:
+      213: 4555097552710656306
+    second: city_windows_136
+  - first:
+      213: 1065611299184943381
+    second: city_windows_137
+  - first:
+      213: 4382532244176367979
+    second: city_windows_138
+  - first:
+      213: -6498036084280865733
+    second: city_windows_139
+  - first:
+      213: 1627041620268599972
+    second: city_windows_140
+  - first:
+      213: -7507200623107857771
+    second: city_windows_141
+  - first:
+      213: 7927373318833171062
+    second: city_windows_142
+  - first:
+      213: 7730265515008099642
+    second: city_windows_143
+  - first:
+      213: 4948244687558435389
+    second: city_windows_144
+  - first:
+      213: -6503607228484320137
+    second: city_windows_145
+  - first:
+      213: -4630591345873743863
+    second: city_windows_146
+  - first:
+      213: 6676564923181403056
+    second: city_windows_147
+  - first:
+      213: 797722149258550332
+    second: city_windows_148
+  - first:
+      213: 5150835307299562714
+    second: city_windows_149
+  - first:
+      213: -6441620109262210536
+    second: city_windows_150
+  - first:
+      213: -8854967117648015661
+    second: city_windows_151
+  - first:
+      213: -734746918172537859
+    second: city_windows_152
+  - first:
+      213: 8438246124294403069
+    second: city_windows_153
+  - first:
+      213: -6682867822973549455
+    second: city_windows_154
+  - first:
+      213: -2367636105191789237
+    second: city_windows_155
+  - first:
+      213: 8597959501690628963
+    second: city_windows_156
+  - first:
+      213: -3719503653844071805
+    second: city_windows_157
+  - first:
+      213: -7758762610139742292
+    second: city_windows_158
+  - first:
+      213: -8385101272322891571
+    second: city_windows_159
+  - first:
+      213: -4218607570039708012
+    second: city_windows_160
+  - first:
+      213: -4274167296316397347
+    second: city_windows_161
+  - first:
+      213: 3681495801536317153
+    second: city_windows_162
+  - first:
+      213: -4441321241890126347
+    second: city_windows_163
+  - first:
+      213: -5747508566177388316
+    second: city_windows_164
+  - first:
+      213: -8582519790920075494
+    second: city_windows_165
+  - first:
+      213: -5061115123041786914
+    second: city_windows_166
+  - first:
+      213: 2566555164495145541
+    second: city_windows_167
+  - first:
+      213: 8385019874374189822
+    second: city_windows_168
+  - first:
+      213: -2589960406359972075
+    second: city_windows_169
+  - first:
+      213: -4567389285859090656
+    second: city_windows_170
+  - first:
+      213: 3776425714271584369
+    second: city_windows_171
+  - first:
+      213: 2668361672442126401
+    second: city_windows_172
+  - first:
+      213: -5047326252028044580
+    second: city_windows_173
+  - first:
+      213: 8761262152428744751
+    second: city_windows_174
+  - first:
+      213: -8747359068031724764
+    second: city_windows_175
+  - first:
+      213: 7151019964077732019
+    second: city_windows_176
+  - first:
+      213: -1400699234952282593
+    second: city_windows_177
+  - first:
+      213: -5926042627781123857
+    second: city_windows_178
+  - first:
+      213: 8565197274941633270
+    second: city_windows_179
+  - first:
+      213: 4957077645156132426
+    second: city_windows_180
+  - first:
+      213: -5790847919471167241
+    second: city_windows_181
+  - first:
+      213: 6660838915353967262
+    second: city_windows_182
+  - first:
+      213: -7308919291015296351
+    second: city_windows_183
+  - first:
+      213: -7726827929348474654
+    second: city_windows_184
+  - first:
+      213: 706476986594658469
+    second: city_windows_185
+  - first:
+      213: -8086833903059341057
+    second: city_windows_186
+  - first:
+      213: -4631111502181625603
+    second: city_windows_187
+  - first:
+      213: 3484637626496763948
+    second: city_windows_188
+  - first:
+      213: -4606822091214502850
+    second: city_windows_189
+  - first:
+      213: -6830188764957896449
+    second: city_windows_190
+  - first:
+      213: 7388621767427355641
+    second: city_windows_191
+  - first:
+      213: -7847162647923549284
+    second: city_windows_192
+  - first:
+      213: -7390025590856301929
+    second: city_windows_193
+  - first:
+      213: -5288718032277032783
+    second: city_windows_194
+  - first:
+      213: 7667503230780763725
+    second: city_windows_195
+  - first:
+      213: -6659416060193014116
+    second: city_windows_196
+  - first:
+      213: 4931036368186455659
+    second: city_windows_197
+  - first:
+      213: -8661100416216898469
+    second: city_windows_198
+  - first:
+      213: 3229416344027995318
+    second: city_windows_199
+  - first:
+      213: 7563712575808666492
+    second: city_windows_200
+  - first:
+      213: 4058490446363215899
+    second: city_windows_201
+  - first:
+      213: 5625599219778292411
+    second: city_windows_202
+  - first:
+      213: -6202776664389128084
+    second: city_windows_203
+  - first:
+      213: -6509828474742290437
+    second: city_windows_204
+  - first:
+      213: 6296263405013864203
+    second: city_windows_205
+  - first:
+      213: 2618783064696937574
+    second: city_windows_206
+  - first:
+      213: 725735571490628401
+    second: city_windows_207
+  - first:
+      213: 4090491863943262096
+    second: city_windows_208
+  - first:
+      213: 5611719453956003873
+    second: city_windows_209
+  - first:
+      213: 8213026851564258280
+    second: city_windows_210
+  - first:
+      213: -5071088231811237470
+    second: city_windows_211
+  - first:
+      213: -5366307417698124466
+    second: city_windows_212
+  - first:
+      213: 8535387249225495152
+    second: city_windows_213
+  - first:
+      213: 1188050502334265910
+    second: city_windows_214
+  - first:
+      213: 5817581722891245580
+    second: city_windows_215
+  - first:
+      213: 4009474192522437428
+    second: city_windows_216
+  - first:
+      213: 7909235208300838792
+    second: city_windows_217
+  - first:
+      213: -6465221698310234045
+    second: city_windows_218
+  - first:
+      213: -7189305117046278022
+    second: city_windows_219
+  - first:
+      213: 5073343818609065953
+    second: city_windows_220
+  - first:
+      213: -2804856160635580708
+    second: city_windows_221
+  - first:
+      213: -604298665301502592
+    second: city_windows_222
+  - first:
+      213: -2562909800237885344
+    second: city_windows_223
+  - first:
+      213: 6337109339167610928
+    second: city_windows_224
+  - first:
+      213: 4607312915792232392
+    second: city_windows_225
+  - first:
+      213: 4231900291482328668
+    second: city_windows_226
+  - first:
+      213: -428882655468249397
+    second: city_windows_227
+  - first:
+      213: -2635022796156912094
+    second: city_windows_228
+  - first:
+      213: -8082195111335121650
+    second: city_windows_229
+  - first:
+      213: -5698062852805898938
+    second: city_windows_230
+  - first:
+      213: -1384158260968437052
+    second: city_windows_231
+  - first:
+      213: 5426792866658019125
+    second: city_windows_232
+  - first:
+      213: 8405277925268442432
+    second: city_windows_233
+  - first:
+      213: -761213152363806
+    second: city_windows_234
+  - first:
+      213: -5746928175776823104
+    second: city_windows_235
+  - first:
+      213: -1537459715181954544
+    second: city_windows_236
+  - first:
+      213: -173444114216977007
+    second: city_windows_237
+  - first:
+      213: -7825732943218184492
+    second: city_windows_238
+  - first:
+      213: 8695340414810270092
+    second: city_windows_239
+  - first:
+      213: 2803184674090068080
+    second: city_windows_240
+  - first:
+      213: 8867145941219373795
+    second: city_windows_241
+  - first:
+      213: -6747335334679831879
+    second: city_windows_242
+  - first:
+      213: -2855403098666753691
+    second: city_windows_243
+  - first:
+      213: 5656303883871517411
+    second: city_windows_244
+  - first:
+      213: 1456090380577419067
+    second: city_windows_245
+  - first:
+      213: -1663405693473493260
+    second: city_windows_246
+  - first:
+      213: -5440105343897755071
+    second: city_windows_247
+  - first:
+      213: 3223668690511130665
+    second: city_windows_248
+  - first:
+      213: 458358889376905730
+    second: city_windows_249
+  - first:
+      213: -7523777661304048086
+    second: city_windows_250
+  - first:
+      213: 6914165764322464639
+    second: city_windows_251
+  - first:
+      213: 5475277447048955770
+    second: city_windows_252
+  - first:
+      213: 2869536421006966471
+    second: city_windows_253
+  - first:
+      213: 2713354031004089418
+    second: city_windows_254
+  - first:
+      213: -3113742482008685068
+    second: city_windows_255
+  - first:
+      213: -6496714446951856649
+    second: city_windows_256
+  - first:
+      213: -3396477692284626425
+    second: city_windows_257
+  - first:
+      213: 6211740202517038560
+    second: city_windows_258
+  - first:
+      213: -3207708430208116706
+    second: city_windows_259
+  - first:
+      213: -8013925951182460100
+    second: city_windows_260
+  - first:
+      213: 6308445774555582736
+    second: city_windows_261
+  - first:
+      213: 1786843788851661257
+    second: city_windows_262
+  - first:
+      213: 1115975591313727758
+    second: city_windows_263
+  - first:
+      213: -4917664406279132959
+    second: city_windows_264
+  - first:
+      213: -8273091116132456168
+    second: city_windows_265
+  - first:
+      213: -1575773698447012711
+    second: city_windows_266
+  - first:
+      213: -2357987559089998686
+    second: city_windows_267
+  - first:
+      213: 4552808378378855218
+    second: city_windows_268
+  - first:
+      213: -5118577369565018174
+    second: city_windows_269
+  - first:
+      213: -1062872093404822477
+    second: city_windows_270
+  - first:
+      213: 2615090588165874377
+    second: city_windows_271
+  - first:
+      213: 6785466642823444978
+    second: city_windows_272
+  - first:
+      213: -6288580080369328390
+    second: city_windows_273
+  - first:
+      213: -7131239038843331858
+    second: city_windows_274
+  - first:
+      213: -1859537804736896732
+    second: city_windows_275
+  - first:
+      213: 3073925575050377694
+    second: city_windows_276
+  - first:
+      213: -960759147960852780
+    second: city_windows_277
+  - first:
+      213: 5243398670289239959
+    second: city_windows_278
+  - first:
+      213: -4542599616443203438
+    second: city_windows_279
+  - first:
+      213: 5992363545431325212
+    second: city_windows_280
+  - first:
+      213: -6636015234787997973
+    second: city_windows_281
+  - first:
+      213: 8504634997031731867
+    second: city_windows_282
+  - first:
+      213: -5299058457445259756
+    second: city_windows_283
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 0
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 0
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: city_windows_0
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 387
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64d4d6613f720c460800000000000000
+      internalID: 7259846524328037702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_1
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 387
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 892e34d267b6df790800000000000000
+      internalID: -7494716049564900712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_2
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 387
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 095c1ee0df223de40800000000000000
+      internalID: 5679922025316074896
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_3
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 387
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b472fb8910b1d3130800000000000000
+      internalID: 3548021775109400395
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_4
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 387
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c0eef2f5bee6a4260800000000000000
+      internalID: 7082595321186872844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_5
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 398
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9dbc2d8b3aae0780800000000000000
+      internalID: -8714841056167019106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_6
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 398
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4a52642263bf7a9d0800000000000000
+      internalID: -2762963636446681692
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_7
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 357
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 69d493476be166ce0800000000000000
+      internalID: -1412407664151278186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_8
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 357
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c53956b7418591650800000000000000
+      internalID: 6204086806672413532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_9
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 357
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcab201e20995d880800000000000000
+      internalID: -8586788876867945777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_10
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 357
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8592bf9bd067c23b0800000000000000
+      internalID: -5535920040618284712
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_11
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 357
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2313b2f8962557d60800000000000000
+      internalID: 7887300935736308018
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_12
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 368
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7667c51dd2d1f2000800000000000000
+      internalID: 13261406528632423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_13
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 368
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13a4ec9d5a8bf9b70800000000000000
+      internalID: 8908041610425420337
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_14
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 327
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1460ea5eee6f1ecd0800000000000000
+      internalID: -2530470009689471423
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_15
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 327
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 497331b7e9b6d8950800000000000000
+      internalID: 6452932169505650580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_16
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 327
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a67da6ab9f46ba40800000000000000
+      internalID: 5383577934502917795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_17
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 327
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 356c40d67b3edcb20800000000000000
+      internalID: 3156429290804135507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_18
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 327
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50e33d17d21bbeb80800000000000000
+      internalID: -8364397074169250299
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_19
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 338
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0a2f31abdfe9e1990800000000000000
+      internalID: -7413313124019473760
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_20
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 338
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3d966dedb0df3d10800000000000000
+      internalID: 2107632664783002940
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_21
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 297
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a83865dbe80d29a20800000000000000
+      internalID: 3067743607673226122
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_22
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 297
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9cf1b3643ceb272b0800000000000000
+      internalID: -5588194441707184183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_23
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 297
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eb69eb3c1c9255cb0800000000000000
+      internalID: -4875945109369219394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_24
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 297
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: daa9830585704ab70800000000000000
+      internalID: 8909254038730087085
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_25
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 297
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e09a9afcb4584fd70800000000000000
+      internalID: 9076025709711436046
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_26
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 313
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a769708c195932940800000000000000
+      internalID: 5270220442312349306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_27
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 313
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e1a8bb395662b6700800000000000000
+      internalID: 534563198485629470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_28
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 313
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32479e801f1e95830800000000000000
+      internalID: 4060524964404098083
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_29
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 308
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 351902f3efc395910800000000000000
+      internalID: 1826558186553905491
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_30
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 308
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41eb355185f1deb30800000000000000
+      internalID: 4318142080893566484
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_31
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 308
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 82b1b20bd50b2b440800000000000000
+      internalID: 4950212856867658536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_32
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 308
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3a67d327332315e0800000000000000
+      internalID: -1940168294735058372
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_33
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 271
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92d78fb420d9659e0800000000000000
+      internalID: -1632945181685154519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_34
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 271
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 23cf55b2fce0027f0800000000000000
+      internalID: -639494864138535886
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_35
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 267
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c8888b1281c458580800000000000000
+      internalID: -8825564228233951092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_36
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 267
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 915ce6f01a44310c0800000000000000
+      internalID: -4606262535330544359
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_37
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 267
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01c8070ac5562a660800000000000000
+      internalID: 7395584986598902800
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_38
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 267
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37992e7d523503e20800000000000000
+      internalID: 3328251546627643763
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_39
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 267
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6db85087c423a3750800000000000000
+      internalID: 6285391533961481174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_40
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 283
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f06635c4f977d5b0800000000000000
+      internalID: -5343668340664147722
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_41
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 283
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7cea863692e595380800000000000000
+      internalID: -8982044449959268665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_42
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 283
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f2306e7f49b4f930800000000000000
+      internalID: 4176166505553081079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_43
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 278
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ce3694165641ac760800000000000000
+      internalID: 7478812556858581996
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_44
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 278
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3d93b02d91503eaf0800000000000000
+      internalID: -368445136057976365
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_45
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 278
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76ac4b632c31eaa90800000000000000
+      internalID: -7300876221058594201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_46
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 278
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79180c354784a5e40800000000000000
+      internalID: 5645904747320869271
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_47
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 241
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c66d04f395f831c0800000000000000
+      internalID: -4523595809890146619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_48
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 241
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 484949faaabe49670800000000000000
+      internalID: 8544713511351391364
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_49
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 237
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: edb38f6c9d4be7fd0800000000000000
+      internalID: -2342235908747019298
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_50
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 237
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c35e1bcc86d3a9f10800000000000000
+      internalID: 2277200081909310780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_51
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 237
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf2d79638937a2320800000000000000
+      internalID: 2533964837937468155
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_52
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 237
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b6da2ebe0c048e070800000000000000
+      internalID: 8135823924180200811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_53
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 237
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1fee20d3e90625fd0800000000000000
+      internalID: -2354713422416646415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_54
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dda66ccae56ac6570800000000000000
+      internalID: 8461320725478140637
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_55
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f40ad0b1844c17830800000000000000
+      internalID: 4067247752462835791
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_56
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61e0b80160a9b8ce0800000000000000
+      internalID: -1401857508157747690
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_57
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 98053b5f617313b60800000000000000
+      internalID: 7724015407668088969
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_58
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 704de9a102b149390800000000000000
+      internalID: -7812589628881447929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_59
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 253
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 996a3213d4d783860800000000000000
+      internalID: 7509890149130675865
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_60
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 253
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41f9a61ab45bd3d80800000000000000
+      internalID: -8269254004347068652
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_61
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 253
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 187bff00b83a7c050800000000000000
+      internalID: 5820800860812195713
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_62
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 252
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 61c9287c2451c12b0800000000000000
+      internalID: -5612587659051230186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_63
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 252
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 76078825de64cf730800000000000000
+      internalID: 4034177351322988647
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_64
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 252
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f96dff20fba06840800000000000000
+      internalID: 5215357416580671993
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_65
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 252
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02c514db126690340800000000000000
+      internalID: 4830504370426698784
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_66
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 252
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 96a85a67275f5cb40800000000000000
+      internalID: 5460039995222231657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_67
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e3223cdc24ac46df0800000000000000
+      internalID: -187802896173948354
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_68
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aa47a806c22710f40800000000000000
+      internalID: 5692956938896831658
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_69
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0ce7d083b23f54bf0800000000000000
+      internalID: -340598829847052608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_70
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 248
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a5d9d8afdb944cc00800000000000000
+      internalID: 919941304191655258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_71
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 211
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d617c2959f3b3fcf0800000000000000
+      internalID: -219634073286708883
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_72
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 211
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f35818f9b5c2d230800000000000000
+      internalID: 3662206849527600114
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_73
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 207
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4b451f9f9dce1c70800000000000000
+      internalID: 8943811995456850766
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_74
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 207
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f2efc2d2161b00e0800000000000000
+      internalID: -2302722514367814922
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_75
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 207
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c6c8a376c12f6abb0800000000000000
+      internalID: -4924982938678162324
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_76
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 207
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3a72a9ea36d0ef880800000000000000
+      internalID: -8575401918684584029
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_77
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 207
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 75edb6f98a7569de0800000000000000
+      internalID: -1326776658473263529
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_78
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e79d82074bb9de80800000000000000
+      internalID: -8153279736717666335
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_79
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3cb1fb14d88560230800000000000000
+      internalID: 3604665915473337283
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_80
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 049e30fe6cd777de0800000000000000
+      internalID: -1335460471125055168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_81
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d9fa737780f782420800000000000000
+      internalID: 2605472058770435997
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_82
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f5a598eace649c140800000000000000
+      internalID: 4740398065138621023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_83
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 223
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 494e51c6fe989db80800000000000000
+      internalID: -8369506771087793004
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_84
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 223
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e85227f8924da4c20800000000000000
+      internalID: 3191596560910787982
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_85
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 223
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 28f1d59862365c070800000000000000
+      internalID: 8126010119824416642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_86
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 222
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e2b7b946417313620800000000000000
+      internalID: 2752041408026868526
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_87
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 222
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 50f2ef3420bc3b560800000000000000
+      internalID: 7328424229253033733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_88
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 222
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d2aaa9cb47f88bb20800000000000000
+      internalID: 3150425670888892973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_89
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 222
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cecd600bc69994440800000000000000
+      internalID: 4920632759967735020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_90
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 222
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0d3cda4b940c54c10800000000000000
+      internalID: 2037245829251449808
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_91
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06dd664f3b8dc6c10800000000000000
+      internalID: 2048250197957860704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_92
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19b304e10e4c66c60800000000000000
+      internalID: 7811147070579948433
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_93
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f419465b10e82000800000000000000
+      internalID: 11505407084795126
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_94
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 218
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2245b9bc88bed5a70800000000000000
+      internalID: 8817462618225333282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_95
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 181
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4855e3a979331140800000000000000
+      internalID: 4689154831626360906
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_96
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 181
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 62399a5bbc2d279a0800000000000000
+      internalID: -6236690761586732250
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_97
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 177
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5ffc30b37ff27760800000000000000
+      internalID: 7454301205594701660
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_98
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 177
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 527cf8b9df1845ad0800000000000000
+      internalID: -2714401749160966363
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_99
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 177
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ead6a157a735c8df0800000000000000
+      internalID: -176674499958510162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_100
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 177
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b043de29da6262c0800000000000000
+      internalID: -4439868801607843663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_101
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 177
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c63f4059c2ca181c0800000000000000
+      internalID: -4503128844915117204
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_102
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 94746e534854bf040800000000000000
+      internalID: 4682412671724046153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_103
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cb84c6d74c2758310800000000000000
+      internalID: 1406656646866553020
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_104
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 420561ec21daeb8f0800000000000000
+      internalID: -522790210449813468
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_105
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f189f1a6ab9b9a000800000000000000
+      internalID: 47773481359611935
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_106
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 834a51471e226acb0800000000000000
+      internalID: -4853153196734569416
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_107
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 185
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 936f81efee0328830800000000000000
+      internalID: 4071870816119748153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_108
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 185
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 138e1eea0d7751a10800000000000000
+      internalID: 1879540157667993649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_109
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 185
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e38c6db7312a47fb0800000000000000
+      internalID: -4650914310601127874
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_110
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 193
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6792faceb871f8cf0800000000000000
+      internalID: -247953564743292554
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_111
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 193
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc8ceeb6bf4a23070800000000000000
+      internalID: 8084705680838019277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_112
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 193
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5e368706188af31e0800000000000000
+      internalID: -2215867218020244507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_113
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 192
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0159898102ef6bf30800000000000000
+      internalID: 4591136283955860752
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_114
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 192
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d568d80b06e142640800000000000000
+      internalID: 5054198082444297821
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_115
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 192
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f2d94836947a0000800000000000000
+      internalID: 2942938305385207
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_116
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 192
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 690df68582b697d70800000000000000
+      internalID: 9041375547949568150
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_117
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 192
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2782dba9dfad75c10800000000000000
+      internalID: 2042341738793478258
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_118
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ae56089a8d05e45a0800000000000000
+      internalID: -6535197117781088790
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_119
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a0892e715bb61d3f0800000000000000
+      internalID: -877802026826557430
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_120
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92b09503854934aa0800000000000000
+      internalID: -6177931157333013719
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_121
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 188
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 541c84fa50120e860800000000000000
+      internalID: 7557076483027026245
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_122
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 151
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 57d0759f2a3f01900800000000000000
+      internalID: 653289827262205301
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_123
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 151
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad18c04a73fadbe10800000000000000
+      internalID: 2215119245246497242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_124
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 147
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d13794041e070e980800000000000000
+      internalID: -8511679182981729507
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_125
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 147
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f4e58d247bbe18fc0800000000000000
+      internalID: -3494252663529775537
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_126
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 147
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1148e7c69a6238710800000000000000
+      internalID: 1694240393932997649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_127
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 147
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f5b0ce7795c52dd0800000000000000
+      internalID: -2511383962731891209
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_128
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 147
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 415fb97e3cc73ae80800000000000000
+      internalID: -8168548118273723116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_129
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e856f96da867691d0800000000000000
+      internalID: -3344355334597679730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_130
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8c821d2694fdf2ed0800000000000000
+      internalID: -2436483367100667704
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_131
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88ffc40c10f489db0800000000000000
+      internalID: -4784987735141318776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_132
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1080bc808f376940800000000000000
+      internalID: 5289266108718678044
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_133
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41c911657d4e92ee0800000000000000
+      internalID: -1285244605124469740
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_134
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 155
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7caba1e97ffb6a280800000000000000
+      internalID: -9032320932414571833
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_135
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 155
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4c6100d040c43db50800000000000000
+      internalID: 6616715857819080388
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_136
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 155
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 231e19a1715f63f30800000000000000
+      internalID: 4555097552710656306
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_137
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 163
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 511af8ca4dfc9ce00800000000000000
+      internalID: 1065611299184943381
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_138
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 163
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b61f3de3bd1e1dc30800000000000000
+      internalID: 4382532244176367979
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_139
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 163
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3cc4c20c9652d5a0800000000000000
+      internalID: -6498036084280865733
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_140
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 162
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4aac2e2bbb9649610800000000000000
+      internalID: 1627041620268599972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_141
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 162
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 592a012eec011d790800000000000000
+      internalID: -7507200623107857771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_142
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 162
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67ae5fe4800b30e60800000000000000
+      internalID: 7927373318833171062
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_143
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 162
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a358289778b674b60800000000000000
+      internalID: 7730265515008099642
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_144
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 162
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d3262af8352bba440800000000000000
+      internalID: 4948244687558435389
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_145
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 774878beeab8eb5a0800000000000000
+      internalID: -6503607228484320137
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_146
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 900923174b5dcbfb0800000000000000
+      internalID: -4630591345873743863
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_147
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0bb8f067c6ce7ac50800000000000000
+      internalID: 6676564923181403056
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_148
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 158
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3c54087114121b00800000000000000
+      internalID: 797722149258550332
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_149
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 121
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ad46124fb617b7740800000000000000
+      internalID: 5150835307299562714
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_150
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 121
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 81ab969c3a4ca96a0800000000000000
+      internalID: -6441620109262210536
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_151
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 117
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3de43d67256dc1580800000000000000
+      internalID: -8854967117648015661
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_152
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 117
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dfb438e1297adc5f0800000000000000
+      internalID: -734746918172537859
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_153
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 117
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df372ed642caa1570800000000000000
+      internalID: 8438246124294403069
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_154
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 117
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 17406c25f1fa143a0800000000000000
+      internalID: -6682867822973549455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_155
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 117
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b4d67a0b187742fd0800000000000000
+      internalID: -2367636105191789237
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_156
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 36be673ec96125770800000000000000
+      internalID: 8597959501690628963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_157
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 38a4bd3322ba16cc0800000000000000
+      internalID: -3719503653844071805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_158
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cafb9068386535490800000000000000
+      internalID: -7758762610139742292
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_159
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dc0a489a1d222ab80800000000000000
+      internalID: -8385101272322891571
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_160
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 496620524ce7475c0800000000000000
+      internalID: -4218607570039708012
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_161
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 125
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dd828705d7b1fa4c0800000000000000
+      internalID: -4274167296316397347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_162
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 125
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e60aa41dec471330800000000000000
+      internalID: 3681495801536317153
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_163
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 125
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5f50eb39cd14d52c0800000000000000
+      internalID: -4441321241890126347
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_164
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 133
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e86b71296fbc30b0800000000000000
+      internalID: -5747508566177388316
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_165
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 133
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a17f278e8b3c4e880800000000000000
+      internalID: -8582519790920075494
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_166
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 133
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed3acbb4c9e43c9b0800000000000000
+      internalID: -5061115123041786914
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_167
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 132
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 54a6d2ce25c3e9320800000000000000
+      internalID: 2566555164495145541
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_168
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 132
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef20aa666239d5470800000000000000
+      internalID: 8385019874374189822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_169
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 132
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 517669c8bbc9e0cd0800000000000000
+      internalID: -2589960406359972075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_170
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 132
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 02f9171c4af5d90c0800000000000000
+      internalID: -4567389285859090656
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_171
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 132
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1700fc3cd2f886430800000000000000
+      internalID: 3776425714271584369
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_172
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1402e22bdcce70520800000000000000
+      internalID: 2668361672442126401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_173
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cda5d52048b44f9b0800000000000000
+      internalID: -5047326252028044580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_174
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f20f69b2281469970800000000000000
+      internalID: 8761262152428744751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_175
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 128
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4235d2be5432b9680800000000000000
+      internalID: -8747359068031724764
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_176
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 91
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3b0749405c68d3360800000000000000
+      internalID: 7151019964077732019
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_177
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 91
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f1ef18f8777bf8ce0800000000000000
+      internalID: -1400699234952282593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_178
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 87
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe0a847a0a772cda0800000000000000
+      internalID: -5926042627781123857
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_179
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 87
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6f23a0c8a81bdd670800000000000000
+      internalID: 8565197274941633270
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_180
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 87
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a46af83cad31bc440800000000000000
+      internalID: 4957077645156132426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_181
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 87
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f87c9b9f76c2afa0800000000000000
+      internalID: -5790847919471167241
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_182
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 87
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e9a75cfe3bd007c50800000000000000
+      internalID: 6660838915353967262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_183
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1aa880f01a0819a90800000000000000
+      internalID: -7308919291015296351
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_184
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2e8fd9ecfeac4c490800000000000000
+      internalID: -7726827929348474654
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_185
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5a886f38319edc900800000000000000
+      internalID: 706476986594658469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_186
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff0ff8a396bc5cf80800000000000000
+      internalID: -8086833903059341057
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_187
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: df01d3d10acfabfb0800000000000000
+      internalID: -4631111502181625603
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_188
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 95
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c28cc4a757beb5030800000000000000
+      internalID: 3484637626496763948
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_189
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 95
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e34ccbd47b74110c0800000000000000
+      internalID: -4606822091214502850
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_190
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 95
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ff012d3918b4631a0800000000000000
+      internalID: -6830188764957896449
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_191
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 103
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f3f933d958a98660800000000000000
+      internalID: 7388621767427355641
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_192
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 103
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9b9dc3d527491390800000000000000
+      internalID: -7847162647923549284
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_193
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 103
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 792c6ff01ea517990800000000000000
+      internalID: -7390025590856301929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_194
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 102
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1b0bce078f2ba96b0800000000000000
+      internalID: -5288718032277032783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_195
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 102
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d4ee8d07091786a60800000000000000
+      internalID: 7667503230780763725
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_196
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 102
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c9ef9a850600593a0800000000000000
+      internalID: -6659416060193014116
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_197
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 102
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b66394c737f8e6440800000000000000
+      internalID: 4931036368186455659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_198
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 102
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b5467675f079dc780800000000000000
+      internalID: -8661100416216898469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_199
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6bc11a10e0131dc20800000000000000
+      internalID: 3229416344027995318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_200
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7bfa307384b7f860800000000000000
+      internalID: 7563712575808666492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_201
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b18cbc3ee87a25830800000000000000
+      internalID: 4058490446363215899
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_202
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 98
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bba89974fa4221e40800000000000000
+      internalID: 5625599219778292411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_203
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 61
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c60f00acc7f4be9a0800000000000000
+      internalID: -6202776664389128084
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_204
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 61
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bf743462e7178a5a0800000000000000
+      internalID: -6509828474742290437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_205
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 57
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0f84243532d06750800000000000000
+      internalID: 6296263405013864203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_206
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 57
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 66cd11b8259c75420800000000000000
+      internalID: 2618783064696937574
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_207
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 57
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 133609b38a4521a00800000000000000
+      internalID: 725735571490628401
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_208
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 57
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 09fa6fa8da854c830800000000000000
+      internalID: 4090491863943262096
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_209
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 57
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 12852387c15d0ed40800000000000000
+      internalID: 5611719453956003873
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_210
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8e38b3238688af170800000000000000
+      internalID: 8213026851564258280
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_211
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a93a36fe10ef99b0800000000000000
+      internalID: -5071088231811237470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_212
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e4d3f84e5db0785b0800000000000000
+      internalID: -5366307417698124466
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_213
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 072fb721b79c37670800000000000000
+      internalID: 8535387249225495152
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_214
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 63abbd623adcc7010800000000000000
+      internalID: 1188050502334265910
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_215
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 65
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c08dcbc01c33cb050800000000000000
+      internalID: 5817581722891245580
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_216
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 65
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4336565f88384a730800000000000000
+      internalID: 4009474192522437428
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_217
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 65
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 88fb8cb548f33cd60800000000000000
+      internalID: 7909235208300838792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_218
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 73
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 340221e9e1be646a0800000000000000
+      internalID: -6465221698310234045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_219
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 73
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a78fe8c26157a3c90800000000000000
+      internalID: -7189305117046278022
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_220
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 73
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1effd93c253286640800000000000000
+      internalID: 5073343818609065953
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_221
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 72
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cde0043ce262319d0800000000000000
+      internalID: -2804856160635580708
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_222
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 72
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 085167cc0991d97f0800000000000000
+      internalID: -604298665301502592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_223
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 72
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 06814759d17be6cd0800000000000000
+      internalID: -2562909800237885344
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_224
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 72
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03855e75e5fe1f750800000000000000
+      internalID: 6337109339167610928
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_225
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 72
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8cf7dd2bfa670ff30800000000000000
+      internalID: 4607312915792232392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_226
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c5e1daeb4eababa30800000000000000
+      internalID: 4231900291482328668
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_227
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bce1d764f7d4c0af0800000000000000
+      internalID: -428882655468249397
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_228
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 22eb2045ab48e6bd0800000000000000
+      internalID: -2635022796156912094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_229
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 68
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e0da8771e5646df80800000000000000
+      internalID: -8082195111335121650
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_230
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 31
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 64dc7a6660a6ce0b0800000000000000
+      internalID: -5698062852805898938
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_231
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 31
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4cacd0e256b7acce0800000000000000
+      internalID: -1384158260968437052
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_232
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 27
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53766ce1c57df4b40800000000000000
+      internalID: 5426792866658019125
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_233
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 27
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 04dce0e6dbb85a470800000000000000
+      internalID: 8405277925268442432
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_234
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 27
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2ea74704eab4dfff0800000000000000
+      internalID: -761213152363806
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_235
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 27
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0c8832dc54fce30b0800000000000000
+      internalID: -5746928175776823104
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_236
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 27
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 01a3b1ce888d9aae0800000000000000
+      internalID: -1537459715181954544
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_237
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 19df6bf3f7dc79df0800000000000000
+      internalID: -173444114216977007
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_238
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4de6864c959656390800000000000000
+      internalID: -7825732943218184492
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_239
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c892dd1990e0ca870800000000000000
+      internalID: 8695340414810270092
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_240
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 07825f2fb99e6e620800000000000000
+      internalID: 2803184674090068080
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_241
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e27dedd04e6e0b70800000000000000
+      internalID: 8867145941219373795
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_242
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 35
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9ba97f31346ac52a0800000000000000
+      internalID: -6747335334679831879
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_243
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 35
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5612b65a2029f58d0800000000000000
+      internalID: -2855403098666753691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_244
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 35
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3eaf2dbf96a3f7e40800000000000000
+      internalID: 5656303883871517411
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_245
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 43
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b3f2e278c72153410800000000000000
+      internalID: 1456090380577419067
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_246
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 43
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4fe662bb5556ae8e0800000000000000
+      internalID: -1663405693473493260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_247
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 43
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 142254c330dd084b0800000000000000
+      internalID: -5440105343897755071
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_248
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 42
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 920f6732895ccbc20800000000000000
+      internalID: 3223668690511130665
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_249
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 42
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 20af3fc3bfa6c5600800000000000000
+      internalID: 458358889376905730
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_250
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 42
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a26f3f8641c269790800000000000000
+      internalID: -7523777661304048086
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_251
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 42
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f739b9c312d04ff50800000000000000
+      internalID: 6914165764322464639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_252
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 42
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a778f0e24d71cfb40800000000000000
+      internalID: 5475277447048955770
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_253
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7ce7a24eb24a2d720800000000000000
+      internalID: 2869536421006966471
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_254
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a4c7fdf7d15c7a520800000000000000
+      internalID: 2713354031004089418
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_255
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4f544ddb5b3c9c4d0800000000000000
+      internalID: -3113742482008685068
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_256
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 38
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f5494ea1a807d5a0800000000000000
+      internalID: -6496714446951856649
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_257
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 1
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 70a16dfb8894dd0d0800000000000000
+      internalID: -3396477692284626425
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_258
+      rect:
+        serializedVersion: 2
+        x: 59
+        y: 1
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0e58a009dc8843650800000000000000
+      internalID: 6211740202517038560
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_259
+      rect:
+        serializedVersion: 2
+        x: 118
+        y: 0
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e185b6a8d2eeb73d0800000000000000
+      internalID: -3207708430208116706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_260
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 0
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c3b2c779ec0d8c090800000000000000
+      internalID: -8013925951182460100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_261
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 0
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0111335220a1c8750800000000000000
+      internalID: 6308445774555582736
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_262
+      rect:
+        serializedVersion: 2
+        x: 205
+        y: 0
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c9cd9775f42cc810800000000000000
+      internalID: 1786843788851661257
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_263
+      rect:
+        serializedVersion: 2
+        x: 234
+        y: 0
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e01e24a33edbc7f00800000000000000
+      internalID: 1115975591313727758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_264
+      rect:
+        serializedVersion: 2
+        x: 282
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1e866230742f0cbb0800000000000000
+      internalID: -4917664406279132959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_265
+      rect:
+        serializedVersion: 2
+        x: 311
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8192c7c6673103d80800000000000000
+      internalID: -8273091116132456168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_266
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99c89a98b2ab12ae0800000000000000
+      internalID: -1575773698447012711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_267
+      rect:
+        serializedVersion: 2
+        x: 369
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2a476a3eeceb64fd0800000000000000
+      internalID: -2357987559089998686
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_268
+      rect:
+        serializedVersion: 2
+        x: 398
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 233a1bb2913de2f30800000000000000
+      internalID: 4552808378378855218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_269
+      rect:
+        serializedVersion: 2
+        x: 447
+        y: 5
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2c749b3700927f8b0800000000000000
+      internalID: -5118577369565018174
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_270
+      rect:
+        serializedVersion: 2
+        x: 478
+        y: 5
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3340eee567bef31f0800000000000000
+      internalID: -1062872093404822477
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_271
+      rect:
+        serializedVersion: 2
+        x: 509
+        y: 5
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9c2281bd80baa4420800000000000000
+      internalID: 2615090588165874377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_272
+      rect:
+        serializedVersion: 2
+        x: 567
+        y: 13
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2f9f0c0f5f1da2e50800000000000000
+      internalID: 6785466642823444978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_273
+      rect:
+        serializedVersion: 2
+        x: 601
+        y: 13
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: afe1df73cb97ab8a0800000000000000
+      internalID: -6288580080369328390
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_274
+      rect:
+        serializedVersion: 2
+        x: 635
+        y: 13
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: eea585980efb80d90800000000000000
+      internalID: -7131239038843331858
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_275
+      rect:
+        serializedVersion: 2
+        x: 690
+        y: 12
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4216f3608389136e0800000000000000
+      internalID: -1859537804736896732
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_276
+      rect:
+        serializedVersion: 2
+        x: 719
+        y: 12
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ed9bdde2607c8aa20800000000000000
+      internalID: 3073925575050377694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_277
+      rect:
+        serializedVersion: 2
+        x: 749
+        y: 12
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4de161f25a2baa2f0800000000000000
+      internalID: -960759147960852780
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_278
+      rect:
+        serializedVersion: 2
+        x: 778
+        y: 12
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 79f78565f4b44c840800000000000000
+      internalID: 5243398670289239959
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_279
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 12
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 290c31177b175f0c0800000000000000
+      internalID: -4542599616443203438
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_280
+      rect:
+        serializedVersion: 2
+        x: 870
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c1a3f6a45e6292350800000000000000
+      internalID: 5992363545431325212
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_281
+      rect:
+        serializedVersion: 2
+        x: 906
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: be681669d4328e3a0800000000000000
+      internalID: -6636015234787997973
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_282
+      rect:
+        serializedVersion: 2
+        x: 965
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b928e666878860670800000000000000
+      internalID: 8504634997031731867
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: city_windows_283
+      rect:
+        serializedVersion: 2
+        x: 991
+        y: 8
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41622f79866f576b0800000000000000
+      internalID: -5299058457445259756
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      city_windows_0: 7259846524328037702
+      city_windows_1: -7494716049564900712
+      city_windows_10: -5535920040618284712
+      city_windows_100: -4439868801607843663
+      city_windows_101: -4503128844915117204
+      city_windows_102: 4682412671724046153
+      city_windows_103: 1406656646866553020
+      city_windows_104: -522790210449813468
+      city_windows_105: 47773481359611935
+      city_windows_106: -4853153196734569416
+      city_windows_107: 4071870816119748153
+      city_windows_108: 1879540157667993649
+      city_windows_109: -4650914310601127874
+      city_windows_11: 7887300935736308018
+      city_windows_110: -247953564743292554
+      city_windows_111: 8084705680838019277
+      city_windows_112: -2215867218020244507
+      city_windows_113: 4591136283955860752
+      city_windows_114: 5054198082444297821
+      city_windows_115: 2942938305385207
+      city_windows_116: 9041375547949568150
+      city_windows_117: 2042341738793478258
+      city_windows_118: -6535197117781088790
+      city_windows_119: -877802026826557430
+      city_windows_12: 13261406528632423
+      city_windows_120: -6177931157333013719
+      city_windows_121: 7557076483027026245
+      city_windows_122: 653289827262205301
+      city_windows_123: 2215119245246497242
+      city_windows_124: -8511679182981729507
+      city_windows_125: -3494252663529775537
+      city_windows_126: 1694240393932997649
+      city_windows_127: -2511383962731891209
+      city_windows_128: -8168548118273723116
+      city_windows_129: -3344355334597679730
+      city_windows_13: 8908041610425420337
+      city_windows_130: -2436483367100667704
+      city_windows_131: -4784987735141318776
+      city_windows_132: 5289266108718678044
+      city_windows_133: -1285244605124469740
+      city_windows_134: -9032320932414571833
+      city_windows_135: 6616715857819080388
+      city_windows_136: 4555097552710656306
+      city_windows_137: 1065611299184943381
+      city_windows_138: 4382532244176367979
+      city_windows_139: -6498036084280865733
+      city_windows_14: -2530470009689471423
+      city_windows_140: 1627041620268599972
+      city_windows_141: -7507200623107857771
+      city_windows_142: 7927373318833171062
+      city_windows_143: 7730265515008099642
+      city_windows_144: 4948244687558435389
+      city_windows_145: -6503607228484320137
+      city_windows_146: -4630591345873743863
+      city_windows_147: 6676564923181403056
+      city_windows_148: 797722149258550332
+      city_windows_149: 5150835307299562714
+      city_windows_15: 6452932169505650580
+      city_windows_150: -6441620109262210536
+      city_windows_151: -8854967117648015661
+      city_windows_152: -734746918172537859
+      city_windows_153: 8438246124294403069
+      city_windows_154: -6682867822973549455
+      city_windows_155: -2367636105191789237
+      city_windows_156: 8597959501690628963
+      city_windows_157: -3719503653844071805
+      city_windows_158: -7758762610139742292
+      city_windows_159: -8385101272322891571
+      city_windows_16: 5383577934502917795
+      city_windows_160: -4218607570039708012
+      city_windows_161: -4274167296316397347
+      city_windows_162: 3681495801536317153
+      city_windows_163: -4441321241890126347
+      city_windows_164: -5747508566177388316
+      city_windows_165: -8582519790920075494
+      city_windows_166: -5061115123041786914
+      city_windows_167: 2566555164495145541
+      city_windows_168: 8385019874374189822
+      city_windows_169: -2589960406359972075
+      city_windows_17: 3156429290804135507
+      city_windows_170: -4567389285859090656
+      city_windows_171: 3776425714271584369
+      city_windows_172: 2668361672442126401
+      city_windows_173: -5047326252028044580
+      city_windows_174: 8761262152428744751
+      city_windows_175: -8747359068031724764
+      city_windows_176: 7151019964077732019
+      city_windows_177: -1400699234952282593
+      city_windows_178: -5926042627781123857
+      city_windows_179: 8565197274941633270
+      city_windows_18: -8364397074169250299
+      city_windows_180: 4957077645156132426
+      city_windows_181: -5790847919471167241
+      city_windows_182: 6660838915353967262
+      city_windows_183: -7308919291015296351
+      city_windows_184: -7726827929348474654
+      city_windows_185: 706476986594658469
+      city_windows_186: -8086833903059341057
+      city_windows_187: -4631111502181625603
+      city_windows_188: 3484637626496763948
+      city_windows_189: -4606822091214502850
+      city_windows_19: -7413313124019473760
+      city_windows_190: -6830188764957896449
+      city_windows_191: 7388621767427355641
+      city_windows_192: -7847162647923549284
+      city_windows_193: -7390025590856301929
+      city_windows_194: -5288718032277032783
+      city_windows_195: 7667503230780763725
+      city_windows_196: -6659416060193014116
+      city_windows_197: 4931036368186455659
+      city_windows_198: -8661100416216898469
+      city_windows_199: 3229416344027995318
+      city_windows_2: 5679922025316074896
+      city_windows_20: 2107632664783002940
+      city_windows_200: 7563712575808666492
+      city_windows_201: 4058490446363215899
+      city_windows_202: 5625599219778292411
+      city_windows_203: -6202776664389128084
+      city_windows_204: -6509828474742290437
+      city_windows_205: 6296263405013864203
+      city_windows_206: 2618783064696937574
+      city_windows_207: 725735571490628401
+      city_windows_208: 4090491863943262096
+      city_windows_209: 5611719453956003873
+      city_windows_21: 3067743607673226122
+      city_windows_210: 8213026851564258280
+      city_windows_211: -5071088231811237470
+      city_windows_212: -5366307417698124466
+      city_windows_213: 8535387249225495152
+      city_windows_214: 1188050502334265910
+      city_windows_215: 5817581722891245580
+      city_windows_216: 4009474192522437428
+      city_windows_217: 7909235208300838792
+      city_windows_218: -6465221698310234045
+      city_windows_219: -7189305117046278022
+      city_windows_22: -5588194441707184183
+      city_windows_220: 5073343818609065953
+      city_windows_221: -2804856160635580708
+      city_windows_222: -604298665301502592
+      city_windows_223: -2562909800237885344
+      city_windows_224: 6337109339167610928
+      city_windows_225: 4607312915792232392
+      city_windows_226: 4231900291482328668
+      city_windows_227: -428882655468249397
+      city_windows_228: -2635022796156912094
+      city_windows_229: -8082195111335121650
+      city_windows_23: -4875945109369219394
+      city_windows_230: -5698062852805898938
+      city_windows_231: -1384158260968437052
+      city_windows_232: 5426792866658019125
+      city_windows_233: 8405277925268442432
+      city_windows_234: -761213152363806
+      city_windows_235: -5746928175776823104
+      city_windows_236: -1537459715181954544
+      city_windows_237: -173444114216977007
+      city_windows_238: -7825732943218184492
+      city_windows_239: 8695340414810270092
+      city_windows_24: 8909254038730087085
+      city_windows_240: 2803184674090068080
+      city_windows_241: 8867145941219373795
+      city_windows_242: -6747335334679831879
+      city_windows_243: -2855403098666753691
+      city_windows_244: 5656303883871517411
+      city_windows_245: 1456090380577419067
+      city_windows_246: -1663405693473493260
+      city_windows_247: -5440105343897755071
+      city_windows_248: 3223668690511130665
+      city_windows_249: 458358889376905730
+      city_windows_25: 9076025709711436046
+      city_windows_250: -7523777661304048086
+      city_windows_251: 6914165764322464639
+      city_windows_252: 5475277447048955770
+      city_windows_253: 2869536421006966471
+      city_windows_254: 2713354031004089418
+      city_windows_255: -3113742482008685068
+      city_windows_256: -6496714446951856649
+      city_windows_257: -3396477692284626425
+      city_windows_258: 6211740202517038560
+      city_windows_259: -3207708430208116706
+      city_windows_26: 5270220442312349306
+      city_windows_260: -8013925951182460100
+      city_windows_261: 6308445774555582736
+      city_windows_262: 1786843788851661257
+      city_windows_263: 1115975591313727758
+      city_windows_264: -4917664406279132959
+      city_windows_265: -8273091116132456168
+      city_windows_266: -1575773698447012711
+      city_windows_267: -2357987559089998686
+      city_windows_268: 4552808378378855218
+      city_windows_269: -5118577369565018174
+      city_windows_27: 534563198485629470
+      city_windows_270: -1062872093404822477
+      city_windows_271: 2615090588165874377
+      city_windows_272: 6785466642823444978
+      city_windows_273: -6288580080369328390
+      city_windows_274: -7131239038843331858
+      city_windows_275: -1859537804736896732
+      city_windows_276: 3073925575050377694
+      city_windows_277: -960759147960852780
+      city_windows_278: 5243398670289239959
+      city_windows_279: -4542599616443203438
+      city_windows_28: 4060524964404098083
+      city_windows_280: 5992363545431325212
+      city_windows_281: -6636015234787997973
+      city_windows_282: 8504634997031731867
+      city_windows_283: -5299058457445259756
+      city_windows_29: 1826558186553905491
+      city_windows_3: 3548021775109400395
+      city_windows_30: 4318142080893566484
+      city_windows_31: 4950212856867658536
+      city_windows_32: -1940168294735058372
+      city_windows_33: -1632945181685154519
+      city_windows_34: -639494864138535886
+      city_windows_35: -8825564228233951092
+      city_windows_36: -4606262535330544359
+      city_windows_37: 7395584986598902800
+      city_windows_38: 3328251546627643763
+      city_windows_39: 6285391533961481174
+      city_windows_4: 7082595321186872844
+      city_windows_40: -5343668340664147722
+      city_windows_41: -8982044449959268665
+      city_windows_42: 4176166505553081079
+      city_windows_43: 7478812556858581996
+      city_windows_44: -368445136057976365
+      city_windows_45: -7300876221058594201
+      city_windows_46: 5645904747320869271
+      city_windows_47: -4523595809890146619
+      city_windows_48: 8544713511351391364
+      city_windows_49: -2342235908747019298
+      city_windows_5: -8714841056167019106
+      city_windows_50: 2277200081909310780
+      city_windows_51: 2533964837937468155
+      city_windows_52: 8135823924180200811
+      city_windows_53: -2354713422416646415
+      city_windows_54: 8461320725478140637
+      city_windows_55: 4067247752462835791
+      city_windows_56: -1401857508157747690
+      city_windows_57: 7724015407668088969
+      city_windows_58: -7812589628881447929
+      city_windows_59: 7509890149130675865
+      city_windows_6: -2762963636446681692
+      city_windows_60: -8269254004347068652
+      city_windows_61: 5820800860812195713
+      city_windows_62: -5612587659051230186
+      city_windows_63: 4034177351322988647
+      city_windows_64: 5215357416580671993
+      city_windows_65: 4830504370426698784
+      city_windows_66: 5460039995222231657
+      city_windows_67: -187802896173948354
+      city_windows_68: 5692956938896831658
+      city_windows_69: -340598829847052608
+      city_windows_7: -1412407664151278186
+      city_windows_70: 919941304191655258
+      city_windows_71: -219634073286708883
+      city_windows_72: 3662206849527600114
+      city_windows_73: 8943811995456850766
+      city_windows_74: -2302722514367814922
+      city_windows_75: -4924982938678162324
+      city_windows_76: -8575401918684584029
+      city_windows_77: -1326776658473263529
+      city_windows_78: -8153279736717666335
+      city_windows_79: 3604665915473337283
+      city_windows_8: 6204086806672413532
+      city_windows_80: -1335460471125055168
+      city_windows_81: 2605472058770435997
+      city_windows_82: 4740398065138621023
+      city_windows_83: -8369506771087793004
+      city_windows_84: 3191596560910787982
+      city_windows_85: 8126010119824416642
+      city_windows_86: 2752041408026868526
+      city_windows_87: 7328424229253033733
+      city_windows_88: 3150425670888892973
+      city_windows_89: 4920632759967735020
+      city_windows_9: -8586788876867945777
+      city_windows_90: 2037245829251449808
+      city_windows_91: 2048250197957860704
+      city_windows_92: 7811147070579948433
+      city_windows_93: 11505407084795126
+      city_windows_94: 8817462618225333282
+      city_windows_95: 4689154831626360906
+      city_windows_96: -6236690761586732250
+      city_windows_97: 7454301205594701660
+      city_windows_98: -2714401749160966363
+      city_windows_99: -176674499958510162
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

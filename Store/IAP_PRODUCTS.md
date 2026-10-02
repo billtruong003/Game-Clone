@@ -44,7 +44,7 @@ Rules (FEATURE_SPEC §1b and Play policy):
 
 Neon balls: 3 rewarded videos, no product. One by one: $21.83 → Full Game $6.99. (More interactive premium sets to come.)
 
-## Nah Blocks (13 products + 3 bundles)
+## Nah Blocks (15 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
@@ -59,11 +59,13 @@ Neon balls: 3 rewarded videos, no product. One by one: $21.83 → Full Game $6.9
 | `color_jelly` | 0.99 | Jelly blocks | 500 coins |
 | `board_paper` | 0.99 | Paper board | 300 coins |
 | `board_midnight` | 0.99 | Midnight board | 400 coins |
+| `board_wood` | 0.99 | Wood board | 400 coins |
+| `board_felt` | 0.99 | Felt board | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon blocks: 3 rewarded videos. One by one: $19.85 → Full Game $6.99. (Pixel dropped.)
+Neon blocks: 3 rewarded videos. One by one: $21.83 → Full Game $6.99.
 
-## Bruh Arrows (15 products + 3 bundles)
+## Bruh Arrows (18 products + 3 bundles)
 
 | Product id | Price | Unlocks | Also by |
 |---|---|---|---|
@@ -76,12 +78,15 @@ Neon blocks: 3 rewarded videos. One by one: $19.85 → Full Game $6.99. (Pixel d
 | `color_ocean` | 0.99 | Ocean arrows | 300 coins |
 | `color_forest` | 0.99 | Forest arrows | 400 coins |
 | `color_mono` | 0.99 | Mono arrows | 400 coins |
+| `color_sunset` | 0.99 | Sunset arrows | 500 coins |
+| `color_pastel` | 0.99 | Pastel arrows | 500 coins |
 | `paper_grid` | 0.99 | Grid paper | 300 coins |
 | `paper_kraft` | 0.99 | Kraft paper | 400 coins |
 | `paper_night` | 0.99 | Night paper | 500 coins |
+| `paper_linen` | 0.99 | Linen paper | 500 coins |
 | `face_sleepy` / `face_grumpy` / `face_derp` | 0.99 each | Face packs | 400 / 500 / 600 coins |
 
-Neon arrows: 3 rewarded videos. One by one: $22.84 → Full Game $6.99.
+Neon arrows: 3 rewarded videos. One by one: $25.81 → Full Game $6.99.
 
 ## Store texts (Play Console product name ≤55, description ≤200)
 

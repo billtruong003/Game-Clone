@@ -81,6 +81,9 @@ namespace CasualGame.ArrowOut
         /// <summary>Where the head tip is right now (local, shift included).</summary>
         public Vector2 HeadPoint => Sample(advance + bodyLength, out _) + shift;
 
+        /// <summary>A point on the body, <paramref name="fromTail"/> canvas units ahead of the round tail end (local, shift included).</summary>
+        public Vector2 PointAt(float fromTail) => Sample(advance + fromTail, out _) + shift;
+
         /// <summary>0..1 fade at a local point (1 inside the board, 0 past 1.2 cells outside).</summary>
         public float FadeAt(Vector2 p)
         {

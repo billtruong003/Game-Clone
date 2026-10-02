@@ -18,9 +18,9 @@ namespace CasualGame.Lab
     /// </list>
     /// Left / Right (or a tap) changes the page. Editor captures: <see cref="Show"/>(index, phase) freezes a page.
     /// </summary>
-    public sealed class ThemeLab : MonoBehaviour
+    public sealed partial class ThemeLab : MonoBehaviour
     {
-        private enum Kind { Arrows, Balls, Blocks }
+        private enum Kind { Arrows, Balls, Blocks, LiveBalls, LiveBlocks, LiveArrows }
 
         private sealed class Page
         {
@@ -34,6 +34,7 @@ namespace CasualGame.Lab
             public float GlowPad;
             public int Style = -1;                // ThemeSprite / ThemeFace style for caps and faces, -1 = default look
             public int Set;                       // BallSkin / BlockSkin set
+            public string Skin;                   // live pages: the skin shader (its material template lives in Assets/_Game/Skins)
         }
 
         private static Color H(string hex) => UIKit.Hex(hex);
@@ -56,20 +57,38 @@ namespace CasualGame.Lab
                 ArrowShader = "ArrowHolo", GlowPad = 0.45f, Style = 3, Palette = P("#3DFFB0", "#5CE1FF", "#FF9D3C", "#C38BFF") },
             new() { Kind = Kind.Arrows, Name = "Arrows · Neon", Note = "White-hot tubes; glowing caps and faces", Ground = 4, Base = H("#0B0B12"), Ink = H("#2A1E4A"),
                 ArrowShader = "ArrowNeon", GlowPad = 0.55f, Style = 2, Palette = P("#00E5FF", "#FF2BD6", "#39FF14", "#FFB300") },
-            // ---------------- Meh Merge premium (picks: Billiard A, Sports A, Eyeballs B, Planets A) ----------------
+            // ---------------- Meh Merge premium ----------------
             new() { Kind = Kind.Balls, Set = 0, Name = "Merge · Billiard", Note = "Sphere shader: solids / stripes, numbers from a texture atlas, rolling", Base = H("#1F6B3A") },
             new() { Kind = Kind.Balls, Set = 1, Name = "Merge · Sports", Note = "Procedural seams, panels, dimples on one sphere shader", Ground = 0, Base = H("#3D8B4A"), Ink = H("#2F7A3E") },
-            new() { Kind = Kind.Balls, Set = 2, Name = "Merge · Planets", Note = "Noise surfaces, clouds, Saturn's ring, the Sun's corona", Ground = 4, Base = H("#0B1026"), Ink = H("#2A3A7A") },
-            new() { Kind = Kind.Balls, Set = 3, Name = "Merge · Monsters", Note = "Colour + horns, the game's faces", Base = H("#2F2552") },
-            new() { Kind = Kind.Balls, Set = 4, Name = "Merge · Slimes", Note = "Wobbling jelly drops with bubbles inside", Base = H("#24304A") },
             new() { Kind = Kind.Balls, Set = 5, Name = "Merge · Eyeballs", Note = "Real eyeballs: veined, iris + pupil turn to look at you", Base = H("#3A1F2E") },
-            // ---------------- Nah Blocks premium (picks: Retro A, Pixel A, Studs B, Gems A) + CRT pillow ----------------
+            // ---------------- Nah Blocks premium ----------------
             new() { Kind = Kind.Blocks, Set = 0, Name = "Blocks · Retro Bricks", Note = "Hard bevel, black well", Base = H("#000000"),
                 Palette = P("#E04040", "#3070E0", "#F0C020", "#30B050", "#A040C0", "#F07020", "#20B0C0") },
             new() { Kind = Kind.Blocks, Set = 2, Name = "Blocks · Toy Bricks (pastel)", Note = "Soft pastel plastic, two studs on the top face", Base = H("#E8E1F2"), Text = UIKit.Ink,
                 Palette = P("#FFB3C7", "#A0C4FF", "#FFE29A", "#B9F2C9", "#D7C4FF", "#FFC9A3", "#BDEFF0") },
             new() { Kind = Kind.Blocks, Set = 3, Name = "Blocks · Gems", Note = "Cut octagons, facets, a soft travelling glint", Base = H("#1B1030"),
                 Palette = P("#E0115F", "#0F52BA", "#50C878", "#FFC87C", "#9966CC", "#7FFFD4", "#E4D00A") },
+            // ---------------- live skins: they react to your finger ----------------
+            new() { Kind = Kind.LiveBalls, Skin = "SkinHungryBall", Name = "Merge · Hungry", Note = "Same-tier balls stare up and open wide; the rest sulk", Base = H("#2B2D42") },
+            new() { Kind = Kind.LiveBalls, Skin = "SkinHamsterBall", Name = "Merge · Hamster Ball", Note = "Runs as the ball rolls, tumbles on impact, naps at rest", Base = H("#3B4A3A") },
+            new() { Kind = Kind.LiveBalls, Skin = "SkinCompassBall", Name = "Merge · Compass", Note = "Needle points to the nearest twin: a drop hint", Base = H("#2E3440") },
+            new() { Kind = Kind.LiveBalls, Skin = "SkinSnowGlobe", Name = "Merge · Snow Globe", Note = "Drops and shakes whirl the snow; it settles", Base = H("#1D2B45") },
+            new() { Kind = Kind.LiveBlocks, Skin = "SkinWatchBlock", Name = "Blocks · Watchers", Note = "Eyes follow the finger; wide-eyed under the piece", Base = H("#2B2D42"),
+                Palette = P("#FF6B6B", "#4DABF7", "#FFD43B", "#69DB7C", "#B197FC", "#FFA94D", "#38D9A9") },
+            new() { Kind = Kind.LiveBlocks, Skin = "SkinBuildingBlock", Name = "Blocks · Night City", Note = "Windows onto one city; it shifts in depth with your finger", Base = H("#0E1430"),
+                Palette = P("#C0504D", "#4F81BD", "#D9A441", "#5E9C5A", "#8064A2", "#D97B3A", "#3FA3A3") },
+            new() { Kind = Kind.LiveBlocks, Skin = "SkinChromeBlock", Name = "Blocks · Chrome", Note = "Polished metal: reflections slide with the finger", Base = H("#1E2130"),
+                Palette = P("#FF8A8A", "#8AC4FF", "#FFE08A", "#9AF0A8", "#CDB4FF", "#FFC48A", "#8FF0E0") },
+            new() { Kind = Kind.LiveBlocks, Skin = "SkinAquariumBlock", Name = "Blocks · Aquarium", Note = "Water tilts as you drag; neighbours slosh; a clear drains", Base = H("#16324A"),
+                Palette = P("#FF8FA3", "#5CC8FF", "#FFE066", "#7AE582", "#C77DFF", "#FFB570", "#64DFDF") },
+            new() { Kind = Kind.LiveArrows, Skin = "ArrowTrain", Name = "Arrows · Train", Note = "Green lamp = clear track; bumps bunch the cars", GlowPad = 0.22f, Base = H("#F5F1EA"), Text = UIKit.Ink,
+                Palette = P("#E5484D", "#2E7DD7", "#F2A93B", "#3BA676") },
+            new() { Kind = Kind.LiveArrows, Skin = "ArrowTape", Name = "Arrows · Tape", Note = "Free strips lift off; tap rolls the tape back up", GlowPad = 0.12f, Base = H("#F5F1EA"), Text = UIKit.Ink,
+                Palette = P("#FF6B8B", "#4DABF7", "#FFC94D", "#4CC38A") },
+            new() { Kind = Kind.LiveArrows, Skin = "ArrowAnts", Name = "Arrows · Ants", Note = "Blocked columns bunch up and fidget; free ones march off", GlowPad = 0.18f, Base = H("#F5F1EA"), Text = UIKit.Ink,
+                Palette = P("#E5484D", "#2E7DD7", "#F2A93B", "#3BA676") },
+            new() { Kind = Kind.LiveArrows, Skin = "ArrowZipper", Name = "Arrows · Zipper", Note = "The pull tab wiggles when free; tap unzips; blocked jams", GlowPad = 0.16f, Base = H("#F5F1EA"), Text = UIKit.Ink,
+                Palette = P("#D9485F", "#3C6FD8", "#E9A23B", "#2F9E6E") },
         };
 
         private const float Cell = 140f;
@@ -102,6 +121,7 @@ namespace CasualGame.Lab
         private void Start()
         {
             instance = this;
+            Shader.SetGlobalFloat("_FacePackOn", 0f); // the lab shows the default faces, whatever the shop last tried on
             var cam = Camera.main;
             cam.backgroundColor = Color.black;
             var canvas = UIKit.CreateCameraCanvas("Lab", cam);
@@ -113,6 +133,7 @@ namespace CasualGame.Lab
         /// <summary>Editor capture hook: show a page frozen at a point of its loop (seconds from the start).</summary>
         public static void Show(int pageIndex, float phase)
         {
+            if (instance == null) instance = FindFirstObjectByType<ThemeLab>(); // a script reload in play mode clears the static
             if (instance == null) return;
             instance.Build(pageIndex);
             instance.frozen = true;
@@ -125,7 +146,19 @@ namespace CasualGame.Lab
             var kb = Keyboard.current;
             if (kb != null && (kb.rightArrowKey.wasPressedThisFrame || kb.spaceKey.wasPressedThisFrame)) { frozen = false; Build((index + 1) % Pages.Length); }
             if (kb != null && kb.leftArrowKey.wasPressedThisFrame) { frozen = false; Build((index + Pages.Length - 1) % Pages.Length); }
-            if (Pointer.current != null && Pointer.current.press.wasPressedThisFrame) { frozen = false; Build((index + 1) % Pages.Length); }
+            var isLive = Pages[index].Kind >= Kind.LiveBalls;
+            var ptr = Pointer.current;
+            if (ptr != null)
+            {
+                var screen = ptr.position.ReadValue();
+                var onTitle = screen.y > Screen.height * 0.86f;
+                if (ptr.press.wasPressedThisFrame && (onTitle || !isLive)) { frozen = false; Build((index + 1) % Pages.Length); return; }
+                if (isLive)
+                {
+                    RectTransformUtility.ScreenPointToLocalPointInRectangle(root, screen, Camera.main, out var local);
+                    LiveInput(ptr.press.wasPressedThisFrame, ptr.press.isPressed, ptr.press.wasReleasedThisFrame, local - root.rect.center);
+                }
+            }
             if (!frozen) clock += Time.deltaTime;
             Animate();
         }
@@ -147,6 +180,12 @@ namespace CasualGame.Lab
             arrows.Clear();
             eyes.Clear();
             rollers.Clear();
+            live.Clear();
+            liveArrows.Clear();
+            template = null;
+            hand = null;
+            manual = false;
+            eventClock = 0f;
             var page = Pages[i];
 
             var ground = UIKit.AddImage(UIKit.Stretch(UIKit.Rect("Ground", root)), (Sprite)null, page.Base);
@@ -168,7 +207,10 @@ namespace CasualGame.Lab
             {
                 case Kind.Arrows: BuildArrows(page); break;
                 case Kind.Balls: BuildBalls(page); break;
-                default: BuildBlocks(page); break;
+                case Kind.Blocks: BuildBlocks(page); break;
+                case Kind.LiveBalls: BuildLiveBalls(page); break;
+                case Kind.LiveBlocks: BuildLiveBlocks(page); break;
+                default: BuildLiveArrows(page); break;
             }
         }
 
@@ -450,6 +492,15 @@ namespace CasualGame.Lab
         {
             var page = Pages[index];
             if (page.Kind == Kind.Arrows) AnimateArrows();
+            if (page.Kind >= Kind.LiveBalls)
+            {
+                LiveFrame();
+                if (page.Kind == Kind.LiveBalls) AnimateLiveBalls(page);
+                else if (page.Kind == Kind.LiveBlocks) AnimateLiveBlocks(page);
+                else AnimateLiveArrows(page);
+                if (hand != null) hand.anchoredPosition = finger;
+                released = false;
+            }
             foreach (var (m, speed) in rollers) m.SetFloat("_Spin", Mathf.Sin(clock * 0.8f) * speed * 0.6f);
             AnimateEyes();
         }
