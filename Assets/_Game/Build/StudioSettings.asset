@@ -16,5 +16,4 @@ MonoBehaviour:
   packagePrefix: com.billthedev
   targetSdk: 36
   minSdk: 25
-  keystorePath: 
-  maxSdkKey: 
+  keystorePath: C:/Users/ducnq/keystores/billthedev-upload.keystore

@@ -176,8 +176,9 @@ namespace CasualGame.Core
             text.enableAutoSizing = true;
             text.fontSizeMax = fontSize;
             text.fontSizeMin = fontSize * 0.6f;
-            text.rectTransform.offsetMin = new Vector2(icon != null ? 90 : 20, 14);
-            text.rectTransform.offsetMax = new Vector2(-20, 0);
+            // the icon spans x 34..106: an icon button's text starts past it, so a long label never runs into it
+            text.rectTransform.offsetMin = new Vector2(icon != null ? 116 : 20, 14);
+            text.rectTransform.offsetMax = new Vector2(icon != null ? -30 : -20, 0);
             if (icon != null)
             {
                 var ic = Image(rt, icon, new Vector2(0f, 0.5f), new Vector2(70, 4), new Vector2(72, 72));

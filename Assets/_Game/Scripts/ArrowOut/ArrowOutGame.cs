@@ -769,7 +769,7 @@ namespace CasualGame.ArrowOut
                     return;
                 }
                 // levels 1–5 don't count blocked taps as mistakes, but calling it "perfect" after several would be a lie
-                p.Text(mistakes > 0 ? Loc.F("{0} mistakes", "Sai {0} lần", mistakes)
+                p.Text(mistakes > 0 ? Loc.F(mistakes == 1 ? "{0} mistake" : "{0} mistakes", "Sai {0} lần", mistakes)
                     : freeTaps > 0 ? Loc.T("Cleared!", "Qua màn!")
                     : Loc.T("Perfect, no mistakes!", "Hoàn hảo, không sai lần nào!"), 48, UIKit.Muted);
                 CoinReward.Add(p, coins, coinsDoubled, "arrow_coins", () => coinsDoubled = true, () => p.Close(() => OpenShop(ShowHome)));
