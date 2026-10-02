@@ -1,0 +1,910 @@
+fileFormatVersion: 2
+guid: e16698c0d55424744af0d1cc9893a738
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 4873448960458071075
+    second: faces_derp_0
+  - first:
+      213: 1347780005611380527
+    second: faces_derp_1
+  - first:
+      213: -4980218624435419421
+    second: faces_derp_2
+  - first:
+      213: 5383057406641911861
+    second: faces_derp_3
+  - first:
+      213: -7980173513155153391
+    second: faces_derp_4
+  - first:
+      213: -2144261507873902487
+    second: faces_derp_5
+  - first:
+      213: -2130823295855154060
+    second: faces_derp_6
+  - first:
+      213: 484857651965351961
+    second: faces_derp_7
+  - first:
+      213: -1642637421137692248
+    second: faces_derp_8
+  - first:
+      213: -8193004881404871455
+    second: faces_derp_9
+  - first:
+      213: -6210481102867670694
+    second: faces_derp_10
+  - first:
+      213: -3207472085371901925
+    second: faces_derp_11
+  - first:
+      213: -189448250438546173
+    second: faces_derp_12
+  - first:
+      213: 254335045674515691
+    second: faces_derp_13
+  - first:
+      213: 1993613324324509963
+    second: faces_derp_14
+  - first:
+      213: -8456741507329178727
+    second: faces_derp_15
+  - first:
+      213: -3822280765930120183
+    second: faces_derp_16
+  - first:
+      213: -6863871536137526664
+    second: faces_derp_17
+  - first:
+      213: -1956715262744346051
+    second: faces_derp_18
+  - first:
+      213: 1735487546368397908
+    second: faces_derp_19
+  - first:
+      213: 3927918025912946942
+    second: faces_derp_20
+  - first:
+      213: -1709901373917972960
+    second: faces_derp_21
+  - first:
+      213: -2178081743864995217
+    second: faces_derp_22
+  - first:
+      213: -4210036268295945275
+    second: faces_derp_23
+  - first:
+      213: -2682000152300350119
+    second: faces_derp_24
+  - first:
+      213: -3501740801477596287
+    second: faces_derp_25
+  - first:
+      213: 8491466224790765805
+    second: faces_derp_26
+  - first:
+      213: 162988964999053171
+    second: faces_derp_27
+  - first:
+      213: 8858790213776828023
+    second: faces_derp_28
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 4
+  singleChannelComponent: 0
+  flipbookRows: 3
+  flipbookColumns: 3
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: faces_derp_0
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 654
+        width: 49
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 32c99174208f1a340800000000000000
+      internalID: 4873448960458071075
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_1
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 650
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f2f17d536c644b210800000000000000
+      internalID: 1347780005611380527
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_2
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 661
+        width: 67
+        height: 30
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 3e60eb22c85b2eab0800000000000000
+      internalID: -4980218624435419421
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_3
+      rect:
+        serializedVersion: 2
+        x: 435
+        y: 649
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5383d60d03674ba40800000000000000
+      internalID: 5383057406641911861
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_4
+      rect:
+        serializedVersion: 2
+        x: 561
+        y: 653
+        width: 52
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 112f766787ab04190800000000000000
+      internalID: -7980173513155153391
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_5
+      rect:
+        serializedVersion: 2
+        x: 689
+        y: 653
+        width: 29
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 960f1a5f48d0e32e0800000000000000
+      internalID: -2144261507873902487
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_6
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 564
+        width: 75
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 47c2d63808bcd62e0800000000000000
+      internalID: -2130823295855154060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_7
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 571
+        width: 81
+        height: 51
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9185600377f8ab600800000000000000
+      internalID: 484857651965351961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_8
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 564
+        width: 57
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a9f252f7fd2439e0800000000000000
+      internalID: -1642637421137692248
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_9
+      rect:
+        serializedVersion: 2
+        x: 45
+        y: 396
+        width: 50
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1ec32d008799c4e80800000000000000
+      internalID: -8193004881404871455
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_10
+      rect:
+        serializedVersion: 2
+        x: 548
+        y: 398
+        width: 57
+        height: 57
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: a59db4b6750ffc9a0800000000000000
+      internalID: -6210481102867670694
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_11
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 435
+        width: 23
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b182d6cd125cc73d0800000000000000
+      internalID: -3207472085371901925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_12
+      rect:
+        serializedVersion: 2
+        x: 179
+        y: 393
+        width: 25
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 30d8a49e1d1fe5df0800000000000000
+      internalID: -189448250438546173
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_13
+      rect:
+        serializedVersion: 2
+        x: 300
+        y: 407
+        width: 51
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: becbc536064978300800000000000000
+      internalID: 254335045674515691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_14
+      rect:
+        serializedVersion: 2
+        x: 436
+        y: 394
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b0919df71ccbaab10800000000000000
+      internalID: 1993613324324509963
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_15
+      rect:
+        serializedVersion: 2
+        x: 699
+        y: 393
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 993c752a76e93aa80800000000000000
+      internalID: -8456741507329178727
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_16
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 299
+        width: 84
+        height: 68
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 90c5dea05e784fac0800000000000000
+      internalID: -3822280765930120183
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_17
+      rect:
+        serializedVersion: 2
+        x: 350
+        y: 308
+        width: 75
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 872ab984431aeb0a0800000000000000
+      internalID: -6863871536137526664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_18
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 319
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: d32c98de5d958d4e0800000000000000
+      internalID: -1956715262744346051
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_19
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 144
+        width: 57
+        height: 58
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 45217697ab0b51810800000000000000
+      internalID: 1735487546368397908
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_20
+      rect:
+        serializedVersion: 2
+        x: 231
+        y: 189
+        width: 23
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef0156132a4c28630800000000000000
+      internalID: 3927918025912946942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_21
+      rect:
+        serializedVersion: 2
+        x: 301
+        y: 78
+        width: 50
+        height: 112
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 026baa682c53548e0800000000000000
+      internalID: -1709901373917972960
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_22
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 141
+        width: 56
+        height: 48
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f62e925a136e5c1e0800000000000000
+      internalID: -2178081743864995217
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_23
+      rect:
+        serializedVersion: 2
+        x: 189
+        y: 143
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5c385b8d152f295c0800000000000000
+      internalID: -4210036268295945275
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_24
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 86
+        width: 29
+        height: 75
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9551892421f97cad0800000000000000
+      internalID: -2682000152300350119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_25
+      rect:
+        serializedVersion: 2
+        x: 692
+        y: 145
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 18baf684b41576fc0800000000000000
+      internalID: -3501740801477596287
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_26
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 42
+        width: 77
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: de081eeaa8fb7d570800000000000000
+      internalID: 8491466224790765805
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_27
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 49
+        width: 69
+        height: 50
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 37fb311a99d034200800000000000000
+      internalID: 162988964999053171
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_derp_28
+      rect:
+        serializedVersion: 2
+        x: 606
+        y: 54
+        width: 90
+        height: 49
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 776efd773ceb0fa70800000000000000
+      internalID: 8858790213776828023
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      faces_derp_0: 4873448960458071075
+      faces_derp_1: 1347780005611380527
+      faces_derp_10: -6210481102867670694
+      faces_derp_11: -3207472085371901925
+      faces_derp_12: -189448250438546173
+      faces_derp_13: 254335045674515691
+      faces_derp_14: 1993613324324509963
+      faces_derp_15: -8456741507329178727
+      faces_derp_16: -3822280765930120183
+      faces_derp_17: -6863871536137526664
+      faces_derp_18: -1956715262744346051
+      faces_derp_19: 1735487546368397908
+      faces_derp_2: -4980218624435419421
+      faces_derp_20: 3927918025912946942
+      faces_derp_21: -1709901373917972960
+      faces_derp_22: -2178081743864995217
+      faces_derp_23: -4210036268295945275
+      faces_derp_24: -2682000152300350119
+      faces_derp_25: -3501740801477596287
+      faces_derp_26: 8491466224790765805
+      faces_derp_27: 162988964999053171
+      faces_derp_28: 8858790213776828023
+      faces_derp_3: 5383057406641911861
+      faces_derp_4: -7980173513155153391
+      faces_derp_5: -2144261507873902487
+      faces_derp_6: -2130823295855154060
+      faces_derp_7: 484857651965351961
+      faces_derp_8: -1642637421137692248
+      faces_derp_9: -8193004881404871455
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

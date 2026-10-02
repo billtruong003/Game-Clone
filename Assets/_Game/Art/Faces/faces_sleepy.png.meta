@@ -1,0 +1,1274 @@
+fileFormatVersion: 2
+guid: 896ddd923edfaf144830254205d40623
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -527207153261428555
+    second: faces_sleepy_0
+  - first:
+      213: 6713848037644837326
+    second: faces_sleepy_1
+  - first:
+      213: -8365272004052533590
+    second: faces_sleepy_2
+  - first:
+      213: -8678296487936138524
+    second: faces_sleepy_3
+  - first:
+      213: -2746042133969015880
+    second: faces_sleepy_4
+  - first:
+      213: -9153486677546894737
+    second: faces_sleepy_5
+  - first:
+      213: 1892099390320636887
+    second: faces_sleepy_6
+  - first:
+      213: 2048076982224413543
+    second: faces_sleepy_7
+  - first:
+      213: -7256470040169979082
+    second: faces_sleepy_8
+  - first:
+      213: 5387763228307372952
+    second: faces_sleepy_9
+  - first:
+      213: 752790936419565517
+    second: faces_sleepy_10
+  - first:
+      213: -6574903198296714034
+    second: faces_sleepy_11
+  - first:
+      213: -2388874016335415815
+    second: faces_sleepy_12
+  - first:
+      213: -8822973282499321810
+    second: faces_sleepy_13
+  - first:
+      213: 2496313905407940119
+    second: faces_sleepy_14
+  - first:
+      213: 6532244894175516705
+    second: faces_sleepy_15
+  - first:
+      213: -336214213072016691
+    second: faces_sleepy_16
+  - first:
+      213: -8010378934187823151
+    second: faces_sleepy_17
+  - first:
+      213: 4890816422440459644
+    second: faces_sleepy_18
+  - first:
+      213: 7516266554835313135
+    second: faces_sleepy_19
+  - first:
+      213: 5644768852722271792
+    second: faces_sleepy_20
+  - first:
+      213: -1677739563224702639
+    second: faces_sleepy_21
+  - first:
+      213: -5546296787054046575
+    second: faces_sleepy_22
+  - first:
+      213: 9177824350187708961
+    second: faces_sleepy_23
+  - first:
+      213: -3131416693108472729
+    second: faces_sleepy_24
+  - first:
+      213: 3058972535823370972
+    second: faces_sleepy_25
+  - first:
+      213: -6219679424162624203
+    second: faces_sleepy_26
+  - first:
+      213: -8433051167821439882
+    second: faces_sleepy_27
+  - first:
+      213: 5217489623342031636
+    second: faces_sleepy_28
+  - first:
+      213: 1082474955414235925
+    second: faces_sleepy_29
+  - first:
+      213: 8721889428381257607
+    second: faces_sleepy_30
+  - first:
+      213: 3262886093157370110
+    second: faces_sleepy_31
+  - first:
+      213: -992999136794949729
+    second: faces_sleepy_32
+  - first:
+      213: -3977433918882834735
+    second: faces_sleepy_33
+  - first:
+      213: 5128843586988857266
+    second: faces_sleepy_34
+  - first:
+      213: 4245931205196566222
+    second: faces_sleepy_35
+  - first:
+      213: 7054245167966547109
+    second: faces_sleepy_36
+  - first:
+      213: -5935716451859719834
+    second: faces_sleepy_37
+  - first:
+      213: -8584996532968083919
+    second: faces_sleepy_38
+  - first:
+      213: 8347098160884606161
+    second: faces_sleepy_39
+  - first:
+      213: -5904024576962964106
+    second: faces_sleepy_40
+  - first:
+      213: -2968437343025789903
+    second: faces_sleepy_41
+  - first:
+      213: 4578530228146226817
+    second: faces_sleepy_42
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 1
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 0
+  textureShape: 4
+  singleChannelComponent: 0
+  flipbookRows: 3
+  flipbookColumns: 3
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 4
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: Android
+    maxTextureSize: 1024
+    resizeAlgorithm: 0
+    textureFormat: 50
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 1
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 4
+    buildTarget: WindowsStoreApps
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: faces_sleepy_0
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 658
+        width: 54
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5b0ceca23ebfea8f0800000000000000
+      internalID: -527207153261428555
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_1
+      rect:
+        serializedVersion: 2
+        x: 156
+        y: 656
+        width: 55
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec126cff7316c2d50800000000000000
+      internalID: 6713848037644837326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_2
+      rect:
+        serializedVersion: 2
+        x: 304
+        y: 658
+        width: 54
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: aaebde4fe6598eb80800000000000000
+      internalID: -8365272004052533590
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_3
+      rect:
+        serializedVersion: 2
+        x: 412
+        y: 656
+        width: 55
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 4e2eb05e25f709780800000000000000
+      internalID: -8678296487936138524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_4
+      rect:
+        serializedVersion: 2
+        x: 560
+        y: 658
+        width: 54
+        height: 29
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8bb65827a3914e9d0800000000000000
+      internalID: -2746042133969015880
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_5
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 661
+        width: 45
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f6afb803d5848f080800000000000000
+      internalID: -9153486677546894737
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_6
+      rect:
+        serializedVersion: 2
+        x: 58
+        y: 635
+        width: 35
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7d37bc7ee56124a10800000000000000
+      internalID: 1892099390320636887
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_7
+      rect:
+        serializedVersion: 2
+        x: 166
+        y: 633
+        width: 35
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 763e3260a2b3c6c10800000000000000
+      internalID: 2048076982224413543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_8
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 635
+        width: 35
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6336764e1f6db4b90800000000000000
+      internalID: -7256470040169979082
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_9
+      rect:
+        serializedVersion: 2
+        x: 422
+        y: 633
+        width: 35
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 89b3c2d4c1e25ca40800000000000000
+      internalID: 5387763228307372952
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_10
+      rect:
+        serializedVersion: 2
+        x: 570
+        y: 635
+        width: 35
+        height: 10
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcffb634e53727a00800000000000000
+      internalID: 752790936419565517
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_11
+      rect:
+        serializedVersion: 2
+        x: 111
+        y: 592
+        width: 43
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ec4d1f0606041c4a0800000000000000
+      internalID: -6574903198296714034
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_12
+      rect:
+        serializedVersion: 2
+        x: 356
+        y: 587
+        width: 76
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9f5ba2b2db309ded0800000000000000
+      internalID: -2388874016335415815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_13
+      rect:
+        serializedVersion: 2
+        x: 614
+        y: 595
+        width: 57
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e20add1bb808e8580800000000000000
+      internalID: -8822973282499321810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_14
+      rect:
+        serializedVersion: 2
+        x: 483
+        y: 493
+        width: 21
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 71655bb5540b4a220800000000000000
+      internalID: 2496313905407940119
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_15
+      rect:
+        serializedVersion: 2
+        x: 446
+        y: 454
+        width: 29
+        height: 35
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 128d0373f1237aa50800000000000000
+      internalID: 6532244894175516705
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_16
+      rect:
+        serializedVersion: 2
+        x: 562
+        y: 442
+        width: 51
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: dcaa76d54f6855bf0800000000000000
+      internalID: -336214213072016691
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_17
+      rect:
+        serializedVersion: 2
+        x: 733
+        y: 429
+        width: 23
+        height: 41
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1df6677dcca65d090800000000000000
+      internalID: -8010378934187823151
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_18
+      rect:
+        serializedVersion: 2
+        x: 670
+        y: 439
+        width: 51
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: c7dd531af9bafd340800000000000000
+      internalID: 4890816422440459644
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_19
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 406
+        width: 46
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fe1ab16db942f4860800000000000000
+      internalID: 7516266554835313135
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_20
+      rect:
+        serializedVersion: 2
+        x: 161
+        y: 403
+        width: 45
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 03643b14d5f365e40800000000000000
+      internalID: 5644768852722271792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_21
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 403
+        width: 46
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1516f5c91c877b8e0800000000000000
+      internalID: -1677739563224702639
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_22
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 400
+        width: 45
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 192d0cc25789703b0800000000000000
+      internalID: -5546296787054046575
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_23
+      rect:
+        serializedVersion: 2
+        x: 573
+        y: 405
+        width: 28
+        height: 27
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1226edbce9e2e5f70800000000000000
+      internalID: 9177824350187708961
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_24
+      rect:
+        serializedVersion: 2
+        x: 682
+        y: 402
+        width: 27
+        height: 28
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7648a8bcb19fa84d0800000000000000
+      internalID: -3131416693108472729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_25
+      rect:
+        serializedVersion: 2
+        x: 87
+        y: 335
+        width: 84
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: cda8d6f6057a37a20800000000000000
+      internalID: 3058972535823370972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_26
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 338
+        width: 57
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 53d0bf954824fa9a0800000000000000
+      internalID: -6219679424162624203
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_27
+      rect:
+        serializedVersion: 2
+        x: 619
+        y: 319
+        width: 40
+        height: 45
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67c5f41a4a8c7fa80800000000000000
+      internalID: -8433051167821439882
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_28
+      rect:
+        serializedVersion: 2
+        x: 12
+        y: 179
+        width: 23
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 413a6924b2f386840800000000000000
+      internalID: 5217489623342031636
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_29
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 152
+        width: 30
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 51be8bb9c39b50f00800000000000000
+      internalID: 1082474955414235925
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_30
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 152
+        width: 33
+        height: 31
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 78f46ec79306a0970800000000000000
+      internalID: 8721889428381257607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_31
+      rect:
+        serializedVersion: 2
+        x: 308
+        y: 150
+        width: 46
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ef8053d3d99184d20800000000000000
+      internalID: 3262886093157370110
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_32
+      rect:
+        serializedVersion: 2
+        x: 417
+        y: 147
+        width: 45
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: f974115db882832f0800000000000000
+      internalID: -992999136794949729
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_33
+      rect:
+        serializedVersion: 2
+        x: 564
+        y: 150
+        width: 46
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d616639ce05dc8c0800000000000000
+      internalID: -3977433918882834735
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_34
+      rect:
+        serializedVersion: 2
+        x: 673
+        y: 147
+        width: 45
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2b7d20f81105d2740800000000000000
+      internalID: 5128843586988857266
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_35
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 129
+        width: 40
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ececc7a6fe39cea30800000000000000
+      internalID: 4245931205196566222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_36
+      rect:
+        serializedVersion: 2
+        x: 163
+        y: 129
+        width: 41
+        height: 12
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 5ac6923fa96b5e160800000000000000
+      internalID: 7054245167966547109
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_37
+      rect:
+        serializedVersion: 2
+        x: 323
+        y: 78
+        width: 21
+        height: 65
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 6699577f55910ada0800000000000000
+      internalID: -5935716451859719834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_38
+      rect:
+        serializedVersion: 2
+        x: 430
+        y: 86
+        width: 18
+        height: 55
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13e2a767327fbd880800000000000000
+      internalID: -8584996532968083919
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_39
+      rect:
+        serializedVersion: 2
+        x: 92
+        y: 42
+        width: 77
+        height: 81
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1d4e7d07d89d6d370800000000000000
+      internalID: 8347098160884606161
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_40
+      rect:
+        serializedVersion: 2
+        x: 352
+        y: 74
+        width: 69
+        height: 25
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 67552f89de0b01ea0800000000000000
+      internalID: -5904024576962964106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_41
+      rect:
+        serializedVersion: 2
+        x: 622
+        y: 70
+        width: 39
+        height: 37
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 13481f6c6fdfdc6d0800000000000000
+      internalID: -2968437343025789903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: faces_sleepy_42
+      rect:
+        serializedVersion: 2
+        x: 650
+        y: 34
+        width: 14
+        height: 40
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      customData: 
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1864b020cf43a8f30800000000000000
+      internalID: 4578530228146226817
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    customData: 
+    physicsShape: []
+    bones: []
+    spriteID: 
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    spriteCustomMetadata:
+      entries: []
+    nameFileIdTable:
+      faces_sleepy_0: -527207153261428555
+      faces_sleepy_1: 6713848037644837326
+      faces_sleepy_10: 752790936419565517
+      faces_sleepy_11: -6574903198296714034
+      faces_sleepy_12: -2388874016335415815
+      faces_sleepy_13: -8822973282499321810
+      faces_sleepy_14: 2496313905407940119
+      faces_sleepy_15: 6532244894175516705
+      faces_sleepy_16: -336214213072016691
+      faces_sleepy_17: -8010378934187823151
+      faces_sleepy_18: 4890816422440459644
+      faces_sleepy_19: 7516266554835313135
+      faces_sleepy_2: -8365272004052533590
+      faces_sleepy_20: 5644768852722271792
+      faces_sleepy_21: -1677739563224702639
+      faces_sleepy_22: -5546296787054046575
+      faces_sleepy_23: 9177824350187708961
+      faces_sleepy_24: -3131416693108472729
+      faces_sleepy_25: 3058972535823370972
+      faces_sleepy_26: -6219679424162624203
+      faces_sleepy_27: -8433051167821439882
+      faces_sleepy_28: 5217489623342031636
+      faces_sleepy_29: 1082474955414235925
+      faces_sleepy_3: -8678296487936138524
+      faces_sleepy_30: 8721889428381257607
+      faces_sleepy_31: 3262886093157370110
+      faces_sleepy_32: -992999136794949729
+      faces_sleepy_33: -3977433918882834735
+      faces_sleepy_34: 5128843586988857266
+      faces_sleepy_35: 4245931205196566222
+      faces_sleepy_36: 7054245167966547109
+      faces_sleepy_37: -5935716451859719834
+      faces_sleepy_38: -8584996532968083919
+      faces_sleepy_39: 8347098160884606161
+      faces_sleepy_4: -2746042133969015880
+      faces_sleepy_40: -5904024576962964106
+      faces_sleepy_41: -2968437343025789903
+      faces_sleepy_42: 4578530228146226817
+      faces_sleepy_5: -9153486677546894737
+      faces_sleepy_6: 1892099390320636887
+      faces_sleepy_7: 2048076982224413543
+      faces_sleepy_8: -7256470040169979082
+      faces_sleepy_9: 5387763228307372952
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

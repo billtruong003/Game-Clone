@@ -191,7 +191,7 @@ Shader "CasualGame/Lab/BallSkin"
                     {
                         float2 q = float2(p.x, p.y / 0.32);
                         float rr = length(RotZ(float3(q, 0), -0.35).xy);
-                        float ring = AAInside(abs(rr - 1.55) - 0.28) * (1 - AAInside(abs(rr - 1.55) - 0.06) * 0.4);
+                        float ring = AAInside(abs(rr - 1.38) - 0.2) * (1 - AAInside(abs(rr - 1.38) - 0.05) * 0.4);   // fits the stage walls
                         bool front = p.y * cos(0.35) + p.x * sin(0.35) < 0;
                         if (ring > 0 && (front || ball < 0.5)) { c = lerp(c, _ColB.rgb * 1.1, ring); a = max(a, ring); }
                     }

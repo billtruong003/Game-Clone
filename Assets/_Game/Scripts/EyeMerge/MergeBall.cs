@@ -26,7 +26,8 @@ namespace CasualGame.EyeMerge
         private Transform spin;
         // premium sets: the fill is a shader quad; it rolls (_Spin) and eyeballs look at the held ball (_Look)
         private MaterialPropertyBlock skinProps;
-        private bool lookAt;
+        private bool lookAt, squashy;
+        private float squash; // slimes: 0..1, set by a landing, settles back
 
         /// <summary>Where every eyeball looks (the ball waiting to be dropped), set by the game.</summary>
         public static Vector2 LookTarget;
@@ -65,6 +66,7 @@ namespace CasualGame.EyeMerge
             fill.SetPropertyBlock(skinProps);
             line.enabled = false;
             lookAt = look.Set == 5;
+            squashy = look.Set == 4;
             if (!look.Face) Face.gameObject.SetActive(false);
         }
 
@@ -78,6 +80,11 @@ namespace CasualGame.EyeMerge
             {
                 skinProps.SetFloat("_Spin", transform.eulerAngles.z * Mathf.Deg2Rad);
                 if (lookAt) skinProps.SetVector("_Look", Vector2.ClampMagnitude((LookTarget - (Vector2)transform.position) / 6f, 1f));
+                if (squashy)
+                {
+                    squash = Mathf.MoveTowards(squash, 0f, Time.deltaTime * 4f);
+                    skinProps.SetFloat("_Squash", squash);
+                }
                 fill.SetPropertyBlock(skinProps);
             }
             if (!Body.simulated || Merging) return;
@@ -96,6 +103,7 @@ namespace CasualGame.EyeMerge
                 {
                     var normal = ((Vector2)transform.position - c.GetContact(0).point).normalized; // from the contact into this ball
                     Jelly.Impact(speed / 9f, normal, radius); // bouncy: a harder hit squashes more
+                    if (squashy) squash = Mathf.Max(squash, Mathf.Clamp01(speed / 9f));
                 }
                 game.OnBallHit(this, c, speed);
             }

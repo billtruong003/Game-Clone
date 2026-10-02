@@ -241,6 +241,12 @@ namespace CasualGame.ArrowOut
             trail.sharedMaterial = inkMaterial;
             trail.time = InkTrailTime;
             trail.widthMultiplier = WorldCell() * InkWidth;
+            var look = ArrowSkins.Current; // a theme leaves its own trail: a light streak, chalk dust, a dashed line
+            if (look != null)
+            {
+                trail.sharedMaterial = ArrowSkins.TrailMaterial(look, WorldCell() * 6f);
+                if (look.Trail == 0) trail.widthMultiplier = WorldCell() * InkWidth * 2.2f;
+            }
             trail.widthCurve = AnimationCurve.Linear(0f, 1f, 1f, 0.2f);
             trail.textureMode = LineTextureMode.Stretch;
             trail.minVertexDistance = 0.04f;

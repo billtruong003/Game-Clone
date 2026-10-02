@@ -19,7 +19,8 @@ namespace CasualGame.ArrowOut
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Register()
         {
-            var c = new SkinCatalog(GameId, ("Arrows", "Mũi tên"), ("Paper", "Giấy"));
+            var c = new SkinCatalog(GameId, ("Arrows", "Mũi tên"), ("Paper", "Giấy"), ("Faces", "Mặt"));
+            FacePacks.AddTo(c);
             c.Add(new SkinDef { Id = "classic", En = "Classic", Vi = "Cổ điển", Tab = 0, Price = SkinPrice.Free, Colors = P("#2E3A59", "#35B09F", "#7B4FAE", "#EDA93C") });
             c.Add(new SkinDef { Id = "color_candy", En = "Candy", Vi = "Kẹo ngọt", Tab = 0, Price = SkinPrice.Coins, Cost = 300, Colors = P("#8A5CF0", "#E85D9E", "#3FB8E0", "#F2A53A") });
             c.Add(new SkinDef { Id = "color_ocean", En = "Ocean", Vi = "Đại dương", Tab = 0, Price = SkinPrice.Coins, Cost = 300, Colors = P("#1F5FA8", "#1FA3B8", "#5E7CE2", "#2EC4B6") });
@@ -62,14 +63,15 @@ namespace CasualGame.ArrowOut
             public float GlowPad;    // cells of halo around the line
             public int Style = -1;   // ThemeSprite / ThemeFace style, -1 = the default cap and face
             public bool Ring;        // neon / vector: the cap is a glowing ring with the face inside
+            public int Trail;        // ThemeTrail mode left behind a flying arrow: 0 glow, 1 chalk, 2 blueprint dashes
         }
 
         private static readonly Dictionary<string, Look> Looks = new()
         {
-            ["theme_blueprint"] = new Look { Line = "ArrowBlueprint", Ground = 2 },
-            ["theme_chalkboard"] = new Look { Line = "ArrowChalk", Ground = 1, Style = 1 },
+            ["theme_blueprint"] = new Look { Line = "ArrowBlueprint", Ground = 2, Trail = 2 },
+            ["theme_chalkboard"] = new Look { Line = "ArrowChalk", Ground = 1, Style = 1, Trail = 1 },
             ["theme_vector"] = new Look { Line = "ArrowVector", Ground = 3, GlowPad = 0.45f, Style = 2, Ring = true },
-            ["theme_hologram"] = new Look { Line = "ArrowHolo", Ground = 4, GlowPad = 0.45f, Style = 3 },
+            ["theme_hologram"] = new Look { Line = "ArrowHolo", Ground = 4, GlowPad = 0.45f, Style = 3, Ring = true },
             ["theme_neon"] = new Look { Line = "ArrowNeon", Ground = 4, GlowPad = 0.55f, Style = 2, Ring = true },
         };
 
@@ -96,6 +98,18 @@ namespace CasualGame.ArrowOut
             if (m.HasProperty("_Reveal") && !m.name.EndsWith("!")) { m.SetFloat("_Reveal", 1f); m.name += "!"; } // fully drawn unless a board animates it
             // glowing lines start at the tail cap's edge, so the line never runs through the face
             if (m.HasProperty("_TailClip")) m.SetFloat("_TailClip", look.Style is 2 or 3 ? 0.3f : 0f);
+            return m;
+        }
+
+        /// <summary>The material of the trail a flying arrow leaves in a look (glow streak, chalk dust, dashed line).</summary>
+        public static Material TrailMaterial(Look look, float worldLength)
+        {
+            var m = Mat("trail." + look.Line, "ThemeTrail");
+            m.SetFloat("_Mode", look.Trail);
+            m.SetFloat("_Length", worldLength);
+            var additive = look.Trail == 0;
+            m.SetFloat("_SrcBlend", (float)UnityEngine.Rendering.BlendMode.One);
+            m.SetFloat("_DstBlend", (float)(additive ? UnityEngine.Rendering.BlendMode.One : UnityEngine.Rendering.BlendMode.OneMinusSrcAlpha));
             return m;
         }
 
@@ -133,9 +147,12 @@ namespace CasualGame.ArrowOut
             if (glow) cap.rectTransform.sizeDelta *= 1.8f;
             // glowing styles draw the face in the arrow's own light; chalk keeps a dark-on-light ink
             var ink = glow ? Color.Lerp(color, Color.white, 0.5f) : color.grayscale < 0.36f ? UIKit.Paper : UIKit.Ink;
-            var key = "face." + look.Line + "." + ColorUtility.ToHtmlStringRGB(ink);
+            // the worn face pack (shop faces tab) instead of the default faces
+            var packName = Skins.Equipped(FacePacks.Tab)?.FacePack;
+            var pack = packName != null ? ArtLibrary.Instance.FacePack(packName) : null;
+            var key = "face." + look.Line + "." + ColorUtility.ToHtmlStringRGB(ink) + "." + (packName ?? "deadpan");
             var faceMat = Mat(key, "ThemeFace");
-            faceMat.SetTexture("_Faces", ArtLibrary.Instance.FaceMaterial.GetTexture("_Faces"));
+            faceMat.SetTexture("_Faces", pack != null ? pack : ArtLibrary.Instance.FaceMaterial.GetTexture("_Faces"));
             faceMat.SetFloat("_Mode", look.Style);
             faceMat.SetColor("_Ink", ink);
             face.GetComponent<FaceGraphic>().material = faceMat;

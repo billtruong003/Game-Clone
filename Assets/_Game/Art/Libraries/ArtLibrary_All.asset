@@ -90,3 +90,8 @@ MonoBehaviour:
   - {fileID: 1948047294, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   - {fileID: -1529428675, guid: 17af6041fb53c5f4f960ec9d2212d1c4, type: 3}
   faceMaterial: {fileID: 2100000, guid: 225230e226342df4a9afa056cbe8cb7f, type: 2}
+  facePacks:
+  - {fileID: 18700000, guid: e16698c0d55424744af0d1cc9893a738, type: 3}
+  - {fileID: 18700000, guid: 87629d797fdd06b4d8e0c74eeddd0d82, type: 3}
+  - {fileID: 18700000, guid: 896ddd923edfaf144830254205d40623, type: 3}
+  ballDigits: {fileID: 2800000, guid: 09199b0adbac1d94d8c7e81437d5138a, type: 3}

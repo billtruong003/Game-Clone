@@ -18,7 +18,8 @@ namespace CasualGame.EyeMerge
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Register()
         {
-            var c = new SkinCatalog(GameId, ("Balls", "Bóng"), ("Stage", "Sân khấu"));
+            var c = new SkinCatalog(GameId, ("Balls", "Bóng"), ("Stage", "Sân khấu"), ("Faces", "Mặt"));
+            FacePacks.AddTo(c);
             // balls: tier 1 → 11
             c.Add(new SkinDef { Id = "classic", En = "Classic", Vi = "Cổ điển", Tab = 0, Price = SkinPrice.Free,
                 Colors = P("#FFD23F", "#FF9F1C", "#3DDC97", "#4EA8DE", "#F15BB5", "#FF5A5F", "#9B5DE5", "#2A9D8F", "#E76F51", "#3A5BD9", "#FFC83D") });

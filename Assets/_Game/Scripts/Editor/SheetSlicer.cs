@@ -143,7 +143,10 @@ namespace CasualGame.EditorTools
                 library = ScriptableObject.CreateInstance<ArtLibrary>();
                 AssetDatabase.CreateAsset(library, libraryPath);
             }
-            library.EditorSet(sprites.OrderBy(s => s.name).ToList(), FaceTextureImporter.EnsureMaterial());
+            var packs = Directory.GetFiles("Assets/_Game/Art/Faces", "faces_*.png")
+                .Select(p => AssetDatabase.LoadAssetAtPath<Texture2DArray>(p.Replace('\\', '/'))).Where(t => t != null).ToList();
+            library.EditorSet(sprites.OrderBy(s => s.name).ToList(), FaceTextureImporter.EnsureMaterial(), packs,
+                AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Game/Art/Lab/ball_digits.png"));
             EditorUtility.SetDirty(library);
             AssetDatabase.SaveAssetIfDirty(library);
             return library;

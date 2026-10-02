@@ -163,6 +163,7 @@ namespace CasualGame.Core
             var r = root;
             root = null;
             UnityEngine.Object.Destroy(r.gameObject);
+            FacePacks.Apply(); // back to the worn face pack after any try-on
             onClose?.Invoke();
         }
 
@@ -238,7 +239,23 @@ namespace CasualGame.Core
             tap.transition = Selectable.Transition.None;
             tap.onClick.AddListener(() => Try(skin));
             var art = UIKit.Place(UIKit.Rect("Art", card), new Vector2(0.5f, 1f), new Vector2(0, -24 - 75), new Vector2(CardW - 48, 150));
-            painter.Card(art, skin);
+            if (skin.Tab == FacePacks.Tab)
+            {
+                // a face pack: three big faces of that pack (smug, grin, shock) on the worn colours, so packs read apart
+                var palette = Skins.Palette ?? catalog.Default(0).Colors;
+                FaceId[] moods = { FaceId.Smug, FaceId.Grin, FaceId.Shock };
+                for (int k = 0; k < 3; k++)
+                {
+                    var body = UIKit.Image(art, "circle_fill", new Vector2(0.5f, 0.5f), new Vector2((k - 1) * 128f, 0), new Vector2(118, 118),
+                        palette[(k * 2 + 2) % palette.Length]);
+                    UIKit.Image(body.transform, "circle_line", new Vector2(0.5f, 0.5f), Vector2.zero, new Vector2(118, 118));
+                    var face = Face.AddUI(body.transform, new Vector2(84, 84), new Vector2(0, 4));
+                    face.SetIdle(moods[k]);
+                    face.InkFor(body.color);
+                    FacePacks.Wear(face, skin);
+                }
+            }
+            else painter.Card(art, skin);
             UIKit.Label(card, skin.Name, 44, new Vector2(0.5f, 1f), new Vector2(0, -216), new Vector2(CardW - 40, 60));
             var button = UIKit.Button(card, "btn_white", "", () => Act(skin), new Vector2(0.5f, 0f), new Vector2(0, 70), new Vector2(CardW - 64, 100), null, 44);
             if (skin.Price == SkinPrice.Premium)
@@ -262,6 +279,7 @@ namespace CasualGame.Core
             var look = UIKit.Stretch(UIKit.Rect("Look", previewArea));
             var pieces = tried.Length > 0 ? tried[0] : null;
             var scene = tried.Length > 1 ? tried[1] : null;
+            if (tried.Length > FacePacks.Tab) FacePacks.Show(tried[FacePacks.Tab]); // try a face pack on
             painter.Preview(look, pieces, scene);
             var shown = tried[tab];
             var trying = shown != null && shown != Skins.Equipped(tab);

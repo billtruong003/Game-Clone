@@ -26,6 +26,7 @@ namespace CasualGame.Core
             if (audio != null) GameAudio.SetLibrary(audio);
             GameFx.SetCatalog(fx);
             GameConfig.SetCurrent(config);
+            FacePacks.Apply(); // the worn face pack, on every face
             if (!bootScene) Ads.Init(config);
         }
 

@@ -66,8 +66,8 @@ namespace CasualGame.Lab
             // ---------------- Nah Blocks premium (picks: Retro A, Pixel A, Studs B, Gems A) + CRT pillow ----------------
             new() { Kind = Kind.Blocks, Set = 0, Name = "Blocks · Retro Bricks", Note = "Hard bevel, black well", Base = H("#000000"),
                 Palette = P("#E04040", "#3070E0", "#F0C020", "#30B050", "#A040C0", "#F07020", "#20B0C0") },
-            new() { Kind = Kind.Blocks, Set = 2, Name = "Blocks · Toy Bricks", Note = "Rounded glossy plastic, two studs on the top face", Base = H("#4C9A4F"),
-                Palette = P("#E3000B", "#0055BF", "#F2CD37", "#00852B", "#FE8A18", "#A0A5A9", "#F4F4F4") },
+            new() { Kind = Kind.Blocks, Set = 2, Name = "Blocks · Toy Bricks (pastel)", Note = "Soft pastel plastic, two studs on the top face", Base = H("#E8E1F2"), Text = UIKit.Ink,
+                Palette = P("#FFB3C7", "#A0C4FF", "#FFE29A", "#B9F2C9", "#D7C4FF", "#FFC9A3", "#BDEFF0") },
             new() { Kind = Kind.Blocks, Set = 3, Name = "Blocks · Gems", Note = "Cut octagons, facets, a soft travelling glint", Base = H("#1B1030"),
                 Palette = P("#E0115F", "#0F52BA", "#50C878", "#FFC87C", "#9966CC", "#7FFFD4", "#E4D00A") },
         };

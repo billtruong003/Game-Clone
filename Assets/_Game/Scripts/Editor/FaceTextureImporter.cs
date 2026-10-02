@@ -6,7 +6,8 @@ namespace CasualGame.EditorTools
 {
     /// <summary>
     /// Imports Assets/_Game/Art/Faces/faces.png (3×3 flipbook written by Tools/art/make-faces.mjs) as a Texture2DArray,
-    /// one slice per <see cref="FaceId"/>, and keeps the shared FaceArray material pointing at it.
+    /// one slice per <see cref="FaceId"/>, and keeps the shared FaceArray material pointing at it. The shop's face
+    /// packs (faces_&lt;pack&gt;.png, same layout) import the same way.
     /// </summary>
     public class FaceTextureImporter : AssetPostprocessor
     {
@@ -15,7 +16,7 @@ namespace CasualGame.EditorTools
 
         private void OnPreprocessTexture()
         {
-            if (assetPath != TexturePath) return;
+            if (assetPath != TexturePath && !IsPack(assetPath)) return;
             var ti = (TextureImporter)assetImporter;
             ti.textureType = TextureImporterType.Default;
             ti.textureShape = TextureImporterShape.Texture2DArray;
@@ -36,6 +37,9 @@ namespace CasualGame.EditorTools
             android.maxTextureSize = 1024;
             ti.SetPlatformTextureSettings(android);
         }
+
+        public static bool IsPack(string path) =>
+            path.StartsWith("Assets/_Game/Art/Faces/faces_") && path.EndsWith(".png");
 
         /// <summary>The material every face renders with (created on first use).</summary>
         public static Material EnsureMaterial()

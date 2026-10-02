@@ -12,6 +12,8 @@ namespace CasualGame.Core
     {
         [SerializeField] private List<Sprite> sprites = new();
         [SerializeField] private Material faceMaterial;
+        [SerializeField] private List<Texture2DArray> facePacks = new(); // shop face packs (faces_<pack>), same slices as the default
+        [SerializeField] private Texture2D ballDigits;                  // Meh Merge billiard numbers 1..16 (Art/Lab/ball_digits.png)
 
         [System.NonSerialized] private Dictionary<string, Sprite> byName;
         private static ArtLibrary instance;
@@ -33,6 +35,10 @@ namespace CasualGame.Core
         public static void SetCurrent(ArtLibrary library) => instance = library;
 
         public Material FaceMaterial => faceMaterial;
+        public Texture2D BallDigits => ballDigits;
+
+        /// <summary>A shop face pack by name ("sleepy"), or null.</summary>
+        public Texture2DArray FacePack(string pack) => facePacks.Find(t => t != null && t.name == "faces_" + pack);
 
         public Sprite Get(string spriteName)
         {
@@ -48,10 +54,12 @@ namespace CasualGame.Core
         }
 
 #if UNITY_EDITOR
-        public void EditorSet(List<Sprite> allSprites, Material faces)
+        public void EditorSet(List<Sprite> allSprites, Material faces, List<Texture2DArray> packs, Texture2D digits)
         {
+            ballDigits = digits;
             sprites = allSprites;
             faceMaterial = faces;
+            facePacks = packs;
             byName = null;
         }
 #endif

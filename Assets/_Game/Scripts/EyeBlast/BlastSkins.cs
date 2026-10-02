@@ -19,7 +19,8 @@ namespace CasualGame.EyeBlast
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
         private static void Register()
         {
-            var c = new SkinCatalog(GameId, ("Blocks", "Khối"), ("Board", "Bàn"));
+            var c = new SkinCatalog(GameId, ("Blocks", "Khối"), ("Board", "Bàn"), ("Faces", "Mặt"));
+            FacePacks.AddTo(c);
             c.Add(new SkinDef { Id = "classic", En = "Classic", Vi = "Cổ điển", Tab = 0, Price = SkinPrice.Free,
                 Colors = P("#FF5A5F", "#FF9F1C", "#FFD23F", "#3DDC97", "#4EA8DE", "#9B5DE5", "#F15BB5") });
             c.Add(new SkinDef { Id = "color_candy", En = "Candy", Vi = "Kẹo ngọt", Tab = 0, Price = SkinPrice.Coins, Cost = 300, Fx = "Skin_Confetti", FxPieceColor = false,

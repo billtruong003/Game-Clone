@@ -53,10 +53,10 @@ Shader "CasualGame/Lab/SlimeSkin"
                 float ang = atan2(p.y, p.x);
                 float radius = 1.0
                     + _Wobble * (sin(ang * 3.0 + tt) * 0.6 + sin(ang * 5.0 - tt * 1.3) * 0.4)
-                    + 0.12 * saturate(-p.y)                    // belly
+                    + 0.04 * saturate(-p.y)                    // a little belly: the blob hugs its round collider
                     - 0.06 * saturate(p.y) * (1 - abs(p.x));   // peak
                 // the flat bottom (it sits on the floor) is part of the shape, so the outline runs along it too
-                float d = max(length(p) - radius, -(p.y + 0.86));
+                float d = max(length(p) - radius, -(p.y + 0.94));
                 float body = AAInside(d);
                 float edgeDist = saturate(-d / radius);          // 0 at the rim .. 1 deep inside
                 // jelly lighting

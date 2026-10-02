@@ -82,7 +82,7 @@ namespace CasualGame.EyeMerge
         /// <summary>The ball's radius inside its quad (the rest is room for horns, a ring, a corona).</summary>
         public static float SphereR(Look look, int tier) => look.Set switch
         {
-            2 => Planets[tier - 1].v == 3 ? 0.45f : Planets[tier - 1].v == 4 ? 0.7f : 0.94f,
+            2 => Planets[tier - 1].v == 3 ? 0.52f : Planets[tier - 1].v == 4 ? 0.7f : 0.94f,
             3 => 0.6f,
             4 => 0.72f,
             _ => 0.94f,
@@ -102,12 +102,7 @@ namespace CasualGame.EyeMerge
         {
             get
             {
-                if (digits != null) return digits;
-                digits = Resources.Load<Texture2D>("ball_digits");
-#if UNITY_EDITOR
-                // TODO(device builds): ship the digits atlas with the game (GameConfig / ArtLibrary) instead of the lab folder
-                if (digits == null) digits = UnityEditor.AssetDatabase.LoadAssetAtPath<Texture2D>("Assets/_Game/Art/Lab/ball_digits.png");
-#endif
+                if (digits == null && ArtLibrary.Instance != null) digits = ArtLibrary.Instance.BallDigits; // ships with the game's art library
                 return digits;
             }
         }

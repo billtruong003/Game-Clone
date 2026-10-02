@@ -5,6 +5,7 @@ import path from 'node:path';
 import sharp from 'sharp';
 import { fileURLToPath } from 'node:url';
 import { FACES, faceInner, INK } from './faces.mjs';
+import { PACKS, packFaceInner } from './facepacks.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const OUT_DIR = path.resolve(HERE, '../../Assets/_Game/Art/Faces');
@@ -17,6 +18,14 @@ async function atlas() {
   fs.mkdirSync(OUT_DIR, { recursive: true });
   await sharp(Buffer.from(svg)).png().toFile(path.join(OUT_DIR, 'faces.png'));
   console.log('faces.png', SLICE * 3);
+  // shop face packs: the same 3×3 layout, one file per pack (faces_<pack>.png), imported the same way
+  for (const pack of Object.keys(PACKS)) {
+    const packCells = FACES.map((name, i) =>
+      `<g transform="translate(${(i % 3) * SLICE} ${Math.floor(i / 3) * SLICE})">${packFaceInner(pack, name)}</g>`).join('');
+    const packSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${SLICE * 3}" height="${SLICE * 3}" viewBox="0 0 ${SLICE * 3} ${SLICE * 3}">${packCells}</svg>`;
+    await sharp(Buffer.from(packSvg)).png().toFile(path.join(OUT_DIR, `faces_${pack}.png`));
+    console.log(`faces_${pack}.png`);
+  }
 }
 
 // Faces on the real bodies at game sizes, rotated like the balls do, to judge them before export.

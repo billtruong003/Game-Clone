@@ -380,6 +380,7 @@ namespace CasualGame.EditorTools
             if (EditorUserBuildSettings.activeBuildTarget != BuildTarget.Android)
                 EditorUserBuildSettings.SwitchActiveBuildTarget(BuildTargetGroup.Android, BuildTarget.Android);
             Switch(p, release);
+            SkinShaders.Include(); // the premium skin shaders are only found by name: keep them in the build
             p = AssetDatabase.LoadAssetAtPath<GameProfile>(profilePath);
             Directory.CreateDirectory("Assets/Plugins/Android");
             EditorUserBuildSettings.buildAppBundle = release;

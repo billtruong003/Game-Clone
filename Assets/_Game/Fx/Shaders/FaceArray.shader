@@ -10,6 +10,7 @@ Shader "CasualGame/FaceArray"
         [HideInInspector] _MainTex ("Unused (UI/sprite slot)", 2D) = "white" {}
         _Faces ("Faces", 2DArray) = "" {}
         _Color ("Tint", Color) = (1, 1, 1, 1)
+        _UseGlobalPack ("Follow the worn face pack", Float) = 1
     }
     SubShader
     {
@@ -28,9 +29,13 @@ Shader "CasualGame/FaceArray"
 
             TEXTURE2D_ARRAY(_Faces);
             SAMPLER(sampler_Faces);
+            // the worn shop face pack, set globally (FacePacks.Apply); _FacePackOn = 0 keeps the default faces
+            TEXTURE2D_ARRAY(_FacePack);
+            float _FacePackOn;
 
             CBUFFER_START(UnityPerMaterial)
                 half4 _Color;
+                float _UseGlobalPack;
                 float4 _MainTex_ST;
             CBUFFER_END
 
@@ -62,7 +67,9 @@ Shader "CasualGame/FaceArray"
 
             half4 frag(Varyings i) : SV_Target
             {
-                half4 c = SAMPLE_TEXTURE2D_ARRAY(_Faces, sampler_Faces, i.uv.xy, i.uv.z);
+                half4 c = _FacePackOn * _UseGlobalPack > 0.5
+                    ? SAMPLE_TEXTURE2D_ARRAY(_FacePack, sampler_Faces, i.uv.xy, i.uv.z)
+                    : SAMPLE_TEXTURE2D_ARRAY(_Faces, sampler_Faces, i.uv.xy, i.uv.z);
                 half ink = saturate((0.45h - dot(c.rgb, half3(0.2126h, 0.7152h, 0.0722h))) / 0.3h);
                 c.rgb = lerp(c.rgb, half3(1.0h, 0.973h, 0.925h), ink * i.lightInk);
                 return c * i.color;

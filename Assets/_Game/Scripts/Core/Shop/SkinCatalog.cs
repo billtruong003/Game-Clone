@@ -37,6 +37,8 @@ namespace CasualGame.Core
         public Color FxTint = Color.white;
         /// <summary>Size of <see cref="Fx"/> relative to the default effect it replaces.</summary>
         public float FxScale = 1f;
+        /// <summary>Faces tab: the face pack this skin wears ("sleepy"), null = the default faces.</summary>
+        public string FacePack;
         /// <summary>Cream face ink on dark bodies / a dark scene.</summary>
         public bool Dark;
 

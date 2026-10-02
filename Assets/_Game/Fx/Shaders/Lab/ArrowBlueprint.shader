@@ -45,7 +45,9 @@ Shader "CasualGame/Lab/ArrowBlueprint"
                 float outline = inside * (1.0 - AAInside(across - (1.0 - _Line)));
                 float dash = step(0.5, frac(along * 2.0)) * AAInside(across - 0.09) * (1.0 - i.uv1.y);
                 float tick = step(frac(along + 0.04), 0.08) * inside * (1.0 - i.uv1.y);
-                float a = saturate(outline + dash * 0.8 + tick + inside * _Fill) * reveal * i.color.a;
+                // the chevron is drawn solid: its two arms overlap, and two outlines would cross into an X
+                float body = lerp(outline + dash * 0.8 + tick + inside * _Fill, inside * 0.9, i.uv1.y);
+                float a = saturate(body) * reveal * i.color.a;
                 return half4(i.color.rgb * a, a);
             }
             ENDHLSL
